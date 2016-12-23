@@ -4,19 +4,25 @@
   "description": "The final project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart" : "npm install",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DungDinhDungDinh/Auctioning.git"
   },
-  "author": "DungDinh",
-  "license": "ISC",
+  "author": "Chung Nguyen - Danh Dang - Dung Dinh",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/DungDinhDungDinh/Auctioning/issues"
   },
   "homepage": "https://github.com/DungDinhDungDinh/Auctioning#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "body-parser" : "*",
+    "jsonwebtoken" : "*",
+    "mongoose": "*"
+
   }
 }

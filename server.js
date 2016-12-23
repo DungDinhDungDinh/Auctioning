@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var jwt    = require('jsonwebtoken');
 app.use(bodyParser.json()); // for parsing application/json
-//app.use(express.static('client'));
+app.use(express.static('client'));
 
 
 var ObjectId = require('mongodb').ObjectID;
@@ -87,7 +87,6 @@ apiRoutes.post('/authenticate', function(req, res) {
 });
 
 
-
 var port = process.env.PORT || 8081;
 
 apiRoutes.get('/', function(req, res) {
@@ -101,3 +100,4 @@ app.use('/api', apiRoutes);
 
 
 app.listen(port);
+console.log('server is running at port::' + port);
