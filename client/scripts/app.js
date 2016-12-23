@@ -28,5 +28,5 @@ myapp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 myapp.service('Data', function() {
-
+    this.name = '';
 });
