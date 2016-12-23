@@ -14,6 +14,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/dang-nhap.html',
         controller: 'dangNhapController'
     }).
+	when('/san-pham-dau-gia', {
+        templateUrl: './view/san-pham-dau-gia.html',
+        controller: 'itemController'
+    }).
     otherwise({
         redirectTo: '/trang-chu'
     });

@@ -1,0 +1,328 @@
+<div style="background: white;">
+    <div class="header">
+        <div class="header-div1">
+            <div class="link-dk-dn" ng-hide="show1" >
+                <a class="text-link-dk-dn" >Đăng nhập</a>
+                <a class="text-link-dk-dn">Đăng ký</a>
+            </div>
+            
+            <div ng-show="show1">
+                <div class="box-username">
+                	<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
+                    <a class="text-username"> Nguyễn Đình Chung...</a>
+                </div>
+                
+                <div class="icon-wrapper">
+                   <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+                   <span class="badge">9</span>
+                </div>
+                
+                <div class="icon-wrapper">
+                	<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+                	<span class="badge">9</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-div2">      
+        </div>
+        
+        <div class="header-div3"> 
+            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+        </div>
+    </div>
+    
+    <div class="banner">
+        <div class="banner-div1">
+            <div class="danh-muc dropdown">
+            	
+                <span> DANH MỤC SẢN PHẨM <i class="fa fa-caret-down icon-user" style="font-size:18px; padding-top: 5px; margin-right: 16px; float: right;"></i> </span>
+                
+                <div class="dropdown-content">
+                    <div class="item"> 
+                    	<i class="fa fa-laptop" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                    	<span> Đồ điện tử </span>
+                	</div>
+                    
+                    <div class="item"> 
+                        <i class="fa fa-futbol-o" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Giải trí, thể thao, sở thích </span>
+                    </div>
+                    
+                    <div class="item"> 
+                        <i class="fa fa-car" style="font-size:22px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Xe cộ, máy móc </span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-child" style="font-size:24px; vertical-align: -3px; width: 29px; padding-left: 5px;" > </i>
+                        <span> Mẹ và bé </span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-umbrella" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Thời trang & phụ kiện </span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-cutlery" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Đồ ăn, thức uống </span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-shower" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Đồ gia dụng </span>
+                    </div>   
+                    
+                    <div class="item"> 
+                        <i class="fa fa-heart" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Sức khỏe & sắc đẹp </span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-home" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Bất động sản</span>
+                    </div>  
+                    
+                    <div class="item"> 
+                        <i class="fa fa-gears" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
+                        <span> Các loại khác </span>       	
+                    </div> 
+                </div>  
+            </div>	      
+            <span style="padding-left:50px; line-height:40px; font-size:15px;"> "Danh mục" (ví dụ: Đồ điện tử)  </span>
+        </div>
+
+    </div>
+        
+    <div class="body-item">
+        
+        <div class="body-item-div1">
+        	<img class="body-item-img" src="image/new-item-1.jpg">
+		</div>
+        
+        <div class="body-item-div2">
+        	<div class="body-item-name">
+        		<span> TÊN SẢN PHẨM</span>
+			</div>
+            
+            <div class="body-price" ng-init="changeNumber()">
+            	<span style="display:block; color: #666; font-size: 15px;"> Giá hiện tại:</span> 
+        		<span> {{price}} đ</span>     
+			</div>
+            
+            <div class="div-dau-gia">
+            	<input class="input-price" placeholder="ENTER PRICE"  ng-model="name" ng-keypress="filterValue($event)" ng-change="changePrice()" />           
+            	<button class="btn-dau-gia"><i class="fa fa-gavel" style=" font-size: 20px;"> </i> ĐẤU GIÁ </button>          
+            </div>
+            
+            <div class="div-infor-1">
+				<span class="infor-title-1"> <i class="fa fa-star" style=" width:16px;"> </i>Tình trạng</span>
+                <span style="display:block;">Hàng mới</span>
+                
+                <span class="infor-title-1"> <i class="fa fa-map-marker" style=" width:14px; margin-left: 2px;"> </i>Nơi bán</span>
+                <span style="display:block;">Hồ Chí Minh, Quận 3</span>
+                
+                <span class="infor-title-1"> <i class="fa fa-truck" style=" width:16px;"> </i>Vận chuyển</span>
+                <span>Miễn phí toàn quốc</span>
+            </div>
+            
+            <div class="div-infor-2">
+      			<span class="infor-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
+                <span style="display: block;">Thông tin 1</span>
+                <span style="display: block;">Thông tin 2</span>
+                <span style="display: block;">Thông tin 3</span>
+                <span style="display: block;">...</span>
+                
+            </div>
+            	
+            <div class="div-infor-3">  
+            	<span class="infor-title-2" ng-hide="show2" ng-click="Theo_doi()"> <i class="fa fa-eye" style=" width:20px;"> </i>Theo dõi</span>
+                <span class="infor-title-3" ng-show="show2" ng-click="Bo_theo_doi()">Đang theo dõi</span>
+                <span class="infor-title-4" style="margin-right: 20px;"> <i class="fa fa-warning" style=" width:20px;"> </i>Báo sai phạm</span>
+            </div>
+		</div>
+        
+        <div class="body-item-div3">
+			
+			<div ng-hide="show3">
+				<div>
+					<div class="body-infor-name">
+						<span> NGÀY HẾT HẠN </span>
+					</div>
+					
+					<div class="div-time-expire">
+						<span> 01/01/2017  23:00 </span>
+					</div>	
+				</div>
+				
+				<div>
+					<div class="body-infor-name">
+						<span> THÔNG TIN NGƯỜI BÁN </span>
+					</div>
+					
+					<div id="defaultCountdown">
+					</div>		
+				</div>
+			</div>
+			
+			<div class="ket-thuc">
+				<span> ĐẤU GIÁ ĐÃ KẾT THÚC </span>			
+			</div>
+			
+			<div class="infor-salesman">
+				<div class="body-infor-name-2">
+					<span> THÔNG TIN NGƯỜI BÁN</span>			
+				</div>
+				
+				<img class="avatar-small" src="image/user-avatar.ico">
+				<span class="salesman-email"> noctislucispro@gmail.com</span>
+			</div>
+			
+			<div class="infor-salesman">
+				<div class="body-infor-name-3">
+					<span> NGƯỜI THẮNG CUỘC</span>			
+				</div>
+				
+				<img class="avatar-small" src="image/user-avatar.ico">
+				<span class="salesman-email"> noctislucispro@gmail.com</span>
+			</div>
+			
+			<div class="infor-xep-hang" ng-hide="show3">
+				<div class="body-infor-name-3">
+					<span> TRẢ GIÁ CAO NHẤT</span>			
+				</div>
+				
+				<span class="highest-name"> noctislucispro@gmail.com</span>
+				<span class="highest-price" ng-init="changeNumber2()"> {{highest_price}} đ</span>	
+			</div>
+		</div>
+        
+	</div> 
+    
+    
+    <div class="footer">
+    	<div class="footer-begin">
+    	</div>
+    
+    	<div class="footer-container">
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+            		<span> CHUYÊN MỤC </span>
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ điện tử </span>
+           		</div>  
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Giải trí, Thể thao, Sở thích</span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Xe cộ, máy móc </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Mẹ & Bé </span>
+           		</div>  
+                
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Thời trang & Phụ kiện </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ ăn, thức uống </span>
+           		</div>   
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ gia dụng </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Sức khỏe & Sắc đẹp </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Bất động sản </span>
+           		</div>  
+                
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Các loại khác </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+            		<span> INFORMATION </span>
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đăng nhập </span>
+           		</div>  
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đăng kí </span>
+           		</div>  
+
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Liên hệ </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-ket-noi">
+            	<div class="footer-title">
+            		<span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
+                    <input class="input-email" placeholder="Enter your email address"/>
+            		<button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
+                    
+ 					<span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
+                    <div>
+                    <a class="icon-fb"></a>
+                    <a class="icon-google"></a>
+                	</div>    
+				</div>
+			</div>
+        </div>
+            
+    	<div style="width: 100%; clear:both; padding-top: 30px;">
+        	<img class="footer-logo" src="image/logo-2.png">
+    	</div>
+    	
+        <div class="footer-end">
+        	<span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
+    	</div>
+    </div>
+    
+</div>
+
+<script>
+	$(function () {
+		var austDay = new Date();
+		austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
+		$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+		$('#year').text(austDay.getFullYear());
+	});
+</script>
+
+</html>

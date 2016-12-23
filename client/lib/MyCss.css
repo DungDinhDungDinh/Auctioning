@@ -220,6 +220,15 @@ h1, .h1, h2, .h2, h3, .h3 {
 	margin-bottom: 20px;
 }
 
+.link-dk-dn{
+	float: right;
+	width: auto;
+	max-width: 170px;
+	height: 30px;
+	border-radius: 0px 0px 5px 5px;
+	background: #8ABE7A;
+}
+
 .box-username {
 	float: right;
 	width: auto;
@@ -227,8 +236,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	height: 30px;
 	border-radius: 0px 0px 5px 5px;
 	background: #8ABE7A;
-	align-items: center;
-	
+	vertical-align: middle;
 }
 
 .text-link-dk-dn {
@@ -236,9 +244,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 	text-decoration: none;
 	line-height: 30px;
 	color: white;
-	width: 120px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 8px;
+	padding-right: 8px;
 	white-space: nowrap; 
 	overflow: hidden;
 	text-overflow: ellipsis; 
@@ -592,6 +599,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .footer {
+	clear: both;
 	background: #0e0e0e;
 	margin-top: 30px;
 	width: 100%;
@@ -787,11 +795,13 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .body-item {
+	float: left;
 	background: white;
 	width: auto;
 	height: auto;
 	padding-left: 100px;
 	padding-right: 100px;
+	padding-bottom: 20px;
 }
 
 .body-item-div1 {
@@ -949,8 +959,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .body-item-div3 {
 	width: 23%;
-	float:right;
-	height: 500px;
+	float: right;
+	height: auto;
 	border-right: 1px solid #eee;
 }
 
@@ -1003,7 +1013,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	width: auto;
 	line-height: 20px;
 	font-weight: bold;
-	color: #0C3;
+	color: #666;
 }
 
 .infor-title-4:hover {
@@ -1011,4 +1021,133 @@ h1, .h1, h2, .h2, h3, .h3 {
 	cursor: pointer;
 }
 
+.body-infor-name {
+	display: block;
+	width: 95%;
+	margin-top: 10px;
+	line-height: 34px;
+	font-size: 16px;
+	color: #333;
+}
 
+.div-time-expire {
+	display: block;
+	width: 90%;
+	height: 40px;
+	padding-left: 5%;
+	margin-top: 1px;
+	line-height: 40px;
+	font-size: 18px;
+	color: #FF1C1C;
+	border: 2px solid #FF1C1C;
+	border-radius: 8px 8px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.infor-salesman {
+	width: 90%;
+	height: 140px;
+	padding-left: 5%;
+	margin-top: 20px;
+	border: 1px solid #DDD;
+	font-size: 15px;
+}
+
+.body-infor-name-2, .body-infor-name-3 {
+	display: block;
+	width: 95%;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	line-height: 34px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+}
+
+.body-infor-name-2:before {
+	font-family: FontAwesome;
+	content: "\f129";
+	display: inline-block;
+	padding-right: 3px;
+}
+
+.body-infor-name-3:before {
+	font-family: FontAwesome;
+	content: "\f024";
+	display: inline-block;
+	padding-right: 3px;
+}
+
+.avatar-small {
+	display: inline-block;
+	float: left;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	width: 80px;	
+	height: 80px;
+}
+
+.salesman-email {
+	word-break: break-all;
+}
+
+.salesman-email:hover {
+	cursor: pointer;
+	color: #8AAB9D;
+}
+
+.infor-xep-hang {
+	width: 90%;
+	height: 100px;
+	padding-left: 5%;
+	margin-top: 20px;
+	border: 1px solid #DDD;
+	font-size: 15px;
+}
+
+.highest-name {
+	width: 50%;
+	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#8ABE7A;
+	font-weight: bold;
+}
+
+.highest-name:before {
+	font-family: FontAwesome;
+	content: "\f005";
+	display: inline-block;
+	padding-right: 3px;
+	color: #F9F900;
+}
+
+.highest-price {
+	width: 40%;
+	float: right;
+	padding-right: 5px;
+	color:#8ABE7A;
+	font-weight: bold;
+	text-align: right;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.ket-thuc {
+	background: #E85D5A;
+	width: 90%;
+	height: 40px;
+	padding-left: 5%;
+	margin-top: 20px;
+	line-height: 40px;
+	font-size: 18px;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+}
+
+.winner {
+
+}
