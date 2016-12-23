@@ -1,3 +1,21 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '661148127390858',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div>
     <div class="dk-form1">
         <div class="dk-form2" style="font-family:Roboto,Helvetica,Arial,sans-serif;">
@@ -7,7 +25,7 @@
                 <div style="font-size: 13px;" class="hr-sect color-black-2">Dùng mạng xã hội</div>
                 
                 <div>
-                    <a class="icon-fb"></a>
+                    <a class="icon-fb" ng-click="loginWithFacebook()"></a>
                     <a class="icon-google"></a>
                 </div>
                 
