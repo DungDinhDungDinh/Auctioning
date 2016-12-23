@@ -118,19 +118,19 @@
             	<button class="btn-dau-gia"><i class="fa fa-gavel" style=" font-size: 20px;"> </i> ĐẤU GIÁ </button>          
             </div>
             
-            <div class="div-infor-1">
-				<span class="infor-title-1"> <i class="fa fa-star" style=" width:16px;"> </i>Tình trạng</span>
+            <div class="div-info-1">
+				<span class="info-title-1"> <i class="fa fa-star" style=" width:16px;"> </i>Tình trạng</span>
                 <span style="display:block;">Hàng mới</span>
                 
-                <span class="infor-title-1"> <i class="fa fa-map-marker" style=" width:14px; margin-left: 2px;"> </i>Nơi bán</span>
+                <span class="info-title-1"> <i class="fa fa-map-marker" style=" width:14px; margin-left: 2px;"> </i>Nơi bán</span>
                 <span style="display:block;">Hồ Chí Minh, Quận 3</span>
                 
-                <span class="infor-title-1"> <i class="fa fa-truck" style=" width:16px;"> </i>Vận chuyển</span>
+                <span class="info-title-1"> <i class="fa fa-truck" style=" width:16px;"> </i>Vận chuyển</span>
                 <span>Miễn phí toàn quốc</span>
             </div>
             
-            <div class="div-infor-2">
-      			<span class="infor-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
+            <div class="div-info-2">
+      			<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
                 <span style="display: block;">Thông tin 1</span>
                 <span style="display: block;">Thông tin 2</span>
                 <span style="display: block;">Thông tin 3</span>
@@ -138,10 +138,10 @@
                 
             </div>
             	
-            <div class="div-infor-3">  
-            	<span class="infor-title-2" ng-hide="show2" ng-click="Theo_doi()"> <i class="fa fa-eye" style=" width:20px;"> </i>Theo dõi</span>
-                <span class="infor-title-3" ng-show="show2" ng-click="Bo_theo_doi()">Đang theo dõi</span>
-                <span class="infor-title-4" style="margin-right: 20px;"> <i class="fa fa-warning" style=" width:20px;"> </i>Báo sai phạm</span>
+            <div class="div-info-3">  
+            	<span class="info-title-2" ng-hide="show2" ng-click="Theo_doi()"> <i class="fa fa-eye" style=" width:20px;"> </i>Theo dõi</span>
+                <span class="info-title-3" ng-show="show2" ng-click="Bo_theo_doi()">Đang theo dõi</span>
+                <span class="info-title-4" style="margin-right: 20px;"> <i class="fa fa-warning" style=" width:20px;"> </i>Báo sai phạm</span>
             </div>
 		</div>
         
@@ -149,8 +149,8 @@
 			
 			<div ng-hide="show3">
 				<div>
-					<div class="body-infor-name">
-						<span> NGÀY HẾT HẠN </span>
+					<div class="body-info-name">
+						<span> THỜI ĐIỂM HẾT HẠN </span>
 					</div>
 					
 					<div class="div-time-expire">
@@ -159,8 +159,8 @@
 				</div>
 				
 				<div>
-					<div class="body-infor-name">
-						<span> THÔNG TIN NGƯỜI BÁN </span>
+					<div class="body-info-name">
+						<span> THỜI GIAN CÒN LẠI </span>
 					</div>
 					
 					<div id="defaultCountdown">
@@ -172,8 +172,17 @@
 				<span> ĐẤU GIÁ ĐÃ KẾT THÚC </span>			
 			</div>
 			
-			<div class="infor-salesman">
-				<div class="body-infor-name-2">
+			<div class="info-xep-hang" ng-hide="show3">
+				<div class="body-info-name-3">
+					<span> TRẢ GIÁ CAO NHẤT</span>			
+				</div>
+				
+				<span class="highest-name"> noctislucispro@gmail.com</span>
+				<span class="highest-price" ng-init="changeNumber2()"> {{highest_price}} đ</span>	
+			</div>
+				
+			<div class="info-salesman">
+				<div class="body-info-name-2">
 					<span> THÔNG TIN NGƯỜI BÁN</span>			
 				</div>
 				
@@ -181,23 +190,15 @@
 				<span class="salesman-email"> noctislucispro@gmail.com</span>
 			</div>
 			
-			<div class="infor-salesman">
-				<div class="body-infor-name-3">
+			<div class="info-salesman">
+				<div class="body-info-name-3">
 					<span> NGƯỜI THẮNG CUỘC</span>			
 				</div>
 				
 				<img class="avatar-small" src="image/user-avatar.ico">
 				<span class="salesman-email"> noctislucispro@gmail.com</span>
 			</div>
-			
-			<div class="infor-xep-hang" ng-hide="show3">
-				<div class="body-infor-name-3">
-					<span> TRẢ GIÁ CAO NHẤT</span>			
-				</div>
-				
-				<span class="highest-name"> noctislucispro@gmail.com</span>
-				<span class="highest-price" ng-init="changeNumber2()"> {{highest_price}} đ</span>	
-			</div>
+					
 		</div>
         
 	</div> 
@@ -271,7 +272,7 @@
             
             <div class="footer-chuyen-muc">
             	<div class="footer-title">  
-            		<span> INFORMATION </span>
+            		<span> infoMATION </span>
                 </div>
                 
                 <div class="footer-item"> 

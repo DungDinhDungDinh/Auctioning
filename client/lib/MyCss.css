@@ -671,6 +671,11 @@ h1, .h1, h2, .h2, h3, .h3 {
 	-webkit-transition: all 0.3s linear;
 }
 
+.btn-subscribe:hover {
+	cursor: pointer;
+	-webkit-transition: all 0.3s linear;
+}
+
 .footer-title {
 	color: white;
 	width: auto;
@@ -858,7 +863,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	display: inline-block;
 }
 
-.div-infor-1 {
+.div-info-1 {
 	width: 90%;
 	height: auto;
 	margin-left: 5%;
@@ -871,7 +876,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	line-height: 20px;
 }
 
-.div-infor-2 {
+.div-info-2 {
 	width: 90%;
 	height: auto;
 	margin-left: 5%;
@@ -884,7 +889,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	line-height: 20px;
 }
 
-.div-infor-3 {
+.div-info-3 {
 	width: 90%;
 	height: auto;
 	margin-left: 5%;
@@ -948,7 +953,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	-webkit-transition: all 0.2s linear;
 } 
 
-.infor-title-1 {
+.info-title-1 {
 	clear: both;
 	float: left;
 	width: 110px;
@@ -964,7 +969,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	border-right: 1px solid #eee;
 }
 
-.infor-title-2 {
+.info-title-2 {
 	float: right;
 	width: auto;
 	line-height: 20px;
@@ -972,12 +977,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #666;
 }
 
-.infor-title-2:hover {
+.info-title-2:hover {
 	color: #000;
 	cursor: pointer;
 }
 
-.infor-title-3 {
+.info-title-3 {
 	float: right;
 	width: auto;
 	height: 22px;
@@ -986,11 +991,11 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #0C3;
 }
 
-.infor-title-3:hover {
+.info-title-3:hover {
 	color: #FF1C1C;
 	cursor: pointer;
 }
-.infor-title-3:before {
+.info-title-3:before {
 	font-family: FontAwesome;
 	content: "\f00c";
 	display: inline-block;
@@ -1001,14 +1006,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 	width: 15px;
 }
 
-.infor-title-3:hover:before  {
+.info-title-3:hover:before  {
 	font-family: FontAwesome;
 	content: "\f00d";
 	display: inline-block;
 	padding-right: 3px;
 }
 
-.infor-title-4 {
+.info-title-4 {
 	float: right;
 	width: auto;
 	line-height: 20px;
@@ -1016,12 +1021,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #666;
 }
 
-.infor-title-4:hover {
+.info-title-4:hover {
 	color: #FF1C1C;
 	cursor: pointer;
 }
 
-.body-infor-name {
+.body-info-name {
 	display: block;
 	width: 95%;
 	margin-top: 10px;
@@ -1045,7 +1050,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-weight: bold;
 }
 
-.infor-salesman {
+.info-salesman {
 	width: 90%;
 	height: 140px;
 	padding-left: 5%;
@@ -1054,7 +1059,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-size: 15px;
 }
 
-.body-infor-name-2, .body-infor-name-3 {
+.body-info-name-2, .body-info-name-3 {
 	display: block;
 	width: 95%;
 	margin-top: 5px;
@@ -1065,14 +1070,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #333;
 }
 
-.body-infor-name-2:before {
+.body-info-name-2:before {
 	font-family: FontAwesome;
 	content: "\f129";
 	display: inline-block;
 	padding-right: 3px;
 }
 
-.body-infor-name-3:before {
+.body-info-name-3:before {
 	font-family: FontAwesome;
 	content: "\f024";
 	display: inline-block;
@@ -1097,7 +1102,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #8AAB9D;
 }
 
-.infor-xep-hang {
+.info-xep-hang {
 	width: 90%;
 	height: 100px;
 	padding-left: 5%;
@@ -1148,6 +1153,25 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-weight: bold;
 }
 
-.winner {
+.user-info-div1 {
+	width: 25%;
+	height: auto;
+	float: left;
+	border-right: 1px solid #EEE;
+}
 
+.body-item-img {
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 90%;	
+	height: auto;
+}
+
+.user-info-div2 {
+	width: 74%;
+	height: 500px;
+	display: inline-block;
+	border-right: 1px solid #EEE;
+	background: #666;
 }

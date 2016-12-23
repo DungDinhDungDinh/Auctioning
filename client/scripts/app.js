@@ -18,6 +18,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/san-pham-dau-gia.html',
         controller: 'itemController'
     }).
+	when('/user-thong-tin-chung', {
+        templateUrl: './view/user-thong-tin-chung.html',
+        controller: 'userCommonInfoController'
+    }).
     otherwise({
         redirectTo: '/trang-chu'
     });
