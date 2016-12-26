@@ -4,29 +4,29 @@
             <div class = dk-form3>
                 <h2 style="font-size: 26px;"> ĐĂNG KÝ </h2>
                 
-                <div style="font-size: 13px;" class="hr-sect color-black-2">Dùng mạng xã hội</div>
+<!--                 <div style="font-size: 13px;" class="hr-sect color-black-2">Dùng mạng xã hội</div>
                 
                 <div>
                     <a class="icon-fb"></a>
                     <a class="icon-google"></a>
                 </div>
                 
-                <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div>
+                <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div> -->
                 
-                <input class="input-dk" placeholder="Địa chỉ Email"/>
-                <input class="input-dk" placeholder="Mật khẩu" type="password"/>
-                <input class="input-dk" placeholder="Xác nhận mật khẩu" type="password"/>
+                <input class="input-dk" placeholder="Tên đăng nhập hoặc địa chỉ Email" ng-model="username"/>
+                <input class="input-dk" placeholder="Mật khẩu" type="password" ng-model="password"/>
+                <input class="input-dk" placeholder="Xác nhận mật khẩu" type="password" ng-model="retypePassword"/>
                 
-                <button type="button" class="btn-dk" style="margin-top: 15px;"> <i class="fa fa-user-circle" style="padding-right:6px;"> </i><strong>ĐĂNG KÝ</strong></button>
+                <button type="button" ng-click="signUp()" class="btn-dk" style="margin-top: 15px;" > <i class="fa fa-user-circle" style="padding-right:6px;"> </i><strong>ĐĂNG KÝ</strong></button>
                 
                 <div style="padding-top: 15px; margin-bottom: 15px;">
-                    <a class="text-dk" href="/forgot-password"><strong>Bạn đã có tài khoản?</strong> Đăng nhập ngay</a>
+                    <a class="text-dk" ng-click="goToSignIn()"><strong>Bạn đã có tài khoản?</strong> Đăng nhập ngay</a>
                 </div>
                 
                 <hr/>
                 
                 <div style="padding-top: 5px;">
-                    <a class="text-dk" href="/forgot-password"><strong>Về trang chủ</strong></a>
+                    <a class="text-dk" ng-click="goToHome()"><strong>Về trang chủ</strong></a>
                 </div>
                 
             </div>

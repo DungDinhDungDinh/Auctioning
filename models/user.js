@@ -2,19 +2,19 @@ var mongoose = require('mongoose');
 
 //ThingsToDo Schema
 var userSchema = mongoose.Schema({
-	_userName:{
+	username:{
 		type: String,
 		required: true
 	},
-	_passWord:{
+	password:{
 		type: String,
 		required: true
 	},
-	_admin:{
-		type: String,
+	admin:{
+		type: Boolean,
 		required: true
 	},
-	_subscribeProducts: {
+	subscribeProducts: {
 		type: Array,
 	}
 });

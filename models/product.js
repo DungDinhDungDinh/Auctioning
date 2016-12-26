@@ -2,25 +2,25 @@ var mongoose = require('mongoose');
 
 //ThingsToDo Schema
 var productSchema = mongoose.Schema({
-	_id:{
+	id:{
 		type: String,
 		required: true
 	},
-	_name:{
+	name:{
 		type:String,
 		required: true
 	},
-	_desciption:{
+	desciption:{
 		type: String,
 	},
-	_startPrice: {
+	startPrice: {
 		type: Number,
 		required: true
 	},
-	_endDate: {
+	endDate: {
 		type: String
 	},
-	_image: {
+	image: {
 		type: Array
 	}
 });

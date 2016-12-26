@@ -31,21 +31,21 @@
                 
                 <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div>
                 
-                <input class="input-dn" placeholder="Tên đăng nhập hoặc địa chỉ Email"/>
-                <input class="input-dn" placeholder="Mật khẩu" type="password"/>
+                <input class="input-dn" placeholder="Tên đăng nhập hoặc địa chỉ Email" ng-model="username"/>
+                <input class="input-dn" placeholder="Mật khẩu" type="password" ng-model="password"/>
                 
                 <a class="text-dk" href="/forgot-password" style="float:right; margin-top: 15px;">Quên mật khẩu?</a>
                 
-                <button type="button" class="btn-dn" style="margin-top: 15px;"> <i class="fa fa-unlock-alt" style="padding-right:6px;"> </i><strong>ĐĂNG NHẬP</strong></button>
+                <button type="button" ng-click="login()" class="btn-dn" style="margin-top: 15px;"> <i class="fa fa-unlock-alt" style="padding-right:6px;"> </i><strong>ĐĂNG NHẬP</strong></button>
                 
                 <div style="padding-top: 15px; margin-bottom: 15px;">
-                    <a class="text-dk" href="/forgot-password"><strong>Bạn chưa có tài khoản?</strong> Đăng kí ngay</a>
+                    <a class="text-dk" ng-click="goToSignUp()"><strong>Bạn chưa có tài khoản?</strong> Đăng kí ngay</a>
                 </div>
                 
                 <hr/>
                 
                 <div style="padding-top: 5px;">
-                    <a class="text-dk" href="/forgot-password"><strong>Về trang chủ</strong></a>
+                    <a class="text-dk" ng-click="goToHome()"><strong>Về trang chủ</strong></a>
                 </div>
                 
             </div>

@@ -177,7 +177,6 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-size: 12px;
 	line-height: 16px;
 	text-transform: uppercase;
-	
 }  
 
 .btn-dn:hover, .btn-dn:active {
@@ -800,13 +799,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .body-item {
-	float: left;
-	background: white;
 	width: auto;
 	height: auto;
 	padding-left: 100px;
 	padding-right: 100px;
 	padding-bottom: 20px;
+	overflow: hidden;
 }
 
 .body-item-div1 {
@@ -826,7 +824,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .body-item-div2 {
 	width: 53%;
-	height: 500px;
+	height: auto;
 	display: inline-block;
 	border-right: 1px solid #eee;
 }
@@ -967,6 +965,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	float: right;
 	height: auto;
 	border-right: 1px solid #eee;
+	display: inline-block;
 }
 
 .info-title-2 {
@@ -1154,24 +1153,445 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .user-info-div1 {
-	width: 25%;
-	height: auto;
 	float: left;
-	border-right: 1px solid #EEE;
-}
-
-.body-item-img {
-	display: block;
-	margin: 0 auto;
-	margin-top: 10px;
-	width: 90%;	
+	width: 24%;
 	height: auto;
+	margin-top: 10px;
+	border-right: 1px solid #DDD;
 }
 
 .user-info-div2 {
-	width: 74%;
-	height: 500px;
-	display: inline-block;
-	border-right: 1px solid #EEE;
-	background: #666;
+	float: right;
+	width: 75%;
+	height: auto;
 }
+
+.user-img-and-name {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 90%;
+	height: 230px;
+	background: #fafafa;
+}
+
+.user-avatar {
+	position:  absolute;
+	top: 20px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	font-size: 20px;
+	color: white;
+	width: 60%;
+	height: auto;
+	margin: 0 auto;
+	border-radius: 50%;
+}
+
+.user-name {
+	position:  absolute;
+	left: 0;
+	bottom: 20px;
+	right: 0;
+	text-align: center;
+	font-size: 20px;
+	color: #E85D5A;
+	font-weight: bold;
+	text-align: center;
+}
+
+.user-info-1 {
+	width: 90%;
+	height: auto;
+	margin-left: 5%;
+	margin-top: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #DDD;
+	display: inline-block;
+	color: #333; 
+	font-size: 13px;
+	line-height: 23px;
+}
+
+.user-info-text {
+	display: block;
+}
+
+.user-main-tab {
+	margin-top: 10px;
+	margin-bottom: 15px;
+	float: left;
+	width: 100%;
+	height: 35px;
+}
+
+.user-tab {
+	background: #efefef;
+	color: #777;
+	float: left;
+	width: 25%;
+	height: 35px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 13px;
+	border-bottom: 2px solid #efefef;
+	-webkit-transition: all 0.2s linear;
+}
+
+.user-tab:hover {
+	cursor: pointer;
+	background: white;
+	color: black;
+	border-bottom: 2px solid #efefef;
+	-webkit-transition: all 0.2s linear;
+}
+
+.user-selected-tab {
+	background: white;
+	color: #8ABE7A;
+	float: left;
+	width: 25%;
+	height: 35px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 13px;	
+	font-weight: bold;
+	border-bottom: 2px solid #8ABE7A;
+	-webkit-transition: all 0.2s linear;
+}
+
+.container {
+    padding: 20px;
+}
+
+.user-title {
+	display: block;
+	width: 95%;
+	line-height: 34px;
+	font-size: 16px;
+	font-weight: bolder;
+	color: #333;
+}
+
+.user-info-line {
+	color: #333;
+	clear: both;
+	width: 100%;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 12px;
+	line-height: 40px;
+}
+
+.line-save {
+	color: #333;
+	clear: both;
+	width: 549px;
+	height: 40px;
+	margin-left: 2%;
+	margin-top: 25px;
+	line-height: 40px;
+}
+
+.user-info-label {
+	clear: both;
+	display: inline-block;
+	width: 150px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.user-info-input {
+	width: 400px;
+	height: 27px;
+	font-size: 14px;
+	padding-left: 10px;
+	border: 1px solid #ddd;
+	color: #333;
+	-webkit-transition: all 0.3s linear;
+}
+
+.user-info-input:focus {
+	border-width: 1px;
+	border-color: #8ABE7A;
+	outline: none;
+	-webkit-transition: all 0.3s linear;
+}
+
+.btn-save-info {
+	background: #8ABE7A;
+	float: right;
+    color: #fff;
+    border: 1px solid #8ABE7A;
+	width: 150px;
+	height: 35px;
+	-webkit-transition: all 0.3s linear;
+	font-size: 14px;
+	line-height: 16px;
+}  
+
+.btn-save-info:hover, .btn-save-info:active {
+	background: #6C3;
+	border: 1px solid #6C3;
+	cursor: pointer;
+	-webkit-transition: all 0.3s linear;
+}
+
+.btn-cancel-info {
+	background: #f8f8f8;
+	margin-left: 5px;
+	float: right;
+    color: black;
+    border: 1px #ddd solid;
+	width: 70px;
+	height: 35px;
+	font-size: 14px;
+	line-height: 16px;
+	-webkit-transition: all 0.3s linear;
+}  
+
+.btn-cancel-info:hover, .btn-cancel	-info:active {
+	background: #E85D5A;
+	border: 1px solid #E85D5A;
+	cursor: pointer;
+	color: white;
+	-webkit-transition: all 0.1s linear;
+}
+
+.user-sell-container-title {
+	color: #333;
+	margin-top: 10px;
+	clear: both;
+	width: 100%;
+	height: 30px;	
+	line-height: 30px;
+	border-top: 1px #DDD solid;
+}
+
+.user-sell-title1 {
+	float: left;
+	width: 55%;
+	height: 30px;
+	overflow: hidden;
+	position: relative;
+}
+
+.user-sell-title2 {
+	float: left;
+	width: 15%;
+	height: 30px;
+	line-height: 30px;
+	overflow:hidden;
+	position: relative;
+	text-align: right;
+}
+
+.user-sell-title-text {
+	line-height: 30px;
+	font-size: 12px;
+	color: black;
+	display: block;
+}
+
+.user-sell-container {
+	color: #333;
+	clear: both;
+	width: 100%;
+	height: 90px;
+	padding-top: 15px;
+	margin-bottom: 15px;
+	line-height: 40px;
+	border-top: 1px #DDD solid;
+}
+
+.user-sell-div-1 {
+	float: left;
+	width: 15%;
+	height: 85px;
+	overflow:hidden;
+	position: relative;
+}
+
+.user-sell-div-2 {
+	float: left;
+	padding-left: 1%;
+	width: 39%;
+	height: 85px;
+	line-height: 14px;
+}
+
+.user-sell-div-3, .user-sell-div-4, .user-sell-div-5 {
+	float: left;
+	width: 15%;
+	height: 85px;
+	text-align: right;
+}
+
+.user-item-img{
+	width: 100%;
+	position: absolute;
+    top:-100%; 
+	left:0; 
+	right: 0; 
+	bottom:-100%;
+    margin: auto;
+}
+
+.span-item-name {
+	line-height: 14px;
+	font-size: 14px;
+	color: black;
+	display: block;
+	font-weight: bold;
+}
+
+.span-item-location, .span-item-type, .span-item-seller  {
+	padding-top: 6px;
+	line-height: 14px;
+	font-size: 13px;
+	color: black;
+    width: 100%;
+	display: block;
+}
+
+.span-item-location:before {
+	font-family: FontAwesome;
+	content: "\f041";
+	color: red;
+}
+
+.span-item-type:before {
+	font-family: FontAwesome;
+	content: "\f029";
+	color: blue;
+}
+
+.span-item-seller:before {
+	font-family: FontAwesome;
+	content: "\f007";
+	color: green;
+}
+
+#small-user-info {
+	float: left;
+	width: 100%;
+	height: 30px;
+	font-size: 14px;
+	margin-top: 5px;
+	overflow:hidden;
+	position: relative;
+}
+
+#small-user-img-div {
+	float: left;
+	width: 30px;
+	height: 30px;
+	overflow:hidden;
+	position: relative;
+	margin-right: 5px;
+}
+
+.span-item-price {
+	line-height: 14px;
+	font-size: 14px;
+	color: red;
+	display: block;
+	font-weight: bold;
+}
+
+.span-highest-price {
+	line-height: 14px;
+	font-size: 14px;
+	color: red;
+	display: block;
+	font-weight: bold;
+}
+
+.span-your-price {
+	line-height: 14px;
+	font-size: 14px;
+	color: blue;
+	display: block;
+	font-weight: bold;
+}
+
+.span-item-date1 {
+	line-height: 15px;
+	font-size: 15px;
+	color: black;
+	display: block;
+}
+
+.span-item-date2 {
+	line-height: 15px;
+	font-size: 15px;
+	padding-top: 5px;
+	color: black;
+	display: block;
+}
+.span-item-stt {
+	line-height: 14px;
+	font-size: 14px;
+	color: black;
+	display: block;
+}
+
+.user-auction-div-1 {
+	float: left;
+	width: 15%;
+	height: 85px;
+	overflow:hidden;
+	position: relative;
+}
+
+.user-auction-div-2 {
+	float: left;
+	padding-left: 1%;
+	width: 36%;
+	height: 85px;
+	line-height: 14px;
+}
+
+.user-auction-div-3, .user-auction-div-4, .user-auction-div-5 {
+	float: left;
+	width: 12%;
+	height: 85px;
+	text-align: right;
+}
+
+.user-auction-title1 {
+	float: left;
+	width: 52%;
+	height: 30px;
+	overflow: hidden;
+	position: relative;
+}
+
+.user-auction-title2 {
+	float: left;
+	width: 12%;
+	height: 30px;
+	line-height: 30px;
+	overflow:hidden;
+	position: relative;
+	text-align: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

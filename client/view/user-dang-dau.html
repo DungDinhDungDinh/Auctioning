@@ -61,13 +61,13 @@
         
         <div class="user-info-div2" style="">
 			<div class="user-main-tab">
-				<div class="user-selected-tab">
+				<div class="user-tab">
 					<span> THÔNG TIN CHUNG </span>
 				</div>
 				<div class="user-tab">
 					<span> ĐĂNG BÁN </span>
 				</div>
-				<div class="user-tab">
+				<div class="user-selected-tab">
 					<span> ĐANG ĐẤU </span>
 				</div>
 				<div class="user-tab">
@@ -75,43 +75,61 @@
 				</div>
 			</div>
 			
-			<span class="user-title"> THÔNG TIN CHUNG </span>
+			<span class="user-title"> DANH SÁCH ĐĂNG BÁN </span>
 			
-			<div class="user-info-line">
-				<span class="user-info-label"> Email</span>
-				<span class="user-info-label"> Email</span>
+			<div class="user-sell-container-title">
+				<div class="user-auction-title1">
+				</div>
+					
+				<div class="user-auction-title2">
+					<span class="user-sell-title-text"> GIÁ HIỆN TẠI <span>
+				</div>
+				
+				<div class="user-auction-title2">
+					<span class="user-sell-title-text"> GIÁ CỦA BẠN <span>   
+				</div>	
+				
+				<div class="user-auction-title2">
+					<span class="user-sell-title-text"> THỜI HẠN <span>   
+				</div>	
+				
+				<div class="user-auction-title2">
+					<span class="user-sell-title-text"> TÌNH TRẠNG <span>   
+				</div>				
 			</div>
 			
-			<div class="user-info-line">
-				<span class="user-info-label"> Tên hiển thị</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Số điện thoại</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Ngày sinh</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Giới tính</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Địa chỉ</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line line-save">
-				<button class="btn-cancel-info"> HỦY </button>
-				<button class="btn-save-info"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>	
+			<div ng-repeat="i in number">
+				<div class="user-sell-container">
+					<div class="user-auction-div-1">
+						<img class="user-item-img" src="image/item.jpg" alt="" />
+					</div>
+					
+					<div class="user-auction-div-2">
+						<span class="span-item-name"> Pin sạc dự phòng Asus ZenPower 9600mAh </span>
+						<span class="span-item-location"> Tp.Hồ Chí Minh</span>
+						<span class="span-item-type"> Giải trí, thể thao, sở thích  </span>
+						<span class="span-item-seller"> Chung Nguyễn  </span>
+					</div>
+					
+					<div class="user-auction-div-3">
+						<span class="span-highest-price"> 100.000.000đ </span>   
+					</div>	
+					
+					<div class="user-auction-div-3">
+						<span class="span-your-price"> 90.000.000đ </span>   
+					</div>	
+					
+					<div class="user-auction-div-4">
+						<span class="span-item-date1"> 01/01/2017 </span>   
+						<span class="span-item-date2"> 23:00 </span>  
+					</div>
+					
+					<div class="user-auction-div-5">
+						<span class="span-item-stt"> Đang đấu giá <span>   
+					</div>
+					
+					
+				</div>
 			</div>
 		</div>     
 	</div> 		
