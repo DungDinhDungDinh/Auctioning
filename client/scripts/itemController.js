@@ -31,6 +31,7 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 		$scope.highest_price = parts.join(" ");
 	}
+	
 	$scope.filterValue = function($event)
 	{
 		var charCode = ($event.which) ? $event.which : $event.keyCode;

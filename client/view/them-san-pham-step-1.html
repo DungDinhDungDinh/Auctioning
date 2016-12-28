@@ -1,0 +1,324 @@
+
+<div style="background: white;">
+    <div class="header">
+        <div class="header-div1">
+            <div class="link-dk-dn" ng-hide="show1" >
+                <a class="text-link-dk-dn" >Đăng nhập</a>
+                <a class="text-link-dk-dn">Đăng ký</a>
+            </div>
+            
+            <div ng-show="show1">
+                <div class="box-username">
+                	<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
+                    <a class="text-username"> Nguyễn Đình Chung...</a>
+                </div>
+                
+                <div class="icon-wrapper">
+                   <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+                   <span class="badge">9</span>
+                </div>
+                
+                <div class="icon-wrapper">
+                	<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+                	<span class="badge">9</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-div2">      
+        </div>
+        
+        <div class="header-div3"> 
+            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+        </div>
+    </div>
+        
+    <div class="body-add-item">
+		<div class="three-step-div">
+            <div class="step1-chosen">
+				<div class="circle-number-chosen">
+					<span> 1 </span>
+				</div>
+				<span> ĐĂNG TIN</span>
+            </div>
+			<div class="step2">
+				<div class="circle-number">
+					<span> 2 </span>
+				</div>
+                <span> KIỂM TRA LẠI</span>
+            </div>
+			<div class="step3">
+				<div class="circle-number">
+					<span> 3 </span>
+				</div>
+                <span> HOÀN TẤT</span>
+            </div>
+        </div>
+     
+		<div class="add-item-info">
+			<div class="tooltip">
+				<span class="add-info-label">Tên sản phẩm</span>
+				
+				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
+				<span class="tooltiptext" ng-show="tipName">
+					<p>- Điền tên mặt hàng bạn muốn đấu giá</p>
+					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
+					<p>- Càng ngắn gọn càng tốt</p>
+				</span>
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label">Mô tả</span>
+				<textarea rows="5" cols="1" class="add-info-textarea" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
+				"Nhập mô tả tại đây"/>
+				
+				<span class="tooltiptext" ng-show="tipContent">
+					<p>- Hãy mô tả sản phẩm đấu giá càng chi tiết càng tốt</p>
+					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
+					<p>- Giới hạn: 2500 ký tự</p>
+				</span>			
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Chuyên mục</span>
+				<select class="add-info-select" ng-init="selectType = types[0]" ng-model="selectType"ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
+				</select>
+				
+				<span class="tooltiptext" ng-show="tipType">
+					<p>- Sản phẩm bạn đấu giá nằm trong chuyên mục nào?</p>
+					<p>- Lưu ý nên chọn đúng chuyên mục sản phẩm, các tin không đăng đúng chuyên mục sẽ rất khó cho người dùng trong việc tìm kiếm</p>
+				</span>	
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Trạng thái sản phẩm</span>
+				<select class="add-info-select" ng-init="selectStatus = status[0]" ng-model="selectStatus"ng-options="stt for stt in status">
+				</select>				
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-img-label">Chọn hình ảnh</span>
+				<div class="chose-img-div" id="divUpImg">
+					<img class="chosen-img" id="chosenImg"/ style="display:none">
+				</div>
+				<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	
+			</div>
+
+			<div class="tooltip">
+				<span class="add-info-label">Giá khởi điểm</span>
+				
+				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-model="name" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+				<span class="tooltiptext" ng-show="tipName">
+					<p>- Giá khởi điểm hay còn gọi là giá sàn (Là giá khởi điểm chấp nhận được của mặt hàng)</p>
+				</span>
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label">Ngày kết thúc </span>
+				<input class="add-info-input" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label">Giờ kết thúc </span>
+				<input class="add-info-input" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
+			</div>
+
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Khu vực bán hàng</span>
+				<select class="add-info-select" ng-init="selectLocation = locations[0]" ng-model="selectLocation"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				</select>
+				
+				<span class="tooltiptext" ng-show="tipType">
+					<p>- Chọn địa phận bán hàng</p>
+				</span>	
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Vận chuyển</span>
+				<select class="add-info-select" ng-init="selectTrans = trans[0]" ng-model="selectTrans"ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				</select>
+				
+				<span class="tooltiptext" ng-show="tipType">
+					<p>- Chọn cách chi trả phí vận chuyển.</p>
+				</span>	
+			</div>
+			
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Vận chuyển</span>
+				<select class="add-info-select" ng-init="selectTrans = trans[0]" ng-model="selectTrans"ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				</select>
+				
+				<span class="tooltiptext" ng-show="tipType">
+					<p>- Chọn cách chi trả phí vận chuyển.</p>
+				</span>	
+			</div>
+			<div class="tooltip">
+				<span class="add-info-label" style="line-height: 28px;">Vận chuyển</span>
+				<select class="add-info-select" ng-init="selectTrans = trans[0]" ng-model="selectTrans"ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				</select>
+				
+				<span class="tooltiptext" ng-show="tipType">
+					<p>- Chọn cách chi trả phí vận chuyển.</p>
+				</span>	
+			</div>
+			
+        </div>
+		
+
+	</div> 		
+
+	
+    <div class="footer">
+    	<div class="footer-begin">
+    	</div>
+    
+    	<div class="footer-container">
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+            		<span> CHUYÊN MỤC </span>
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ điện tử </span>
+           		</div>  
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Giải trí, Thể thao, Sở thích</span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Xe cộ, máy móc </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Mẹ & Bé </span>
+           		</div>  
+                
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Thời trang & Phụ kiện </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ ăn, thức uống </span>
+           		</div>   
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đồ gia dụng </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Sức khỏe & Sắc đẹp </span>
+           		</div>  
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Bất động sản </span>
+           		</div>  
+                
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Các loại khác </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-chuyen-muc">
+            	<div class="footer-title">  
+            		<span> INFOMATION </span>
+                </div>
+                
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đăng nhập </span>
+           		</div>  
+           
+                <div class="footer-item"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Đăng kí </span>
+           		</div>  
+
+                <div class="footer-item" style="border-bottom: none;"> 
+            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                	<span> Liên hệ </span>
+           		</div>  
+            </div>
+            
+            <div class="footer-ket-noi">
+            	<div class="footer-title">
+            		<span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
+                    <input class="input-email" placeholder="Enter your email address"/>
+            		<button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
+                    
+ 					<span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
+                    <div>
+                    <a class="icon-fb"></a>
+                    <a class="icon-google"></a>
+                	</div>    
+				</div>
+			</div>
+        </div>
+            
+    	<div style="width: 100%; clear:both; padding-top: 30px;">
+        	<img class="footer-logo" src="image/logo-2.png">
+    	</div>
+    	
+        <div class="footer-end">
+        	<span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
+    	</div>
+    </div>
+    
+</div>
+
+<script>
+	
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#chosenImg')
+                    .attr('src', e.target.result)
+
+					.css('display', 'initial');
+					
+				$('#divUpImg')
+					.height(182)
+					.width(282)
+					.css('border-style', 'solid')
+					.css('border-width', '1px')
+					.css('background', 'none');
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
+	$("#divUpImg").click(function () {
+    $("#inputUpImg").trigger('click');
+});
+</script>
+
+<script>
+	$('#timepicker').timepicker();
+    $( function() {
+		$( "#datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+		});
+	});
+</script>
+
