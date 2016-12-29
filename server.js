@@ -52,7 +52,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
 
     var access_token = req.body.access_token;
     request({
-            uri: "https://graph.facebook.com/me?access_token=" + access_token,
+            uri: "https://graph.facebook.com/me?access_token=" + access_token + '&fields=name,email,picture',
             method: "GET",
             timeout: 10000,
             followRedirect: true,
@@ -62,6 +62,9 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
             if (response.statusCode === 200) {
                 var obj = JSON.parse(body);
                 var fb_user_id = obj.id;
+                var name = obj.name;
+                var email = obj.email;
+                var picture = obj.picture.data.url;
                 User.findOne({
                     username: fb_user_id
                 }, function(err, user) {
@@ -70,7 +73,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                         console.log(err);
                     }
 
-                    console.log(user);
+                    console.log(response);
                     if (!user) {
                         var user = new User({
                             username: fb_user_id,
@@ -87,8 +90,11 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
                                 res.json({
-                                    username: user.username,
-                                    token: token
+                                    userId: user.username,
+                                    token: token,
+                                    name: name,
+                                    email: email,
+                                    picture: picture
                                 });
                             }
                         });
@@ -97,8 +103,12 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             expiresIn: 60 * 60 * 24 // expires in 24 hours
                         });
                         res.json({
-                            username: user.username,
-                            token: token
+                            userId: user.username,
+                            token: token,
+                            name: name,
+                            email: email,
+                            picture: picture
+
                         });
                     }
                 });

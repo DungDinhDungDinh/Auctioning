@@ -13,7 +13,6 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
 	$scope.loginWithFacebook = function() {
         FB.login(function(response) {
             verifyFacebookAccessToken(response.authResponse.accessToken);
-           
         }, {
             scope: 'public_profile, email'
         });
@@ -30,9 +29,9 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
             }).then(function successCallback(response) {
                 if (response.status === 200) {
                     Data.token = response.data.token;
-                    Data.username = response.data.username;
+                    Data.username = response.data.name;
                     $location.path('/trang-chu');
-                    $scope.$apply();
+                    console.log(response.data);
                 }
             }, function errorCallback(response) {
                 console.log('failed to verify facebook access token');
