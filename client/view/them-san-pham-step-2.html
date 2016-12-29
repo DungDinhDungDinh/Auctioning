@@ -37,14 +37,14 @@
         
     <div class="body-add-item">
 		<div class="three-step-div">
-            <div class="step1-chosen">
-				<div class="circle-number-chosen">
+            <div class="step1">
+				<div class="circle-number">
 					<span> 1 </span>
 				</div>
 				<span> ĐĂNG TIN</span>
             </div>
-			<div class="step2">
-				<div class="circle-number">
+			<div class="step2-chosen">
+				<div class="circle-number-chosen">
 					<span> 2 </span>
 				</div>
                 <span> KIỂM TRA LẠI</span>
@@ -59,110 +59,79 @@
      
 		<div class="add-item-info">
 		
-			<span class="add-item-title"> NỘI DUNG TIN </span>
-
-			<div class="tooltip">
-				<span class="add-info-label"> Tên sản phẩm <span class="color-red">*</span> </span>
+			<div style="border-bottom: 1px solid #ddd;">
+				<span class="add-item-title"> (Tên sản phẩm) </span>
 				
-				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
-				<span class="tooltiptext" ng-show="tipName">
-					<p>- Điền tên mặt hàng bạn muốn đấu giá</p>
-					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
-					<p>- Càng ngắn gọn càng tốt</p>
-				</span>
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label"> Mô tả <span class="color-red">*</span> </span>
-				<textarea rows="5" cols="1" class="add-info-textarea" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
-				"Nhập mô tả tại đây"/>
-				
-				<span class="tooltiptext" ng-show="tipContent">
-					<p>- Hãy mô tả sản phẩm đấu giá càng chi tiết càng tốt</p>
-					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
-					<p>- Giới hạn: 2500 ký tự</p>
-				</span>			
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label" style="line-height: 28px;"> Chuyên mục <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectType = types[0]" ng-model="selectType"ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
-				</select>
-				
-				<span class="tooltiptext" ng-show="tipType">
-					<p>- Sản phẩm bạn đấu giá nằm trong chuyên mục nào?</p>
-					<p>- Lưu ý nên chọn đúng chuyên mục sản phẩm, các tin không đăng đúng chuyên mục sẽ rất khó cho người dùng trong việc tìm kiếm</p>
-				</span>	
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label" style="line-height: 28px;"> Trạng thái sản phẩm <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectStatus = status[0]" ng-model="selectStatus"ng-options="stt for stt in status">
-				</select>				
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-img-label"> Chọn hình ảnh <span class="color-red">*</span> </span>
-				<div class="chose-img-div" id="divUpImg">
-					<img class="chosen-img" id="chosenImg"/ style="display:none">
+				<div class="check-item-div1">
+					<img class="body-item-img" src="image/new-item-1.jpg">
 				</div>
-				<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	
-			</div>
-
-			<span class="add-item-title"> PHƯƠNG THỨC BÁN HÀNG </span>
-			
-			<div class="tooltip">
-				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>
 				
-				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-model="name" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
-				<span class="tooltiptext" ng-show="tipName">
-					<p>- Giá khởi điểm hay còn gọi là giá sàn (Là giá khởi điểm chấp nhận được của mặt hàng)</p>
-				</span>
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label"> Ngày kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label"> Giờ kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
-			</div>
-
-			<span class="add-item-title"> NƠI BÁN VÀ CÁCH THỨC VẬN CHUYỂN </span>
-			
-			<div class="tooltip">
-				<span class="add-info-label" style="line-height: 28px;"> Khu vực bán hàng <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectLocation = locations[0]" ng-model="selectLocation"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
-				</select>
+				<div class="check-item-div2">
+					<div class="check-info">
+						<span class="check-info-title"> <i class="fa fa-tag" style=" width:18px;"> </i>Giá khởi điểm</span>
+						<span style="display:block;">1000000 đ</span>
+					</div>
+					
+					<div class="check-info">
+						<span class="check-info-title"> <i class="fa fa-clock-o" style=" width:18px;"> </i>Thời gian kết thúc</span>
+						<span style="display:block;"> 08/01/2017 22:00 </span>
+					</div>
+					
+					<div class="check-info">
+						<span class="check-info-title"> <i class="fa fa-star" style=" width:18px;"> </i>Trạng thái sản phẩm</span>
+						<span style="display:block;">Hàng mới</span>
+					</div>
+					
+					<div class="check-info">
+						<span class="check-info-title"> <i class="fa fa-map-marker" style=" width:18px;"> </i>Khu vực bán hàng</span>
+						<span style="display:block;">Hải Phòng, Nam Định, Thái Bình</span>
+					</div>
+					
+					<div class="check-info">
+						<span class="check-info-title"> <i class="fa fa-truck" style=" width:18px;"> </i>Vận chuyển</span>
+						<span style="display:block;">Miễn phí toàn quốc</span>
+					</div>
+					
+					<div class="check-info">
+						<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
+						<span style="display: block;">Thông tin 1</span>
+						<span style="display: block;">Thông tin 2</span>
+						<span style="display: block;">Thông tin 3</span>
+						<span style="display: block;">...</span>
+					</div>
+					
+				</div>
+			</div>	
+		
+			<div class="check-item-div3">
+				<span class="add-item-title"> THÔNG TIN LIÊN HỆ </span>
 				
-				<span class="tooltiptext" ng-show="tipType">
-					<p>- Chọn địa phận bán hàng</p>
-				</span>	
-			</div>
-			
-			<div class="tooltip">
-				<span class="add-info-label" style="line-height: 28px;"> Vận chuyển <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectTrans = trans[0]" ng-model="selectTrans"ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
-				</select>
+				<div class="contact-info">
+					<span class="add-info-label"> Tên hiển thị <span class="color-red">*</span> </span>				
+					<input class="add-info-input"/>
+				</div>
 				
-				<span class="tooltiptext" ng-show="tipType">
-					<p>- Chọn cách chi trả phí vận chuyển.</p>
-				</span>	
+				<div class="contact-info">
+					<span class="add-info-label"> Số điện thoại <span class="color-red">*</span>  </span>				
+					<input class="add-info-input"/>
+				</div>
+				
+				<div class="contact-info">
+					<span class="add-info-label"> Địa chỉ <span class="color-red">*</span> </span>				
+					<input class="add-info-input"/>
+				</div>
+				
+				<span style="font-size: 14px;"><i> Lưu ý: Thay đổi thông tin tại đây sẽ cập nhật lại thông tin cá nhân của bạn </i> </span>
 			</div>
-			 
-			<div class="tooltip">
-				<span class="color-red" style="font-size: 14px;"> (*) Các thông tin bạn cần nhập đầy đủ </span>
-			</div> 
 			
 			<div class="check-item-div4">
-			<button class="btn-check-again">Kiểm tra lại </button>
+			<button class="btn-check-again"> Hoàn tất </button>
+			<button class="btn-check-again" style="float: left;"><i class="fa fa-arrow-left" style="padding-right: 7px;"> </i>Quay lại </button>
 			</div>
-        </div>
-		
+		</div>
 
-	</div> 		
+    </div>
+
 
 	
     <div class="footer">

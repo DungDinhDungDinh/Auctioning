@@ -25,6 +25,10 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: white;
 }
 
+.color-red {
+	color: red;
+}
+
 .hr-sect {
 	display: flex;
 	flex-basis: 100%;
@@ -271,6 +275,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .header-div2 {
+
 	background-image: url(../image/logo-1.png);
 	background-size: auto 100%;
 	background-repeat:no-repeat;
@@ -820,6 +825,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	margin-top: 10px;
 	width: 90%;	
 	height: auto;
+	max-height: 380px;
 }
 
 .body-item-div2 {
@@ -1611,14 +1617,6 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-weight: 700;
 }
 
-.step1, .step1-chosen{
-	width: 31%;
-}
-
-.step3, .step3-chosen{
-	margin-right: 0px;
-}
-
 .step1:after, .step1:before,.step2:after, .step2:before, .step3:after, .step3:before {
     content: "";
     position: absolute;
@@ -1696,6 +1694,14 @@ h1, .h1, h2, .h2, h3, .h3 {
     z-index: 0;
 }
 
+.step1, .step1-chosen{
+	width: 31%;
+}
+
+.step3, .step3-chosen{
+	margin-right: 0px;
+}
+
 .circle-number, .circle-number-chosen {
 	margin-top: 5px;
 	margin-right: 5px;
@@ -1764,7 +1770,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .add-info-select {
-	width: 100%;
+	width: 99%;
 	height: 28px;
 	padding-left: 24%;
 	line-height: 28px;
@@ -1789,15 +1795,17 @@ h1, .h1, h2, .h2, h3, .h3 {
     position: relative;
 	width: 280px;
 	height: 180px;
+	margin-left: auto;
+	margin-right: auto;
 	border-radius: 3px;	
-	border: 2px dashed #eee;
-	background: url(../image/add-img.png) no-repeat center;
+	border: 2px dashed #ddd;
+	background: url(../image/add-img-2.png) no-repeat center;
 }
 
 .chose-img-div:hover {
 	cursor: pointer;
-	border-color: #ddd;
-	background: url(../image/add-img-2.png) no-repeat center;
+	border-color: #eee;	
+	background: url(../image/add-img.png) no-repeat center;
 }
 
 .chosen-img {
@@ -1810,7 +1818,14 @@ h1, .h1, h2, .h2, h3, .h3 {
     bottom: -100%;
     margin: auto;
 	border-radius: 3px;	
-	border: 2px solid #eee;
+	-webkit-transition: all 0.1s linear;	
+}
+
+.chosen-img:hover {
+	/*filter: blur(1px); */
+	-webkit-transform: scale(1.2);
+	-webkit-transition: all 0.1s linear;
+	transform: scale(1.2);
 }
 
 .add-info-input:focus, .add-info-textarea:focus, .add-info-select:focus {
@@ -1823,7 +1838,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .tooltip {
     position: relative;
-	margin-bottom: 30px;	
+	margin-bottom: 20px;	
 }
 
 .tooltip .tooltiptext {
@@ -1882,6 +1897,143 @@ h1, .h1, h2, .h2, h3, .h3 {
 .ui-widget-content {
     border: 2px solid #1c94c4;
 }
+
+.btn-check-again {
+	background: white;
+	float: right;
+	width: 120px;
+	height: 40px;
+	border: 1px solid #77ad66;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 1%;
+	border-radius: 1px;
+	color: #77ad66;
+	font-size: 14px;
+	font-weight: bold;
+	-webkit-transition: all 0.1s linear;	
+}
+
+.btn-check-again:hover {
+	cursor: pointer;
+	background: #77ad66;
+	border: 1px solid #77ad66;
+	color: white;
+	-webkit-transition: all 0.1s linear;
+}
+
+.add-item-title {
+	display: block;
+	width: 99%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	line-height: 34px;
+	font-size: 20px;
+	font-weight: 500;
+	color: black;
+	border-bottom: 1px solid #ddd;
+}
+
+.check-item-div1 {
+    width: 40%;
+    height: auto;
+    float: left;
+    border-right: 1px solid #eee;
+}
+
+.check-item-div2 {
+    width: 59%;
+    height: auto;
+    display: inline-block;
+}
+
+.check-info {
+	width: 97%;
+	height: auto;
+	margin-left: 3%;
+	margin-top: 13px;
+	padding-top: 13px;
+	border-top: 1px solid #ddd;
+	display: inline-block;
+	color: #333; 
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.check-info-title {
+	clear: both;
+	float: left;
+	width: 170px;
+	line-height: 20px;
+	font-weight: bold;
+	color: #666;
+}
+
+.check-item-div3 {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+	margin-bottom: 20px;
+}
+
+.check-item-div4 {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+	margin-bottom: 0px;
+}
+
+.contact-info {
+    display: block;
+	margin-bottom: 20px;	
+}
+
+.completed-div {
+	width: 98%;
+	height: 200px;
+	border: 3px solid #8ABE7A;
+	border-radius: 7px;
+	font-size: 30px;
+}
+
+.completed-div-1{
+	width: 15%;
+	margin-left: 10%;
+	margin-top: 50px;
+	float: left;
+	display: block;
+}
+
+.completed-div-2 {
+	width: 70%;
+	float: left;
+	margin-top: 70px;
+	display: block;
+}
+
+.completed-text {
+	width: 98%;
+	font-size: 25px;
+	line-height: 30px;
+}
+
+.icon-completed {
+	width:18px; 
+	padding-right: 100px; 
+	font-size: 100px;
+	color: #8ABE7A;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
