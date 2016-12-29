@@ -2025,9 +2025,23 @@ h1, .h1, h2, .h2, h3, .h3 {
 	color: #8ABE7A;
 }
 
+.category-img-div{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+	height: auto;
+}
 
+.category-img{
+	width: 100%;
+	height: auto;
+}
 
-
+.category-main-div {
+	float: right;
+	width: 79%;
+	height: auto;
+}
 
 
 

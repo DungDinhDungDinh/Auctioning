@@ -46,6 +46,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/them-san-pham-step-3.html',
         controller: 'addItem3Controller'
     }).
+	when('/danh-sach-san-pham', {
+        templateUrl: './view/danh-sach-san-pham.html',
+        controller: 'itemListController'
+    }).
     otherwise({
         redirectTo: '/trang-chu'
     });
