@@ -41,7 +41,6 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
             });
     };
 
-
     $scope.username = '';
     $scope.password = '';
 

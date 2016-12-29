@@ -1,5 +1,15 @@
 <div style="background: white;">
-    <div class="header">
+
+	<div class="top-header" id="fixedHeader">
+		<div class="fix-header-div1"></div>
+        <div class="fix-header-div2">
+            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+        </div>
+	</div>
+
+    <div class="header" id="defaultHeader">
         <div class="header-div1">
             <div class="link-dk-dn" ng-show="show1" >
                 <a class="text-link-dk-dn" >Đăng nhập</a>
@@ -376,13 +386,26 @@
     
 </div>
 <script>
-$("#slideshow > div:gt(0)").hide();
-setInterval(function() {
-$('#slideshow > div:first')
-.fadeOut(1000)
-.next()
-.fadeIn(1000)
-.end()
-.appendTo('#slideshow');
-},  3000);
+	$("#slideshow > div:gt(0)").hide();
+	setInterval(function() {
+		$('#slideshow > div:first')
+			.fadeOut(1000)
+			.next()
+			.fadeIn(1000)
+			.end()
+			.appendTo('#slideshow');
+		},  3000);
+	
+	window.onscroll = function() {myFunction()};
+
+	function myFunction() {
+		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+			document.getElementById("defaultHeader").style.display = "none";
+			document.getElementById("fixedHeader").style.display = "block";
+		} else {
+			document.getElementById("defaultHeader").style.display = "block";
+			document.getElementById("fixedHeader").style.display = "none";
+		}
+	}
+		
 </script>
