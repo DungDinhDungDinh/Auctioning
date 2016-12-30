@@ -38,7 +38,6 @@ apiRoutes.post('/users', function(req, res) {
         diaChi: req.body.diaChi
     });
 
-
     // save the user
     user.save(function(err) {
         if (err) {
