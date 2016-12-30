@@ -16,23 +16,30 @@ app.set('superSecret', secret);
 
 
 var User = require('./models/user');
-var Product = require('./models/product');
+var Item = require('./models/item');
+var Userauction = require('./models/userauction');
+var Userfollow = require('./models/userfollow');
 
 var apiRoutes = express.Router();
 
-//############################ Authenticate ############################################
-
-
+//##############################################-User API-######################################
+//ADD
 apiRoutes.post('/users', function(req, res) {
 
     // create a sample user
     var user = new User({
-        username: req.body.username,
-        password: req.body.password,
-        admin: false
+        ID: req.body.ID,
+        email: req.body.email,
+        ten: req.body.ten,
+        avatar: req.body.avatar,
+        soDienThoai: req.body.soDienThoai,
+        ngaySinh: req.body.ngaySinh,
+        gioiTinh: req.body.gioiTinh,
+        diaChi: req.body.diaChi
     });
 
-    // save the sample user
+
+    // save the user
     user.save(function(err) {
         if (err) {
             res.status(400).json({
@@ -47,6 +54,439 @@ apiRoutes.post('/users', function(req, res) {
     });
 });
 
+//GET
+//Lay 1 user theo ID
+apiRoutes.get('/users/:ID', function(req, res) {
+    var id= req.params.ID;
+    User.find({
+        ID: id
+    }).select('-ID').exec(function(err, users) {
+        if (err)
+            return console.log(users);
+        else {
+            res.status(200).send(users);
+            console.log(users);
+        }
+    });
+});
+
+//Lay tat ca user
+apiRoutes.get('/users', function(req, res) {
+    User.find({
+    }).select('-ID').exec(function(err, users) {
+        if (err)
+            return console.log(users);
+        else {
+            res.status(200).send(users);
+            console.log(users);
+        }
+    });
+});
+
+//DELETE
+apiRoutes.delete('/users/:ID', function(req, res) {
+    User.remove({
+        ID : req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove user successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/users/:ID', function(req, res) {
+   
+    var email = req.body.email;
+    var ten = req.body.ten;
+    var avatar = req.body.avatar;
+    var soDienThoai = req.body.soDienThoai;
+    var ngaySinh = req.body.ngaySinh;
+    var gioiTinh = req.body.gioiTinh;
+    var diaChi = req.body.diaChi;
+
+    User.findOne({
+               ID : req.params.ID
+            }, function(err, u) {
+
+                if (err) throw err;
+
+                if (!u) {
+                    u.email = email;
+                    u.ten = ten;
+                    u.avatar = avatar;
+                    u.soDienThoai = soDienThoai;
+                    u.ngaySinh = ngaySinh;
+                    u.gioiTinh = gioiTinh;
+                    u.diaChi = diaChi;
+
+                    u.save(function(err, u) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        User.find(function(err, users) {
+                            res.status(200).send({
+                                'messege': 'Updated'
+                            });
+                        });
+                    }
+                });
+                }
+            });
+});
+
+//##############################################-Item API-######################################
+//ADD
+apiRoutes.post('/items', function(req, res) {
+
+    // create a sample item
+    var item = new Item({
+        ID: req.body.ID,
+        ten: req.body.ten,
+        hinhAnh: req.body.hinhAnh,
+        chuyenMuc: req.body.chuyenMuc,
+        giaHienTai: req.body.giaHienTai,
+        ngayHetHan: req.body.ngayHetHan,
+        trangThai: req.body.trangThai,
+        noiBan: req.body.noiBan,
+        vanChuyen: req.body.vanChuyen,
+        moTa: req.body.moTa,
+        nguoiBan: req.body.nguoiBan,
+        nguoiTra: req.body.nguoiTra
+    });
+
+
+    // save the item
+    item.save(function(err) {
+        if (err) {
+            res.status(400).json({
+                'error': 'bad request'
+            });
+        }
+
+        console.log('Item saved successfully');
+        res.status(201).send({
+            'message': 'item created'
+        });
+    });
+});
+
+//GET
+//Lay 1 item theo ID
+apiRoutes.get('/items/:ID', function(req, res) {
+    var id= req.params.ID;
+    Item.find({
+        ID: id
+    }).select('-ID').exec(function(err, items) {
+        if (err)
+            return console.log(items);
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//Lay tat ca item
+apiRoutes.get('/items', function(req, res) {
+    Item.find({
+    }).select('-ID').exec(function(err, items) {
+        if (err)
+            return console.log(items);
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//DELETE
+apiRoutes.delete('/items/:ID', function(req, res) {
+    Item.remove({
+        ID : req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove item successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/items/:ID', function(req, res) {
+   
+    var ten = req.body.ten;
+    var hinhAnh = req.body.hinhAnh;
+    var chuyenMuc = req.body.chuyenMuc;
+    var giaHienTai = req.body.giaHienTai;
+    var ngayHetHan = req.body.ngayHetHan;
+    var trangThai = req.body.trangThai;
+    var noiBan = req.body.noiBan;
+    var vanChuyen = req.body.vanChuyen;
+    var moTa = req.body.moTa;
+    var nguoiBan = req.body.nguoiBan;
+    var nguoiTra = req.body.nguoiTra;
+
+    Item.findOne({
+               ID : req.params.ID
+            }, function(err, u) {
+
+                if (err) throw err;
+
+                if (!u) {
+                    u.ten = ten;
+                    u.hinhAnh = hinhAnh;
+                    u.chuyenMuc = chuyenMuc;
+                    u.giaHienTai = giaHienTai;
+                    u.ngayHetHan = ngayHetHan;
+                    u.trangThai = trangThai;
+                    u.noiBan = noiBan;
+                    u.vanChuyen = vanChuyen;
+                    u.moTa = moTa;
+                    u.nguoiBan = nguoiBan;
+                    u.nguoiTra = nguoiTra;
+
+                    u.save(function(err, u) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        Item.find(function(err, items) {
+                            res.status(200).send({
+                                'messege': 'Updated'
+                            });
+                        });
+                    }
+                });
+                }
+            });
+});
+
+//##############################################-Userauction API-######################################
+//ADD
+apiRoutes.post('/userauctions', function(req, res) {
+
+    // create a sample userauction
+    var userauction = new Userauction({
+        userID: req.body.userID,
+        itemID: req.body.itemID,
+        giaHienTai: req.body.giaHienTai,
+        giaDaTra: req.body.giaDaTra
+    });
+
+
+    // save the userauction
+    userauction.save(function(err) {
+        if (err) {
+            res.status(400).json({
+                'error': 'bad request'
+            });
+        }
+
+        console.log('Userauction saved successfully');
+        res.status(201).send({
+            'message': 'userauction created'
+        });
+    });
+});
+
+//GET
+//Lay 1 userauction theo ID
+apiRoutes.get('/userauctions/:ID', function(req, res) {
+    var id= req.params.ID;
+    Userauction.find({
+        ID: id
+    }).select('-ID').exec(function(err, userauctions) {
+        if (err)
+            return console.log(userauctions);
+        else {
+            res.status(200).send(userauctions);
+            console.log(userauctions);
+        }
+    });
+});
+
+//Lay tat ca userauction
+apiRoutes.get('/userauctions', function(req, res) {
+    Userauction.find({
+    }).select('-ID').exec(function(err, userauctions) {
+        if (err)
+            return console.log(userauctions);
+        else {
+            res.status(200).send(userauctions);
+            console.log(userauctions);
+        }
+    });
+});
+
+//DELETE
+apiRoutes.delete('/userauctions/:ID', function(req, res) {
+    Userauction.remove({
+        ID : req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove userauction successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/userauctions/:ID', function(req, res) {
+   
+    var userID = req.body.userID;
+    var itemID = req.body.itemID;
+    var giaHienTai = req.body.giaHienTai;
+    var giaDaTra = req.body.giaDaTra;
+
+    Userauction.findOne({
+               ID : req.params.ID
+            }, function(err, u) {
+
+                if (err) throw err;
+
+                if (!u) {
+                    u.userID= userID;
+                    u.itemID = itemID;
+                    u.giaHienTai = giaHienTai;
+                    u.giaDaTra = giaDaTra;
+
+                    u.save(function(err, u) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        Userauction.find(function(err, items) {
+                            res.status(200).send({
+                                'messege': 'Updated'
+                            });
+                        });
+                    }
+                });
+                }
+            });
+});
+
+//##############################################-Userfollow API-######################################
+//ADD
+apiRoutes.post('/userfollows', function(req, res) {
+
+    // create a sample userfollow
+    var userfollow = new Userfollow({
+        userID: req.body.userID,
+        itemID: req.body.itemID,
+        giaHienTai: req.body.giaHienTai,
+        trangThai: req.body.trangThai
+    });
+
+
+    // save the userfollow
+    userfollow.save(function(err) {
+        if (err) {
+            res.status(400).json({
+                'error': 'bad request'
+            });
+        }
+
+        console.log('Userfollow saved successfully');
+        res.status(201).send({
+            'message': 'userfollow created'
+        });
+    });
+});
+
+//GET
+//Lay 1 userfollow theo ID
+apiRoutes.get('/userfollows/:ID', function(req, res) {
+    var id= req.params.ID;
+    Userfollow.find({
+        ID: id
+    }).select('-ID').exec(function(err, userfollows) {
+        if (err)
+            return console.log(userfollows);
+        else {
+            res.status(200).send(userfollows);
+            console.log(userfollows);
+        }
+    });
+});
+
+//Lay tat ca userfollow
+apiRoutes.get('/userfollows', function(req, res) {
+    Userfollow.find({
+    }).select('-ID').exec(function(err, userfollows) {
+        if (err)
+            return console.log(userfollows);
+        else {
+            res.status(200).send(userfollows);
+            console.log(userfollows);
+        }
+    });
+});
+
+//DELETE
+apiRoutes.delete('/userfollows/:ID', function(req, res) {
+    Userfollow.remove({
+        ID : req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove userfollow successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/userfollows/:ID', function(req, res) {
+   
+    var userID = req.body.userID;
+    var itemID = req.body.itemID;
+    var giaHienTai = req.body.giaHienTai;
+    var trangThai = req.body.trangThai;
+
+    Userfollow.findOne({
+               ID : req.params.ID
+            }, function(err, u) {
+
+                if (err) throw err;
+
+                if (!u) {
+                    u.userID= userID;
+                    u.itemID = itemID;
+                    u.giaHienTai = giaHienTai;
+                    u.trangThai = trangThai;
+
+                    u.save(function(err, u) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        Userfollow.find(function(err, userfollows) {
+                            res.status(200).send({
+                                'messege': 'Updated'
+                            });
+                        });
+                    }
+                });
+                }
+            });
+});
+
+//#########################################-Authentication API-#################################
 apiRoutes.post('/authenticate/facebook', function(req, res) {
     console.log('authenticate facebook');
 
@@ -166,6 +606,36 @@ apiRoutes.post('/authenticate', function(req, res) {
     });
 });
 
+// route middleware to verify a token
+apiRoutes.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;    
+        next();
+      }
+    });
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    });
+    
+  }
+});
 
 var port = process.env.PORT || 8081;
 
@@ -175,9 +645,9 @@ apiRoutes.get('/', function(req, res) {
 
 app.use('/api', apiRoutes);
 
+//API ITEM
+
 
 //Test 
-
-
 app.listen(port);
 console.log('server is running at port::' + port);
