@@ -11,8 +11,8 @@
     <div class="header" id="defaultHeader">
         <div class="header-div1">
             <div class="link-dk-dn" ng-show="show1" >
-                <a class="text-link-dk-dn" >Đăng nhập</a>
-                <a class="text-link-dk-dn">Đăng ký</a>
+                <a class="text-link-dk-dn" ng-click="goToLogin()">Đăng nhập</a>
+                <a class="text-link-dk-dn" ng-click="goToSignUp()">Đăng ký</a>
             </div>
             
             <div ng-hide="show1">
@@ -52,7 +52,7 @@
         </div>
         
         <div class="banner-div2">
-            <div class="item">
+            <div class="item" ng-click="goToItemList()">
                 <i class="fa fa-laptop" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Đồ điện tử </span>
             </div>

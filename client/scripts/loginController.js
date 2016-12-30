@@ -30,6 +30,7 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
                 if (response.status === 200) {
                     Data.token = response.data.token;
                     Data.username = response.data.name;
+					Data.userID = response.data.userID;
                     $location.path('/trang-chu');
                     console.log(response.data);
                 }
@@ -68,6 +69,4 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
 
             });
     }
-
-   
 }]);
