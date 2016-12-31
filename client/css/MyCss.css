@@ -1202,22 +1202,34 @@ h1, .h1, h2, .h2, h3, .h3 {
 	display: block;
 	margin: 0 auto;
 	margin-top: 10px;
+	margin-bottom: 30px;
 	width: 90%;
-	height: 230px;
+	height: 250px;
 	background: #fafafa;
+}
+
+.avatar-div {
+	overflow: hidden;
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20px;
 }
 
 .user-avatar {
 	position:  absolute;
-	top: 20px;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	text-align: center;
 	font-size: 20px;
 	color: white;
-	width: 60%;
+	width: 99%;
 	height: auto;
+	min-height: 99%;
+	min-width: 99%;
 	margin: 0 auto;
 	border-radius: 50%;
 	border: 1px solid #DDD;
@@ -1234,7 +1246,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 .user-name {
 	position:  absolute;
 	left: 0;
-	bottom: 20px;
+	bottom: 10px;
 	right: 0;
 	text-align: center;
 	font-size: 20px;

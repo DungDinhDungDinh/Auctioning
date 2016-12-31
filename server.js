@@ -564,7 +564,8 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var fb_user_id = obj.id;
                 var name = obj.name;
                 var email = obj.email;
-                var picture = obj.picture.data.url;
+                var picture = 'https://graph.facebook.com/'+ fb_user_id + '/picture?width=300&height=300';
+
                  console.log(body);
                 Account.findOne({
                     ID: fb_user_id
@@ -593,7 +594,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                     ID: fb_user_id,
                                     ten: name,
                                     email: email,
-                                    avatar: 'https://graph.facebook.com/'+ fb_user_id + '/picture?width=300&height=300'
+                                    avatar: picture
                                 });
 								
 								

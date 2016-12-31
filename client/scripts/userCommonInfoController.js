@@ -87,8 +87,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/them-san-pham-step-1');
     };
 
-    var myScope = $scope;
-    getUserInfomation = function() {
+    getUserInformation = function() {
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -99,19 +98,20 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             if (response.status === 200) {
                 console.log(response.data);
                 var info = response.data[0];
-                myScope.name = info.ten;
-                myScope.email = info.email;
-                myScope.phone = info.soDienThoai;
-                myScope.birthday = info.ngaySinh;
-                myScope.gender = info.gioiTinh;
-                myScope.address = info.diaChi;
-                myScope.picture = info.avatar;
-                console.log(myScope.picture);
+                $scope.userID = info.ID;
+                $scope.name = info.ten;
+                $scope.email = info.email;
+                $scope.phone = info.soDienThoai;
+                $scope.birthday = info.ngaySinh;
+                $scope.gender = info.gioiTinh;
+                $scope.address = info.diaChi;
+                $scope.picture = info.avatar;
+                console.log($scope.picture);
 
-                myScope.staticName = info.ten;
-                myScope.staticEmail = info.email;
-                myScope.staticBirthday = info.ngaySinh;
-                myScope.staticGender = info.gioiTinh;
+                $scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -120,7 +120,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         });
     };
 
-    getUserInfomation();
+    getUserInformation();
 
     $scope.pickImage = function() {
         filepicker.pick({
@@ -130,12 +130,39 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             },
             function(Blob) {
                 console.log(JSON.stringify(Blob));
+                $scope.picture = Blob.url;
+                $scope.$apply();
             },
             function(FPError) {
                 console.log(FPError.toString());
             });
-    }
+    };
 
+    $scope.saveNewInfo = function() {
+    	$http({
+            method: 'PUT',
+            url: '/api/users/' + $scope.userID,
+            data: {
+                'token': Data.token,
+                'email': $scope.email,
+    			'ten': $scope.name,
+    			'avatar': $scope.picture,
+    			'soDienThoai': $scope.phone,
+    			'ngaySinh': $scope.birthday,
+    			'gioiTinh': $scope.gender,
+    			'diaChi': $scope.address
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+    };
 
     // -------------- Kết thúc link --------------
 }]);
