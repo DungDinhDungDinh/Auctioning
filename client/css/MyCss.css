@@ -1220,6 +1220,15 @@ h1, .h1, h2, .h2, h3, .h3 {
 	height: auto;
 	margin: 0 auto;
 	border-radius: 50%;
+	border: 1px solid #DDD;
+	-webkit-transition: all 0.1s linear;
+}
+
+.user-avatar:hover {
+	cursor: pointer;
+	border-radius: 0%;
+	-webkit-transition: all 0.1s linear;
+	opacity: 0.7;
 }
 
 .user-name {
@@ -1845,8 +1854,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .chosen-img:hover {
 	/*filter: blur(1px); */
-	-webkit-transform: scale(1.2);
 	-webkit-transition: all 0.1s linear;
+	-webkit-transform: scale(1.2);
 	transform: scale(1.2);
 }
 
