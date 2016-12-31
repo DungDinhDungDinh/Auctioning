@@ -1826,7 +1826,15 @@ h1, .h1, h2, .h2, h3, .h3 {
 	padding-left: 24%;
 	outline: none;
 	border: 1px solid #ddd;
+}
 
+.add-info-input-error {
+	width: 75%;
+	height: 28px;
+	line-height: 32px;
+	padding-left: 24%;
+	outline: none;
+	border: 1px solid red;
 }
 
 .add-info-textarea {
@@ -1841,6 +1849,18 @@ h1, .h1, h2, .h2, h3, .h3 {
 	border: 1px solid #ddd;
 }
 
+.add-info-textarea-error {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+	width: 75%;
+	max-height: 75%;
+	resize: vertical;
+	line-height: 20px;
+	min-height: 100px;
+	max-height: 200px;
+	padding-left: 24%;
+	border: 1px solid red;
+}
+
 .add-info-select {
 	width: 99%;
 	height: 28px;
@@ -1848,12 +1868,23 @@ h1, .h1, h2, .h2, h3, .h3 {
 	line-height: 28px;
 	outline: none;
 	border: 1px solid #ddd;
-	    /*for firefox*/
+	/*for firefox*/
     -moz-appearance: none;
     /*for chrome*/
     -webkit-appearance:none;
 }
-
+.add-info-select-error {
+	width: 99%;
+	height: 28px;
+	padding-left: 24%;
+	line-height: 28px;
+	outline: none;
+	border: 1px solid red;
+	/*for firefox*/
+    -moz-appearance: none;
+    /*for chrome*/
+    -webkit-appearance:none;
+}
 
 .add-img-label {
 	display: block;
@@ -1872,6 +1903,18 @@ h1, .h1, h2, .h2, h3, .h3 {
 	margin-right: auto;
 	border-radius: 3px;	
 	border: 2px dashed #ddd;
+	background: url(../image/add-img-2.png) no-repeat center;
+}
+
+.chose-img-div-error {
+	overflow: hidden;
+    position: relative;
+	width: 280px;
+	height: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 3px;	
+	border: 1px solid red;
 	background: url(../image/add-img-2.png) no-repeat center;
 }
 
@@ -1905,7 +1948,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	border: 1px solid #6994B9;
 }
 
-.add-info-input:focus, .add-info-textarea:focus {
+.add-info-input:focus, .add-info-textarea:focus , .add-info-textarea-error:focus {
 	outline: none;
 }
 
@@ -2154,7 +2197,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 .tooltip .error {
     position: absolute;
     top: -18px;
-    right: 5px;
+    right: 7px;
     background: #df280a;
     color: #fff;
     font-weight: 400;

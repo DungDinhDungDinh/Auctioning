@@ -80,9 +80,9 @@
 
 			<div class="tooltip">
 				<span class="add-info-label"> Tên sản phẩm <span class="color-red">*</span> </span>
-				<input class="add-info-input" ng-model="item_name" ng-style="myStyle" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
-				<span class="error"> Không được để trống </span>
+				<input id ="item_name" ng-class="class_name" ng-init="class_name = 'add-info-input'" ng-model="item_name"  ng-focus="showTipName()" ng-blur="hideTipName()" placeholder="Nhập tên sản phẩm tại đây"/>
 				
+				<span class="error" ng-show="error_show_name"> {{error_name}}</span>				
 				<span class="tooltiptext" ng-show="tipName">
 					<p>- Điền tên mặt hàng bạn muốn đấu giá</p>
 					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
@@ -92,9 +92,10 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label"> Mô tả <span class="color-red">*</span> </span>
-				<textarea rows="5" cols="1" class="add-info-textarea" ng-model="item_content" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
+				<textarea rows="5" cols="1" id="item_content" ng-class="class_content" ng-init="class_content = 'add-info-textarea'" ng-model="item_content" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
 				"Nhập mô tả tại đây"/>
 				
+				<span class="error" ng-show="error_show_content"> {{error_content}}</span>
 				<span class="tooltiptext" ng-show="tipContent">
 					<p>- Hãy mô tả sản phẩm đấu giá càng chi tiết càng tốt</p>
 					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
@@ -104,9 +105,10 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Chuyên mục <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="item_type = types[0]" ng-model="item_type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
+				<select id="item_type" ng-class="class_type" ng-init="class_type = 'add-info-select';item_type = types[0]" ng-model="item_type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
 				</select>
 				
+				<span class="error" ng-show="error_show_type"> {{error_type}}</span>
 				<span class="tooltiptext" ng-show="tipType">
 					<p>- Sản phẩm bạn đấu giá nằm trong chuyên mục nào?</p>
 					<p>- Lưu ý nên chọn đúng chuyên mục sản phẩm, các tin không đăng đúng chuyên mục sẽ rất khó cho người dùng trong việc tìm kiếm</p>
@@ -115,46 +117,57 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Trạng thái sản phẩm <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="item_status = status[0]" ng-model="item_status"ng-options="stt for stt in status">
-				</select>				
+				<select id="item_situation" ng-class="class_situation" ng-init="class_situation = 'add-info-select';item_situation = situations[0]" ng-model="item_situation"ng-options="stt for stt in situations">
+				</select>
+				
+				<span class="error" ng-show="error_show_situation"> {{error_situation}}</span>				
 			</div>
 			
 			<div class="tooltip">
 				<span class="add-img-label"> Chọn hình ảnh <span class="color-red">*</span> </span>
-				<div class="chose-img-div" >
-					<img class="chosen-img" ng-click="selectImg()" ng-src="{{item_image}}"/>
+				<div ng-class="class_image" ng-init="class_image = 'chose-img-div'">
+					<a class="imageAnchor" href="#" id="item_image">
+						<img tabindex="0" class="chosen-img" ng-click="selectImg()" ng-src="{{item_image}}"/>
+					<a>
+					<span class="error" ng-show="error_show_image"> {{error_image}}</span>
 				</div>
-				<!--<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	-->
+
 			</div>
 
 			<span class="add-item-title"> PHƯƠNG THỨC BÁN HÀNG </span>
 			
 			<div class="tooltip">
-				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>
+				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>				
+				<input id="item_price" ng-class="class_price" ng-init="class_price = 'add-info-input'" ng-model="item_price" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
 				
-				<input class="add-info-input" ng-model="item_price" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+				<span class="error" ng-show="error_show_price"> {{error_price}}</span>
 				<span class="tooltiptext" ng-show="tipName">
 					<p>- Giá khởi điểm hay còn gọi là giá sàn (Là giá khởi điểm chấp nhận được của mặt hàng)</p>
 				</span>
 			</div>
 			
 			<div class="tooltip">
-				<span class="add-info-label"> Ngày kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" ng-model="item_date" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
+				<span class="add-info-label"> Ngày kết thúc <span class="color-red">*</span> </span>				
+				<input ng-class="class_date" ng-init="class_date = 'add-info-input'" ng-model="item_date" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
+				
+				<span class="error" ng-show="error_show_date"> {{error_date}}</span>
 			</div>
 			
 			<div class="tooltip">
 				<span class="add-info-label"> Giờ kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" ng-model="item_time" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
+				<input ng-class="class_time" ng-init="class_time = 'add-info-input'" ng-model="item_time" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
+				
+				<span class="error" ng-show="error_show_time"> {{error_time}}</span>
 			</div>
 
 			<span class="add-item-title"> NƠI BÁN VÀ CÁCH THỨC VẬN CHUYỂN </span>
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Khu vực bán hàng <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="item_location = locations[0]" ng-model="item_location"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select id="item_location" ng-class="class_location" ng-init="class_location = 'add-info-select';item_location = locations[0]" ng-model="item_location"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
+				<span class="error" ng-show="error_show_location"> {{error_location}}</span>
 				<span class="tooltiptext" ng-show="tipType">
 					<p>- Chọn địa phận bán hàng</p>
 				</span>	
@@ -162,9 +175,10 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Vận chuyển <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="item_trans = trans[0]" ng-model="item_trans" ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select id="item_trans" ng-class="class_trans" ng-init="class_trans = 'add-info-select';item_trans = trans[0]" ng-model="item_trans" ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
+				<span class="error" ng-show="error_show_trans"> {{error_trans}}</span>
 				<span class="tooltiptext" ng-show="tipType">
 					<p>- Chọn cách chi trả phí vận chuyển.</p>
 				</span>	
