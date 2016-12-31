@@ -46,7 +46,7 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
 
     $scope.login = function() {
         if ($scope.username === '') {
-			$scope.errorText = " * Chưa nhập tên đăng nhập"
+			$scope.errorText = " * Chưa nhập tên đăng nhập";
             $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
 			//angular.element('#inputName').css({'border-color': 'red',});
 			angular.element('#inputName').focus();
@@ -54,7 +54,7 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
         }
 		
 		if ($scope.password === '') {
-			$scope.errorText = " * Chưa nhập mật khẩu"
+			$scope.errorText = " * Chưa nhập mật khẩu";
             $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
 			//angular.element('#inputPassword').css({'border-color': 'red',});
 			angular.element('#inputPassword').focus();
@@ -76,6 +76,9 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
                 }
             }, function errorCallback(response) {
                 console.log('failed to sign in');
+				$scope.errorText = " * Tên đăng nhập hoặc mật khẩu không đúng";
+				$scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+				angular.element('#inputName').focus();
                 console.log(response);
 
             });
