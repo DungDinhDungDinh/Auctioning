@@ -128,12 +128,12 @@
             
             <div class="user-info-line">
                 <span class="user-info-label"> Địa chỉ</span>
-                <input class="user-info-input" ng-model="address"> {{address}} </input>
+                <input class="user-info-input" ng-model="address"> </input>
             </div>
             
             <div class="user-info-line line-save">
                 <button class="btn-cancel-info"> HỦY </button>
-                <button class="btn-save-info"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>
+                <button class="btn-save-info" ng-click="saveNewInfo()"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>
             </div>
         </div>
     </div>

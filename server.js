@@ -109,22 +109,24 @@ apiRoutes.put('/users/:ID', function(req, res) {
     var gioiTinh = req.body.gioiTinh;
     var diaChi = req.body.diaChi;
 
+
     User.findOne({
         ID: req.params.ID
-    }, function(err, u) {
+    }, function(err, user) {
 
         if (err) throw err;
 
-        if (!u) {
-            u.email = email;
-            u.ten = ten;
-            u.avatar = avatar;
-            u.soDienThoai = soDienThoai;
-            u.ngaySinh = ngaySinh;
-            u.gioiTinh = gioiTinh;
-            u.diaChi = diaChi;
+        if (user) {
+            console.log('lakdjasflj');
+            user.email = email;
+            user.ten = ten;
+            user.avatar = avatar;
+            user.soDienThoai = soDienThoai;
+            user.ngaySinh = ngaySinh;
+            user.gioiTinh = gioiTinh;
+            user.diaChi = diaChi;
 
-            u.save(function(err, u) {
+            user.save(function(err, user1) {
                 if (err) {
                     res.status(400).send({
                         'error': 'Bad request (The data is invalid)'
@@ -138,6 +140,10 @@ apiRoutes.put('/users/:ID', function(req, res) {
                     });
                 }
             });
+        } else {
+            res.status(404).send({
+                            'messege': 'Not found'
+                        });
         }
     });
 });
@@ -504,6 +510,8 @@ apiRoutes.get('/notifications', function(req, res) {
         }
     });
 });
+
+
 
 //EDIT
 apiRoutes.put('/notifications/:ID', function(req, res) {

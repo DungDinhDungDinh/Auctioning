@@ -139,6 +139,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
     };
 
     $scope.saveNewInfo = function() {
+    	console.log($scope.userID);
     	$http({
             method: 'PUT',
             url: '/api/users/' + $scope.userID,
