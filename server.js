@@ -423,7 +423,7 @@ apiRoutes.get('/new_realty_items', function(req, res) {
 });
 
 //-- Các loại khác
-apiRoutes.get('/newotheritems', function(req, res) {
+apiRoutes.get('/new_other_items', function(req, res) {
     Item.find({chuyfoodtenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
