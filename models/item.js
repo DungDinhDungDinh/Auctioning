@@ -18,6 +18,9 @@ var itemSchema = mongoose.Schema({
 		//loai item
 		type: String
 	},
+	giaKhoiDiem: {
+		type: Number
+	},
 	giaHienTai: {
 		type: Number
 	},
