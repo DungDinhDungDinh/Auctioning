@@ -60,7 +60,7 @@ apiRoutes.post('/users', function(req, res) {
 //GET
 //Lay 1 user theo ID
 apiRoutes.get('/users/:ID', function(req, res) {
-    var id= req.params.ID;
+    var id = req.params.ID;
     User.find({
         ID: id
     }).select('-ID').exec(function(err, users) {
@@ -75,8 +75,7 @@ apiRoutes.get('/users/:ID', function(req, res) {
 
 //Lay tat ca user
 apiRoutes.get('/users', function(req, res) {
-    User.find({
-    }).select('-ID').exec(function(err, users) {
+    User.find({}).select('-ID').exec(function(err, users) {
         if (err)
             return console.log(users);
         else {
@@ -89,7 +88,7 @@ apiRoutes.get('/users', function(req, res) {
 //DELETE
 apiRoutes.delete('/users/:ID', function(req, res) {
     User.remove({
-        ID : req.params.ID
+        ID: req.params.ID
     }, function(err) {
         if (!err) {
             console.log('remove user successfull');
@@ -101,7 +100,7 @@ apiRoutes.delete('/users/:ID', function(req, res) {
 
 //EDIT
 apiRoutes.put('/users/:ID', function(req, res) {
-   
+
     var email = req.body.email;
     var ten = req.body.ten;
     var avatar = req.body.avatar;
@@ -111,36 +110,36 @@ apiRoutes.put('/users/:ID', function(req, res) {
     var diaChi = req.body.diaChi;
 
     User.findOne({
-               ID : req.params.ID
-            }, function(err, u) {
+        ID: req.params.ID
+    }, function(err, u) {
 
-                if (err) throw err;
+        if (err) throw err;
 
-                if (!u) {
-                    u.email = email;
-                    u.ten = ten;
-                    u.avatar = avatar;
-                    u.soDienThoai = soDienThoai;
-                    u.ngaySinh = ngaySinh;
-                    u.gioiTinh = gioiTinh;
-                    u.diaChi = diaChi;
+        if (!u) {
+            u.email = email;
+            u.ten = ten;
+            u.avatar = avatar;
+            u.soDienThoai = soDienThoai;
+            u.ngaySinh = ngaySinh;
+            u.gioiTinh = gioiTinh;
+            u.diaChi = diaChi;
 
-                    u.save(function(err, u) {
-                    if (err) {
-                        res.status(400).send({
-                            'error': 'Bad request (The data is invalid)'
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    User.find(function(err, users) {
+                        res.status(200).send({
+                            'messege': 'Updated'
                         });
-                        return console.error(err);
-                    } else {
-                        User.find(function(err, users) {
-                            res.status(200).send({
-                                'messege': 'Updated'
-                            });
-                        });
-                    }
-                });
+                    });
                 }
             });
+        }
+    });
 });
 
 //##############################################-Item API-######################################
@@ -183,7 +182,7 @@ apiRoutes.post('/items', function(req, res) {
 //GET
 //Lay 1 item theo ID
 apiRoutes.get('/items/:ID', function(req, res) {
-    var id= req.params.ID;
+    var id = req.params.ID;
     Item.find({
         ID: id
     }).select('-ID').exec(function(err, items) {
@@ -198,8 +197,7 @@ apiRoutes.get('/items/:ID', function(req, res) {
 
 //Lay tat ca item
 apiRoutes.get('/items', function(req, res) {
-    Item.find({
-    }).select('-ID').exec(function(err, items) {
+    Item.find({}).select('-ID').exec(function(err, items) {
         if (err)
             return console.log(items);
         else {
@@ -212,7 +210,7 @@ apiRoutes.get('/items', function(req, res) {
 //DELETE
 apiRoutes.delete('/items/:ID', function(req, res) {
     Item.remove({
-        ID : req.params.ID
+        ID: req.params.ID
     }, function(err) {
         if (!err) {
             console.log('remove item successfull');
@@ -224,7 +222,7 @@ apiRoutes.delete('/items/:ID', function(req, res) {
 
 //EDIT
 apiRoutes.put('/items/:ID', function(req, res) {
-   
+
     var ten = req.body.ten;
     var hinhAnh = req.body.hinhAnh;
     var chuyenMuc = req.body.chuyenMuc;
@@ -239,41 +237,41 @@ apiRoutes.put('/items/:ID', function(req, res) {
     var giaKhoiDiem = req.body.giaKhoiDiem;
 
     Item.findOne({
-               ID : req.params.ID
-            }, function(err, u) {
+        ID: req.params.ID
+    }, function(err, u) {
 
-                if (err) throw err;
+        if (err) throw err;
 
-                if (!u) {
-                    u.ten = ten;
-                    u.hinhAnh = hinhAnh;
-                    u.chuyenMuc = chuyenMuc;
-                    u.giaHienTai = giaHienTai;
-                    u.ngayHetHan = ngayHetHan;
-                    u.trangThai = trangThai;
-                    u.noiBan = noiBan;
-                    u.vanChuyen = vanChuyen;
-                    u.moTa = moTa;
-                    u.nguoiBan = nguoiBan;
-                    u.nguoiTra = nguoiTra;
-                    u.giaKhoiDiem = giaKhoiDiem;
+        if (!u) {
+            u.ten = ten;
+            u.hinhAnh = hinhAnh;
+            u.chuyenMuc = chuyenMuc;
+            u.giaHienTai = giaHienTai;
+            u.ngayHetHan = ngayHetHan;
+            u.trangThai = trangThai;
+            u.noiBan = noiBan;
+            u.vanChuyen = vanChuyen;
+            u.moTa = moTa;
+            u.nguoiBan = nguoiBan;
+            u.nguoiTra = nguoiTra;
+            u.giaKhoiDiem = giaKhoiDiem;
 
-                    u.save(function(err, u) {
-                    if (err) {
-                        res.status(400).send({
-                            'error': 'Bad request (The data is invalid)'
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Item.find(function(err, items) {
+                        res.status(200).send({
+                            'messege': 'Updated'
                         });
-                        return console.error(err);
-                    } else {
-                        Item.find(function(err, items) {
-                            res.status(200).send({
-                                'messege': 'Updated'
-                            });
-                        });
-                    }
-                });
+                    });
                 }
             });
+        }
+    });
 });
 
 //##############################################-Userauction API-######################################
@@ -307,7 +305,7 @@ apiRoutes.post('/userauctions', function(req, res) {
 //GET
 //Lay 1 userauction theo ID
 apiRoutes.get('/userauctions/:ID', function(req, res) {
-    var id= req.params.ID;
+    var id = req.params.ID;
     Userauction.find({
         ID: id
     }).select('-ID').exec(function(err, userauctions) {
@@ -322,8 +320,7 @@ apiRoutes.get('/userauctions/:ID', function(req, res) {
 
 //Lay tat ca userauction
 apiRoutes.get('/userauctions', function(req, res) {
-    Userauction.find({
-    }).select('-ID').exec(function(err, userauctions) {
+    Userauction.find({}).select('-ID').exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
         else {
@@ -336,7 +333,7 @@ apiRoutes.get('/userauctions', function(req, res) {
 //DELETE
 apiRoutes.delete('/userauctions/:ID', function(req, res) {
     Userauction.remove({
-        ID : req.params.ID
+        ID: req.params.ID
     }, function(err) {
         if (!err) {
             console.log('remove userauction successfull');
@@ -348,40 +345,40 @@ apiRoutes.delete('/userauctions/:ID', function(req, res) {
 
 //EDIT
 apiRoutes.put('/userauctions/:ID', function(req, res) {
-   
+
     var userID = req.body.userID;
     var itemID = req.body.itemID;
     var giaHienTai = req.body.giaHienTai;
     var giaDaTra = req.body.giaDaTra;
 
     Userauction.findOne({
-               ID : req.params.ID
-            }, function(err, u) {
+        ID: req.params.ID
+    }, function(err, u) {
 
-                if (err) throw err;
+        if (err) throw err;
 
-                if (!u) {
-                    u.userID= userID;
-                    u.itemID = itemID;
-                    u.giaHienTai = giaHienTai;
-                    u.giaDaTra = giaDaTra;
+        if (!u) {
+            u.userID = userID;
+            u.itemID = itemID;
+            u.giaHienTai = giaHienTai;
+            u.giaDaTra = giaDaTra;
 
-                    u.save(function(err, u) {
-                    if (err) {
-                        res.status(400).send({
-                            'error': 'Bad request (The data is invalid)'
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Userauction.find(function(err, items) {
+                        res.status(200).send({
+                            'messege': 'Updated'
                         });
-                        return console.error(err);
-                    } else {
-                        Userauction.find(function(err, items) {
-                            res.status(200).send({
-                                'messege': 'Updated'
-                            });
-                        });
-                    }
-                });
+                    });
                 }
             });
+        }
+    });
 });
 
 //##############################################-Userfollow API-######################################
@@ -415,7 +412,7 @@ apiRoutes.post('/userfollows', function(req, res) {
 //GET
 //Lay 1 userfollow theo ID
 apiRoutes.get('/userfollows/:ID', function(req, res) {
-    var id= req.params.ID;
+    var id = req.params.ID;
     Userfollow.find({
         ID: id
     }).select('-ID').exec(function(err, userfollows) {
@@ -430,8 +427,7 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
 
 //Lay tat ca userfollow
 apiRoutes.get('/userfollows', function(req, res) {
-    Userfollow.find({
-    }).select('-ID').exec(function(err, userfollows) {
+    Userfollow.find({}).select('-ID').exec(function(err, userfollows) {
         if (err)
             return console.log(userfollows);
         else {
@@ -444,7 +440,7 @@ apiRoutes.get('/userfollows', function(req, res) {
 //DELETE
 apiRoutes.delete('/userfollows/:ID', function(req, res) {
     Userfollow.remove({
-        ID : req.params.ID
+        ID: req.params.ID
     }, function(err) {
         if (!err) {
             console.log('remove userfollow successfull');
@@ -456,40 +452,40 @@ apiRoutes.delete('/userfollows/:ID', function(req, res) {
 
 //EDIT
 apiRoutes.put('/userfollows/:ID', function(req, res) {
-   
+
     var userID = req.body.userID;
     var itemID = req.body.itemID;
     var giaHienTai = req.body.giaHienTai;
     var trangThai = req.body.trangThai;
 
     Userfollow.findOne({
-               ID : req.params.ID
-            }, function(err, u) {
+        ID: req.params.ID
+    }, function(err, u) {
 
-                if (err) throw err;
+        if (err) throw err;
 
-                if (!u) {
-                    u.userID= userID;
-                    u.itemID = itemID;
-                    u.giaHienTai = giaHienTai;
-                    u.trangThai = trangThai;
+        if (!u) {
+            u.userID = userID;
+            u.itemID = itemID;
+            u.giaHienTai = giaHienTai;
+            u.trangThai = trangThai;
 
-                    u.save(function(err, u) {
-                    if (err) {
-                        res.status(400).send({
-                            'error': 'Bad request (The data is invalid)'
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Userfollow.find(function(err, userfollows) {
+                        res.status(200).send({
+                            'messege': 'Updated'
                         });
-                        return console.error(err);
-                    } else {
-                        Userfollow.find(function(err, userfollows) {
-                            res.status(200).send({
-                                'messege': 'Updated'
-                            });
-                        });
-                    }
-                });
+                    });
                 }
             });
+        }
+    });
 });
 
 //##############################################-Notification API-######################################
@@ -511,7 +507,7 @@ apiRoutes.get('/notifications', function(req, res) {
 
 //EDIT
 apiRoutes.put('/notifications/:ID', function(req, res) {
-   
+
     // var userID = req.body.userID;
     // var itemID = req.body.itemID;
     // var giaHienTai = req.body.giaHienTai;
@@ -548,6 +544,9 @@ apiRoutes.put('/notifications/:ID', function(req, res) {
 });
 
 //#########################################-Authentication API-#################################
+
+
+
 apiRoutes.post('/authenticate/facebook', function(req, res) {
     console.log('authenticate facebook');
 
@@ -574,7 +573,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                         console.log(err);
                     }
 
-                   
+
                     if (!account) {
                         var account = new Account({
                             ID: fb_user_id,
@@ -589,7 +588,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
 
                                 var user = new User({
                                     ID: fb_user_id,
-                                    ten : name,
+                                    ten: name,
                                     email: email,
                                     avatar: picture
                                 });
@@ -601,7 +600,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                 });
 
 
-                                var token = jwt.sign(user, app.get('superSecret'), {
+                                var token = jwt.sign(account, app.get('superSecret'), {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
                                 res.json({
@@ -614,11 +613,11 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             }
                         });
                     } else {
-                        var token = jwt.sign(user, app.get('superSecret'), {
+                        var token = jwt.sign(account, app.get('superSecret'), {
                             expiresIn: 60 * 60 * 24 // expires in 24 hours
                         });
                         res.json({
-                            userID: user.ID,
+                            userID: account.ID,
                             token: token,
                             name: name,
                             email: email,
@@ -631,6 +630,51 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 res.status(401).send("Oh uh, something went wrong, cannot authenticate");
             }
         });
+});
+
+apiRoutes.post('/register', function(req, res) {
+
+    var userID = req.body.userID;
+    var password = req.body.password;
+    // find the user
+    Account.findOne({
+        ID: userID
+    }, function(err, account) {
+
+        if (err) {
+            console.log(err);
+        }
+
+        console.log(account);
+        if (!account) {
+            var account = new Account({
+                ID: userID,
+                password: password
+            });
+            account.save(function(err) {
+                if (err) {
+                    console.log('error create new account' + err);
+                } else {
+                    var user = new User({
+                        ID: userID
+                    });
+                    user.save(function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            console.log('created new user');
+                        }
+                    });
+                    console.log('Created new account');
+                    res.status(201).send("Đăng ký thành công!");
+                }
+            });
+        } else if (account) {
+            res.status(401).send("* Tên đăng nhập đã tồn tại");
+        }
+
+    });
 });
 
 
@@ -684,32 +728,35 @@ apiRoutes.post('/authenticate', function(req, res) {
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
 
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-  // decode token
-  if (token) {
+    // decode token
+    if (token) {
 
-    // verifies secret and checks exp
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
-        next();
-      }
-    });
-  } else {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else {
 
-    // if there is no token
-    // return an error
-    return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
-    });
-    
-  }
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
 });
 
 var port = process.env.PORT || 8081;
