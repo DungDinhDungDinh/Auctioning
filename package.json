@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart" : "npm install",
+    "prestart": "npm install",
     "start": "node server.js"
   },
   "repository": {
@@ -19,11 +19,10 @@
   },
   "homepage": "https://github.com/DungDinhDungDinh/Auctioning#readme",
   "dependencies": {
+    "body-parser": "*",
     "express": "^4.14.0",
-    "body-parser" : "*",
-    "jsonwebtoken" : "*",
+    "jsonwebtoken": "*",
     "mongoose": "*",
-    "request" : "*"
-
+    "request": "*"
   }
 }

@@ -24,9 +24,12 @@ var itemSchema = mongoose.Schema({
 	giaHienTai: {
 		type: Number
 	},
+	ngayTao: {
+		type: Date
+	},
 	ngayHetHan: {
 		//ngay va gio: dd/mm/yyyy hh:mm
-		type: String
+		type: Date
 	},
 	trangThai: {
 		//con thoi gian dau gia: 1
