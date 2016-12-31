@@ -566,26 +566,41 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var name = obj.name;
                 var email = obj.email;
                 var picture = obj.picture.data.url;
-                User.findOne({
+                Account.findOne({
                     ID: fb_user_id
-                }, function(err, user) {
+                }, function(err, account) {
 
                     if (err) {
                         console.log(err);
                     }
 
-                    console.log(response);
-                    if (!user) {
-                        var user = new User({
+                   
+                    if (!account) {
+                        var account = new Account({
                             ID: fb_user_id,
-                            admin: false
+                            password: fb_user_id
                         });
 
-                        user.save(function(err) {
+                        account.save(function(err) {
                             if (err) {
                                 console.log('error create new user' + err);
                             } else {
                                 console.log('User saved successfully');
+
+                                var user = new User({
+                                    ID: fb_user_id,
+                                    ten : name,
+                                    email: email,
+                                    avatar: picture
+                                });
+
+                                user.save(function(err) {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                });
+
+
                                 var token = jwt.sign(user, app.get('superSecret'), {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
