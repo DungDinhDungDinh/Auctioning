@@ -45,8 +45,19 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
     $scope.password = '';
 
     $scope.login = function() {
-        if ($scope.username === '' && $scope.password === '') {
-            alert('Vui lập không để trống username và password');
+        if ($scope.username === '') {
+			$scope.errorText = " * Chưa nhập tên đăng nhập"
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			//angular.element('#inputName').css({'border-color': 'red',});
+			angular.element('#inputName').focus();
+            return;
+        }
+		
+		if ($scope.password === '') {
+			$scope.errorText = " * Chưa nhập mật khẩu"
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			//angular.element('#inputPassword').css({'border-color': 'red',});
+			angular.element('#inputPassword').focus();
             return;
         }
 
