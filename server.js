@@ -416,6 +416,20 @@ apiRoutes.get('/newrealtyitems', function(req, res) {
     });   
 });
 
+//-- Các loại khác
+apiRoutes.get('/newotheritems', function(req, res) {
+    Item.find({chuyfoodtenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
