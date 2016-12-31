@@ -125,8 +125,8 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
     $scope.pickImage = function() {
         filepicker.pick({
                 mimetype: 'image/*',
-                container: 'window',
-                services: ['COMPUTER', 'FACEBOOK', 'INSTAGRAM', 'GOOGLE_DRIVE']
+                container: 'modal',
+                services: ['COMPUTER', 'FACEBOOK', 'INSTAGRAM', 'GOOGLE_DRIVE', 'WEBCAM', 'IMAGE_SEARCH']
             },
             function(Blob) {
                 console.log(JSON.stringify(Blob));
