@@ -332,6 +332,35 @@ apiRoutes.get('/newentertainmentitems', function(req, res) {
     });   
 });
 
+//-- Mẹ và bé
+apiRoutes.get('/newmomandbabytitems', function(req, res) {
+    Item.find({chuyenMuc: 'Mẹ và bé'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Thời trang & phụ kiện
+apiRoutes.get('/newfashionitems', function(req, res) {
+    Item.find({chuyenMuc: 'Thời trang & phụ kiện'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
