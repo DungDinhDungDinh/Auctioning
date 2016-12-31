@@ -21,25 +21,49 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
 	}
 	
     $scope.signUp = function() {
-    	if ($scope.username === '' || $scope.password === ''  || $scope.retypePassword === '') {
-    		alert('Vui lòng nhập đủ các trường cần thiết');
+    	if ($scope.username === '') {
+    		$scope.errorText = " * Chưa nhập tên đăng nhập";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputID').focus();
     		return;
     	}
-
-    	if ($scope.username.length < 4) {
-    		alert('Username phải dài hơn 4 ký tự');
+		
+		if ($scope.username.length < 6) {
+    		$scope.errorText = " * Tên đăng nhập phải dài tối thiểu 6 ký tự";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputID').focus();
     		return;
     	}
-
+		
+		if ($scope.password === '') {
+    		$scope.errorText = " * Chưa nhập mật khẩu";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputPassword').focus();
+    		return;
+    	}
+		
+		
     	if ($scope.password.length < 6) {
-    		alert('Username phải dài hơn 6 ký tự');
+    		$scope.errorText = " * Password phải dài tối thiểu 6 ký tự";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputPassword').focus();
+    		return;
+    	}
+		
+		if ($scope.retypePassword === '') {
+    		$scope.errorText = " * Chưa nhập xác nhận mật khẩu";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputRePassword').focus();
     		return;
     	}
 
     	if ($scope.password !== $scope.retypePassword) {
-    		alert('Vui lòng nhập lại đúng mật khẩu');
+    		$scope.errorText = " * Xác nhận Password chưa chính xác";
+            $scope.errorStyle = {"color":"red", "font-size":"12px", "display":"block"};
+			angular.element('#inputRePassword').focus();
     		return;
     	}
+		
     	signUp($scope.username, $scope.password);
 
     };
