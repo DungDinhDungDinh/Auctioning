@@ -280,6 +280,162 @@ apiRoutes.put('/items/:ID', function(req, res) {
     });
 });
 
+//-------------------------ITEM API------------------
+//API lấy 4 sản phẩm đấu giá mới nhất
+apiRoutes.get('/newitems', function(req, res) {
+    Item.find({}).sort({ngayTao: -1}).limit(4).exec(function(err, items) {
+        if (err){
+            res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//API lấy từ mỗi danh mục 5 sản phẩm mới nhất
+//--Đồ điện tử
+apiRoutes.get('/newelectronicitems', function(req, res) {
+    Item.find({chuyenMuc: 'Đồ điện tử'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//--Giai trí, thể thao, sở thích
+apiRoutes.get('/newentertainmentitems', function(req, res) {
+    Item.find({chuyenMuc: 'Giải trí, thể thao, sở thích'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Xe cộ, máy móc
+apiRoutes.get('/newentertainmentitems', function(req, res) {
+    Item.find({chuyenMuc: 'Xe cộ, máy móc'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Mẹ và bé
+apiRoutes.get('/newmomandbabytitems', function(req, res) {
+    Item.find({chuyenMuc: 'Mẹ và bé'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Thời trang & phụ kiện
+apiRoutes.get('/newfashionitems', function(req, res) {
+    Item.find({chuyenMuc: 'Thời trang & phụ kiện'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Đồ ăn, thức uống
+apiRoutes.get('/newfooditems', function(req, res) {
+    Item.find({chuyenMuc: 'Đồ ăn, thức uống'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Đồ gia dụng
+apiRoutes.get('/newhomeitems', function(req, res) {
+    Item.find({chuyfoodtenMuc: 'Đồ gia dụng'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Sức khỏe & sắc đẹp
+apiRoutes.get('/newhealthyitems', function(req, res) {
+    Item.find({chuyfoodtenMuc: 'Sức khỏe & sắc đẹp'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Bất động sản
+apiRoutes.get('/newrealtyitems', function(req, res) {
+    Item.find({chuyfoodtenMuc: 'Bất động sản'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Các loại khác
+apiRoutes.get('/newotheritems', function(req, res) {
+    Item.find({chuyfoodtenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
@@ -781,7 +937,6 @@ apiRoutes.get('/', function(req, res) {
 
 app.use('/api', apiRoutes);
 
-//API ITEM
 
 
 //Test 
