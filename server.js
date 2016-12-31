@@ -384,7 +384,7 @@ apiRoutes.get('/new_food_items', function(req, res) {
 
 //-- Đồ gia dụng
 apiRoutes.get('/new_home_items', function(req, res) {
-    Item.find({chuyfoodtenMuc: 'Đồ gia dụng'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+    Item.find({chuyenMuc: 'Đồ gia dụng'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -398,7 +398,7 @@ apiRoutes.get('/new_home_items', function(req, res) {
 
 //-- Sức khỏe & sắc đẹp
 apiRoutes.get('/new_healthy_items', function(req, res) {
-    Item.find({chuyfoodtenMuc: 'Sức khỏe & sắc đẹp'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+    Item.find({chuyenMuc: 'Sức khỏe & sắc đẹp'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -412,7 +412,7 @@ apiRoutes.get('/new_healthy_items', function(req, res) {
 
 //-- Bất động sản
 apiRoutes.get('/new_realty_items', function(req, res) {
-    Item.find({chuyfoodtenMuc: 'Bất động sản'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+    Item.find({chuyenMuc: 'Bất động sản'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -426,7 +426,21 @@ apiRoutes.get('/new_realty_items', function(req, res) {
 
 //-- Các loại khác
 apiRoutes.get('/new_other_items', function(req, res) {
-    Item.find({chuyfoodtenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+    Item.find({chuyenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
+//-- Lấy các items của 1 user
+apiRoutes.get('/getitems/:ID', function(req, res) {
+    Item.find({nguoiBan: req.params.ID}).select('-_id').exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
             console.log('Failed!!');
