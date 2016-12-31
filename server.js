@@ -19,10 +19,14 @@ var User = require('./models/user');
 var Item = require('./models/item');
 var Userauction = require('./models/userauction');
 var Userfollow = require('./models/userfollow');
+var Account = require('./models/account');
+var Notification = require('./models/notification');
 
 var apiRoutes = express.Router();
 
 //##############################################-User API-######################################
+
+
 //ADD
 apiRoutes.post('/users', function(req, res) {
 
@@ -156,7 +160,8 @@ apiRoutes.post('/items', function(req, res) {
         vanChuyen: req.body.vanChuyen,
         moTa: req.body.moTa,
         nguoiBan: req.body.nguoiBan,
-        nguoiTra: req.body.nguoiTra
+        nguoiTra: req.body.nguoiTra,
+        giaKhoiDiem: req.body.giaKhoiDiem
     });
 
 
@@ -231,6 +236,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
     var moTa = req.body.moTa;
     var nguoiBan = req.body.nguoiBan;
     var nguoiTra = req.body.nguoiTra;
+    var giaKhoiDiem = req.body.giaKhoiDiem;
 
     Item.findOne({
                ID : req.params.ID
@@ -250,6 +256,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
                     u.moTa = moTa;
                     u.nguoiBan = nguoiBan;
                     u.nguoiTra = nguoiTra;
+                    u.giaKhoiDiem = giaKhoiDiem;
 
                     u.save(function(err, u) {
                     if (err) {
@@ -483,6 +490,61 @@ apiRoutes.put('/userfollows/:ID', function(req, res) {
                 });
                 }
             });
+});
+
+//##############################################-Notification API-######################################
+
+//Lay tat ca notification
+apiRoutes.get('/notifications', function(req, res) {
+    var userID = req.query.userID;
+    Userfollow.find({
+        userID: userID
+    }).select('-ID').exec(function(err, notifications) {
+        if (err)
+            return console.log(notifications);
+        else {
+            res.status(200).send(notifications);
+            console.log(notifications);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/notifications/:ID', function(req, res) {
+   
+    // var userID = req.body.userID;
+    // var itemID = req.body.itemID;
+    // var giaHienTai = req.body.giaHienTai;
+    // var trangThai = req.body.trangThai;
+
+    // Userfollow.findOne({
+    //            ID : req.params.ID
+    //         }, function(err, u) {
+
+    //             if (err) throw err;
+
+    //             if (!u) {
+    //                 u.userID= userID;
+    //                 u.itemID = itemID;
+    //                 u.giaHienTai = giaHienTai;
+    //                 u.trangThai = trangThai;
+
+    //                 u.save(function(err, u) {
+    //                 if (err) {
+    //                     res.status(400).send({
+    //                         'error': 'Bad request (The data is invalid)'
+    //                     });
+    //                     return console.error(err);
+    //                 } else {
+    //                     Userfollow.find(function(err, userfollows) {
+    //                         res.status(200).send({
+    //                             'messege': 'Updated'
+    //                         });
+    //                     });
+    //                 }
+    //             });
+    //             }
+    //         });
 });
 
 //#########################################-Authentication API-#################################

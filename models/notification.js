@@ -10,11 +10,19 @@ var notificationSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	time: {
+	thoiGian: {
 		type: String,
 		required: true
 	},
-	message: {
+	noiDung: {
+		type: String,
+		required: true
+	},
+	seen :  {
+		type: Boolean,
+		required: true
+	},
+	ID: {
 		type: String,
 		required: true
 	}
