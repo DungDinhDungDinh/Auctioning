@@ -601,7 +601,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                 });
 
 
-                                var token = jwt.sign(user, app.get('superSecret'), {
+                                var token = jwt.sign(account, app.get('superSecret'), {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
                                 res.json({
@@ -614,7 +614,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             }
                         });
                     } else {
-                        var token = jwt.sign(user, app.get('superSecret'), {
+                        var token = jwt.sign(account, app.get('superSecret'), {
                             expiresIn: 60 * 60 * 24 // expires in 24 hours
                         });
                         res.json({
