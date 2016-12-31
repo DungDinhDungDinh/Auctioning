@@ -381,7 +381,7 @@ apiRoutes.get('/new_food_items', function(req, res) {
 });
 
 //-- Đồ gia dụng
-apiRoutes.get('/newhomeitems', function(req, res) {
+apiRoutes.get('/new_home_items', function(req, res) {
     Item.find({chuyfoodtenMuc: 'Đồ gia dụng'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
