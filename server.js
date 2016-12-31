@@ -584,15 +584,17 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             if (err) {
                                 console.log('error create new user' + err);
                             } else {
-                                console.log('User saved successfully');
+                                console.log('Account saved successfully');
 
+								if(!email) {email = '';}
                                 var user = new User({
                                     ID: fb_user_id,
                                     ten: name,
                                     email: email,
                                     avatar: picture
                                 });
-
+								
+								
                                 user.save(function(err) {
                                     if (err) {
                                         console.log(err);
@@ -603,6 +605,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                 var token = jwt.sign(account, app.get('superSecret'), {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
+															
                                 res.json({
                                     userID: fb_user_id,
                                     token: token,
