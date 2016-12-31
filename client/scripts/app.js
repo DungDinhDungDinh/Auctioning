@@ -14,7 +14,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/dang-nhap.html',
         controller: 'loginController'
     }).
-	when('/san-pham-dau-gia', {
+	when('/san-pham-dau-gia/:itemID', {
         templateUrl: './view/san-pham-dau-gia.html',
         controller: 'itemController'
     }).

@@ -1,9 +1,10 @@
 
 
-myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location, $rootScope) {
+myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function ($scope, $http, Data, $location, $rootScope, $routeParams) {
 
 	$scope.price =  "1000000";
 	$scope.highest_price =  "100000000";
+	$scope.itemID = $routeParams.itemID;
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -134,4 +135,21 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 		$scope.name = parts.join(" ");
 	}
+
+	var getItemInformation = function() {
+		$http({
+            method: 'GET',
+            url: '/api/items/' + $scope.itemID
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+	};
+
+	getItemInformation();
 }]);

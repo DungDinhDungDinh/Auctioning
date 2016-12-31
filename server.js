@@ -190,10 +190,11 @@ apiRoutes.post('/items', function(req, res) {
 //GET
 //Lay 1 item theo ID
 apiRoutes.get('/items/:ID', function(req, res) {
+    console.log('laksd');
     var id = req.params.ID;
     Item.find({
         ID: id
-    }).select('-ID').exec(function(err, items) {
+    }).select().exec(function(err, items) {
         if (err)
             return console.log(items);
         else {

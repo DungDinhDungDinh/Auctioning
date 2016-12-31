@@ -6,6 +6,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 	$scope.price =  "1000000";
 	$scope.highest_price =  "100000000";
 	$scope.viewID = $routeParams.viewID;
+	console.log($scope.viewID);
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -92,7 +93,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
         $location.path('/them-san-pham-step-1');
     };
 
-    $scope.getUserSellingItems = function (){
+     var getUserSellingItems = function (){
     	$http({
             method: 'GET',
             url: '/api/getItems/' + $scope.viewID
@@ -101,6 +102,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
                 console.log(response.data);
                 $scope.user_items = response.data;
 
+
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -108,6 +110,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 
         });
     };
+    getUserSellingItems();
 
 	// -------------- Kết thúc link --------------
 }]);
