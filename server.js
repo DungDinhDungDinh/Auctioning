@@ -360,6 +360,19 @@ apiRoutes.get('/newfashionitems', function(req, res) {
     });   
 });
 
+//-- Đồ ăn, thức uống
+apiRoutes.get('/newfoodtitems', function(req, res) {
+    Item.find({chuyenMuc: 'Đồ ăn, thức uống'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
 
 //##############################################-Userauction API-######################################
 //ADD
