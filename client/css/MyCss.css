@@ -1202,17 +1202,17 @@ h1, .h1, h2, .h2, h3, .h3 {
 	display: block;
 	margin: 0 auto;
 	margin-top: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	width: 90%;
-	height: 250px;
+	height: 265px;
 	background: #fafafa;
 }
 
 .avatar-div {
 	overflow: hidden;
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     margin-left: auto;
     margin-right: auto;
     top: 20px;
@@ -1400,10 +1400,10 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .btn-save-info {
-	background: #8ABE7A;
+	background: #77ad66;
 	float: right;
     color: #fff;
-    border: 1px solid #8ABE7A;
+    border: 1px solid #77ad66;
 	width: 150px;
 	height: 35px;
 	-webkit-transition: all 0.3s linear;
@@ -1412,8 +1412,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 }  
 
 .btn-save-info:hover, .btn-save-info:active {
-	background: #6C3;
-	border: 1px solid #6C3;
+	background: #8ABE7A;
+	border: 1px solid #8ABE7A;
 	cursor: pointer;
 	-webkit-transition: all 0.3s linear;
 }

@@ -36,6 +36,10 @@ var itemSchema = mongoose.Schema({
 		//het thoi gian dau gia: 0
 		type: Boolean
 	},
+	tinhTrang: {
+		//Mới, cũ, kiếm
+		type: String
+	},
 	noiBan: {
 		type: String
 	},

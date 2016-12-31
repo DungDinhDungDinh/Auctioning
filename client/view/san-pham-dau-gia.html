@@ -111,7 +111,7 @@
 					</div>
                 </div>  
             </div>	      
-            <span style="padding-left:50px; line-height:40px; font-size:15px;"> "Danh mục" (ví dụ: Đồ điện tử)  </span>
+            <span style="padding-left:50px; line-height:40px; font-size:15px;"> {{item_type}}  </span>
         </div>
 
     </div>
@@ -119,17 +119,17 @@
     <div class="body-item">
         
         <div class="body-item-div1">
-        	<img class="body-item-img" src="image/new-item-1.jpg">
+        	<img class="body-item-img" ng-src="{{item_picture}}">
 		</div>
         
         <div class="body-item-div2">
         	<div class="body-item-name">
-        		<span> TÊN SẢN PHẨM</span>
+        		<span> {{item_name}}</span>
 			</div>
             
             <div class="body-price" ng-init="changeNumber()">
             	<span style="display:block; color: #666; font-size: 15px;"> Giá hiện tại:</span> 
-        		<span> {{price}} đ</span>     
+        		<span> {{item_price}} đ</span>     
 			</div>
             
             <div class="div-dau-gia">
@@ -139,22 +139,19 @@
             
             <div class="div-info-1">
 				<span class="info-title-1"> <i class="fa fa-star" style=" width:16px;"> </i>Tình trạng</span>
-                <span style="display:block;">Hàng mới</span>
+                <span style="display:block;"> {{item_situation}} </span>
                 
                 <span class="info-title-1"> <i class="fa fa-map-marker" style=" width:14px; margin-left: 2px;"> </i>Nơi bán</span>
-                <span style="display:block;">Hồ Chí Minh, Quận 3</span>
+                <span style="display:block;"> {{item_location}} </span>
                 
                 <span class="info-title-1"> <i class="fa fa-truck" style=" width:16px;"> </i>Vận chuyển</span>
-                <span>Miễn phí toàn quốc</span>
+                <span> {{item_trans}} </span>
             </div>
             
             <div class="div-info-2">
       			<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
-                <span style="display: block;">Thông tin 1</span>
-                <span style="display: block;">Thông tin 2</span>
-                <span style="display: block;">Thông tin 3</span>
-                <span style="display: block;">...</span>
-                
+				<br>
+                <pre>{{item_content}}</pre>               
             </div>
             	
             <div class="div-info-3">  

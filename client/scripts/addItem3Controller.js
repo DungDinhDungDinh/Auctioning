@@ -53,26 +53,23 @@ myapp.controller('addItem3Controller',  ['$scope', '$http', 'Data', '$location',
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
-		console.log(danh_muc);
 		Data.danh_muc = danh_muc;
         $location.path('/danh-sach-san-pham');
     };
 
 	$scope.goTo_Search_Result = function () {
 		Data.danh_muc = $scope.searchString;
-		console.log(Data.danh_muc);
         $location.path('/danh-sach-san-pham');
     };
 
 	$scope.goTo_Item_Info = function (item_ID) {
 		Data.item_ID = item_ID;
-        $location.path('/san-pham-dau-gia');
+        $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
 	$scope.goTo_User_Info = function () {
 		Data.ViewUserID = Data.userID;
-		console.log(Data.ViewUserID);
-        $location.path('/user-thong-tin-chung');
+        $location.path('/user-thong-tin-chung/' + Data.userID);
     };
 
 	$scope.goTo_User_Sell = function () {

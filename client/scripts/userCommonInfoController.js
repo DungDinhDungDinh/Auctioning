@@ -1,4 +1,4 @@
-myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function($scope, $http, Data, $location, $rootScope, $routeParams) {
+myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 
     $scope.price = "1000000";
     $scope.highest_price = "100000000";
@@ -49,30 +49,27 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
     };
 
     $scope.goTo_Item_List = function(danh_muc) {
-        console.log(danh_muc);
         Data.danh_muc = danh_muc;
         $location.path('/danh-sach-san-pham');
     };
 
     $scope.goTo_Search_Result = function() {
         Data.danh_muc = $scope.searchString;
-        console.log(Data.danh_muc);
         $location.path('/danh-sach-san-pham');
     };
 
-    $scope.goTo_Item_Info = function(item_ID) {
-        Data.item_ID = item_ID;
-        $location.path('/san-pham-dau-gia');
+	$scope.goTo_Item_Info = function (item_ID) {
+		Data.item_ID = item_ID;
+        $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
-    $scope.goTo_User_Info = function() {
-        Data.ViewUserID = Data.userID;
-        console.log(Data.ViewUserID);
-        $location.path('/user-thong-tin-chung');
+	$scope.goTo_User_Info = function () {
+		Data.ViewUserID = Data.userID;
+        $location.path('/user-thong-tin-chung/' + $scope.viewID);
     };
 
     $scope.goTo_User_Sell = function() {
-        $location.path('/user-dang-ban');
+        $location.path('/user-dang-ban/' + $scope.viewID);
     };
 
     $scope.goTo_User_Buy = function() {
@@ -114,7 +111,6 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
                 $scope.gender = info.gioiTinh;
                 $scope.address = info.diaChi;
                 $scope.picture = info.avatar;
-                console.log($scope.picture);
 
                 $scope.staticName = info.ten;
                 $scope.staticEmail = info.email;
@@ -124,7 +120,30 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
 				if($scope.staticBirthday){ $scope.showBirthday= true;}
 				if($scope.staticGender){ $scope.showGender = true;}
 				
-				if(Data.userID !== $scope.viewID) { $scope.notMyInfo = true; }
+				//Trang thông tin của người khác
+				if(Data.userID !== $scope.viewID) 
+				{ 
+					$scope.notMyInfo = true; 
+					console.log($scope.phone);
+					if (!$scope.name){ 
+						$scope.name = '* Chưa cập nhật *';
+					}
+					if (!$scope.email){ 
+						$scope.email = '* Chưa cập nhật *';
+					}
+					if (!$scope.phone){ 
+						$scope.phone = '* Chưa cập nhật *';
+					}
+					if (!$scope.birthday){ 
+						$scope.birthday = '* Chưa cập nhật *';
+					}
+					if (!$scope.gender){ 
+						$scope.gender = '* Chưa cập nhật *';
+					}
+					if (!$scope.address){ 
+						$scope.address = '* Chưa cập nhật *';
+					}
+				}
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -152,6 +171,10 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
     };
 
     $scope.saveNewInfo = function() {		
+		if($scope.gender === '* Chưa cập nhật *')
+		{
+			$scope.gender = null;	
+		}
     	$http({
             method: 'PUT',
             url: '/api/users/' + $scope.userID,
@@ -167,8 +190,8 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
-				$location.path('/user-thong-tin-chung/' + $scope.viewID);
+				alert('Lưu thay đổi thành công');
+				$route.reload();
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -177,5 +200,4 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         });
     };
 
-    // -------------- Kết thúc link --------------
 }]);

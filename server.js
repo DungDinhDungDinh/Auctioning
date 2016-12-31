@@ -161,6 +161,7 @@ apiRoutes.post('/items', function(req, res) {
         // giaHienTai: req.body.giaHienTai,
         // ngayHetHan: req.body.ngayHetHan,
         // trangThai: req.body.trangThai,
+		// tinhTrang: req.body.tinhTrang,
         // noiBan: req.body.noiBan,
         // vanChuyen: req.body.vanChuyen,
         // moTa: req.body.moTa,
@@ -238,6 +239,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
     var giaHienTai = req.body.giaHienTai;
     var ngayHetHan = req.body.ngayHetHan;
     var trangThai = req.body.trangThai;
+	var tinhTrang = req.body.tinhTrang;
     var noiBan = req.body.noiBan;
     var vanChuyen = req.body.vanChuyen;
     var moTa = req.body.moTa;
@@ -258,6 +260,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
             u.giaHienTai = giaHienTai;
             u.ngayHetHan = ngayHetHan;
             u.trangThai = trangThai;
+			u.tinhTrang = tinhTrang;
             u.noiBan = noiBan;
             u.vanChuyen = vanChuyen;
             u.moTa = moTa;

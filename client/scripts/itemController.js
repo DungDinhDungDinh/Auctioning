@@ -2,7 +2,7 @@
 
 myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function ($scope, $http, Data, $location, $rootScope, $routeParams) {
 
-	$scope.price =  "1000000";
+	$scope.item_price =  "1000000";
 	$scope.highest_price =  "100000000";
 	$scope.itemID = $routeParams.itemID;
 	
@@ -53,26 +53,23 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
-		console.log(danh_muc);
 		Data.danh_muc = danh_muc;
         $location.path('/danh-sach-san-pham');
     };
 
 	$scope.goTo_Search_Result = function () {
 		Data.danh_muc = $scope.searchString;
-		console.log(Data.danh_muc);
         $location.path('/danh-sach-san-pham');
     };
 
 	$scope.goTo_Item_Info = function (item_ID) {
 		Data.item_ID = item_ID;
-        $location.path('/san-pham-dau-gia');
+        $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
 	$scope.goTo_User_Info = function () {
 		Data.ViewUserID = Data.userID;
-		console.log(Data.ViewUserID);
-        $location.path('/user-thong-tin-chung');
+        $location.path('/user-thong-tin-chung/' + Data.userID);
     };
 
 	$scope.goTo_User_Sell = function () {
@@ -104,20 +101,14 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 		$scope.show2 = false;
 	}
 
-	$scope.changeNumber = function()
+	//Chuyển giá tiền thành có '.'
+	changeNumber = function(price)
 	{
-		var x = $scope.price;
+		var x = price;
 		var parts = x.toString().split(" ");
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-		$scope.price = parts.join(" ");
-	}
-
-	$scope.changeNumber2 = function()
-	{
-		var x = $scope.highest_price;
-		var parts = x.toString().split(" ");
-		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-		$scope.highest_price = parts.join(" ");
+		price = parts.join(" ");
+		return price
 	}
 
 	$scope.filterValue = function($event)
@@ -143,6 +134,18 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
+				var item = response.data[0];
+				$scope.item_name = item.ten;
+				$scope.item_picture = item.hinhAnh;
+				$scope.item_type = item.chuyeMuc;
+				$scope.item_content = item.moTa;
+				$scope.item_price = item.giaHienTai;
+				$scope.item_dateExpire = item.ngayHetHan;
+				$scope.item_status = item.trangThai
+				$scope.item_situation = item.tinhTrang;
+				$scope.item_location = item.noiBan;
+				$scope.item_trans= item.vanChuyen;
+				$scope.item_price = changeNumber($scope.item_price);
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');

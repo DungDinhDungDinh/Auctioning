@@ -55,41 +55,42 @@
     
         
     <div class="body-item">
-			
-        <div class="user-info-div1">
-			<div class="user-img-and-name">
-				<img class="user-avatar" src="image/my-avatar.jpg">
-				<span class="user-name"> Chung Nguyễn</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Ngày sinh</span>
-				<span class="user-info-text"> 07/07/1995</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Email</span>
-				<span class="user-info-text"> noctislucispro@gmail.com</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Số điện thoại</span>
-				<span class="user-info-text"> 0927556505</span>
-			</div>
-		</div>
+		<div class="user-info-div1">
+            <div class="user-img-and-name">
+				<div class="avatar-div">
+					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{picture}}" ng-click="pickImage()">
+				</div>
+                <span class="user-name"> {{staticName}}</span>
+            </div>
+            <div class="user-info-1" ng-show="showEmail">
+                <span class="user-info-text"> Email</span>
+                <span class="user-info-text"> {{staticEmail}}</span>
+            </div>
+            
+            <div class="user-info-1" ng-show="showBirthday">
+                <span class="user-info-text"> Ngày sinh</span>
+                <span class="user-info-text">{{staticBirthday}}</span>
+            </div>
+            
+            
+            <div class="user-info-1" ng-show="showGender">
+                <span class="user-info-text"> Giới tính </span>
+                <span class="user-info-text"> {{staticGender}}</span>
+            </div>
+        </div>
         
         <div class="user-info-div2" style="">
 			<div class="user-main-tab">
-				<div class="user-tab">
+				<div class="user-tab" ng-click="goTo_User_Info()">
 					<span> THÔNG TIN CHUNG </span>
 				</div>
-				<div class="user-selected-tab">
+				<div class="user-selected-tab" 
 					<span> ĐĂNG BÁN </span>
 				</div>
-				<div class="user-tab">
+				<div class="user-tab" ng-click="goTo_User_Buy()">
 					<span> ĐANG ĐẤU </span>
 				</div>
-				<div class="user-tab">
+				<div class="user-tab" ng-click="goTo_User_Follow()">
 					<span> THEO DÕI </span>
 				</div>
 			</div>
