@@ -81,7 +81,7 @@
 
 			<div class="tooltip">
 				<span class="add-info-label"> Tên sản phẩm <span class="color-red">*</span> </span>
-				<input class="add-info-input" ng-model="input_name" ng-style="myStyle" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
+				<input class="add-info-input" ng-model="item_name" ng-style="myStyle" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
 				<span class="error"> Không được để trống </span>
 				
 				<span class="tooltiptext" ng-show="tipName">
@@ -93,7 +93,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label"> Mô tả <span class="color-red">*</span> </span>
-				<textarea rows="5" cols="1" class="add-info-textarea" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
+				<textarea rows="5" cols="1" class="add-info-textarea" ng-model="item_content" ng-focus="showTipContent()" ng-blur="hideTipContent()"placeholder=
 				"Nhập mô tả tại đây"/>
 				
 				<span class="tooltiptext" ng-show="tipContent">
@@ -105,7 +105,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Chuyên mục <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectType = types[0]" ng-model="selectType"ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
+				<select class="add-info-select" ng-init="item_Type = types[0]" ng-model="item_Type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
 				</select>
 				
 				<span class="tooltiptext" ng-show="tipType">
@@ -116,16 +116,16 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Trạng thái sản phẩm <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectStatus = status[0]" ng-model="selectStatus"ng-options="stt for stt in status">
+				<select class="add-info-select" ng-init="item_status = status[0]" ng-model="item_status"ng-options="stt for stt in status">
 				</select>				
 			</div>
 			
 			<div class="tooltip">
 				<span class="add-img-label"> Chọn hình ảnh <span class="color-red">*</span> </span>
 				<div class="chose-img-div" id="divUpImg">
-					<img class="chosen-img" id="chosenImg"/ style="display:none">
+					<img class="chosen-img" id="chosenImg"/ style="display:none" ng-click="selectImg()">
 				</div>
-				<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	
+				<!--<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	-->
 			</div>
 
 			<span class="add-item-title"> PHƯƠNG THỨC BÁN HÀNG </span>
@@ -133,7 +133,7 @@
 			<div class="tooltip">
 				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>
 				
-				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-model="name" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+				<input class="add-info-input" ng-model="item_price" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
 				<span class="tooltiptext" ng-show="tipName">
 					<p>- Giá khởi điểm hay còn gọi là giá sàn (Là giá khởi điểm chấp nhận được của mặt hàng)</p>
 				</span>
@@ -141,19 +141,19 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label"> Ngày kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
+				<input class="add-info-input" ng-model="item_date" id="datepicker" placeholder="Chọn ngày kết thúc đấu giá"/>
 			</div>
 			
 			<div class="tooltip">
 				<span class="add-info-label"> Giờ kết thúc <span class="color-red">*</span> </span>
-				<input class="add-info-input" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
+				<input class="add-info-input" ng-model="item_time" id="timepicker" placeholder="Chọn giờ kết thúc đấu giá"/>
 			</div>
 
 			<span class="add-item-title"> NƠI BÁN VÀ CÁCH THỨC VẬN CHUYỂN </span>
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Khu vực bán hàng <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectLocation = locations[0]" ng-model="selectLocation"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select class="add-info-select" ng-init="item_location = locations[0]" ng-model="item_location"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
 				<span class="tooltiptext" ng-show="tipType">
@@ -163,7 +163,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Vận chuyển <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="selectTrans = trans[0]" ng-model="selectTrans"ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select class="add-info-select" ng-init="item_trans = trans[0]" ng-model="item_trans" ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
 				<span class="tooltiptext" ng-show="tipType">
@@ -176,7 +176,7 @@
 			</div> 
 			
 			<div class="check-item-div4">
-			<button class="btn-check-again">Kiểm tra lại </button>
+			<button class="btn-check-again" ng-click="checkToNextStep()">Kiểm tra lại </button>
 			</div>
         </div>
 		
