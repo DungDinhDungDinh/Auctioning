@@ -1,26 +1,36 @@
 <div style="background: white;">
 	<div class="top-header" id="fixedHeader">
-		<div class="fix-header-div1"></div>
+		<div class="fix-header-div1" ng-click="goTo_Home()"></div>
         <div class="fix-header-div2">
-            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
-            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
-            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?" />
+            <button class="btn-tim-kiem" ng-click="goTo_Search_Result()"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
 	</div>
 
     <div class="header" id="defaultHeader">
         <div class="header-div1">
             <div class="link-dk-dn" ng-show="show1" >
-                <a class="text-link-dk-dn" >Đăng nhập</a>
-                <a class="text-link-dk-dn">Đăng ký</a>
+                <a class="text-link-dk-dn" ng-click="goTo_Login()">Đăng nhập</a>
+                <a class="text-link-dk-dn" ng-click="goTo_SignUp()">Đăng ký</a>
             </div>
             
             <div ng-hide="show1">
-                <div class="box-username">
-                    <i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
-                    <a class="text-username"> {{username }}</a>
-                </div>
-                
+				<div class="dropdown">
+					<div class="box-username">
+						<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
+						<a class="text-username"> {{username }}</a>
+					</div>
+					<div class="dropdown-user">
+						<div class="dropdown-account"> 
+							<span class="dropdown-myInfo" ng-click="goTo_User_Info()"> Trang cá nhân </span>
+						</div>
+						<div class="dropdown-account"> 
+							<span class="dropdown-logOut" ng-click="goTo_Logout()"> Đăng xuất </i> </span>
+						</div>
+					</div>
+				</div>
+				
                 <div class="icon-wrapper">
                     <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
                     <span class="badge">9</span>
@@ -33,16 +43,17 @@
             </div>
         </div>
         
-        <div class="header-div2">
+        <div class="header-div2" ng-click="goTo_Home()">
         </div>
         
         <div class="header-div3">
             <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
-            <button class="btn-tim-kiem" ><i class="fa fa-search" style="color: white;"> </i> </button>
-            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+            <button class="btn-tim-kiem" ng-click="goTo_Search_Result()" ><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
     </div>
-    
+
+	
     <div class="banner">
         <div class="banner-div1">
             <div class="danh-muc">
@@ -52,52 +63,52 @@
         </div>
         
         <div class="banner-div2">
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Đồ điện tử')">
                 <i class="fa fa-laptop" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Đồ điện tử </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Giải trí, thể thao, sở thích')">
                 <i class="fa fa-futbol-o" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Giải trí, thể thao, sở thích </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Xe cộ, máy móc')">
                 <i class="fa fa-car" style="font-size:22px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Xe cộ, máy móc </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Mẹ và bé')">
                 <i class="fa fa-child" style="font-size:24px; vertical-align: -3px; width: 29px; padding-left: 5px;" > </i>
                 <span> Mẹ và bé </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Thời trang & phụ kiện')">
                 <i class="fa fa-umbrella" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Thời trang & phụ kiện </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Đồ ăn, thức uống')">
                 <i class="fa fa-cutlery" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Đồ ăn, thức uống </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Đồ gia dụng')">
                 <i class="fa fa-shower" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Đồ gia dụng </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Sức khỏe & sắc đẹp')">
                 <i class="fa fa-heart" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Sức khỏe & sắc đẹp </span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Bất động sản')">
                 <i class="fa fa-home" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Bất động sản</span>
             </div>
             
-            <div class="item">
+            <div class="item" ng-click="goTo_Item_List('Các loại khác')">
                 <i class="fa fa-gears" style="font-size:24px; vertical-align: -3px; width: 34px;" > </i>
                 <span> Các loại khác </span>
             </div>
@@ -159,13 +170,14 @@
                 <img class="img-banner" src="image/slide-img1.jpg">
             </div>
             
-            <div>
+            <div style="display:none;">
                 <img class="img-banner" src="image/slide-img2.jpg">
             </div>
             
-            <div>
+			<div style="display:none;">
                 <img class="img-banner" src="image/slide-img3.jpg">
             </div>
+
         </div>
     </div>
     
@@ -177,7 +189,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -186,7 +200,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -195,7 +211,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -204,7 +222,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -213,7 +233,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -228,7 +250,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -237,7 +261,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -246,7 +272,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -255,7 +283,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -264,7 +294,9 @@
             
             <div class="item-list">
                 <div class="item-list-inner">
-                    <img class="img-item-inner" src="image/new-item-1.jpg">
+                    <div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" src="image/new-item-1.jpg">
+					</div>
                     <span class="item-text-name"> Tên sản phẩm </span>
                     <span class="item-text-price"> Gia </span>
                     <span class="item-text-time"> Thoi han </span>
@@ -385,7 +417,20 @@
     
 </div>
 <script>
-	$("#slideshow > div:gt(0)").hide();
+
+	 $(document).ready(function() {
+			 $('#noidung').load('header.html');
+	 });
+	 
+	//Go top top of page after refresh F5
+	window.onload = function() {
+		// short timeout
+		setTimeout(function() {
+			$(document.body).scrollTop(0);
+		}, 1);
+	};
+	
+	//Slideshow of banner image
 	setInterval(function() {
 		$('#slideshow > div:first')
 			.fadeOut(1000)
@@ -393,12 +438,12 @@
 			.fadeIn(1000)
 			.end()
 			.appendTo('#slideshow');
-		},  3000);
+		},  5000);
 	
+	//Toolbar fix on top when use scrollbar
 	window.onscroll = function() {myFunction()};
-
 	function myFunction() {
-		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {		
 			document.getElementById("fixedHeader").style.display = "block";
 		} else {
 			document.getElementById("fixedHeader").style.display = "none";

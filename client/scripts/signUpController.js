@@ -11,7 +11,15 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
     $scope.password = '';
     $scope.retypePassword = '';
 
+	$scope.generateId = function() {
+		var text = "";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+		for( var i=0; i < 20; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+		return text;
+	}
+	
     $scope.signUp = function() {
     	if ($scope.username === '' || $scope.password === ''  || $scope.retypePassword === '') {
     		alert('Vui lòng nhập đủ các trường cần thiết');
@@ -32,7 +40,6 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
     		alert('Vui lòng nhập lại đúng mật khẩu');
     		return;
     	}
-
     	signUp($scope.username, $scope.password);
 
     };
@@ -42,8 +49,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
                 method: 'POST',
                 url: '/api/users',
                 data : {
-                    'username' : username,
-                    'password' : password
+                    'ID' : $scope.generateId()
                 }
             }).then(function successCallback(response) {
                 if (response.status === 201) {

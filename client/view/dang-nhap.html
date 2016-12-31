@@ -31,8 +31,9 @@
                 
                 <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div>
                 
-                <input class="input-dn" placeholder="Tên đăng nhập hoặc địa chỉ Email" ng-model="username"/>
-                <input class="input-dn" placeholder="Mật khẩu" type="password" ng-model="password"/>
+				<span ng-model="error" ng-style="errorStyle" style="text-align: left; float:left; font-size: 12px; display:none;" > {{errorText}} </span>
+                <input class="input-dn" id="inputName" placeholder="Tên đăng nhập" ng-model="username"/>
+                <input class="input-dn" id="inputPassword" placeholder="Mật khẩu" type="password" ng-model="password"/>
                 
                 <a class="text-dk" href="/forgot-password" style="float:right; margin-top: 15px;">Quên mật khẩu?</a>
                 

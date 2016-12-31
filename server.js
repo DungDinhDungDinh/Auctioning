@@ -38,7 +38,6 @@ apiRoutes.post('/users', function(req, res) {
         diaChi: req.body.diaChi
     });
 
-
     // save the user
     user.save(function(err) {
         if (err) {
@@ -506,7 +505,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var email = obj.email;
                 var picture = obj.picture.data.url;
                 User.findOne({
-                    username: fb_user_id
+                    ID: fb_user_id
                 }, function(err, user) {
 
                     if (err) {
@@ -516,8 +515,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                     console.log(response);
                     if (!user) {
                         var user = new User({
-                            username: fb_user_id,
-                            password: fb_user_id,
+                            ID: fb_user_id,
                             admin: false
                         });
 
@@ -530,7 +528,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
                                 res.json({
-                                    userId: user.username,
+                                    userID: fb_user_id,
                                     token: token,
                                     name: name,
                                     email: email,
@@ -543,7 +541,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             expiresIn: 60 * 60 * 24 // expires in 24 hours
                         });
                         res.json({
-                            userId: user.username,
+                            userID: user.ID,
                             token: token,
                             name: name,
                             email: email,
