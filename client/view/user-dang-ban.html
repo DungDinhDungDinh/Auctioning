@@ -113,30 +113,30 @@
 				</div>				
 			</div>
 			
-			<div ng-repeat="i in number">
+			<div ng-repeat="item in my_items">
 				<div class="user-sell-container">
 					<div class="user-sell-div-1">
-						<img class="user-item-img" src="image/item.jpg" alt="" />
+						<img class="user-item-img" ng-src="item.hinhAnh" alt="" />
 					</div>
 					
 					<div class="user-sell-div-2">
-						<span class="span-item-name"> Pin sạc dự phòng Asus ZenPower 9600mAh </span>
-						<span class="span-item-location"> Tp.Hồ Chí Minh</span>
-						<span class="span-item-type"> Giải trí, thể thao, sở thích  </span>
-						<span class="span-item-seller"> Chung Nguyễn  </span>
+						<span class="span-item-name"> {{item.ten}} </span>
+						<span class="span-item-location"> {{item.noiBan}}</span>
+						<span class="span-item-type"> {{item.chuyenMuc}}  </span>
+						<span class="span-item-seller"> {{viewID}}  </span>
 					</div>
 					
 					<div class="user-sell-div-3">
-						<span class="span-item-price"> 100000 đ </span>   
+						<span class="span-item-price"> {{item.giaHienTai}} </span>   
 					</div>		
 					
 					<div class="user-sell-div-4">
-						<span class="span-item-date1"> 01/01/2017 </span>   
-						<span class="span-item-date2"> 23:00 </span>  
+						<span class="span-item-date1"> {{date}} </span>   
+						<span class="span-item-date2"> {{time}} </span>  
 					</div>
 					
 					<div class="user-sell-div-5">
-						<span class="span-item-stt"> Đang đấu giá <span>   
+						<span class="span-item-stt"> {{item.trangThai}} <span>   
 					</div>
 				</div>
 			</div>

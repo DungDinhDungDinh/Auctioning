@@ -18,11 +18,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/san-pham-dau-gia.html',
         controller: 'itemController'
     }).
-	when('/user-thong-tin-chung', {
-        templateUrl: './view/user-thong-tin-chung.html',
-        controller: 'userCommonInfoController'
-    }).
-	when('/user-dang-ban', {
+	when('/user-dang-ban/:viewID', {
         templateUrl: './view/user-dang-ban.html',
         controller: 'userSellController'
     }).
