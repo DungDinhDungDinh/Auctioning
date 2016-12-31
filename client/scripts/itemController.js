@@ -129,11 +129,11 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 
 	$scope.changePrice = function()
 	{
-		var x = $scope.name;
+		var x = $scope.yourPrice;
 		x = x.replace(/ /g,"");
 		var parts = x.toString().split(" ");
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-		$scope.name = parts.join(" ");
+		$scope.yourPrice = parts.join(" ");
 	}
 
 	var getItemInformation = function() {

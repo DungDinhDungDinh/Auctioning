@@ -1332,13 +1332,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 	height: 40px;
 	margin-top: 5px;
 	margin-bottom: 12px;
+	margin-left: 50px;
 	line-height: 40px;
 }
 
 .line-save {
 	color: #333;
 	clear: both;
-	width: 549px;
+	width: 599px;
 	height: 40px;
 	margin-left: 2%;
 	margin-top: 25px;
@@ -1353,6 +1354,13 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-size: 14px;
 }
 
+.user-info-text {
+	clear: both;
+	display: inline-block;
+	width: 150px;
+	font-size: 14px;
+}
+
 .user-info-input {
 	width: 400px;
 	height: 27px;
@@ -1361,9 +1369,30 @@ h1, .h1, h2, .h2, h3, .h3 {
 	border: 1px solid #ddd;
 	color: #333;
 	-webkit-transition: all 0.3s linear;
+	-moz-appearance: none;
+    -webkit-appearance:none;
 }
 
 .user-info-input:focus {
+	border-width: 1px;
+	border-color: #8ABE7A;
+	outline: none;
+	-webkit-transition: all 0.3s linear;
+}
+
+.user-info-input-2 {
+	width: 412px;
+	height: 31px;
+	font-size: 14px;
+	padding-left: 10px;
+	border: 1px solid #ddd;
+	color: #333;
+	-webkit-transition: all 0.3s linear;
+	-moz-appearance: none;
+    -webkit-appearance:none;
+}
+
+.user-info-input-2:focus {
 	border-width: 1px;
 	border-color: #8ABE7A;
 	outline: none;
@@ -1824,6 +1853,7 @@ h1, .h1, h2, .h2, h3, .h3 {
     /*for chrome*/
     -webkit-appearance:none;
 }
+
 
 .add-img-label {
 	display: block;

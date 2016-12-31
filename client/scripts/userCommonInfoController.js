@@ -87,6 +87,14 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/them-san-pham-step-1');
     };
 
+	//Number only
+	$scope.filterValue = function($event)
+	{
+		var charCode = ($event.which) ? $event.which : $event.keyCode;
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+       		$event.preventDefault()
+	}
+	
     getUserInformation = function() {
         $http({
             method: 'GET',
@@ -112,6 +120,11 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
                 $scope.staticEmail = info.email;
                 $scope.staticBirthday = info.ngaySinh;
                 $scope.staticGender = info.gioiTinh;
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}
+				
+				if(Data.userID !== $scope.viewID) { $scope.notMyInfo = true; }
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -138,8 +151,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             });
     };
 
-    $scope.saveNewInfo = function() {
-    	console.log($scope.userID);
+    $scope.saveNewInfo = function() {		
     	$http({
             method: 'PUT',
             url: '/api/users/' + $scope.userID,
@@ -156,7 +168,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
-
+				$location.path('/user-thong-tin-chung/' + $scope.viewID);
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
