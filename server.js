@@ -395,7 +395,7 @@ apiRoutes.get('/new_home_items', function(req, res) {
 });
 
 //-- Sức khỏe & sắc đẹp
-apiRoutes.get('/newhealthyitems', function(req, res) {
+apiRoutes.get('/new_healthy_items', function(req, res) {
     Item.find({chuyfoodtenMuc: 'Sức khỏe & sắc đẹp'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
@@ -409,7 +409,7 @@ apiRoutes.get('/newhealthyitems', function(req, res) {
 });
 
 //-- Bất động sản
-apiRoutes.get('/newrealtyitems', function(req, res) {
+apiRoutes.get('/new_realty_items', function(req, res) {
     Item.find({chuyfoodtenMuc: 'Bất động sản'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
