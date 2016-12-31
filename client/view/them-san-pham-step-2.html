@@ -117,8 +117,8 @@
 					</div>
 					
 					<div class="check-info">
-						<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span>
-						<span style="display: block;">Thông tin 1</span>
+						<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span> <br/>
+						<pre style="display: block;">{{item_content}}</pre>
 						<span style="display: block;">Thông tin 2</span>
 						<span style="display: block;">Thông tin 3</span>
 						<span style="display: block;">...</span>
@@ -132,24 +132,24 @@
 				
 				<div class="contact-info">
 					<span class="add-info-label"> Tên hiển thị <span class="color-red">*</span> </span>				
-					<input class="add-info-input"/>
+					<input class="add-info-input" ng-model="user_name"/>
 				</div>
 				
 				<div class="contact-info">
-					<span class="add-info-label"> Số điện thoại <span class="color-red">*</span>  </span>				
-					<input class="add-info-input"/>
+					<span class="add-info-label" > Số điện thoại <span class="color-red">*</span>  </span>				
+					<input class="add-info-input" ng-model="user_phone"/>
 				</div>
 				
 				<div class="contact-info">
-					<span class="add-info-label"> Địa chỉ <span class="color-red">*</span> </span>				
-					<input class="add-info-input"/>
+					<span class="add-info-label" > Địa chỉ <span class="color-red">*</span> </span>				
+					<input class="add-info-input" ng-model="user_address"/>
 				</div>
 				
 				<span style="font-size: 14px;"><i> Lưu ý: Thay đổi thông tin tại đây sẽ cập nhật lại thông tin cá nhân của bạn </i> </span>
 			</div>
 			
 			<div class="check-item-div4">
-			<button class="btn-check-again"> Hoàn tất </button>
+			<button class="btn-check-again" ng-click="updateUserAndCreateNewItem()"> Hoàn tất </button>
 			<button class="btn-check-again" style="float: left;"><i class="fa fa-arrow-left" style="padding-right: 7px;"> </i>Quay lại </button>
 			</div>
 		</div>

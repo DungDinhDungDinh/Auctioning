@@ -1,4 +1,3 @@
-
 <div style="background: white;">
     <div class="top-header" id="fixedHeader">
 		<div class="fix-header-div1" ng-click="goTo_Home()"></div>
@@ -105,7 +104,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Chuyên mục <span class="color-red">*</span> </span>
-				<select class="add-info-select" ng-init="item_Type = types[0]" ng-model="item_Type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
+				<select class="add-info-select" ng-init="item_type = types[0]" ng-model="item_type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
 				</select>
 				
 				<span class="tooltiptext" ng-show="tipType">
@@ -122,8 +121,8 @@
 			
 			<div class="tooltip">
 				<span class="add-img-label"> Chọn hình ảnh <span class="color-red">*</span> </span>
-				<div class="chose-img-div" id="divUpImg">
-					<img class="chosen-img" id="chosenImg"/ style="display:none" ng-click="selectImg()">
+				<div class="chose-img-div" >
+					<img class="chosen-img" ng-click="selectImg()" ng-src="{{item_image}}"/>
 				</div>
 				<!--<input type="file" id="inputUpImg"  name="inputUpImg" style="display:none" onchange="readURL(this);" />	-->
 			</div>
@@ -298,40 +297,12 @@
 </div>
 
 <script>
-	
-	function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#chosenImg')
-                    .attr('src', e.target.result)
-
-					.css('display', 'initial');
-					
-				$('#divUpImg')
-					.height(182)
-					.width(282)
-					.css('border-style', 'solid')
-					.css('border-width', '1px')
-					.css('background', 'none');
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-	
-	$("#divUpImg").click(function () {
-    $("#inputUpImg").trigger('click');
-});
-</script>
-
-<script>
 	$('#timepicker').timepicker();
     $( function() {
 		$( "#datepicker" ).datepicker({
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		minDate: 0
 		});
 	});
 	

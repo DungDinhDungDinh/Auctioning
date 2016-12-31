@@ -117,7 +117,6 @@ apiRoutes.put('/users/:ID', function(req, res) {
         if (err) throw err;
 
         if (user) {
-            console.log('lakdjasflj');
             user.email = email;
             user.ten = ten;
             user.avatar = avatar;
@@ -155,36 +154,39 @@ apiRoutes.post('/items', function(req, res) {
     // create a sample item
     var item = new Item({
         ID: req.body.ID,
-        ten: req.body.ten,
-        hinhAnh: req.body.hinhAnh,
-        chuyenMuc: req.body.chuyenMuc,
-        giaHienTai: req.body.giaHienTai,
-        ngayHetHan: req.body.ngayHetHan,
-        trangThai: req.body.trangThai,
-        noiBan: req.body.noiBan,
-        vanChuyen: req.body.vanChuyen,
         moTa: req.body.moTa,
-        nguoiBan: req.body.nguoiBan,
-        nguoiTra: req.body.nguoiTra,
-        giaKhoiDiem: req.body.giaKhoiDiem
+        ten: req.body.ten,
+        // hinhAnh: req.body.hinhAnh,
+        // chuyenMuc: req.body.chuyenMuc,
+        // giaHienTai: req.body.giaHienTai,
+        // ngayHetHan: req.body.ngayHetHan,
+        // trangThai: req.body.trangThai,
+        // noiBan: req.body.noiBan,
+        // vanChuyen: req.body.vanChuyen,
+        // moTa: req.body.moTa,
+        // nguoiBan: req.body.nguoiBan,
+        // nguoiTra: req.body.nguoiTra,
+        // giaKhoiDiem: req.body.giaKhoiDiem
     });
 
 
     // save the item
     item.save(function(err) {
         if (err) {
+            console.log(err);
             res.status(400).json({
                 'error': 'bad request'
             });
+        } else {
+            console.log('Item saved successfully');
+            res.status(201).send({
+                'message': 'item created'
+            });
         }
 
-        console.log('Item saved successfully');
-        res.status(201).send({
-            'message': 'item created'
-        });
+
     });
 });
-
 //GET
 //Lay 1 item theo ID
 apiRoutes.get('/items/:ID', function(req, res) {

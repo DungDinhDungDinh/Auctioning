@@ -197,4 +197,46 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 		$scope.name = parts.join(" ");
 	}
+
+	$scope.selectImg = function () {
+		filepicker.pick({
+                mimetype: 'image/*',
+                container: 'modal',
+                services: ['COMPUTER', 'FACEBOOK', 'INSTAGRAM', 'GOOGLE_DRIVE', 'WEBCAM', 'IMAGE_SEARCH']
+            },
+            function(Blob) {
+                console.log(JSON.stringify(Blob));
+                $scope.item_image = Blob.url;
+                $scope.$apply();
+            },
+            function(FPError) {
+                console.log(FPError.toString());
+            });
+	}
+
+
+	$scope.checkToNextStep = function() {
+		Data.item_name = $scope.item_name;
+		Data.item_content = $scope.item_content;
+		Data.item_type = $scope.item_type;
+		Data.item_status = $scope.item_status;
+		Data.item_image = $scope.item_image;
+		Data.item_price = $scope.item_price;
+		$scope.item_date = $('#datepicker').val();
+		$scope.item_time = $('#timepicker').val();
+		Data.item_date = $scope.item_date;
+		Data.item_time = $scope.item_time;
+		Data.item_location = $scope.item_location;
+		Data.item_trans = $scope.item_trans;
+
+		localStorage.setItem("test", $scope.item_content);
+		console.log($scope.item_content);
+
+		$location.path('/them-san-pham-step-2');
+
+	};
+
+
+
+
 }]);

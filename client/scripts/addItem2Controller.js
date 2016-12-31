@@ -5,6 +5,8 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.show1 = false;	
 	$scope.price =  "1000000";
 	$scope.highest_price =  "100000000";
+	$scope.item_content = localStorage.getItem("test");
+	console.log($scope.item_content);
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -90,6 +92,88 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.goTo_Add_Item = function () {
         $location.path('/them-san-pham-step-1');
     };
+
+       getUserInformation = function() {
+        $http({
+            method: 'GET',
+            url: '/api/users/' + Data.userID,
+            data: {
+                'token': Data.token
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                var info = response.data[0];
+                
+                $scope.user_name = info.ten;
+                $scope.user_phone = info.soDienThoai;
+                $scope.user_address = info.diaChi;
+            }
+        }, function errorCallback(response) {
+            console.log('failed to get user info');
+            console.log(response);
+
+        });
+    };
+
+    getUserInformation();
+
+    $scope.updateUserAndCreateNewItem = function() {
+    	$http({
+            method: 'PUT',
+            url: '/api/users/' +Data.userID,
+            data: {
+                'token': Data.token,
+    			'ten': $scope.name,
+    			'soDienThoai': $scope.user_phone,
+    			'diaChi': $scope.user_address
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                createNewItem();
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+    };
+
+
+    var generateId = function() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 20; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        return text;
+    }
+
+    var createNewItem  = function()
+    {
+    	var id = generateId();
+
+    	$http({
+            method: 'POST',
+            url: '/api/items',
+            data: {
+                'token': Data.token,
+    			'moTa' : $scope.item_content,
+    			'ID' : id,
+    			'ten' : 'test'
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 201) {
+                console.log(response.data);
+                $location.path('/them-san-pham-step-3');
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+    }
 
 	// -------------- Kết thúc link --------------
 }]);
