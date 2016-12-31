@@ -16,7 +16,7 @@ var userAuctionSchema = mongoose.Schema({
 	giaDaTra: {
 		//gia nguoi dung da dua ra
 		type: Number
-	}	
+	}
 });
 
 
