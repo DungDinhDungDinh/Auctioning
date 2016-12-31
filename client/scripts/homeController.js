@@ -64,7 +64,7 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
 	$scope.goTo_User_Info = function () {
 		Data.ViewUserID = Data.userID;
 		console.log(Data.ViewUserID);
-        $location.path('/user-thong-tin-chung');
+        $location.path('/user-thong-tin-chung/' + Data.userID);
     };
 
 	$scope.goTo_User_Sell = function () {

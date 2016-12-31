@@ -50,6 +50,11 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/danh-sach-san-pham.html',
         controller: 'itemListController'
     }).
+    when('/user-thong-tin-chung/:viewID', {
+        templateUrl: './view/user-thong-tin-chung.html',
+        controller: 'userCommonInfoController'
+    }).
+
     otherwise({
         redirectTo: '/trang-chu'
     });

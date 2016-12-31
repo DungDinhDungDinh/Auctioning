@@ -63,7 +63,7 @@ apiRoutes.get('/users/:ID', function(req, res) {
     var id = req.params.ID;
     User.find({
         ID: id
-    }).select('-ID').exec(function(err, users) {
+    }).select().exec(function(err, users) {
         if (err)
             return console.log(users);
         else {
@@ -75,7 +75,7 @@ apiRoutes.get('/users/:ID', function(req, res) {
 
 //Lay tat ca user
 apiRoutes.get('/users', function(req, res) {
-    User.find({}).select('-ID').exec(function(err, users) {
+    User.find({}).select().exec(function(err, users) {
         if (err)
             return console.log(users);
         else {
@@ -565,6 +565,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var name = obj.name;
                 var email = obj.email;
                 var picture = obj.picture.data.url;
+                 console.log(body);
                 Account.findOne({
                     ID: fb_user_id
                 }, function(err, account) {
@@ -572,6 +573,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                     if (err) {
                         console.log(err);
                     }
+
 
 
                     if (!account) {
@@ -591,7 +593,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                     ID: fb_user_id,
                                     ten: name,
                                     email: email,
-                                    avatar: picture
+                                    avatar: 'https://graph.facebook.com/'+ fb_user_id + '/picture?width=300&height=300'
                                 });
 								
 								

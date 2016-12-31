@@ -1,13 +1,12 @@
 <div style="background: white;">
     <div class="top-header" id="fixedHeader">
-		<div class="fix-header-div1" ng-click="goTo_Home()"></div>
+        <div class="fix-header-div1" ng-click="goTo_Home()"></div>
         <div class="fix-header-div2">
             <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?" ng/>
             <button class="btn-tim-kiem" ng-click="goTo_Search_Result()"><i class="fa fa-search" style="color: white;"> </i> </button>
             <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
-	</div>
-
+    </div>
     <div class="header" id="defaultHeader">
         <div class="header-div1">
             <div class="link-dk-dn" ng-show="show1" >
@@ -16,21 +15,21 @@
             </div>
             
             <div ng-hide="show1">
-				<div class="dropdown">
-					<div class="box-username">
-						<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
-						<a class="text-username"> {{username }}</a>
-					</div>
-					<div class="dropdown-user">
-						<div class="dropdown-account"> 
-							<span class="dropdown-myInfo" ng-click="goTo_User_Info()"> Trang cá nhân </span>
-						</div>
-						<div class="dropdown-account"> 
-							<span class="dropdown-logOut" ng-click="goTo_Logout()"> Đăng xuất </i> </span>
-						</div>
-					</div>
-				</div>
-				
+                <div class="dropdown">
+                    <div class="box-username">
+                        <i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
+                        <a class="text-username"> {{username }}</a>
+                    </div>
+                    <div class="dropdown-user">
+                        <div class="dropdown-account">
+                            <span class="dropdown-myInfo" ng-click="goTo_User_Info()"> Trang cá nhân </span>
+                        </div>
+                        <div class="dropdown-account">
+                            <span class="dropdown-logOut" ng-click="goTo_Logout()"> Đăng xuất </i> </span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="icon-wrapper">
                     <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
                     <span class="badge">9</span>
@@ -52,218 +51,217 @@
             <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
     </div>
-        
+    
     <div class="body-item">
-			
+        
         <div class="user-info-div1">
-			<div class="user-img-and-name">
-				<img class="user-avatar" src="image/my-avatar.jpg">
-				<span class="user-name"> Chung Nguyễn</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Ngày sinh</span>
-				<span class="user-info-text"> 07/07/1995</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Email</span>
-				<span class="user-info-text"> noctislucispro@gmail.com</span>
-			</div>
-			
-			<div class="user-info-1">
-				<span class="user-info-text"> Số điện thoại</span>
-				<span class="user-info-text"> 0927556505</span>
-			</div>
-		</div>
+            <div class="user-img-and-name">
+                <img class="user-avatar" ng-src="{{picture}}" ng-click="pickImage()">
+                <span class="user-name"> {{staticName}}</span>
+            </div>
+            <div class="user-info-1">
+                <span class="user-info-text"> Email</span>
+                <span class="user-info-text"> {{staticEmail}}</span>
+            </div>
+            
+            <div class="user-info-1">
+                <span class="user-info-text"> Ngày sinh</span>
+                <span class="user-info-text">{{staticBirthday}}</span>
+            </div>
+            
+            
+            <div class="user-info-1">
+                <span class="user-info-text"> Giới tính </span>
+                <span class="user-info-text"> {{staticGender}}</span>
+            </div>
+        </div>
         
         <div class="user-info-div2" style="">
-			<div class="user-main-tab">
-				<div class="user-selected-tab">
-					<span> THÔNG TIN CHUNG </span>
-				</div>
-				<div class="user-tab">
-					<span> ĐĂNG BÁN </span>
-				</div>
-				<div class="user-tab">
-					<span> ĐANG ĐẤU </span>
-				</div>
-				<div class="user-tab">
-					<span> THEO DÕI </span>
-				</div>
-			</div>
-			
-			<span class="user-title"> THÔNG TIN CHUNG </span>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Email</span>
-				<span class="user-info-label"> Email</span>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Tên hiển thị</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Số điện thoại</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Ngày sinh</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Giới tính</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			
-			
-			<div class="user-info-line">
-				<span class="user-info-label"> Địa chỉ</span>
-				<input class="user-info-input"> </input>
-			</div>
-			
-			<div class="user-info-line line-save">
-				<button class="btn-cancel-info"> HỦY </button>
-				<button class="btn-save-info"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>	
-			</div>
-		</div>     
-	</div> 		
-
-	
-    <div class="footer">
-    	<div class="footer-begin">
-    	</div>
+            <div class="user-main-tab">
+                <div class="user-selected-tab">
+                    <span> THÔNG TIN CHUNG </span>
+                </div>
+                <div class="user-tab">
+                    <span> ĐĂNG BÁN </span>
+                </div>
+                <div class="user-tab">
+                    <span> ĐANG ĐẤU </span>
+                </div>
+                <div class="user-tab">
+                    <span> THEO DÕI </span>
+                </div>
+            </div>
+            
+            <span class="user-title"> THÔNG TIN CHUNG </span>
+            
+            <div class="user-info-line">
+                <span class="user-info-label"> ID</span>
+                <span class="user-info-label"> {{viewID}}</span>
+            </div>
+            <div class="user-info-line">
+                <span class="user-info-label"> Email </span>
+                <input class="user-info-input" ng-model="email"></input>
+            </div>
+            
+            <div class="user-info-line">
+                <span class="user-info-label"> Tên hiển thị</span>
+                <input class="user-info-input" ng-model="name"></input>
+            </div>
+            
+            
+            <div class="user-info-line">
+                <span class="user-info-label"> Ngày sinh</span>
+                <input class="user-info-input" ng-model="birthday"> </input>
+            </div>
+            
+            <div class="user-info-line">
+                <span class="user-info-label"> Giới tính</span>
+                <input class="user-info-input" ng-model="gender"> </input>
+            </div>
+            
+             <div class="user-info-line">
+                <span class="user-info-label"> Số điện thoại</span>
+                <input class="user-info-input" ng-model="phone"> </input>
+            </div>
+            
+            <div class="user-info-line">
+                <span class="user-info-label"> Địa chỉ</span>
+                <input class="user-info-input" ng-model="address"> {{address}} </input>
+            </div>
+            
+            <div class="user-info-line line-save">
+                <button class="btn-cancel-info"> HỦY </button>
+                <button class="btn-save-info"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>
+            </div>
+        </div>
+    </div>
     
-    	<div class="footer-container">
+    <div class="footer">
+        <div class="footer-begin">
+        </div>
+        
+        <div class="footer-container">
             <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
-            		<span> CHUYÊN MỤC </span>
+                <div class="footer-title">
+                    <span> CHUYÊN MỤC </span>
                 </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ điện tử </span>
-           		</div>  
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Giải trí, Thể thao, Sở thích</span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Đồ điện tử </span>
+                </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Xe cộ, máy móc </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Giải trí, Thể thao, Sở thích</span>
+                </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Mẹ & Bé </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Xe cộ, máy móc </span>
+                </div>
                 
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Thời trang & Phụ kiện </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Mẹ & Bé </span>
+                </div>
+                
+                <div class="footer-item" style="border-bottom: none;">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Thời trang & Phụ kiện </span>
+                </div>
             </div>
             
             <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
+                <div class="footer-title">
                 </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ ăn, thức uống </span>
-           		</div>   
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ gia dụng </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Đồ ăn, thức uống </span>
+                </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Sức khỏe & Sắc đẹp </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Đồ gia dụng </span>
+                </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Bất động sản </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Sức khỏe & Sắc đẹp </span>
+                </div>
                 
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Các loại khác </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Bất động sản </span>
+                </div>
+                
+                <div class="footer-item" style="border-bottom: none;">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Các loại khác </span>
+                </div>
             </div>
             
             <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
-            		<span> INFOMATION </span>
+                <div class="footer-title">
+                    <span> INFOMATION </span>
                 </div>
                 
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đăng nhập </span>
-           		</div>  
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đăng kí </span>
-           		</div>  
-
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Liên hệ </span>
-           		</div>  
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Đăng nhập </span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Đăng kí </span>
+                </div>
+                <div class="footer-item" style="border-bottom: none;">
+                    <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+                    <span> Liên hệ </span>
+                </div>
             </div>
             
             <div class="footer-ket-noi">
-            	<div class="footer-title">
-            		<span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
+                <div class="footer-title">
+                    <span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
                     <input class="input-email" placeholder="Enter your email address"/>
-            		<button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
+                    <button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
                     
- 					<span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
+                    <span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
                     <div>
-                    <a class="icon-fb"></a>
-                    <a class="icon-google"></a>
-                	</div>    
-				</div>
-			</div>
+                        <a class="icon-fb"></a>
+                        <a class="icon-google"></a>
+                    </div>
+                </div>
+            </div>
         </div>
-            
-    	<div style="width: 100%; clear:both; padding-top: 30px;">
-        	<img class="footer-logo" src="image/logo-2.png">
-    	</div>
-    	
+        
+        <div style="width: 100%; clear:both; padding-top: 30px;">
+            <img class="footer-logo" src="image/logo-2.png">
+        </div>
+        
         <div class="footer-end">
-        	<span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
-    	</div>
+            <span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
+        </div>
     </div>
     
 </div>
-
 <script>
-	$(function () {
-		var austDay = new Date();
-		austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
-		$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
-		$('#year').text(austDay.getFullYear());
-	});
-	
-	window.onscroll = function() {myFunction()};
-	function myFunction() {
-		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-			document.getElementById("fixedHeader").style.display = "block";
-		} else {
-			document.getElementById("fixedHeader").style.display = "none";
-		}
-	}
+    $(function () {
+        var austDay = new Date();
+        austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
+        $('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+        $('#year').text(austDay.getFullYear());
+    });
+    
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            document.getElementById("fixedHeader").style.display = "block";
+        } else {
+            document.getElementById("fixedHeader").style.display = "none";
+        }
+    }
 </script>
-
 </html>
