@@ -282,7 +282,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
 
 //-------------------------ITEM API------------------
 //API lấy 4 sản phẩm đấu giá mới nhất
-apiRoutes.get('/newitems', function(req, res) {
+apiRoutes.get('/new_items', function(req, res) {
     Item.find({}).sort({ngayTao: -1}).limit(4).exec(function(err, items) {
         if (err){
             res.status(404).send('Not found');
@@ -297,7 +297,7 @@ apiRoutes.get('/newitems', function(req, res) {
 
 //API lấy từ mỗi danh mục 5 sản phẩm mới nhất
 //--Đồ điện tử
-apiRoutes.get('/newelectronicitems', function(req, res) {
+apiRoutes.get('/new_electronic_items', function(req, res) {
     Item.find({chuyenMuc: 'Đồ điện tử'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
@@ -311,7 +311,7 @@ apiRoutes.get('/newelectronicitems', function(req, res) {
 });
 
 //--Giai trí, thể thao, sở thích
-apiRoutes.get('/newentertainmentitems', function(req, res) {
+apiRoutes.get('/new_entertainment_items', function(req, res) {
     Item.find({chuyenMuc: 'Giải trí, thể thao, sở thích'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
@@ -325,7 +325,7 @@ apiRoutes.get('/newentertainmentitems', function(req, res) {
 });
 
 //-- Xe cộ, máy móc
-apiRoutes.get('/newentertainmentitems', function(req, res) {
+apiRoutes.get('/new_vehicle_items', function(req, res) {
     Item.find({chuyenMuc: 'Xe cộ, máy móc'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
