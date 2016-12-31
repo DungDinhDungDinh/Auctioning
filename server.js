@@ -339,7 +339,7 @@ apiRoutes.get('/new_vehicle_items', function(req, res) {
 });
 
 //-- Mẹ và bé
-apiRoutes.get('/newmomandbabytitems', function(req, res) {
+apiRoutes.get('/new_momandbaby_titems', function(req, res) {
     Item.find({chuyenMuc: 'Mẹ và bé'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
@@ -353,7 +353,7 @@ apiRoutes.get('/newmomandbabytitems', function(req, res) {
 });
 
 //-- Thời trang & phụ kiện
-apiRoutes.get('/newfashionitems', function(req, res) {
+apiRoutes.get('/new_fashion_items', function(req, res) {
     Item.find({chuyenMuc: 'Thời trang & phụ kiện'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
@@ -367,7 +367,7 @@ apiRoutes.get('/newfashionitems', function(req, res) {
 });
 
 //-- Đồ ăn, thức uống
-apiRoutes.get('/newfooditems', function(req, res) {
+apiRoutes.get('/new_food_items', function(req, res) {
     Item.find({chuyenMuc: 'Đồ ăn, thức uống'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
         if (err){
             return res.status(404).send('Not found');
