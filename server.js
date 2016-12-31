@@ -452,6 +452,21 @@ apiRoutes.get('/getitems/:ID', function(req, res) {
     });   
 });
 
+//-- Tìm kiếm items
+apiRoutes.get('/search', function(req, res) {
+    var tmp = req.query.search;
+    Item.find({'ten': {'$regex': tmp}}).select('-_id').exec(function(err, items) {
+        if (err){
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        }
+        else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });   
+});
+
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
