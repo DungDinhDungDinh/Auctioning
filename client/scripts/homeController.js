@@ -45,15 +45,15 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
-		console.log(danh_muc);
-		Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
 	$scope.goTo_Search_Result = function () {
-		Data.danh_muc = $scope.searchString;
-		console.log(Data.danh_muc);
-        $location.path('/danh-sach-san-pham');
+		if(!$scope.searchString)
+		{
+			$scope.searchString = 'all';
+		}
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
 	$scope.goTo_Item_Info = function (item_ID) {
@@ -83,7 +83,6 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
         $location.path('/them-san-pham-step-1');
     }
 	
-	
 	//Chuyển giá tiền thành có '.'
     $scope.changePrice = function(price) {
         var x = price;
@@ -93,8 +92,7 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
         return price
     }
 	
-	var loadDuLieu = function() {
-		
+	var loadDuLieu = function() {	
 		//Lấy 4 item mới nhất
 		$http({
             method: 'GET',
@@ -259,7 +257,6 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             console.log('Không thể lấy 5 đồ điện tử');
             console.log(response);
         });	
-		
 	}
 	
 	loadDuLieu();

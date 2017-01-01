@@ -31,6 +31,24 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 
 	// -------------- Link --------------
 
+	//Chuyển giá tiền thành có '.'
+	changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
+	
+	$scope.changeInfo = function(item) {
+		item.giaHienTai = changeNumber(item.giaHienTai);
+		if(item.trangThai === true){
+			item.status = 'Đang đấu giá';
+		} else {
+			item.status = 'Đã kết thúc';
+		} 
+	}
+	
 	$scope.goTo_SignUp = function () {
         $location.path('/dang-ky');
 	};
@@ -52,13 +70,15 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
-		Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
 	$scope.goTo_Search_Result = function () {
-		Data.danh_muc = $scope.searchString;
-        $location.path('/danh-sach-san-pham');
+		if(!$scope.searchString)
+		{
+			$scope.searchString = 'all';
+		}
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
 	$scope.goTo_Item_Info = function (item_ID) {

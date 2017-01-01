@@ -114,8 +114,8 @@
 				</div>				
 			</div>
 			
-			<div ng-repeat="item in user_items">
-				<div class="user-sell-container">
+			<div ng-repeat="item in user_items" ng-init="changeInfo(item)">
+				<div class="user-sell-container" >
 					<div class="user-sell-div-1">
 						<img class="user-item-img" ng-src="{{item.hinhAnh}}" alt=" No image " />
 					</div>
@@ -128,7 +128,7 @@
 					</div>
 					
 					<div class="user-sell-div-3">
-						<span class="span-item-price"> {{item.giaHienTai}} </span>   
+						<span class="span-item-price"> {{item.giaHienTai}} <u> đ </u> </span>   
 					</div>		
 					
 					<div class="user-sell-div-4">
@@ -137,7 +137,7 @@
 					</div>
 					
 					<div class="user-sell-div-5">
-						<span class="span-item-stt"> {{item.trangThai}} <span>   
+						<span class="span-item-stt"> {{item.status}} <span>   
 					</div>
 				</div>
 			</div>

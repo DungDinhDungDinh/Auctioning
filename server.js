@@ -592,7 +592,7 @@ apiRoutes.get('/new_realty_items', function(req, res) {
 });
 
 //-- Lấy tất cả items Bất động sản
-apiRoutes.get('/new_realty_items', function(req, res) {
+apiRoutes.get('/all_realty_items', function(req, res) {
     Item.find({
         chuyenMuc: 'Bất động sản'
     }).sort({
@@ -626,7 +626,7 @@ apiRoutes.get('/new_other_items', function(req, res) {
 });
 
 //-- Lấy tất cả items Các loại khác
-apiRoutes.get('/new_other_items', function(req, res) {
+apiRoutes.get('/all_other_items', function(req, res) {
     Item.find({
         chuyenMuc: 'Các loại khác'
     }).sort({
@@ -687,10 +687,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for(var i=0; i<userauctions.length; i++){
-                tmp_array.push(userauctions[i].itemID);
-            }
-            res.status(200).send(tmp_array);
+            res.status(200).send(userauctions);
         }
     });
 });
@@ -809,11 +806,14 @@ apiRoutes.post('/userauctions', function(req, res) {
 });
 
 //GET
-//Lay 1 userauction theo ID
-apiRoutes.get('/userauctions/:ID', function(req, res) {
-    var id = req.params.ID;
+//Lay 1 userauction theo userID va itemID
+apiRoutes.get('/userauctions', function(req, res) {
+    var _userID = req.query.userID;
+	console.log(req.query.userID);
+	var _itemID = req.query.itemID;
     Userauction.find({
-        ID: id
+        userID: _userID,
+		itemID: _itemID 
     }).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);

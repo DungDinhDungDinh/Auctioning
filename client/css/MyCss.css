@@ -1364,6 +1364,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-size: 16px;
 	font-weight: bolder;
 	color: #333;
+	text-transform: uppercase;
 }
 
 .user-info-line {
@@ -1542,6 +1543,11 @@ h1, .h1, h2, .h2, h3, .h3 {
 	line-height: 14px;
 }
 
+.user-sell-div-1:hover {
+	cursor:  pointer;
+	opacity: 0.8;
+}
+
 .user-sell-div-3, .user-sell-div-4, .user-sell-div-5 {
 	float: left;
 	width: 15%;
@@ -1567,12 +1573,17 @@ h1, .h1, h2, .h2, h3, .h3 {
 	font-weight: bold;
 }
 
+.span-item-name:hover,.span-item-type:hover, .span-item-seller:hover {
+	cursor:  pointer;
+	opacity: 0.5;
+}
+
 .span-item-location, .span-item-type, .span-item-seller  {
 	padding-top: 6px;
 	line-height: 14px;
 	font-size: 13px;
 	color: black;
-    width: 100%;
+    width: auto;
 	display: block;
 }
 

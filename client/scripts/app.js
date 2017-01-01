@@ -42,7 +42,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/them-san-pham-step-3.html',
         controller: 'addItem3Controller'
     }).
-	when('/danh-sach-san-pham', {
+	when('/danh-sach-san-pham/:chuyenMuc', {
         templateUrl: './view/danh-sach-san-pham.html',
         controller: 'itemListController'
     }).
@@ -50,7 +50,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/user-thong-tin-chung.html',
         controller: 'userCommonInfoController'
     }).
-
+	when('/ket-qua-tim-kiem/:viewID', {
+        templateUrl: './view/ket-qua-tim-kiem.html',
+        controller: 'searchResultController'
+    }).
     otherwise({
         redirectTo: '/trang-chu'
     });

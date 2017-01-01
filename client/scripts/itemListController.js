@@ -1,10 +1,46 @@
-
-
-myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location, $rootScope) {
+myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 	
-	$scope.number = [1,2,4,6];
-	$scope.price =  "1000000";
-	$scope.highest_price =  "100000000";
+	$scope.chuyenMuc = $routeParams.chuyenMuc;
+	if($scope.chuyenMuc === 'do-dien-tu'){
+		$scope.chuyenMuc = "Đồ điện tử";
+		$scope.apiString = 'all_electronic_items';
+	}
+	if($scope.chuyenMuc === 'giai-tri-the-thao-so-thich'){
+		$scope.chuyenMuc = "Giải trí, thể thao, sở thích";
+		$scope.apiString = 'all_entertainment_items';
+	}
+	if($scope.chuyenMuc === 'xe-co-may-moc'){
+		$scope.chuyenMuc = "Xe cộ, máy móc";
+		$scope.apiString = 'all_vehicle_items';
+	}
+	if($scope.chuyenMuc === 'me-va-be'){
+		$scope.chuyenMuc = "Mẹ và bé";
+		$scope.apiString = 'all_momandbaby_titems';
+	}
+	if($scope.chuyenMuc === 'thoi-trang-va-phu-kien'){
+		$scope.chuyenMuc = "Thời trang & phụ kiện";
+		$scope.apiString = 'all_fashion_items';
+	}
+	if($scope.chuyenMuc === 'do-an-thuc-uong'){
+		$scope.chuyenMuc = "Đồ ăn, thức uống";
+		$scope.apiString = 'all_food_items';
+	}
+	if($scope.chuyenMuc === 'do-gia-dung'){
+		$scope.chuyenMuc = "Đồ gia dụng";
+		$scope.apiString = 'all_home_items';
+	}
+	if($scope.chuyenMuc === 'suc-khoe-va-sac-dep'){
+		$scope.chuyenMuc = "Sức khỏe & sắc đẹp";
+		$scope.apiString = 'all_healthy_items';
+	}
+	if($scope.chuyenMuc === 'bat-dong-san'){
+		$scope.chuyenMuc = "Bất động sản";
+		$scope.apiString = 'all_realty_items';
+	}
+	if($scope.chuyenMuc === 'cac-loai-khac'){
+		$scope.chuyenMuc = "Các loại khác";
+		$scope.apiString = 'all_other_items';
+	}
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -53,13 +89,15 @@ myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location',
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
-		Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
 	$scope.goTo_Search_Result = function () {
-		Data.danh_muc = $scope.searchString;
-        $location.path('/danh-sach-san-pham');
+		if(!$scope.searchString)
+		{
+			$scope.searchString = 'all';
+		}
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
 	$scope.goTo_Item_Info = function (item_ID) {
@@ -90,5 +128,39 @@ myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location',
 
 	// -------------- Kết thúc link --------------
 	
+	//Chuyển giá tiền thành có '.'
+	changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
 	
+	$scope.changeInfo = function(item) {
+		item.giaHienTai = changeNumber(item.giaHienTai);
+		if(item.trangThai === true){
+			item.status = 'Đang đấu giá';
+		} else {
+			item.status = 'Đã kết thúc';
+		} 
+	}
+	
+	// Lấy danh sách các sản phẩm của chuyên mục
+	var loadDuLieu = function() {
+		$http({
+            method: 'GET',
+            url: '/api/' + $scope.apiString ,
+        }).then(function successCallback(response) {
+            if (response.status === 200) {	
+                console.log(response.data);
+				console.log('load danh sach chuyen muc thanh cong');
+                $scope.all_type_items = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+	}
+	
+	loadDuLieu();
 }]);
