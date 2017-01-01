@@ -186,8 +186,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	{
 		$scope.tipTrans = false;
 	}
-
-
+	
 	$scope.filterValue = function($event)
 	{
 		var charCode = ($event.which) ? $event.which : $event.keyCode;
@@ -356,7 +355,30 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 
 	};
 
-
-
+	
+	var timeCondition = function(){
+		var day = new Date();			
+		$( function() {
+			$( "#datepicker" ).datepicker({
+				changeMonth: true,
+				changeYear: true,
+				minDate: 0
+			}).on( "change", function() {
+				
+				// Kiểm tra nếu là ngày hiện tại	
+				$('#timepicker').timepicker({showleadingzero: true});				
+				$('#timepicker').timepicker('settime','null');				
+				$('#timepicker').timepicker(
+					'option',{mintime: {hour: day.gethours(), minute: day.getminutes()}}
+				);
+				
+				//Nếu không phải ngày hiện tại
+				$('#timepicker').timepicker({showLeadingZero: true});
+				$('#timepicker').timepicker('settime','null');
+			});
+		});
+		
+	}
+	timeCondition();
 
 }]);
