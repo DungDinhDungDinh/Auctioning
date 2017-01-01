@@ -958,6 +958,17 @@ apiRoutes.use(function(req, res, next) {
     }
 });
 
+var myFunction = function () {
+    console.log('askldfajsldf');
+}
+
+var cron = require('cron');
+var cronJob = cron.job('*/5 * * * * *', function(){
+    // perform operation e.g. GET request http.get() etc.
+    myFunction();
+}); 
+cronJob.start();
+
 var port = process.env.PORT || 8081;
 
 apiRoutes.get('/', function(req, res) {

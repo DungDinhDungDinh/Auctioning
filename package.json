@@ -23,6 +23,7 @@
     "express": "^4.14.0",
     "jsonwebtoken": "*",
     "mongoose": "*",
-    "request": "*"
+    "request": "*",
+    "cron" : "*"
   }
 }
