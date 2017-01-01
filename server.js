@@ -68,7 +68,7 @@ apiRoutes.get('/users/:ID', function(req, res) {
             return console.log(users);
         else {
             res.status(200).send(users);
-            console.log(users);
+            //console.log(users);
         }
     });
 });
@@ -80,7 +80,7 @@ apiRoutes.get('/users', function(req, res) {
             return console.log(users);
         else {
             res.status(200).send(users);
-            console.log(users);
+            //console.log(users);
         }
     });
 });
@@ -959,7 +959,7 @@ apiRoutes.use(function(req, res, next) {
 });
 
 var myFunction = function () {
-    console.log('askldfajsldf');
+   
 }
 
 var cron = require('cron');
