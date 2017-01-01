@@ -85,6 +85,33 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         $location.path('/them-san-pham-step-1');
     };
 
+	var  getUserInformation = function() {
+        $http({
+            method: 'GET',
+            url: '/api/users/' + $scope.viewID,
+            data: {
+                'token': Data.token
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                var info = response.data[0];					
+                $scope.picture = info.avatar;
+                $scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
+
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}	
+            }
+        }, function errorCallback(response) {
+            console.log('failed to get user info');
+            console.log(response);
+
+        });
+    };
 
     var getUserAuctionItems = function() {
         $http({
@@ -121,35 +148,7 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         });
     };
 
-    getUserAuctionItems();
-
-      var  getUserInformation = function() {
-        $http({
-            method: 'GET',
-            url: '/api/users/' + $scope.viewID,
-            data: {
-                'token': Data.token
-            }
-        }).then(function successCallback(response) {
-            if (response.status === 200) {
-                console.log(response.data);
-                var info = response.data[0];					
-                $scope.picture = info.avatar;
-                $scope.staticName = info.ten;
-                $scope.staticEmail = info.email;
-                $scope.staticBirthday = info.ngaySinh;
-                $scope.staticGender = info.gioiTinh;
-
-				if($scope.staticEmail){ $scope.showEmail = true;}
-				if($scope.staticBirthday){ $scope.showBirthday= true;}
-				if($scope.staticGender){ $scope.showGender = true;}	
-            }
-        }, function errorCallback(response) {
-            console.log('failed to get user info');
-            console.log(response);
-
-        });
-    };
 
     getUserInformation();
+	getUserAuctionItems();
 }]);

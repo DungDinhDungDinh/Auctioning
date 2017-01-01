@@ -119,13 +119,13 @@
 			<div ng-repeat="item in new_items">
 				<div class="new-post">
 					<div class="new-post-img">
-						<img class="new-post-img-2" src="{{item.hinhAnh}}">
+						<img class="new-post-img-2" ng-src="{{item.hinhAnh}}">
 						<img class="new-post-img-3" src="image/new-vector.png">
 					</div>
 					<div class="new-post-text">
 						<span class="new-post-text-name"> {{item.ten}} </span>
-						<span class="new-post-text-price"> {{item.giaHienTai}} </span>
-						<span class="new-post-text-location"> {{item.location}} </span>
+						<span class="new-post-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u></span>
+						<span class="new-post-text-location"> {{item.noiBan}} </span>
 					</div>
 				</div>
 			</div>
@@ -149,126 +149,145 @@
     
     <div class="main-container">
         <div class="container">
-            <div class="title">
-                <a> ĐỒ ĐIỆN TỬ </a>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
+            <div class="title"><a> ĐỒ ĐIỆN TỬ </a></div>       
+			<div class="item-list"ng-repeat="item in new_electronic_items">
+				<div class="item-list-inner">
 					<div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
             </div>
         </div>
         
         <div class="container">
-            <div class="title">
-                <a> GIẢI TRÍ, THỂ THAO, ƯA THÍCH</a>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
+            <div class="title"><a> GIẢI TRÍ, THỂ THAO, SỞ THÍCH </a></div>       
+			<div class="item-list"ng-repeat="item in new_entertainment_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
-            </div>
-            
-            <div class="item-list">
-                <div class="item-list-inner">
-                    <div class="item-img-div" id="divUpImg">
-						<img class="chosen-img" src="image/new-item-1.jpg">
-					</div>
-                    <span class="item-text-name"> Tên sản phẩm </span>
-                    <span class="item-text-price"> Gia </span>
-                    <span class="item-text-time"> Thoi han </span>
-                </div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
             </div>
         </div>
+		
+		<div class="container">
+            <div class="title"><a> XE CỘ, MÁY MÓC </a></div>       
+			<div class="item-list"ng-repeat="item in new_vehicle_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> MẸ VÀ BÉ </a></div>       
+			<div class="item-list"ng-repeat="item in new_momandbaby_titems">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> THỜI TRANG & PHỤ KIỆN </a></div>       
+			<div class="item-list"ng-repeat="item in new_fashion_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> ĐỒ ĂN, THÚC UỐNG </a></div>       
+			<div class="item-list"ng-repeat="item in new_food_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> ĐỒ GIA DỤNG </a></div>       
+			<div class="item-list"ng-repeat="item in new_home_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> SỨC KHỎE & SẮC ĐẸP </a></div>       
+			<div class="item-list"ng-repeat="item in new_healthy_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> BẤT ĐỘNG SẢN </a></div>       
+			<div class="item-list"ng-repeat="item in new_realty_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+		
+		<div class="container">
+            <div class="title"><a> CÁC LOẠI KHÁC </a></div>       
+			<div class="item-list"ng-repeat="item in new_other_items">
+				<div class="item-list-inner">
+					<div class="item-img-div" id="divUpImg">
+						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
+					</div>
+					<span class="item-text-name"> {{item.ten}}  </span>
+					<span class="item-text-price" ng-init="item.giaHienTai = changePrice(item.giaHienTai)"> {{item.giaHienTai}} <u>đ</u>   </span>
+					<span class="item-text-time"> {{item.noiBan}}  </span>
+				</div>
+            </div>
+        </div>
+			
     </div>
     
     <div class="footer">
