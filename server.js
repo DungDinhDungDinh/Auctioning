@@ -763,14 +763,15 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     });
                                     console.error(err);
                                 } else {
+									res.status(200).send({
+										'message': 'updated'
+									});
                                     console.log('updated item');
                                 }
                             });
                         }
                     });
-                    res.status(200).send({
-                        'message': 'updated'
-                    });
+                    
                 }
             });
         } else {
@@ -920,8 +921,8 @@ apiRoutes.post('/userfollows', function(req, res) {
 });
 
 //GET
-//Lay 1 userfollow theo ID
-apiRoutes.get('/userfollows/:ID', function(req, res) {
+//Lay 1 userfollow theo ID &^&*#$*&@$@
+apiRoutes.get('/userXXXXXfollows/:ID', function(req, res) {
     var id = req.params.ID;
     Userfollow.find({
         ID: id
@@ -935,6 +936,41 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
     });
 });
 
+// Lấy toàn bộ item mà user đang theo dõi
+// apiRoutes.get('/userfollows/:ID', function(req, res)  {
+	// var userID = req.body.userID;
+	// console.log(req.params.ID);
+	// Userfollow.find({
+        // userID: req.params.ID
+    // }).select().exec(function(err, followed_items) {
+        // if (err)
+             // return console.log(followed_items);
+        // else {
+            // if (followed_items) {
+				// var items = [];
+				// console.log(followed_items);
+				
+				// for(var i=0; i< followed_items.length; i++){
+					// //Lấy từng item
+					// Item.find({
+						// ID: followed_items[i].itemID
+					// }).select().exec(function(err, item) {
+						// if (item){
+							// items.push(item);
+						// }
+					// });
+					// followed_items.push(items);
+					// console.log('hehe');
+					// console.log(followed_items);
+				// }
+                // res.status(200).send(items);
+            // } else {
+                // res.status(200).json({'follow' : false});
+            // }
+        // }
+    // });
+// });
+
 //Lay tat ca userfollow
 apiRoutes.get('/userfollows', function(req, res) {
     var _userID = req.query.userID;
@@ -947,7 +983,7 @@ apiRoutes.get('/userfollows', function(req, res) {
             return console.log(userfollow);
         else {
             if (userfollow) {
-                res.status(200).json({'follow' : true});
+                res.status(200).json({'follow' : true});			
                 console.log(userfollow);
             } else {
                 res.status(200).json({'follow' : false});
@@ -972,6 +1008,8 @@ apiRoutes.put('/userfollows', function(req, res) {
         }
     });
 });
+
+
 
 // //EDIT
 // apiRoutes.put('/userfollows/:ID', function(req, res) {

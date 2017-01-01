@@ -935,7 +935,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .input-price {
-	background: #F8F8F8;
+	background: white;
 	float: left;
 	width: 150px;
 	height: 36px;
@@ -1118,13 +1118,46 @@ h1, .h1, h2, .h2, h3, .h3 {
 	padding-right: 3px;
 }
 
-.avatar-small {
+.avatar-small-div {
 	display: inline-block;
 	float: left;
 	margin-bottom: 10px;
 	margin-right: 10px;
 	width: 80px;	
 	height: 80px;
+	overflow:hidden;
+    position: relative;
+	border: 1px solid #DDD;
+	-webkit-transition: all 0.1s linear;
+}
+
+.avatar-small-div:hover {
+	cursor: pointer;
+	border-radius: 50%;
+	-webkit-transition: all 0.1s linear;
+}
+
+.avatar-small {
+	position:  absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	font-size: 20px;
+	color: white;
+	width: 100%;
+	height: auto;
+	min-height: 100%;
+	min-width: 100%;
+	margin: 0 auto;
+	border: none;
+	-webkit-transition: all 0.1s linear;
+}
+
+.avatar-small:hover {
+	cursor: pointer;
+	border-radius: 50%;
+	-webkit-transition: all 0.1s linear;
 }
 
 .salesman-email {
@@ -1153,6 +1186,10 @@ h1, .h1, h2, .h2, h3, .h3 {
 	white-space: nowrap;
 	color:#8ABE7A;
 	font-weight: bold;
+}
+
+.highest-name:hover {
+	cursor: pointer;
 }
 
 .highest-name:before {

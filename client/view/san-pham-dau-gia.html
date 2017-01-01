@@ -129,7 +129,7 @@
             
             <div class="body-price" ng-init="changeNumber()">
             	<span style="display:block; color: #666; font-size: 15px;"> Giá hiện tại:</span> 
-        		<span> {{item_price}} đ</span>     
+        		<span> {{item_price}} <u> đ </u></span>     
 			</div>
             
             <div class="div-dau-gia">
@@ -193,8 +193,8 @@
 					<span> TRẢ GIÁ CAO NHẤT</span>			
 				</div>
 				
-				<span class="highest-name"> noctislucispro@gmail.com</span>
-				<span class="highest-price" ng-init="changeNumber2()"> {{highest_price}} đ</span>	
+				<span class="highest-name" ng-click="goTo_User_Info(buyer.ID)"> {{buyer.ten}} </span>
+				<span class="highest-price"> {{item_price }} đ</span>	
 			</div>
 				
 			<div class="info-salesman">
@@ -202,8 +202,11 @@
 					<span> THÔNG TIN NGƯỜI BÁN</span>			
 				</div>
 				
-				<img class="avatar-small" ng-src="{{owner.avatar}}">
-				<span class="salesman-email"> {{owner.ten}} </span>
+				<div class="avatar-small-div" ng-click="goTo_User_Info(owner.ID)">
+					<img class="avatar-small" ng-src="{{owner.avatar}}">
+				</div>
+				
+				<span class="salesman-email" ng-click="goTo_User_Info(owner.ID)"> <strong>{{owner.ten}} </strong> </span>
 			</div>
 			
 			<div class="info-salesman">
@@ -211,8 +214,11 @@
 					<span> NGƯỜI THẮNG CUỘC</span>			
 				</div>
 				
-				<img class="avatar-small" ng-src="{{buyer.avatar}}">
-				<span class="salesman-email"> {{buyer.ten}} </span>
+				<div class="avatar-small-div" ng-click="goTo_User_Info(buyer.ID)">
+					<img class="avatar-small" ng-src="{{buyer.avatar}}">
+				</div>
+				
+				<span class="salesman-email" ng-click="goTo_User_Info(buyer.ID)"> <strong>{{buyer.ten}} </strong> </span>
 			</div>
 		</div>
 	</div> 

@@ -91,8 +91,9 @@ myapp.controller('userFollowController',  ['$scope', '$http', 'Data', '$location
 
 	// -------------- Kết thúc link --------------
 	
-	
+	//Lấy danh sách sản phẩm đang theo dõi
 	var getUserFollowItems = function (){
+		//Lấy thông tin user
 		$http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -103,8 +104,8 @@ myapp.controller('userFollowController',  ['$scope', '$http', 'Data', '$location
             if (response.status === 200) {
                 console.log(response.data);
                 var info = response.data[0];
-                $scope.picture = info.avatar;
 				
+                $scope.picture = info.avatar;
                 $scope.staticName = info.ten;
                 $scope.staticEmail = info.email;
                 $scope.staticBirthday = info.ngaySinh;
@@ -117,17 +118,17 @@ myapp.controller('userFollowController',  ['$scope', '$http', 'Data', '$location
         }, function errorCallback(response) {
             console.log('failed to get user info');
             console.log(response);
-
         });
 		
+		//Lấy danh sách followed item
     	$http({
             method: 'GET',
-            url: '/api/getItems/' + $scope.viewID
+            url: '/api/userfollows/' + $scope.viewID
         }).then(function successCallback(response) {
             if (response.status === 200) {
+				console.log('helo');
                 console.log(response.data);
-                $scope.user_items = response.data;
-			
+                $scope.followed_items = response.data;
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');

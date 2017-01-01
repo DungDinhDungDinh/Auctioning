@@ -114,8 +114,8 @@
 				</div>				
 			</div>
 			
-			<div ng-repeat="i in number">
-				<div class="user-sell-container">
+			<div ng-repeat="item in number">
+				<div class="user-sell-container" ng-repeat="item in followed_items">
 					<div class="user-sell-div-1">
 						<img class="user-item-img" src="image/item.jpg" alt="" />
 					</div>
