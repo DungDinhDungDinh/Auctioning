@@ -200,12 +200,12 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
         var newPrice = $scope.yourPrice.replace(/ /g, '');
         if (newPrice > $scope.item_price) {
             $http({
-                method: 'GET',
+                method: 'POST',
                 url: '/api/userauctions/',
                 data: {
                     'userID': Data.userID,
                     'itemID': $scope.itemID,
-                    'giaDaTra': $scope.newPrice
+                    'giaDaTra': newPrice
                 }
             }).then(function successCallback(response) {
                 if (response.status === 200) {

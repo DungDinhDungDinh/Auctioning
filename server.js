@@ -141,8 +141,8 @@ apiRoutes.put('/users/:ID', function(req, res) {
             });
         } else {
             res.status(404).send({
-                            'messege': 'Not found'
-                        });
+                'messege': 'Not found'
+            });
         }
     });
 });
@@ -161,7 +161,7 @@ apiRoutes.post('/items', function(req, res) {
         giaHienTai: req.body.giaHienTai,
         ngayHetHan: req.body.ngayHetHan,
         trangThai: req.body.trangThai,
-		tinhTrang: req.body.tinhTrang,
+        tinhTrang: req.body.tinhTrang,
         noiBan: req.body.noiBan,
         vanChuyen: req.body.vanChuyen,
         nguoiBan: req.body.nguoiBan,
@@ -204,7 +204,7 @@ apiRoutes.get('/items/:ID', function(req, res) {
 
 //Lay tat ca item
 apiRoutes.get('/items', function(req, res) {
-    Item.find({}).select('-ID').exec(function(err, items) {
+    Item.find({}).select().exec(function(err, items) {
         if (err)
             return console.log(items);
         else {
@@ -236,7 +236,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
     var giaHienTai = req.body.giaHienTai;
     var ngayHetHan = req.body.ngayHetHan;
     var trangThai = req.body.trangThai;
-	var tinhTrang = req.body.tinhTrang;
+    var tinhTrang = req.body.tinhTrang;
     var noiBan = req.body.noiBan;
     var vanChuyen = req.body.vanChuyen;
     var moTa = req.body.moTa;
@@ -257,7 +257,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
             u.giaHienTai = giaHienTai;
             u.ngayHetHan = ngayHetHan;
             u.trangThai = trangThai;
-			u.tinhTrang = tinhTrang;
+            u.tinhTrang = tinhTrang;
             u.noiBan = noiBan;
             u.vanChuyen = vanChuyen;
             u.moTa = moTa;
@@ -286,207 +286,241 @@ apiRoutes.put('/items/:ID', function(req, res) {
 //-------------------------ITEM API------------------
 //API lấy 4 sản phẩm đấu giá mới nhất
 apiRoutes.get('/new_items', function(req, res) {
-    Item.find({}).sort({ngayTao: -1}).limit(4).exec(function(err, items) {
-        if (err){
+    Item.find({}).sort({
+        ngayTao: -1
+    }).limit(4).exec(function(err, items) {
+        if (err) {
             res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //API lấy từ mỗi danh mục 5 sản phẩm mới nhất
 //--Đồ điện tử
 apiRoutes.get('/new_electronic_items', function(req, res) {
-    Item.find({chuyenMuc: 'Đồ điện tử'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Đồ điện tử'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //--Giai trí, thể thao, sở thích
 apiRoutes.get('/new_entertainment_items', function(req, res) {
-    Item.find({chuyenMuc: 'Giải trí, thể thao, sở thích'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Giải trí, thể thao, sở thích'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Xe cộ, máy móc
 apiRoutes.get('/new_vehicle_items', function(req, res) {
-    Item.find({chuyenMuc: 'Xe cộ, máy móc'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Xe cộ, máy móc'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Mẹ và bé
 apiRoutes.get('/new_momandbaby_titems', function(req, res) {
-    Item.find({chuyenMuc: 'Mẹ và bé'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Mẹ và bé'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Thời trang & phụ kiện
 apiRoutes.get('/new_fashion_items', function(req, res) {
-    Item.find({chuyenMuc: 'Thời trang & phụ kiện'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Thời trang & phụ kiện'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Đồ ăn, thức uống
 apiRoutes.get('/new_food_items', function(req, res) {
-    Item.find({chuyenMuc: 'Đồ ăn, thức uống'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Đồ ăn, thức uống'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Đồ gia dụng
 apiRoutes.get('/new_home_items', function(req, res) {
-    Item.find({chuyenMuc: 'Đồ gia dụng'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Đồ gia dụng'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Sức khỏe & sắc đẹp
 apiRoutes.get('/new_healthy_items', function(req, res) {
-    Item.find({chuyenMuc: 'Sức khỏe & sắc đẹp'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Sức khỏe & sắc đẹp'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Bất động sản
 apiRoutes.get('/new_realty_items', function(req, res) {
-    Item.find({chuyenMuc: 'Bất động sản'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Bất động sản'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Các loại khác
 apiRoutes.get('/new_other_items', function(req, res) {
-    Item.find({chuyenMuc: 'Các loại khác'}).sort({ngayTao: -1}).limit(5).exec(function(err, items) {
-        if (err){
+    Item.find({
+        chuyenMuc: 'Các loại khác'
+    }).sort({
+        ngayTao: -1
+    }).limit(5).exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Lấy các items của 1 user
 apiRoutes.get('/getitems/:ID', function(req, res) {
-    Item.find({nguoiBan: req.params.ID}).select('-_id').exec(function(err, items) {
-        if (err){
+    Item.find({
+        nguoiBan: req.params.ID
+    }).select().exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //-- Tìm kiếm items
 apiRoutes.get('/search', function(req, res) {
     var tmp = req.query.search;
-    Item.find({'ten': {'$regex': tmp}}).select('-_id').exec(function(err, items) {
-        if (err){
+    Item.find({
+        'ten': {
+            '$regex': tmp
+        }
+    }).select().exec(function(err, items) {
+        if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
-        }
-        else {
+        } else {
             res.status(200).send(items);
             console.log(items);
         }
-    });   
+    });
 });
 
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
-
     // create a sample userauction
     var userauction = new Userauction({
         userID: req.body.userID,
         itemID: req.body.itemID,
-        giaHienTai: req.body.giaHienTai,
         giaDaTra: req.body.giaDaTra
     });
+    
+    console.log(req.body.userID);
 
     Userauction.findOne({
         userID: userauction.userID,
         itemID: userauction.itemID
     }, function(err, user) {
-
+        console.log(userauction);
         if (err) throw err;
-
         if (user) {
             user.giaDaTra = userauction.giaDaTra;
 
@@ -497,68 +531,72 @@ apiRoutes.post('/userauctions', function(req, res) {
                     });
                     return console.error(err);
                 } else {
-//--
-                    Item.findOne({ID: user.itemID}).select('-_id').exec(function(err, items) {
-                        if (err){
+                    Item.findOne({
+                        ID: user.itemID
+                    }).select().exec(function(err, item1) {
+                        if (err) {
                             return res.status(404).send('Not found');
                             console.log('Failed!!');
-                        }
-                        else {
-                            items.nguoiTra = user.userID;
-                            items.giaHienTai = user.giaDaTra;
+                        } else {
+                            item1.nguoiTra = user.userID;
+                            item1.giaHienTai = user.giaDaTra;
+                            console.log(item1.nguoiTra);
+                            console.log(item1.giaHienTai);
+                            console.log(item1);
 
-                            items.save(function(err, user1) {
-                            if (err) {
-                                res.status(400).send({
-                                    'error': 'Bad request (The data is invalid)'
-                                });
-                                return console.error(err);
-                            } else {
-                                 res.status(400).send({
-                                    'error': 'Bad request (The data is invalid)'
+                            item1.save(function(err, abc) {
+                                if (err) {
+                                    res.status(400).send({
+                                        'error': 'Bad request (The data is invalid)'
                                     });
-                            }
+                                    console.error(err);
+                                } else {
+                                    console.log('updated item');
+                                }
+                            });
                         }
-                    }); 
+                    });
+                    res.status(200).send({
+                        'message': 'updated'
+                    });
                 }
             });
         } else {
-            user.userID = userauction.userID;
-            user.itemID = userauction.itemID;
-            user.giaDaTra = userauction.giaDaTra;
-            user.save(function(err, user1) {
+            userauction.save(function(err, user1) {
                 if (err) {
                     res.status(400).send({
                         'error': 'Bad request (The data is invalid)'
                     });
                     return console.error(err);
                 } else {
-//--
-                    Item.findOne({ID: user.itemID}).select('-_id').exec(function(err, items) {
-                        if (err){
+                    // //--
+                    Item.findOne({
+                        ID: userauction.itemID
+                    }).select().exec(function(err, items) {
+                        if (err) {
                             return res.status(404).send('Not found');
                             console.log('Failed!!');
-                        }
-                        else {
-                            items.nguoiTra = user.userID;
-                            items.giaHienTai = user.giaDaTra;
+                        } else {
+                            items.nguoiTra = userauction.userID;
+                            items.giaHienTai = userauction.giaDaTra;
 
-                            items.save(function(err, user1) {
-                            if (err) {
-                                res.status(400).send({
-                                    'error': 'Bad request (The data is invalid)'
-                                });
-                                return console.error(err);
-                            } else {
-                                 res.status(400).send({
-                                    'error': 'Bad request (The data is invalid)'
+                            items.save(function(err) {
+                                if (err) {
+                                    res.status(400).send({
+                                        'error': 'Bad request (The data is invalid)'
                                     });
-                            }
+                                    return console.error(err);
+                                } else {
+                                      console.log('updated item');
+                                }
+                            });
                         }
+                    });
                 }
             });
         }
-    });
+    })
+
 });
 
 //GET
@@ -567,7 +605,7 @@ apiRoutes.get('/userauctions/:ID', function(req, res) {
     var id = req.params.ID;
     Userauction.find({
         ID: id
-    }).select('-ID').exec(function(err, userauctions) {
+    }).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
         else {
@@ -579,7 +617,7 @@ apiRoutes.get('/userauctions/:ID', function(req, res) {
 
 //Lay tat ca userauction
 apiRoutes.get('/userauctions', function(req, res) {
-    Userauction.find({}).select('-ID').exec(function(err, userauctions) {
+    Userauction.find({}).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
         else {
@@ -674,7 +712,7 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
     var id = req.params.ID;
     Userfollow.find({
         ID: id
-    }).select('-ID').exec(function(err, userfollows) {
+    }).select().exec(function(err, userfollows) {
         if (err)
             return console.log(userfollows);
         else {
@@ -686,7 +724,7 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
 
 //Lay tat ca userfollow
 apiRoutes.get('/userfollows', function(req, res) {
-    Userfollow.find({}).select('-ID').exec(function(err, userfollows) {
+    Userfollow.find({}).select().exec(function(err, userfollows) {
         if (err)
             return console.log(userfollows);
         else {
@@ -754,7 +792,7 @@ apiRoutes.get('/notifications', function(req, res) {
     var userID = req.query.userID;
     Userfollow.find({
         userID: userID
-    }).select('-ID').exec(function(err, notifications) {
+    }).select().exec(function(err, notifications) {
         if (err)
             return console.log(notifications);
         else {
@@ -825,7 +863,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var fb_user_id = obj.id;
                 var name = obj.name;
                 var email = obj.email;
-                var picture = 'https://graph.facebook.com/'+ fb_user_id + '/picture?width=300&height=300';
+                var picture = 'https://graph.facebook.com/' + fb_user_id + '/picture?width=300&height=300';
 
                 Account.findOne({
                     ID: fb_user_id
@@ -847,15 +885,17 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                             } else {
                                 console.log('Account saved successfully');
 
-								if(!email) {email = '';}
+                                if (!email) {
+                                    email = '';
+                                }
                                 var user = new User({
                                     ID: fb_user_id,
                                     ten: name,
                                     email: email,
                                     avatar: picture
                                 });
-								
-								
+
+
                                 user.save(function(err) {
                                     if (err) {
                                         console.log(err);
@@ -866,7 +906,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                                 var token = jwt.sign(account, app.get('superSecret'), {
                                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                                 });
-															
+
                                 res.json({
                                     userID: fb_user_id,
                                     token: token,
@@ -925,8 +965,7 @@ apiRoutes.post('/register', function(req, res) {
                     user.save(function(err) {
                         if (err) {
                             console.log(err);
-                        }
-                        else {
+                        } else {
                             console.log('created new user');
                         }
                     });
@@ -1023,15 +1062,15 @@ apiRoutes.use(function(req, res, next) {
     }
 });
 
-var myFunction = function () {
-   
+var myFunction = function() {
+
 }
 
 var cron = require('cron');
-var cronJob = cron.job('*/5 * * * * *', function(){
+var cronJob = cron.job('*/5 * * * * *', function() {
     // perform operation e.g. GET request http.get() etc.
     myFunction();
-}); 
+});
 cronJob.start();
 
 var port = process.env.PORT || 8081;
