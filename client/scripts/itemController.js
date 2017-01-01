@@ -128,6 +128,7 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 	}
 
 	var getItemInformation = function() {
+		
 		$http({
             method: 'GET',
             url: '/api/items/' + $scope.itemID
@@ -159,6 +160,17 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 
 				getUserInformation(item.nguoiBan, 1);
 				getUserInformation(item.nguoiMua, 0);
+				
+				var aaa = $scope.time_hour;
+				console.log(aaa);
+				
+				$(function () {
+					var austDay = new Date();
+					austDay = new Date($scope.time_year, $scope.time_month - 1, $scope.time_day, $scope.time_hour , $scope.time_minute);
+					$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+					$('#year').text(austDay.getFullYear());
+				});
+			
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -169,8 +181,7 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 
 	getItemInformation();
 
-
-		var getUserInformation = function(id, isOwner) {
+	var getUserInformation = function(id, isOwner) {
 		$http({
             method: 'GET',
             url: '/api/users/' + id
@@ -190,4 +201,6 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 
         });
 	};
+	
+	
 }]);
