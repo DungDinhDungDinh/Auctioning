@@ -473,16 +473,17 @@ apiRoutes.get('/new_other_items', function(req, res) {
 });
 
 //-- Lấy các items của 1 user
-apiRoutes.get('/getitems/:ID', function(req, res) {
+apiRoutes.get('/get_items', function(req, res) {
+    var userID = req.query.userID;
     Item.find({
-        nguoiBan: req.params.ID
+        nguoiBan: userID
     }).select().exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -507,13 +508,11 @@ apiRoutes.get('/search', function(req, res) {
 
 apiRoutes.get('/item_auctioning', function(req, res) {
     var _userID = req.query.userID;
-    var _itemID = req.query.itemID;
    
 });
 
 apiRoutes.get('/item_follow', function(req, res) {
     var _userID = req.query.userID;
-    var _itemID = req.query.itemID;
      
 });
 
