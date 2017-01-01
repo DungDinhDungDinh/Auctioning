@@ -289,15 +289,15 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .header-div3 {
-	width: 80%;
+	width: 75%;
 	height: 55px;
-	margin-left: 20%;
+	margin-left: 25%;
 }
 
 .input-tim-kiem {
 	background: #F8F8F8;
 	float: left;
-	width: 600px;
+	width: 60%;
 	height: 36px;
 	border: 1px solid #ddd;
 	padding-left: 20px;
