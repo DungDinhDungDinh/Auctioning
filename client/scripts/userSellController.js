@@ -106,12 +106,9 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
         }, function errorCallback(response) {
             console.log('failed to update user information');
             console.log(response);
-
         });
     };
     getUserSellingItems();
-
-
         getUserInformation = function() {
         $http({
             method: 'GET',
@@ -123,7 +120,17 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
             if (response.status === 200) {
                 console.log(response.data);
                 var info = response.data[0];
-                $scope.user = info;
+				
+				$scope.picture = info.avatar;			
+				$scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}
+				
+				
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');

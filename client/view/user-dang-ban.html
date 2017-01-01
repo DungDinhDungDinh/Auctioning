@@ -58,24 +58,24 @@
 		<div class="user-info-div1">
             <div class="user-img-and-name">
 				<div class="avatar-div">
-					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{user.avatar}}" ng-click="pickImage()">
+					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{picture}}" ng-click="pickImage()">
 				</div>
-                <span class="user-name"> {{user.ten}}</span>
+                <span class="user-name"> {{staticName}}</span>
             </div>
             <div class="user-info-1" ng-show="showEmail">
-                <span class="user-info-text"> <b>Email</b></span>
-                <span class="user-info-text"> {{user.email}}</span>
+                <span class="user-info-text"> <b> Email </b></span>
+                <span class="user-info-text"> {{staticEmail}}</span>
             </div>
             
             <div class="user-info-1" ng-show="showBirthday">
-                <span class="user-info-text"> <b>Ngày sinh </b></span>
-                <span class="user-info-text">{{user.ngaySinh}}</span>
+                <span class="user-info-text"> <b> Ngày sinh </b></span>
+                <span class="user-info-text">{{staticBirthday}}</span>
             </div>
             
             
             <div class="user-info-1" ng-show="showGender">
-                <span class="user-info-text"> <b>Giới tính </b></span>
-                <span class="user-info-text"> {{user.gioiTinh}}</span>
+                <span class="user-info-text"> <b> Giới tính </b></span>
+                <span class="user-info-text"> {{staticGender}}</span>
             </div>
         </div>
         

@@ -82,4 +82,21 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
 	$scope.goTo_Add_Item = function () {
         $location.path('/them-san-pham-step-1');
     };
+	
+	var loadDuLieu = function() {
+		$http({
+            method: 'GET',
+            url: '/api/new_items'
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                $scope.new_items = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log('Cannot get 4 new item');
+            console.log(response);
+        });		
+	}
+	
+	loadDuLieu();
 }]);

@@ -116,53 +116,19 @@
         
         <div class="banner-div3">
             <span style="font-size: 17px; margin: 10px; margin-bottom: 0px; line-height: 22px; display:inline-block;"> Đấu giá mới nhất </span>
-            <div class="new-post">
-                <div class="new-post-img">
-                    <img class="new-post-img-2" src="image/new-item-1.jpg">
-                    <img class="new-post-img-3" src="image/new-vector.png">
-                </div>
-                <div class="new-post-text">
-                    <span class="new-post-text-name"> Tên sản phẩm dài nhất 1 2 </span>
-                    <span class="new-post-text-price"> 400.000đ </span>
-                    <span class="new-post-text-location"> Hà nội </span>
-                </div>
-            </div>
-            
-            <div class="new-post">
-                <div class="new-post-img">
-                    <img class="new-post-img-2" src="image/new-item-1.jpg">
-                    <img class="new-post-img-3" src="image/new-vector.png">
-                </div>
-                <div class="new-post-text">
-                    <span class="new-post-text-name"> Tên sản phẩm </span>
-                    <span class="new-post-text-price"> Giá </span>
-                    <span class="new-post-text-location"> Địa chỉ </span>
-                </div>
-            </div>
-            
-            <div class="new-post">
-                <div class="new-post-img">
-                    <img class="new-post-img-2" src="image/new-item-1.jpg">
-                    <img class="new-post-img-3" src="image/new-vector.png">
-                </div>
-                <div class="new-post-text">
-                    <span class="new-post-text-name"> Tên sản phẩm </span>
-                    <span class="new-post-text-price"> Giá </span>
-                    <span class="new-post-text-location"> Địa chỉ </span>
-                </div>
-            </div>
-            
-            <div class="new-post">
-                <div class="new-post-img">
-                    <img class="new-post-img-2" src="image/new-item-1.jpg">
-                    <img class="new-post-img-3" src="image/new-vector.png">
-                </div>
-                <div class="new-post-text">
-                    <span class="new-post-text-name"> Tên sản phẩm </span>
-                    <span class="new-post-text-price"> Giá </span>
-                    <span class="new-post-text-location"> Địa chỉ </span>
-                </div>
-            </div>
+			<div ng-repeat="item in new_items">
+				<div class="new-post">
+					<div class="new-post-img">
+						<img class="new-post-img-2" src="{{item.hinhAnh}}">
+						<img class="new-post-img-3" src="image/new-vector.png">
+					</div>
+					<div class="new-post-text">
+						<span class="new-post-text-name"> {{item.ten}} </span>
+						<span class="new-post-text-price"> {{item.giaHienTai}} </span>
+						<span class="new-post-text-location"> {{item.location}} </span>
+					</div>
+				</div>
+			</div>
         </div>
         
         <div id="slideshow">
