@@ -1,5 +1,3 @@
-
-
 myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function ($scope, $http, Data, $location, $rootScope, $routeParams) {
 	
 	$scope.number = [1,2,4,6];
@@ -88,7 +86,8 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 	$scope.goTo_Add_Item = function () {
         $location.path('/them-san-pham-step-1');
     };
-
+	// -------------- Kết thúc link --------------
+	
 	
     var getUserSellingItems = function (){
 		$http({
@@ -108,8 +107,10 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
             console.log(response);
         });
     };
+	
     getUserSellingItems();
-        getUserInformation = function() {
+	
+	var  getUserInformation = function() {
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -140,6 +141,5 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
     };
 
     getUserInformation();
-
-	// -------------- Kết thúc link --------------
+	
 }]);

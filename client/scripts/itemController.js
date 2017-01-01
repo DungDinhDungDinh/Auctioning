@@ -93,9 +93,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             url: '/api/userfollows',
             data: {
                 'userID': Data.userID,
-                'itemID': $scope.itemID,
-                'giaHienTai': $scope.item_price,
-                'trangThai': $scope.item_status
+                'itemID': $scope.itemID
             }
         }).then(function successCallback(response) {
             console.log(response.data);
