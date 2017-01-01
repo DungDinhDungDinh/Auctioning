@@ -519,7 +519,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             //Tìm items của userauctions
             userauctions.each(function(err, doc) {
                 Item.find({
-                    ID: userauction.itemID
+                    ID: doc.itemID
                 }).select().exec(function(err, items) {
                     if (err) {
                         return res.status(404).send('Not found');
@@ -536,8 +536,31 @@ apiRoutes.get('/item_auctioning', function(req, res) {
 
 apiRoutes.get('/item_follow', function(req, res) {
     var _userID = req.query.userID;
-    var _itemID = req.query.itemID;
-     
+    Userfollow.find({
+        userID: _userID
+    }).select().exec(function(err, userfollows) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            //res.status(200).send(items);
+
+            //Tìm items của userfollows
+            userfollows.each(function(err, doc) {
+                Item.find({
+                    ID: doc.itemID
+                }).select().exec(function(err, items) {
+                    if (err) {
+                        return res.status(404).send('Not found');
+                        console.log('Failed!!');
+                    } else {
+                        res.status(200).send(items);
+                        console.log(items);
+                    }
+                });
+            });     
+        }
+    });
 });
 
 
