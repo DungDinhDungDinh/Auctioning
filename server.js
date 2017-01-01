@@ -644,9 +644,10 @@ apiRoutes.get('/new_other_items', function(req, res) {
 
 
 //-- Lấy các items của 1 user
-apiRoutes.get('/getitems/:ID', function(req, res) {
+apiRoutes.get('/get_items', function(req, res) {
+    var userID = req.query.userID;
     Item.find({
-        nguoiBan: req.params.ID
+        nguoiBan: userID
     }).select().exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
