@@ -679,6 +679,7 @@ apiRoutes.get('/search', function(req, res) {
 
 apiRoutes.get('/item_auctioning', function(req, res) {
     var _userID = req.query.userID;
+    var tmp_array = [];
     Userauction.find({
         userID: _userID
     }).select().exec(function(err, userauctions) {
@@ -694,14 +695,16 @@ apiRoutes.get('/item_auctioning', function(req, res) {
                     ID: userauctions[i].itemID
                 }).select().exec(function(err, items) {
                     if (err) {
-                        return res.status(404).send('Not found');
+                        // return res.status(404).send('Not found');
                         console.log('Failed!!');
                     } else {
-                        res.status(200).send(items);
+                        //res.status(200).send(items);
                         console.log(items);
+                        tmp_array.push(items);
                     }
                 });
-            };     
+            };  
+            res.status(200).send(tmp_array);  
         }
     });
 });
