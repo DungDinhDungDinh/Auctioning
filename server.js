@@ -517,9 +517,9 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             //res.status(200).send(items);
 
             //Tìm items của userauctions
-            userauctions.each(function(err, doc) {
+            for(var i=0; i< userauctions.length; i++){
                 Item.find({
-                    ID: doc.itemID
+                    ID: userauctions[i].itemID
                 }).select().exec(function(err, items) {
                     if (err) {
                         return res.status(404).send('Not found');
@@ -529,7 +529,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
                         console.log(items);
                     }
                 });
-            });     
+            };     
         }
     });
 });
@@ -546,9 +546,9 @@ apiRoutes.get('/item_follow', function(req, res) {
             //res.status(200).send(items);
 
             //Tìm items của userfollows
-            userfollows.each(function(err, doc) {
+            for(var i=0; i< userfollows.length; i++){
                 Item.find({
-                    ID: doc.itemID
+                    ID: userfollows[i].itemID
                 }).select().exec(function(err, items) {
                     if (err) {
                         return res.status(404).send('Not found');
@@ -558,7 +558,7 @@ apiRoutes.get('/item_follow', function(req, res) {
                         console.log(items);
                     }
                 });
-            });     
+            }; 
         }
     });
 });
