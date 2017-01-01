@@ -88,11 +88,43 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
 
     $scope.Theo_doi = function() {
-        $scope.show2 = true;
+        $http({
+            method: 'POST',
+            url: '/api/userfollows',
+            data: {
+                'userID': Data.userID,
+                'itemID': $scope.itemID,
+                'giaHienTai': $scope.item_price,
+                'trangThai': $scope.item_status
+            }
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            if (response.status === 201) {
+                $scope.show2 = true;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+
+        });
     }
 
     $scope.Bo_theo_doi = function() {
-        $scope.show2 = false;
+        $http({
+            method: 'PUT',
+            url: '/api/userfollows',
+            data: {
+                'userID': Data.userID,
+                'itemID': $scope.itemID
+            }
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            if (response.status === 200) {
+                $scope.show2 = false;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+
+        });
     }
 
     //Chuyển giá tiền thành có '.'
@@ -167,7 +199,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
             }
         }, function errorCallback(response) {
-            console.log('failed to update user information');
             console.log(response);
 
         });
@@ -190,7 +221,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 }
             }
         }, function errorCallback(response) {
-            console.log('failed to update user information');
             console.log(response);
 
         });
@@ -201,7 +231,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
         if (newPrice > $scope.item_price) {
             $http({
                 method: 'POST',
-                url: '/api/userauctions/',
+                url: '/api/userauctions',
                 data: {
                     'userID': Data.userID,
                     'itemID': $scope.itemID,
@@ -213,7 +243,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     $route.reload();
                 }
             }, function errorCallback(response) {
-                console.log('failed to update user information');
                 console.log(response);
 
             });
@@ -221,6 +250,27 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             alert('Giá mới phải lớn hơn giá hiện tại!');
         }
     }
+
+    var checkFollowItem = function() {
+    	  $http({
+                method: 'GET',
+                url: '/api/userfollows',
+                params: {
+                    'userID': Data.userID,
+                    'itemID': $scope.itemID
+                }
+            }).then(function successCallback(response) {
+            	console.log(response.data);
+                if (response.status === 200) {
+                 	$scope.show2 = response.data.follow;
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+
+            });
+    };
+    checkFollowItem();
+
 
 
 }]);

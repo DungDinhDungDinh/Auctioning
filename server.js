@@ -283,6 +283,8 @@ apiRoutes.put('/items/:ID', function(req, res) {
     });
 });
 
+
+
 //-------------------------ITEM API------------------
 //API lấy 4 sản phẩm đấu giá mới nhất
 apiRoutes.get('/new_items', function(req, res) {
@@ -503,6 +505,21 @@ apiRoutes.get('/search', function(req, res) {
     });
 });
 
+apiRoutes.get('/item_auctioning', function(req, res) {
+    var _userID = req.query.userID;
+    var _itemID = req.query.itemID;
+   
+});
+
+apiRoutes.get('/item_follow', function(req, res) {
+    var _userID = req.query.userID;
+    var _itemID = req.query.itemID;
+     
+});
+
+
+
+
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
@@ -512,7 +529,7 @@ apiRoutes.post('/userauctions', function(req, res) {
         itemID: req.body.itemID,
         giaDaTra: req.body.giaDaTra
     });
-    
+
     console.log(req.body.userID);
 
     Userauction.findOne({
@@ -587,7 +604,7 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     });
                                     return console.error(err);
                                 } else {
-                                      console.log('updated item');
+                                    console.log('updated item');
                                 }
                             });
                         }
@@ -689,6 +706,7 @@ apiRoutes.post('/userfollows', function(req, res) {
         giaHienTai: req.body.giaHienTai,
         trangThai: req.body.trangThai
     });
+    console.log(req.body);
 
 
     // save the userfollow
@@ -697,6 +715,7 @@ apiRoutes.post('/userfollows', function(req, res) {
             res.status(400).json({
                 'error': 'bad request'
             });
+            return;
         }
 
         console.log('Userfollow saved successfully');
@@ -724,66 +743,79 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
 
 //Lay tat ca userfollow
 apiRoutes.get('/userfollows', function(req, res) {
-    Userfollow.find({}).select().exec(function(err, userfollows) {
+    var _userID = req.query.userID;
+    var _itemID = req.query.itemID;
+    Userfollow.findOne({
+        userID: _userID,
+        itemID: _itemID
+    }).select().exec(function(err, userfollow) {
         if (err)
-            return console.log(userfollows);
+            return console.log(userfollow);
         else {
-            res.status(200).send(userfollows);
-            console.log(userfollows);
+            if (userfollow) {
+                res.status(200).json({'follow' : true});
+                console.log(userfollow);
+            } else {
+                res.status(200).json({'follow' : false});
+            }
         }
     });
 });
 
 //DELETE
-apiRoutes.delete('/userfollows/:ID', function(req, res) {
+apiRoutes.put('/userfollows', function(req, res) {
+    console.log(req.body);
     Userfollow.remove({
-        ID: req.params.ID
+        userID: req.body.userID,
+        itemID: req.body.itemID,
     }, function(err) {
         if (!err) {
             console.log('remove userfollow successfull');
+            res.status(200).send('Successfully');
         } else {
             console.log(error);
+            res.status(400).send('Error');
         }
     });
 });
 
-//EDIT
-apiRoutes.put('/userfollows/:ID', function(req, res) {
+// //EDIT
+// apiRoutes.put('/userfollows/:ID', function(req, res) {
 
-    var userID = req.body.userID;
-    var itemID = req.body.itemID;
-    var giaHienTai = req.body.giaHienTai;
-    var trangThai = req.body.trangThai;
+//     var userID = req.body.userID;
+//     var itemID = req.body.itemID;
+//     var giaHienTai = req.body.giaHienTai;
+//     var trangThai = req.body.trangThai;
 
-    Userfollow.findOne({
-        ID: req.params.ID
-    }, function(err, u) {
+//     Userfollow.findOne({
+//         ID: req.params.ID
+//     }, function(err, u) {
 
-        if (err) throw err;
+//         if (err) throw err;
 
-        if (!u) {
-            u.userID = userID;
-            u.itemID = itemID;
-            u.giaHienTai = giaHienTai;
-            u.trangThai = trangThai;
+//         if (!u) {
+//             u.userID = userID;
+//             u.itemID = itemID;
+//             u.giaHienTai = giaHienTai;
+//             u.trangThai = trangThai;
 
-            u.save(function(err, u) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Userfollow.find(function(err, userfollows) {
-                        res.status(200).send({
-                            'messege': 'Updated'
-                        });
-                    });
-                }
-            });
-        }
-    });
-});
+//             u.save(function(err, u) {
+//                 if (err) {
+//                     res.status(400).send({
+//                         'error': 'Bad request (The data is invalid)'
+//                     });
+//                     return console.error(err);
+//                 } else {
+//                     Userfollow.find(function(err, userfollows) {
+//                         res.status(200).send({
+//                             'messege': 'Updated'
+//                         });
+//                     });
+//                 }
+//             });
+//         }
+//     });
+// });
 
 //##############################################-Notification API-######################################
 
