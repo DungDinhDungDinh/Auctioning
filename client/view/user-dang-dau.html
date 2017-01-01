@@ -60,22 +60,22 @@
 				<div class="avatar-div">
 					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{user.avatar}}" ng-click="pickImage()">
 				</div>
-                <span class="user-name"> {{staticName}}</span>
+                <span class="user-name"> {{user.ten}}</span>
             </div>
             <div class="user-info-1" ng-show="showEmail">
                 <span class="user-info-text"> <b>Email</b></span>
-                <span class="user-info-text"> {{staticEmail}}</span>
+                <span class="user-info-text"> {{user.email}}</span>
             </div>
             
             <div class="user-info-1" ng-show="showBirthday">
                 <span class="user-info-text"> <b>Ngày sinh</b></span>
-                <span class="user-info-text">{{staticBirthday}}</span>
+                <span class="user-info-text">{{user.ngaySinh}}</span>
             </div>
             
             
             <div class="user-info-1" ng-show="showGender">
                 <span class="user-info-text"> <b>Giới tính </b></span>
-                <span class="user-info-text"> {{staticGender}}</span>
+                <span class="user-info-text"> {{user.gioiTinh}}</span>
             </div>
         </div>
         
@@ -118,14 +118,14 @@
 				</div>				
 			</div>
 			
-			<div ng-repeat="i in number">
+			<div ng-repeat="item in user_items">
 				<div class="user-sell-container">
 					<div class="user-auction-div-1">
-						<img class="user-item-img" src="image/item.jpg" alt="" />
+						<img class="user-item-img" src="{{item.hinhAnh}}" alt="" />
 					</div>
 					
 					<div class="user-auction-div-2">
-						<span class="span-item-name"> Pin sạc dự phòng Asus ZenPower 9600mAh </span>
+						<span class="span-item-name"> {{item.ten}} </span>
 						<span class="span-item-location"> Tp.Hồ Chí Minh</span>
 						<span class="span-item-type"> Giải trí, thể thao, sở thích  </span>
 						<span class="span-item-seller"> Chung Nguyễn  </span>

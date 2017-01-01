@@ -112,7 +112,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
     getUserSellingItems();
 
 
-        getUserInformation = function() {
+      var  getUserInformation = function() {
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,

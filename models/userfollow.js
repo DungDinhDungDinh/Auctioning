@@ -8,16 +8,7 @@ var userFollowSchema = mongoose.Schema({
 	},
 	itemID: {
 		type: String
-	},
-	giaHienTai: {
-		//gia cao nhat hien tai cua item
-		type: Number
-	},
-	trangThai: {
-		//1: con dau gia
-		//0: het dau gia
-		type: Boolean
-	}	
+	}
 });
 
 
