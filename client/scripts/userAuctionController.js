@@ -96,18 +96,6 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
-                var info = response.data[0];
-				
-                $scope.picture = info.avatar;
-                $scope.staticName = info.ten;
-                $scope.staticEmail = info.email;
-                $scope.staticBirthday = info.ngaySinh;
-                $scope.staticGender = info.gioiTinh;
-
-				if($scope.staticEmail){ $scope.showEmail = true;}
-				if($scope.staticBirthday){ $scope.showBirthday= true;}
-				if($scope.staticGender){ $scope.showGender = true;}
-				
                 $scope.itemIDs = response.data;
 
                 for (i = 0; i < $scope.itemIDs.length; i++) {
@@ -145,8 +133,16 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
-                var info = response.data[0];
-                $scope.user = info;
+                var info = response.data[0];					
+                $scope.picture = info.avatar;
+                $scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
+
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}	
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
