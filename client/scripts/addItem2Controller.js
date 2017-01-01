@@ -5,8 +5,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.show1 = false;	
 	$scope.price =  "1000000";
 	$scope.highest_price =  "100000000";
-	$scope.item_content = localStorage.getItem("test");
-	console.log($scope.item_content);
+    $scope.item = Data.item;
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -101,10 +100,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
             if (response.status === 200) {
                 console.log(response.data);
                 var info = response.data[0];
-                
-                $scope.user_name = info.ten;
-                $scope.user_phone = info.soDienThoai;
-                $scope.user_address = info.diaChi;
+                $scope.user = info;
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -113,7 +109,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
         });
     };
 
-    getUserInformation();
+    //getUserInformation();
 
     $scope.updateUserAndCreateNewItem = function() {
     	$http({
@@ -121,9 +117,13 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
             url: '/api/users/' +Data.userID,
             data: {
                 'token': Data.token,
-    			'ten': $scope.name,
-    			'soDienThoai': $scope.user_phone,
-    			'diaChi': $scope.user_address
+                'ten': $scope.user.ten,
+                'email': $scope.user.email,
+                'avatar': $scope.user.avatar,
+                'soDienThoai': $scope.user.soDienThoai,
+                'ngaySinh': $scope.user.ngaySinh,
+                'gioiTinh': $scope.user.gioiTinh,
+                'diaChi': $scoper.user.diaChi
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -156,9 +156,22 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
             url: '/api/items',
             data: {
                 'token': Data.token,
-    			'moTa' : $scope.item_content,
-    			'ID' : id,
-    			'ten' : 'test'
+    			'ID': id,
+                'moTa': $scope.item.item_content,
+                'ten': $scope.item.item_name,
+                'hinhAnh': $scope.item.item_image,
+                'chuyenMuc': $scope.item.item_type,
+                'giaHienTai': $scope.item.item_price,
+                'giaKhoiDiem': $scope.item.item_price,
+                //
+                'ngayHetHan': $scope.item.item_date + $scope.item.item_time,
+                //
+                'tinhTrang': $scope.item.item_situation,
+                'trangThai': 1,
+                'noiBan': $scope.item.item_location,
+                'vanChuyen': $scope.item.item_trans,
+                'nguoiBan': Data.userID
+
             }
         }).then(function successCallback(response) {
             if (response.status === 201) {
