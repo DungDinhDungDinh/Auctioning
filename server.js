@@ -480,19 +480,84 @@ apiRoutes.post('/userauctions', function(req, res) {
         giaDaTra: req.body.giaDaTra
     });
 
+    Userauction.findOne({
+        userID: userauction.userID,
+        itemID: userauction.itemID
+    }, function(err, user) {
 
-    // save the userauction
-    userauction.save(function(err) {
-        if (err) {
-            res.status(400).json({
-                'error': 'bad request'
+        if (err) throw err;
+
+        if (user) {
+            user.giaDaTra = userauction.giaDaTra;
+
+            user.save(function(err, user1) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+//--
+                    Item.findOne({ID: user.itemID}).select('-_id').exec(function(err, items) {
+                        if (err){
+                            return res.status(404).send('Not found');
+                            console.log('Failed!!');
+                        }
+                        else {
+                            items.nguoiTra = user.userID;
+                            items.giaHienTai = user.giaDaTra;
+
+                            items.save(function(err, user1) {
+                            if (err) {
+                                res.status(400).send({
+                                    'error': 'Bad request (The data is invalid)'
+                                });
+                                return console.error(err);
+                            } else {
+                                 res.status(400).send({
+                                    'error': 'Bad request (The data is invalid)'
+                                    });
+                            }
+                        }
+                    }); 
+                }
+            });
+        } else {
+            user.userID = userauction.userID;
+            user.itemID = userauction.itemID;
+            user.giaDaTra = userauction.giaDaTra;
+            user.save(function(err, user1) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+//--
+                    Item.findOne({ID: user.itemID}).select('-_id').exec(function(err, items) {
+                        if (err){
+                            return res.status(404).send('Not found');
+                            console.log('Failed!!');
+                        }
+                        else {
+                            items.nguoiTra = user.userID;
+                            items.giaHienTai = user.giaDaTra;
+
+                            items.save(function(err, user1) {
+                            if (err) {
+                                res.status(400).send({
+                                    'error': 'Bad request (The data is invalid)'
+                                });
+                                return console.error(err);
+                            } else {
+                                 res.status(400).send({
+                                    'error': 'Bad request (The data is invalid)'
+                                    });
+                            }
+                        }
+                }
             });
         }
-
-        console.log('Userauction saved successfully');
-        res.status(201).send({
-            'message': 'userauction created'
-        });
     });
 });
 
