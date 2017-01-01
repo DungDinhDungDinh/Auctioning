@@ -686,29 +686,15 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            //res.status(200).send(items);
-
-            //Tìm items của userauctions
-            for(var i=0; i< userauctions.length; i++){
-                Item.find({
-                    ID: userauctions[i].itemID
-                }).select().exec(function(err, items) {
-                    if (err) {
-                        // return res.status(404).send('Not found');
-                        console.log('Failed!!');
-                    } else {
-                        //res.status(200).send(items);
-                        console.log(items);
-                        tmp_array.push(items);
-                    }
-                });
-            };  
-            res.status(200).send(tmp_array);  
+            for(var i=0; i<userauctions.length; i++){
+                tmp_array.push(userauctions[i].itemID);
+            }
+            res.status(200).send(tmp_array);
         }
     });
 });
 
-apiRoutes.get('/item_follow', function(req, res) {
+apiRoutes.get('/item_following', function(req, res) {
     var _userID = req.query.userID;
     Userfollow.find({
         userID: _userID
@@ -717,22 +703,10 @@ apiRoutes.get('/item_follow', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            //res.status(200).send(items);
-
-            //Tìm items của userfollows
-            for(var i=0; i< userfollows.length; i++){
-                Item.find({
-                    ID: userfollows[i].itemID
-                }).select().exec(function(err, items) {
-                    if (err) {
-                        return res.status(404).send('Not found');
-                        console.log('Failed!!');
-                    } else {
-                        res.status(200).send(items);
-                        console.log(items);
-                    }
-                });
-            }; 
+            for(var i=0; i<userfollows.length; i++){
+                tmp_array.push(userfollows[i].itemID);
+            }
+            res.status(200).send(tmp_array);
         }
     });
 });
