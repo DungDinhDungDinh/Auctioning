@@ -56,6 +56,12 @@ var itemSchema = mongoose.Schema({
 	nguoiTra: {
 		//ID nguoi tra gia cao nhat - Co the rong
 		type: String
+	},
+	tenNguoiBan: {
+		type: String
+	},
+	tenNguoiTra: {
+		type: String
 	}
 });
 
