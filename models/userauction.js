@@ -9,10 +9,6 @@ var userAuctionSchema = mongoose.Schema({
 	itemID: {
 		type: String
 	},
-	giaHienTai: {
-		//gia cao nhat hien tai cua item
-		type: Number
-	},
 	giaDaTra: {
 		//gia nguoi dung da dua ra
 		type: Number
