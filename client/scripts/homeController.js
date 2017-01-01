@@ -58,7 +58,7 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
 
 	$scope.goTo_Item_Info = function (item_ID) {
 		Data.item_ID = item_ID;
-        $location.path('/san-pham-dau-gia');
+        $location.path('/san-pham-dau-gia/' + item_ID);
     };
 
 	$scope.goTo_User_Info = function () {

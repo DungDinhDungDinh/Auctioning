@@ -117,7 +117,7 @@
         <div class="banner-div3">
             <span style="font-size: 17px; margin: 10px; margin-bottom: 0px; line-height: 22px; display:inline-block;"> Đấu giá mới nhất </span>
 			<div ng-repeat="item in new_items">
-				<div class="new-post">
+				<div class="new-post" ng-click="goTo_Item_Info(item.ID)">
 					<div class="new-post-img">
 						<img class="new-post-img-2" ng-src="{{item.hinhAnh}}">
 						<img class="new-post-img-3" src="image/new-vector.png">
@@ -151,7 +151,7 @@
         <div class="container">
             <div class="title"><a> ĐỒ ĐIỆN TỬ </a></div>       
 			<div class="item-list"ng-repeat="item in new_electronic_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -165,7 +165,7 @@
         <div class="container">
             <div class="title"><a> GIẢI TRÍ, THỂ THAO, SỞ THÍCH </a></div>       
 			<div class="item-list"ng-repeat="item in new_entertainment_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -179,7 +179,7 @@
 		<div class="container">
             <div class="title"><a> XE CỘ, MÁY MÓC </a></div>       
 			<div class="item-list"ng-repeat="item in new_vehicle_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -193,7 +193,7 @@
 		<div class="container">
             <div class="title"><a> MẸ VÀ BÉ </a></div>       
 			<div class="item-list"ng-repeat="item in new_momandbaby_titems">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -207,7 +207,7 @@
 		<div class="container">
             <div class="title"><a> THỜI TRANG & PHỤ KIỆN </a></div>       
 			<div class="item-list"ng-repeat="item in new_fashion_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -221,7 +221,7 @@
 		<div class="container">
             <div class="title"><a> ĐỒ ĂN, THÚC UỐNG </a></div>       
 			<div class="item-list"ng-repeat="item in new_food_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -235,7 +235,7 @@
 		<div class="container">
             <div class="title"><a> ĐỒ GIA DỤNG </a></div>       
 			<div class="item-list"ng-repeat="item in new_home_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -249,7 +249,7 @@
 		<div class="container">
             <div class="title"><a> SỨC KHỎE & SẮC ĐẸP </a></div>       
 			<div class="item-list"ng-repeat="item in new_healthy_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -263,7 +263,7 @@
 		<div class="container">
             <div class="title"><a> BẤT ĐỘNG SẢN </a></div>       
 			<div class="item-list"ng-repeat="item in new_realty_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
@@ -277,7 +277,7 @@
 		<div class="container">
             <div class="title"><a> CÁC LOẠI KHÁC </a></div>       
 			<div class="item-list"ng-repeat="item in new_other_items">
-				<div class="item-list-inner">
+				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
 					</div>
