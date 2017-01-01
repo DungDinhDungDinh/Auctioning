@@ -101,6 +101,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
                 console.log(response.data);
                 var info = response.data[0];
                 $scope.user = info;
+                console.log(info);
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -109,7 +110,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
         });
     };
 
-    //getUserInformation();
+    getUserInformation();
 
     $scope.updateUserAndCreateNewItem = function() {
     	$http({
@@ -123,7 +124,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
                 'soDienThoai': $scope.user.soDienThoai,
                 'ngaySinh': $scope.user.ngaySinh,
                 'gioiTinh': $scope.user.gioiTinh,
-                'diaChi': $scoper.user.diaChi
+                'diaChi': $scope.user.diaChi
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -150,7 +151,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
     var createNewItem  = function()
     {
     	var id = generateId();
-
+        console.log($scope.item.item_date + ' ' + $scope.item.item_time);
     	$http({
             method: 'POST',
             url: '/api/items',
@@ -161,10 +162,10 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
                 'ten': $scope.item.item_name,
                 'hinhAnh': $scope.item.item_image,
                 'chuyenMuc': $scope.item.item_type,
-                'giaHienTai': $scope.item.item_price,
-                'giaKhoiDiem': $scope.item.item_price,
+                'giaHienTai': $scope.item.item_price.replace(' ', ''),
+                'giaKhoiDiem': $scope.item.item_price.replace(' ', ''),
                 //
-                'ngayHetHan': $scope.item.item_date + $scope.item.item_time,
+                'ngayHetHan': $scope.item.item_date + ' ' + $scope.item.item_time,
                 //
                 'tinhTrang': $scope.item.item_situation,
                 'trangThai': 1,
