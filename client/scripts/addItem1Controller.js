@@ -153,6 +153,17 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	{
 		$scope.tipType = false;
 	}
+	
+	//Tip price
+	$scope.showTipPrice = function()
+	{
+		$scope.tipPrice = true;
+	}
+
+	$scope.hideTipPrice = function()
+	{
+		$scope.tipPrice = false;
+	}
 
 	//Tip location
 	$scope.showTipLocation = function()
@@ -194,6 +205,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	}
 
 	$scope.selectImg = function () {
+		console.log('ooo');
 		filepicker.pick({
                 mimetype: 'image/*',
                 container: 'modal',
@@ -301,7 +313,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 		{			
 			$scope.error_time = 'Không được để trống';
 			$scope.error_show_time = true;
-			$scope.class_time = "add-info-input-error";
+			$scope.class_time = "add-info-input-error";	
 			angular.element('#timepicker').focus();
 			return;
 		}
