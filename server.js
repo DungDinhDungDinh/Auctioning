@@ -190,7 +190,6 @@ apiRoutes.post('/items', function(req, res) {
 //GET
 //Lay 1 item theo ID
 apiRoutes.get('/items/:ID', function(req, res) {
-    console.log('laksd');
     var id = req.params.ID;
     Item.find({
         ID: id
@@ -199,7 +198,6 @@ apiRoutes.get('/items/:ID', function(req, res) {
             return console.log(items);
         else {
             res.status(200).send(items);
-            console.log(items);
         }
     });
 });

@@ -309,7 +309,15 @@
 </div>
 
 <script>
-	$('#timepicker').timepicker();
+	// $('#timepicker').timepicker({
+	// 	 minTime: new Date().toString()
+	// });
+
+	    $(function() {
+	        $("#timepicker").timepicker({
+
+	        });
+	    });
     $( function() {
 		$( "#datepicker" ).datepicker({
 		changeMonth: true,

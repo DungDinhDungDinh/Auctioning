@@ -202,8 +202,9 @@
 					<span> THÔNG TIN NGƯỜI BÁN</span>			
 				</div>
 				
-				<img class="avatar-small" src="image/user-avatar.ico">
-				<span class="salesman-email"> noctislucispro@gmail.com</span>
+				<img class="avatar-small" ng-src="{{owner.avatar}}">
+				<span class="salesman-email"> {{owner.ten}} </span>
+                <span class="salesman-email"> {{owner.email}} </span>
 			</div>
 			
 			<div class="info-salesman">
@@ -211,9 +212,9 @@
 					<span> NGƯỜI THẮNG CUỘC</span>			
 				</div>
 				
-				<img class="avatar-small" src="image/user-avatar.ico">
-				<span class="salesman-email"> noctislucispro@gmail.com</span>
-			</div>
+				<img class="avatar-small" ng-src="{{buyer.avatar}}">
+				<span class="salesman-email"> {{buyer.ten}} </span>
+                <span class="salesman-email"> {{buyer.email}} </span>
 					
 		</div>
         

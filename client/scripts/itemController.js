@@ -156,6 +156,9 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 
 
 				$scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year  + ' ' + $scope.time_hour + ':' + $scope.time_minute;
+
+				getUserInformation(item.nguoiBan, 1);
+				getUserInformation(item.nguoiMua, 0);
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -165,4 +168,26 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 	};
 
 	getItemInformation();
+
+
+		var getUserInformation = function(id, isOwner) {
+		$http({
+            method: 'GET',
+            url: '/api/users/' + id
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+				var info = response.data[0];
+				if (isOwner) {
+					$scope.owner = info;
+				} else {
+					$scope.buyer = info;
+				}
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+	};
 }]);
