@@ -125,10 +125,8 @@
 			
 			<div class="tooltip">
 				<span class="add-img-label"> Chọn hình ảnh <span class="color-red">*</span> </span>
-				<div ng-class="class_image" ng-init="class_image = 'chose-img-div'">
-					<a class="imageAnchor" href="#" id="item_image">
-						<img tabindex="0" class="chosen-img" ng-click="selectImg()" ng-src="{{item_image}}"/>
-					<a>
+				<div ng-class="class_image" ng-init="class_image = 'chose-img-div'" ng-click="selectImg()">
+					<img class="chosen-img" ng-src="{{item_image}}"/>
 					<span class="error" ng-show="error_show_image"> {{error_image}}</span>
 				</div>
 
@@ -136,12 +134,12 @@
 
 			<span class="add-item-title"> PHƯƠNG THỨC BÁN HÀNG </span>
 			
-			<div class="tooltip">
+			<div class="tooltip"> 
 				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>				
-				<input id="item_price" ng-class="class_price" ng-init="class_price = 'add-info-input'" ng-model="item_price" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+				<input id="item_price" ng-class="class_price" ng-init="class_price = 'add-info-input'" ng-model="item_price" ng-focus="showTipPrice()" ng-blur="hideTipPrice()" placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
 				
 				<span class="error" ng-show="error_show_price"> {{error_price}}</span>
-				<span class="tooltiptext" ng-show="tipName">
+				<span class="tooltiptext" ng-show="tipPrice">
 					<p>- Giá khởi điểm hay còn gọi là giá sàn (Là giá khởi điểm chấp nhận được của mặt hàng)</p>
 				</span>
 			</div>
@@ -168,7 +166,7 @@
 				</select>
 				
 				<span class="error" ng-show="error_show_location"> {{error_location}}</span>
-				<span class="tooltiptext" ng-show="tipType">
+				<span class="tooltiptext" ng-show="tipLocation">
 					<p>- Chọn địa phận bán hàng</p>
 				</span>	
 			</div>
@@ -179,7 +177,7 @@
 				</select>
 				
 				<span class="error" ng-show="error_show_trans"> {{error_trans}}</span>
-				<span class="tooltiptext" ng-show="tipType">
+				<span class="tooltiptext" ng-show="tipTrans">
 					<p>- Chọn cách chi trả phí vận chuyển.</p>
 				</span>	
 			</div>
