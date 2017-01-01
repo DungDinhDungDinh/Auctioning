@@ -335,12 +335,14 @@
 </div>
 
 <script>
-	$(function () {
-		var austDay = new Date();
-		austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 8, 22, 0);
-		$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
-		$('#year').text(austDay.getFullYear());
-	});
+
+	//$(function () {
+	//	changeText();
+	//	var austDay = new Date();
+	//	austDay = new Date(austDay.getFullYear(), 1 - 1, 8, 8, 0);
+	//	$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+	//	$('#year').text(austDay.getFullYear());
+	//});
 	
 	window.onscroll = function() {myFunction()};
 	function myFunction() {
