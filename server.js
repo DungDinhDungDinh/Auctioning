@@ -319,6 +319,23 @@ apiRoutes.get('/new_electronic_items', function(req, res) {
     });
 });
 
+//--API lấy tất cả Đồ điện tử
+apiRoutes.get('/all_electronic_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Đồ điện tử'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 //--Giai trí, thể thao, sở thích
 apiRoutes.get('/new_entertainment_items', function(req, res) {
     Item.find({
@@ -326,6 +343,23 @@ apiRoutes.get('/new_entertainment_items', function(req, res) {
     }).sort({
         ngayTao: -1
     }).limit(5).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//--Lấy tất cả items Giai trí, thể thao, sở thích
+apiRoutes.get('/all_entertainment_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Giải trí, thể thao, sở thích'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -353,6 +387,23 @@ apiRoutes.get('/new_vehicle_items', function(req, res) {
     });
 });
 
+//-- Lấy tất cả items Xe cộ, máy móc
+apiRoutes.get('/all_vehicle_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Xe cộ, máy móc'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 //-- Mẹ và bé
 apiRoutes.get('/new_momandbaby_titems', function(req, res) {
     Item.find({
@@ -360,6 +411,23 @@ apiRoutes.get('/new_momandbaby_titems', function(req, res) {
     }).sort({
         ngayTao: -1
     }).limit(5).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//-- Lấy tất cả items Mẹ và bé
+apiRoutes.get('/all_momandbaby_titems', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Mẹ và bé'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -387,6 +455,23 @@ apiRoutes.get('/new_fashion_items', function(req, res) {
     });
 });
 
+//-- Lấy tất cả items Thời trang & phụ kiện
+apiRoutes.get('/all_fashion_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Thời trang & phụ kiện'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 //-- Đồ ăn, thức uống
 apiRoutes.get('/new_food_items', function(req, res) {
     Item.find({
@@ -394,6 +479,23 @@ apiRoutes.get('/new_food_items', function(req, res) {
     }).sort({
         ngayTao: -1
     }).limit(5).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//-- Lấy tất cả items Đồ ăn, thức uống
+apiRoutes.get('/all_food_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Đồ ăn, thức uống'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -421,6 +523,23 @@ apiRoutes.get('/new_home_items', function(req, res) {
     });
 });
 
+//-- Lấy tất cả items Đồ gia dụng
+apiRoutes.get('/all_home_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Đồ gia dụng'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 //-- Sức khỏe & sắc đẹp
 apiRoutes.get('/new_healthy_items', function(req, res) {
     Item.find({
@@ -428,6 +547,23 @@ apiRoutes.get('/new_healthy_items', function(req, res) {
     }).sort({
         ngayTao: -1
     }).limit(5).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
+//-- Lấy tất cả items Sức khỏe & sắc đẹp
+apiRoutes.get('/all_healthy_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Sức khỏe & sắc đẹp'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
@@ -455,6 +591,23 @@ apiRoutes.get('/new_realty_items', function(req, res) {
     });
 });
 
+//-- Lấy tất cả items Bất động sản
+apiRoutes.get('/new_realty_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Bất động sản'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 //-- Các loại khác
 apiRoutes.get('/new_other_items', function(req, res) {
     Item.find({
@@ -471,6 +624,24 @@ apiRoutes.get('/new_other_items', function(req, res) {
         }
     });
 });
+
+//-- Lấy tất cả items Các loại khác
+apiRoutes.get('/new_other_items', function(req, res) {
+    Item.find({
+        chuyenMuc: 'Các loại khác'
+    }).sort({
+        ngayTao: -1
+    }).exec(function(err, items) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            res.status(200).send(items);
+            console.log(items);
+        }
+    });
+});
+
 
 //-- Lấy các items của 1 user
 apiRoutes.get('/getitems/:ID', function(req, res) {
