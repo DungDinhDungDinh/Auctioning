@@ -473,17 +473,16 @@ apiRoutes.get('/new_other_items', function(req, res) {
 });
 
 //-- Lấy các items của 1 user
-apiRoutes.get('/get_items', function(req, res) {
-    var userID = req.query.userID;
+apiRoutes.get('/getitems/:ID', function(req, res) {
     Item.find({
-        nguoiBan: userID
+        nguoiBan: req.params.ID
     }).select().exec(function(err, items) {
         if (err) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            //console.log(items);
+            console.log(items);
         }
     });
 });
@@ -508,11 +507,36 @@ apiRoutes.get('/search', function(req, res) {
 
 apiRoutes.get('/item_auctioning', function(req, res) {
     var _userID = req.query.userID;
-   
+    Userauction.find({
+        userID: _userID
+    }).select().exec(function(err, userauctions) {
+        if (err) {
+            return res.status(404).send('Not found');
+            console.log('Failed!!');
+        } else {
+            //res.status(200).send(items);
+
+            //Tìm items của userauctions
+            userauctions.each(function(err, doc) {
+                Item.find({
+                    ID: userauction.itemID
+                }).select().exec(function(err, items) {
+                    if (err) {
+                        return res.status(404).send('Not found');
+                        console.log('Failed!!');
+                    } else {
+                        res.status(200).send(items);
+                        console.log(items);
+                    }
+                });
+            });     
+        }
+    });
 });
 
 apiRoutes.get('/item_follow', function(req, res) {
     var _userID = req.query.userID;
+    var _itemID = req.query.itemID;
      
 });
 
