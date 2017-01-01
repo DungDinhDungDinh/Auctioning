@@ -91,6 +91,15 @@ myapp.controller('userFollowController',  ['$scope', '$http', 'Data', '$location
 
 	// -------------- Kết thúc link --------------
 	
+	//Chuyển giá tiền thành có '.'
+	changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
+	
 	//Lấy danh sách sản phẩm đang theo dõi
 	var getUserFollowItems = function (){
 		//Lấy thông tin user
@@ -123,17 +132,34 @@ myapp.controller('userFollowController',  ['$scope', '$http', 'Data', '$location
 		//Lấy danh sách followed item
     	$http({
             method: 'GET',
-            url: '/api/userfollows/' + $scope.viewID
+            url: '/api/item_following/' +  $scope.viewID,
         }).then(function successCallback(response) {
             if (response.status === 200) {
-				console.log('helo');
                 console.log(response.data);
-                $scope.followed_items = response.data;
+                $scope.item_list_ID = response.data;
+				$scope.followed_items = [];
+				for (var i = 0; i < $scope.item_list_ID.length; i ++){
+					$http({
+						method: 'GET',
+						url: '/api/items/' +  $scope.item_list_ID[i].itemID,
+					}).then(function successCallback(response) {
+						$scope.followed_items.push(response.data[0]);
+						console.log($scope.followed_items);
+					});
+				};
+				
+				for (var i = 0; i < $scope.followed_items.length; i ++){
+					$scope.followed_items[i].giaHienTai = changeNumber($scope.followed_items[i].giaHienTai);
+					if($scope.followed_items[i].trangThai === true){
+						$scope.followed_items[i].status = 'Đang đấu giá';
+					} else {
+						$scope.followed_items[i].status = 'Đã kết thúc';
+					}
+				};
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
             console.log(response);
-
         });
     };
 	

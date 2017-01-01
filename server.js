@@ -695,8 +695,9 @@ apiRoutes.get('/item_auctioning', function(req, res) {
     });
 });
 
-apiRoutes.get('/item_following', function(req, res) {
-    var _userID = req.query.userID;
+//Lấy toàn bộ item đang theo dõi của 1 user
+apiRoutes.get('/item_following/:ID', function(req, res) {
+    var _userID = req.params.ID;
     Userfollow.find({
         userID: _userID
     }).select().exec(function(err, userfollows) {
@@ -704,16 +705,11 @@ apiRoutes.get('/item_following', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for(var i=0; i<userfollows.length; i++){
-                tmp_array.push(userfollows[i].itemID);
-            }
-            res.status(200).send(tmp_array);
+            res.status(200).send(userfollows);
+			console.log('Get followed items successed!!');
         }
     });
 });
-
-
-
 
 //##############################################-Userauction API-######################################
 //ADD
@@ -937,39 +933,36 @@ apiRoutes.get('/userXXXXXfollows/:ID', function(req, res) {
 });
 
 // Lấy toàn bộ item mà user đang theo dõi
-// apiRoutes.get('/userfollows/:ID', function(req, res)  {
-	// var userID = req.body.userID;
-	// console.log(req.params.ID);
-	// Userfollow.find({
-        // userID: req.params.ID
-    // }).select().exec(function(err, followed_items) {
-        // if (err)
-             // return console.log(followed_items);
-        // else {
-            // if (followed_items) {
-				// var items = [];
-				// console.log(followed_items);
-				
-				// for(var i=0; i< followed_items.length; i++){
-					// //Lấy từng item
-					// Item.find({
-						// ID: followed_items[i].itemID
-					// }).select().exec(function(err, item) {
-						// if (item){
-							// items.push(item);
-						// }
-					// });
-					// followed_items.push(items);
-					// console.log('hehe');
-					// console.log(followed_items);
-				// }
-                // res.status(200).send(items);
-            // } else {
-                // res.status(200).json({'follow' : false});
-            // }
-        // }
-    // });
-// });
+apiRoutes.get('/userfollows/:ID', function(req, res)  {
+	var userID = req.params.ID;
+	var items = [];
+	Userfollow.find({
+        userID: req.params.ID
+    }).select().exec(function(err, followed_items) {
+        if (err)
+             return console.log(followed_items);
+        else {
+            if (followed_items) {						
+				for(var i=0; i< followed_items.length; i++){
+					//Lấy từng item
+					Item.find({
+						ID: followed_items[i].itemID
+						}).select().exec(function(err, item) {
+						if (item){
+							items.push(item[0]);
+							if (items.length === followed_items.length){
+								console.log('Lay danh sach followed items thanh cong!');
+								res.status(200).send(items);			
+							}
+						}
+					});
+				}        
+            } else {
+                res.status(200).json({'follow' : false});
+            }
+        }
+    });
+});
 
 //Lay tat ca userfollow
 apiRoutes.get('/userfollows', function(req, res) {

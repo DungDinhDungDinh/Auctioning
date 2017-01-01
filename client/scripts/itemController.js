@@ -164,7 +164,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 var item = response.data[0];
                 $scope.item_name = item.ten;
                 $scope.item_picture = item.hinhAnh;
-                $scope.item_type = item.chuyeMuc;
+                $scope.item_type = item.chuyenMuc;
                 $scope.item_content = item.moTa;
                 $scope.item_price = item.giaHienTai;
                 $scope.item_status = item.trangThai
