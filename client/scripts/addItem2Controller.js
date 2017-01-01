@@ -152,6 +152,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
     {
     	var id = generateId();
         console.log($scope.item.item_date + ' ' + $scope.item.item_time);
+        console.log( $scope.item.item_price.replace(/ /g, ''));
     	$http({
             method: 'POST',
             url: '/api/items',
@@ -162,8 +163,8 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
                 'ten': $scope.item.item_name,
                 'hinhAnh': $scope.item.item_image,
                 'chuyenMuc': $scope.item.item_type,
-                'giaHienTai': $scope.item.item_price.replace(' ', ''),
-                'giaKhoiDiem': $scope.item.item_price.replace(' ', ''),
+                'giaHienTai': $scope.item.item_price.replace(/ /g, ''),
+                'giaKhoiDiem': $scope.item.item_price.replace(/ /g, ''),
                 //
                 'ngayHetHan': $scope.item.item_date + ' ' + $scope.item.item_time,
                 //
