@@ -140,12 +140,22 @@ myapp.controller('itemController',  ['$scope', '$http', 'Data', '$location', '$r
 				$scope.item_type = item.chuyeMuc;
 				$scope.item_content = item.moTa;
 				$scope.item_price = item.giaHienTai;
-				$scope.item_dateExpire = item.ngayHetHan;
 				$scope.item_status = item.trangThai
 				$scope.item_situation = item.tinhTrang;
 				$scope.item_location = item.noiBan;
 				$scope.item_trans= item.vanChuyen;
 				$scope.item_price = changeNumber($scope.item_price);
+
+
+				var date = new Date(item.ngayHetHan);
+				$scope.time_day = date.getDate();
+				$scope.time_month = date.getMonth() + 1;
+				$scope.time_year = date.getFullYear();
+				$scope.time_hour = date.getHours();
+				$scope.time_minute = date.getMinutes();
+
+
+				$scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year  + ' ' + $scope.time_hour + ':' + $scope.time_minute;
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
