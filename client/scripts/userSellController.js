@@ -67,29 +67,57 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 		Data.item_ID = item_ID;
         $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
-
+	
 	$scope.goTo_User_Info = function () {
 		Data.ViewUserID = Data.userID;
         $location.path('/user-thong-tin-chung/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Sell = function () {
-        $location.path('/user-dang-ban');
+        $location.path('/user-dang-ban/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Buy = function () {
-        $location.path('/user-dang-dau');
+        $location.path('/user-dang-dau/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Follow = function () {
-        $location.path('/user-theo-doi');
+        $location.path('/user-theo-doi/' + $scope.viewID);
     };
 
 	$scope.goTo_Add_Item = function () {
         $location.path('/them-san-pham-step-1');
     };
 
-     var getUserSellingItems = function (){
+	
+    var getUserSellingItems = function (){
+		$http({
+            method: 'GET',
+            url: '/api/users/' + $scope.viewID,
+            data: {
+                'token': Data.token
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                var info = response.data[0];
+                $scope.picture = info.avatar;
+				
+                $scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}
+				
+            }
+        }, function errorCallback(response) {
+            console.log('failed to get user info');
+            console.log(response);
+
+        });
+		
     	$http({
             method: 'GET',
             url: '/api/getItems/' + $scope.viewID
@@ -97,8 +125,7 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
             if (response.status === 200) {
                 console.log(response.data);
                 $scope.user_items = response.data;
-
-
+			
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');

@@ -1,10 +1,11 @@
 
 
-myapp.controller('userAuctionController',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location, $rootScope) {
+myapp.controller('userAuctionController',  ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function ($scope, $http, Data, $location, $rootScope, $routeParams) {
 	
 	$scope.number = [1,2,4,6];
 	$scope.price =  "1000000";
 	$scope.highest_price =  "100000000";
+	$scope.viewID = $routeParams.viewID;
 	
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
@@ -69,19 +70,19 @@ myapp.controller('userAuctionController',  ['$scope', '$http', 'Data', '$locatio
 
 	$scope.goTo_User_Info = function () {
 		Data.ViewUserID = Data.userID;
-        $location.path('/user-thong-tin-chung/' + Data.userID);
+        $location.path('/user-thong-tin-chung/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Sell = function () {
-        $location.path('/user-dang-ban/' + Data.userID);
+        $location.path('/user-dang-ban/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Buy = function () {
-        $location.path('/user-dang-dau');
+        $location.path('/user-dang-dau/' + $scope.viewID);
     };
 
 	$scope.goTo_User_Follow = function () {
-        $location.path('/user-theo-doi');
+        $location.path('/user-theo-doi/' + $scope.viewID);
     };
 
 	$scope.goTo_Add_Item = function () {
@@ -89,4 +90,50 @@ myapp.controller('userAuctionController',  ['$scope', '$http', 'Data', '$locatio
     };
 
 	// -------------- Kết thúc link --------------
+	
+	var getUserAuctionItems = function (){
+		$http({
+            method: 'GET',
+            url: '/api/users/' + $scope.viewID,
+            data: {
+                'token': Data.token
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                var info = response.data[0];
+                $scope.picture = info.avatar;
+				
+                $scope.staticName = info.ten;
+                $scope.staticEmail = info.email;
+                $scope.staticBirthday = info.ngaySinh;
+                $scope.staticGender = info.gioiTinh;
+				if($scope.staticEmail){ $scope.showEmail = true;}
+				if($scope.staticBirthday){ $scope.showBirthday= true;}
+				if($scope.staticGender){ $scope.showGender = true;}
+				
+            }
+        }, function errorCallback(response) {
+            console.log('failed to get user info');
+            console.log(response);
+
+        });
+		
+    	$http({
+            method: 'GET',
+            url: '/api/getItems/' + $scope.viewID
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                $scope.user_items = response.data;
+			
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+
+        });
+    };
+	
+    getUserAuctionItems();
 }]);

@@ -68,16 +68,16 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/user-thong-tin-chung/' + $scope.viewID);
     };
 
-    $scope.goTo_User_Sell = function() {
+	$scope.goTo_User_Sell = function () {
         $location.path('/user-dang-ban/' + $scope.viewID);
     };
 
-    $scope.goTo_User_Buy = function() {
-        $location.path('/user-dang-dau');
+	$scope.goTo_User_Buy = function () {
+        $location.path('/user-dang-dau/' + $scope.viewID);
     };
 
-    $scope.goTo_User_Follow = function() {
-        $location.path('/user-theo-doi');
+	$scope.goTo_User_Follow = function () {
+        $location.path('/user-theo-doi/' + $scope.viewID);
     };
 
     $scope.goTo_Add_Item = function() {

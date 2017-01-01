@@ -22,11 +22,11 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/user-dang-ban.html',
         controller: 'userSellController'
     }).
-	when('/user-dang-dau', {
+	when('/user-dang-dau/:viewID', {
         templateUrl: './view/user-dang-dau.html',
         controller: 'userAuctionController'
     }).
-	when('/user-theo-doi', {
+	when('/user-theo-doi/:viewID', {
         templateUrl: './view/user-theo-doi.html',
         controller: 'userFollowController'
     }).

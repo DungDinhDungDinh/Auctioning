@@ -153,6 +153,17 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	{
 		$scope.tipType = false;
 	}
+	
+	//Tip price
+	$scope.showTipPrice = function()
+	{
+		$scope.tipPrice = true;
+	}
+
+	$scope.hideTipPrice = function()
+	{
+		$scope.tipPrice = false;
+	}
 
 	//Tip location
 	$scope.showTipLocation = function()
@@ -194,6 +205,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	}
 
 	$scope.selectImg = function () {
+		console.log('ooo');
 		filepicker.pick({
                 mimetype: 'image/*',
                 container: 'modal',
@@ -301,7 +313,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 		{			
 			$scope.error_time = 'Không được để trống';
 			$scope.error_show_time = true;
-			$scope.class_time = "add-info-input-error";
+			$scope.class_time = "add-info-input-error";	
 			angular.element('#timepicker').focus();
 			return;
 		}
@@ -323,21 +335,24 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 			angular.element('#item_trans').focus();
 			return;
 		}
+
+		var item = {};
 		
-		Data.item_name = $scope.item_name;
-		Data.item_content = $scope.item_content;
-		Data.item_type = $scope.item_type;
-		Data.item_status = $scope.item_status;
-		Data.item_image = $scope.item_image;
-		Data.item_price = $scope.item_price;
-		Data.item_date = $('#datepicker').val();
-		console.log(Data.item_date);
-		Data.item_time = $('#timepicker').val();
-		Data.item_date = $scope.item_date;
-		Data.item_time = $scope.item_time;
-		Data.item_location = $scope.item_location;
-		Data.item_trans = $scope.item_trans;
-		//$location.path('/them-san-pham-step-2');
+		item.item_name = $scope.item_name;
+		item.item_content = $scope.item_content;
+		item.item_type = $scope.item_type;
+		item.item_situation = $scope.item_situation;
+		item.item_image = $scope.item_image;
+		item.item_price = $scope.item_price;
+		item.item_date = $('#datepicker').val();
+		console.log(item.item_date);
+		item.item_time = $('#timepicker').val();
+		item.item_date = $scope.item_date;
+		item.item_time = $scope.item_time;
+		item.item_location = $scope.item_location;
+		item.item_trans = $scope.item_trans;
+		Data.item = item;
+		$location.path('/them-san-pham-step-2');
 
 	};
 

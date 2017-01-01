@@ -79,49 +79,46 @@
 		<div class="add-item-info">
 		
 			<div style="border-bottom: 1px solid #ddd;">
-				<span class="add-item-title"> (Tên sản phẩm) </span>
+				<span class="add-item-title"> {{item.item_name}} </span>
 				
 				<div class="check-item-div1">
-					<img class="body-item-img" src="image/new-item-1.jpg">
+					<img class="body-item-img" ng-src="{{item.item_image}}">
 				</div>
 				
 				<div class="check-item-div2">
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-tag" style=" width:18px;"> </i>Giá khởi điểm</span>
-						<span style="display:block;">1000000 đ</span>
+						<span style="display:block;">{{item.item_price}}</span>
 					</div>
 					
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-clock-o" style=" width:18px;"> </i>Thời gian kết thúc</span>
-						<span style="display:block;"> 08/01/2017 22:00 </span>
+						<span style="display:block;"> {{item.item_date}} </span>
 					</div>
 					
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-qrcode" style=" width:18px;"> </i>Chuyên mục</span>
-						<span style="display:block;">Hàng điện tử</span>
+						<span style="display:block;">{{item.item_type}}</span>
 					</div>
 					
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-star" style=" width:18px;"> </i>Trạng thái sản phẩm</span>
-						<span style="display:block;">Hàng mới</span>
+						<span style="display:block;">{{item.item_situation}}</span>
 					</div>
 					
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-map-marker" style=" width:18px;"> </i>Khu vực bán hàng</span>
-						<span style="display:block;">Hải Phòng, Nam Định, Thái Bình</span>
+						<span style="display:block;">{{item.item_location}}</span>
 					</div>
 					
 					<div class="check-info">
 						<span class="check-info-title"> <i class="fa fa-truck" style=" width:18px;"> </i>Vận chuyển</span>
-						<span style="display:block;">Miễn phí toàn quốc</span>
+						<span style="display:block;">{{item.item_trans}}</span>
 					</div>
 					
 					<div class="check-info">
 						<span class="info-title-1" style="width: 100%; padding-bottom: 5px;"> <i class="fa fa-certificate" style=" width:16px;"> </i>Mô tả</span> <br/>
-						<pre style="display: block;">{{item_content}}</pre>
-						<span style="display: block;">Thông tin 2</span>
-						<span style="display: block;">Thông tin 3</span>
-						<span style="display: block;">...</span>
+						<pre style="display: block;">{{item.item_content}}</pre>
 					</div>
 					
 				</div>
@@ -132,17 +129,17 @@
 				
 				<div class="contact-info">
 					<span class="add-info-label"> Tên hiển thị <span class="color-red">*</span> </span>				
-					<input class="add-info-input" ng-model="user_name"/>
+					<input class="add-info-input" ng-model="user.ten"/>
 				</div>
 				
 				<div class="contact-info">
 					<span class="add-info-label" > Số điện thoại <span class="color-red">*</span>  </span>				
-					<input class="add-info-input" ng-model="user_phone"/>
+					<input class="add-info-input" ng-model="user.soDienThoai"/>
 				</div>
 				
 				<div class="contact-info">
 					<span class="add-info-label" > Địa chỉ <span class="color-red">*</span> </span>				
-					<input class="add-info-input" ng-model="user_address"/>
+					<input class="add-info-input" ng-model="user.diaChi"/>
 				</div>
 				
 				<span style="font-size: 14px;"><i> Lưu ý: Thay đổi thông tin tại đây sẽ cập nhật lại thông tin cá nhân của bạn </i> </span>

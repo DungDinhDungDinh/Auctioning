@@ -156,18 +156,17 @@ apiRoutes.post('/items', function(req, res) {
         ID: req.body.ID,
         moTa: req.body.moTa,
         ten: req.body.ten,
-        // hinhAnh: req.body.hinhAnh,
-        // chuyenMuc: req.body.chuyenMuc,
-        // giaHienTai: req.body.giaHienTai,
-        // ngayHetHan: req.body.ngayHetHan,
-        // trangThai: req.body.trangThai,
-		// tinhTrang: req.body.tinhTrang,
-        // noiBan: req.body.noiBan,
-        // vanChuyen: req.body.vanChuyen,
-        // moTa: req.body.moTa,
-        // nguoiBan: req.body.nguoiBan,
-        // nguoiTra: req.body.nguoiTra,
-        // giaKhoiDiem: req.body.giaKhoiDiem
+        hinhAnh: req.body.hinhAnh,
+        chuyenMuc: req.body.chuyenMuc,
+        giaHienTai: req.body.giaHienTai,
+        ngayHetHan: req.body.ngayHetHan,
+        trangThai: req.body.trangThai,
+		tinhTrang: req.body.tinhTrang,
+        noiBan: req.body.noiBan,
+        vanChuyen: req.body.vanChuyen,
+        nguoiBan: req.body.nguoiBan,
+        nguoiTra: req.body.nguoiTra,
+        giaKhoiDiem: req.body.giaKhoiDiem
     });
 
 
@@ -765,7 +764,6 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                 var email = obj.email;
                 var picture = 'https://graph.facebook.com/'+ fb_user_id + '/picture?width=300&height=300';
 
-                 console.log(body);
                 Account.findOne({
                     ID: fb_user_id
                 }, function(err, account) {
@@ -773,8 +771,6 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                     if (err) {
                         console.log(err);
                     }
-
-
 
                     if (!account) {
                         var account = new Account({
