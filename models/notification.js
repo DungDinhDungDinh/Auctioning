@@ -10,6 +10,11 @@ var notificationSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	//tên item, để không cần gọi api lấy tên item trên client
+	name: {
+		type: String,
+		required: true
+	},
 	thoiGian: {
 		type: String,
 		required: true
