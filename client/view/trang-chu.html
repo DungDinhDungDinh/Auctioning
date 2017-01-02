@@ -31,15 +31,98 @@
 					</div>
 				</div>
 				
-                <div class="icon-wrapper">
-                    <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+				<div class="box-noti" ng-click="showNotification()">
+					<i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
                     <span class="badge">{{follow_noti}}</span>
-                </div>
-                
-                <div class="icon-wrapper">
-                    <i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+					<div id="notifications" class="div-show-noti-container" ng-show="divNoti">
+						<div  class="div-show-noti"> <!-- onmouseover="disableBodyScroll();" onmouseout="enableBodyScroll();"> -->
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>				
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>	
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>	
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>	
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="box-noti">
+					<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
                     <span class="badge">{{auction_noti}}</span>
-                </div>
+				</div>
+
             </div>
         </div>
         
@@ -430,4 +513,24 @@
 			document.getElementById("fixedHeader").style.display = "none";
 		}
 	}
+
+	$.fn.disableScroll = function() {
+		window.oldScrollPos = $(window).scrollTop();
+		$(window).on('scroll.scrolldisabler',function ( event ) {
+			$(window).scrollTop( window.oldScrollPos );
+			event.preventDefault();
+		});
+	};
+	
+	$.fn.enableScroll = function() {
+		$(window).off('scroll.scrolldisabler');
+	};
+	
+	function disableBodyScroll() {
+		$("#selector").disableScroll();
+	}
+	function enableBodyScroll() {
+		$("#selector").enableScroll();
+	}
+	
 </script>
