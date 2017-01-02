@@ -2,8 +2,8 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
     $scope.highest_price = "100000000";
     $scope.itemID = $routeParams.itemID;
-
-    $(window).scrollTop(0, 0);
+	
+    $(window).scrollTop(0, 0);	
     if (Data.token !== '') {
         $scope.show1 = false;
         $scope.username = Data.username;
@@ -61,7 +61,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
     $scope.goTo_Item_Info = function(item_ID) {
         Data.item_ID = item_ID;
-        $location.path('/san-pham-dau-gia/' + Data.item_ID);
+        location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
     $scope.goTo_User_Info = function(viewID) {
@@ -69,7 +69,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 			$location.path('/user-thong-tin-chung/' + Data.userID);
 		}
 		else {
-			location.path('/user-thong-tin-chung/' + viewID);
+			$location.path('/user-thong-tin-chung/' + viewID);
 		}
     };
 
@@ -176,16 +176,44 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 $scope.item_price = changeNumber($scope.item_price);
 				
                 var date = new Date(item.ngayHetHan);
-                $scope.time_day = date.getDate();
+                $scope.time_day = date.getDate();			
                 $scope.time_month = date.getMonth() + 1;
                 $scope.time_year = date.getFullYear();
                 $scope.time_hour = date.getHours();
                 $scope.time_minute = date.getMinutes();
+				
+				if($scope.time_day < 10){
+					$scope.time_day = '0' + $scope.time_day;
+				}
+				
+				if($scope.time_month < 10){
+					$scope.time_month = '0' + $scope.time_month;
+				}
+				
+				if($scope.time_hour < 10){
+					$scope.time_hour = '0' + $scope.time_hour;
+				}
+				
+				if($scope.time_minute < 10){
+					$scope.time_minute = '0' + $scope.time_minute;
+				}
 
                 $scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year + ' ' + $scope.time_hour + ':' +$scope.time_minute;
 
                 getUserInformation(item.nguoiBan, 1);
                 getUserInformation(item.nguoiTra, 0);
+
+				if(Data.userID === item.nguoiBan) {
+					$scope.ownItem = true;
+				}
+				
+				if(item.trangThai === false) {
+					$scope.expiredShow = true;
+				}
+				
+				if(!item.tenNguoiTra) {		
+					$scope.noBuyer = true;
+				}
 
                 $(function() {
                     var austDay = new Date();
@@ -212,8 +240,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             url: '/api/users/' + id
         }).then(function successCallback(response) {
             if (response.status === 200) {
-				console.log('Thông tin');
-                console.log(response.data);
                 var info = response.data[0];				
                 if (isOwner) {
                     $scope.owner = info;
@@ -234,23 +260,25 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 		var newPrice = $scope.yourPrice.replace(/\./g, '');
 		newPrice = newPrice.replace(" đ", '');
 		var itemPrice = $scope.item_price.replace(/\./g, '');
-		if (Number(newPrice) > Number($scope.item_price)) {
+		if (Number(newPrice) > Number(itemPrice)) {
             $http({
                 method: 'POST',
                 url: '/api/userauctions',
                 data: {
                     'userID': Data.userID,
                     'itemID': $scope.itemID,
+					'buyerName': Data.username,
                     'giaDaTra': newPrice
                 }
             }).then(function successCallback(response) {
                 if (response.status === 200) {
-                    console.log(response.data);
+					console.log(response.data);
+					alert('Ra giá thành công!');
                     $route.reload();
                 }
             }, function errorCallback(response) {
                 console.log(response);
-
+				alert('Ra giá thất bại!');
             });
         } else {
             alert('Giá mới phải lớn hơn giá hiện tại!');
@@ -266,7 +294,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     'itemID': $scope.itemID
                 }
             }).then(function successCallback(response) {
-            	console.log(response.data);
                 if (response.status === 200) {
                  	$scope.show2 = response.data.follow;
                 }

@@ -30,24 +30,6 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
 	}
 
 	// -------------- Link --------------
-
-	//Chuyển giá tiền thành có '.'
-	changeNumber = function(price) {
-        var x = price;
-        var parts = x.toString().split(" ");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        price = parts.join(" ");
-        return price
-    }
-	
-	$scope.changeInfo = function(item) {
-		item.giaHienTai = changeNumber(item.giaHienTai);
-		if(item.trangThai === true){
-			item.status = 'Đang đấu giá';
-		} else {
-			item.status = 'Đã kết thúc';
-		} 
-	}
 	
 	$scope.goTo_SignUp = function () {
         $location.path('/dang-ky');
@@ -108,6 +90,49 @@ myapp.controller('userSellController',  ['$scope', '$http', 'Data', '$location',
     };
 	// -------------- Kết thúc link --------------
 	
+	//Chuyển giá tiền thành có '.'
+	changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
+	
+	$scope.changeInfo = function(item) {
+		item.giaHienTai = changeNumber(item.giaHienTai);
+		if(item.trangThai === true){
+			item.status = 'Đang đấu giá';
+		} else {
+			item.status = 'Đã kết thúc';
+		} 
+		
+		var date = new Date(item.ngayHetHan);
+		$scope.time_day = date.getDate();			
+		$scope.time_month = date.getMonth() + 1;
+		$scope.time_year = date.getFullYear();
+		$scope.time_hour = date.getHours();
+		$scope.time_minute = date.getMinutes();
+		
+		if($scope.time_day < 10){
+			$scope.time_day = '0' + $scope.time_day;
+		}
+		
+		if($scope.time_month < 10){
+			$scope.time_month = '0' + $scope.time_month;
+		}
+		
+		if($scope.time_hour < 10){
+			$scope.time_hour = '0' + $scope.time_hour;
+		}
+		
+		if($scope.time_minute < 10){
+			$scope.time_minute = '0' + $scope.time_minute;
+		}
+
+		item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+		item.time = $scope.time_hour + ':' +$scope.time_minute;
+	}
 	
     var getUserSellingItems = function (){
 		$http({

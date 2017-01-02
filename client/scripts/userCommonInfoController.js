@@ -172,6 +172,10 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             });
     };
 
+	$scope.cancel = function() {
+		$route.reload();	
+	}
+	
     $scope.saveNewInfo = function() {		
 		if($scope.gender === '* Chưa cập nhật *')
 		{

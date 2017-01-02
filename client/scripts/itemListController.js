@@ -89,7 +89,38 @@ myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location',
     };
 
 	$scope.goTo_Item_List = function (danh_muc) {
+		if(danh_muc === "Đồ điện tử" ){
+			danh_muc = 'do-dien-tu';
+		}
+		if(danh_muc === "Giải trí, thể thao, sở thích" ){
+			danh_muc = 'giai-tri-the-thao-so-thich';
+		}
+		if(danh_muc === "Xe cộ, máy móc" ){
+			danh_muc = 'xe-co-may-moc';
+		}
+		if(danh_muc === "Mẹ và bé" ){
+			danh_muc = 'me-va-be';
+		}
+		if(danh_muc === "Thời trang & phụ kiện" ){
+			danh_muc = 'thoi-trang-va-phu-kien' ;
+		}
+		if(danh_muc === "Đồ ăn, thức uống" ){
+			danh_muc = 'do-an-thuc-uong';
+		}
+		if(danh_muc === "Đồ gia dụng" ){
+			danh_muc = 'do-gia-dung';
+		}
+		if(danh_muc === "Sức khỏe & sắc đẹp"){
+			danh_muc = 'suc-khoe-va-sac-dep';
+		}
+		if(danh_muc === "Bất động sản"){
+			danh_muc = 'bat-dong-san';
+		}
+		if(danh_muc === "Các loại khác"){
+			danh_muc = 'cac-loai-khac';
+		}
         $location.path('/danh-sach-san-pham/' + danh_muc);
+		$route.reload();
     };
 
 	$scope.goTo_Search_Result = function () {
@@ -144,6 +175,32 @@ myapp.controller('itemListController',  ['$scope', '$http', 'Data', '$location',
 		} else {
 			item.status = 'Đã kết thúc';
 		} 
+		
+		var date = new Date(item.ngayHetHan);
+		$scope.time_day = date.getDate();			
+		$scope.time_month = date.getMonth() + 1;
+		$scope.time_year = date.getFullYear();
+		$scope.time_hour = date.getHours();
+		$scope.time_minute = date.getMinutes();
+		
+		if($scope.time_day < 10){
+			$scope.time_day = '0' + $scope.time_day;
+		}
+		
+		if($scope.time_month < 10){
+			$scope.time_month = '0' + $scope.time_month;
+		}
+		
+		if($scope.time_hour < 10){
+			$scope.time_hour = '0' + $scope.time_hour;
+		}
+		
+		if($scope.time_minute < 10){
+			$scope.time_minute = '0' + $scope.time_minute;
+		}
+
+		item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+		item.time = $scope.time_hour + ':' +$scope.time_minute;
 	}
 	
 	// Lấy danh sách các sản phẩm của chuyên mục

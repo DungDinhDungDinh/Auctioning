@@ -120,15 +120,15 @@
 			
 			<div ng-repeat="item in auctioning_items" ng-init="changeInfo(item)">
 				<div class="user-sell-container">
-					<div class="user-auction-div-1">
+					<div class="user-auction-div-1" ng-click="goTo_Item_Info(item.ID)">
 						<img class="user-item-img" ng-src="{{item.hinhAnh}}" alt="" />
 					</div>
 					
 					<div class="user-auction-div-2">
-						<span class="span-item-name"> {{item.ten}} </span>
+						<span class="span-item-name" ng-click="goTo_Item_Info(item.ID)"> {{item.ten}} </span>
 						<span class="span-item-location"> {{item.noiBan}}</span>
-						<span class="span-item-type"> {{item.chuyenMuc}}  </span>
-						<span class="span-item-seller"> {{item.tenNguoiBan}} </span>
+						<span class="span-item-type" ng-click="goTo_Item_List(item.chuyenMuc)"> {{item.chuyenMuc}}  </span>
+						<span class="span-item-seller" ng-click="goTo_User_Info(item.tenNguoiBan)"> {{item.tenNguoiBan}} </span>
 					</div>
 					
 					<div class="user-auction-div-3">
@@ -140,8 +140,8 @@
 					</div>	
 					
 					<div class="user-auction-div-4">
-						<span class="span-item-date1"> {ngay ket thuc} </span>   
-						<span class="span-item-date2"> {h ket thuc} </span>  
+						<span class="span-item-date1"> {{item.date}} </span>   
+						<span class="span-item-date2"> {{item.time}} </span>  
 					</div>
 					
 					<div class="user-auction-div-5">

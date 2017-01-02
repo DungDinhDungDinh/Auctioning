@@ -116,14 +116,38 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
             if (response.status === 200) {		
 				item.giaDaTra = response.data[0].giaDaTra;
 				item.giaDaTra = changeNumber(item.giaDaTra);
-				console.log(item.giaDaTra);
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
             console.log(response);
         });
-	}
-	
+		var date = new Date(item.ngayHetHan);
+		$scope.time_day = date.getDate();			
+		$scope.time_month = date.getMonth() + 1;
+		$scope.time_year = date.getFullYear();
+		$scope.time_hour = date.getHours();
+		$scope.time_minute = date.getMinutes();
+		
+		if($scope.time_day < 10){
+			$scope.time_day = '0' + $scope.time_day;
+		}
+		
+		if($scope.time_month < 10){
+			$scope.time_month = '0' + $scope.time_month;
+		}
+		
+		if($scope.time_hour < 10){
+			$scope.time_hour = '0' + $scope.time_hour;
+		}
+		
+		if($scope.time_minute < 10){
+			$scope.time_minute = '0' + $scope.time_minute;
+		}
+
+		item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+		item.time = $scope.time_hour + ':' +$scope.time_minute;
+	};
+
 	
 	var  getUserInformation = function() {
         $http({

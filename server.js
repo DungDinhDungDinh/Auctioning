@@ -712,13 +712,12 @@ apiRoutes.get('/item_following/:ID', function(req, res) {
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
     // create a sample userauction
+	var buyerName = req.body.buyerName;
     var userauction = new Userauction({
         userID: req.body.userID,
         itemID: req.body.itemID,
         giaDaTra: req.body.giaDaTra
     });
-
-    console.log(req.body.userID);
 
     Userauction.findOne({
         userID: userauction.userID,
@@ -743,10 +742,12 @@ apiRoutes.post('/userauctions', function(req, res) {
                             return res.status(404).send('Not found');
                             console.log('Failed!!');
                         } else {
-                            item1.nguoiTra = user.userID;
-                            item1.giaHienTai = user.giaDaTra;
+                            item1.nguoiTra = user.userID;      
+							item1.tenNguoiTra = buyerName;
+							item1.giaHienTai = user.giaDaTra;
                             console.log(item1.nguoiTra);
-                            console.log(item1.giaHienTai);
+                            console.log(item1.tenNguoiTra);
+							console.log(item1.giaHienTai);
                             console.log(item1);
 
                             item1.save(function(err, abc) {

@@ -7,6 +7,10 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.highest_price =  "100000000";
     $scope.item = Data.item;
 	
+	if(!$scope.item.item_image){
+		$scope.item.item_image = 'image/image-default.png';
+	}
+		
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
 		$scope.show1 = false;
@@ -90,8 +94,16 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.goTo_Add_Item = function () {
         $location.path('/them-san-pham-step-1');
     };
+	
+	// -------------- End link --------------
+	
+	$scope.filterValue = function($event) {
+        var charCode = ($event.which) ? $event.which : $event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            $event.preventDefault()
+    }
 
-       getUserInformation = function() {
+    getUserInformation = function() {
         $http({
             method: 'GET',
             url: '/api/users/' + Data.userID,
@@ -110,11 +122,30 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
             console.log(response);
 
         });
-    };
-
+    };	
     getUserInformation();
 
     $scope.updateUserAndCreateNewItem = function() {
+	
+		$scope.class_phone = "add-info-input";
+		$scope.class_address = "add-info-input";
+		$scope.error_show_phone = false;
+		$scope.error_show_address = false;
+		
+		if (!$scope.user.soDienThoai) {
+            $scope.error_phone = 'Vui lòng cập nhật đủ thông tin';
+            $scope.error_show_phone = true;
+            $scope.class_phone = "add-info-input-error";
+            angular.element('#user_soDienThoai').focus();
+        }
+		
+		if (!$scope.user.diaChi) {
+            $scope.error_address = 'Vui lòng cập nhật đủ thông tin';
+            $scope.error_show_address = true;
+            $scope.class_address = "add-info-input-error";
+            angular.element('#user_diaChi').focus();
+        }
+		
     	$http({
             method: 'PUT',
             url: '/api/users/' +Data.userID,
@@ -140,7 +171,6 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
         });
     };
 
-
     var generateId = function() {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -155,6 +185,7 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
     	var id = generateId();
         console.log($scope.item.item_date + ' ' + $scope.item.item_time);
         console.log( $scope.item.item_price.replace(/ /g, ''));
+		
     	$http({
             method: 'POST',
             url: '/api/items',

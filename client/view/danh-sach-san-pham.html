@@ -141,15 +141,15 @@
 			
 			<div ng-repeat="item in all_type_items" ng-init="changeInfo(item)" >
 				<div class="user-sell-container">
-					<div class="user-sell-div-1">
+					<div class="user-sell-div-1" ng-click="goTo_Item_Info(item.ID)">
 						<img class="user-item-img" ng-src="{{item.hinhAnh}}" alt="" />
 					</div>
 					
 					<div class="user-sell-div-2">
-						<span class="span-item-name"> {{item.ten}} </span>
-						<span class="span-item-location"> {{item.noiBan}} </span>
-						<span class="span-item-type"> {{item.chuyenMuc}} </span>
-						<span class="span-item-seller"> {{item.tenNguoiBan}}  </span>
+						<span class="span-item-name" ng-click="goTo_Item_Info(item.ID)"> {{item.ten}} </span>
+						<span class="span-item-location"> {{item.noiBan}}</span>
+						<span class="span-item-type" ng-click="goTo_Item_List(item.chuyenMuc)"> {{item.chuyenMuc}}  </span>
+						<span class="span-item-seller" ng-click="goTo_User_Info(item.tenNguoiBan)"> {{item.tenNguoiBan}} </span>
 					</div>
 					
 					<div class="user-sell-div-3">
@@ -157,8 +157,8 @@
 					</div>		
 					
 					<div class="user-sell-div-4">
-						<span class="span-item-date1"> {ngay het han} </span>   
-						<span class="span-item-date2"> {gio het han} </span>  
+						<span class="span-item-date1"> {{item.date}} </span>   
+						<span class="span-item-date2"> {{item.time}} </span>  
 					</div>
 					
 					<div class="user-sell-div-5">

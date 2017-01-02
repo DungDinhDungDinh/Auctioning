@@ -136,7 +136,7 @@
 			
 			<div class="tooltip"> 
 				<span class="add-info-label"> Giá khởi điểm <span class="color-red">*</span> </span>				
-				<input id="item_price" ng-class="class_price" ng-init="class_price = 'add-info-input'" ng-model="item_price" ng-focus="showTipPrice()" ng-blur="hideTipPrice()" placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+				<input id="item_price" ng-class="class_price" ng-init="class_price = 'add-info-input'" ng-model="item_price" ng-focus="showTipPrice()" ng-blur="hideTipPrice()" placeholder="Nhập giá khởi điểm ở đây" ng-keypress="filterValue($event)"/>
 				
 				<span class="error" ng-show="error_show_price"> {{error_price}}</span>
 				<span class="tooltiptext" ng-show="tipPrice">

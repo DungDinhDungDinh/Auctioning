@@ -208,7 +208,6 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
             });
     }
 
-
     $scope.checkToNextStep = function() {
         $scope.class_name = "add-info-input";
         $scope.class_content = "add-info-textarea";
@@ -315,7 +314,6 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
         }
 
         var item = {};
-
         item.item_name = $scope.item_name;
         item.item_content = $scope.item_content;
         item.item_type = $scope.item_type;
