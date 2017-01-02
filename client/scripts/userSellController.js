@@ -151,7 +151,7 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
 
-     Data.socket.on('auction_notification', function(data) {
+    Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {

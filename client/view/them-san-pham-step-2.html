@@ -127,22 +127,19 @@
 			<div class="check-item-div3">
 				<span class="add-item-title"> THÔNG TIN LIÊN HỆ </span>
 				
-				<div class="contact-info">
-					<span class="add-info-label"> Tên hiển thị <span class="color-red">*</span> </span>				
-					<input class="add-info-input" ng-model="user.ten"/>
-				</div>
-				
-				<div class="contact-info">
+				<div class="tooltip">
 					<span class="add-info-label" > Số điện thoại <span class="color-red">*</span>  </span>				
-					<input class="add-info-input" ng-model="user.soDienThoai"/>
+					<input id="user_soDienThoai" ng-class="class_phone" ng-init="class_phone = 'add-info-input'" ng-model="user.soDienThoai" ng-keypress="filterValue($event)" ng-change="changePrice()"/>
+					<span class="error" ng-show="error_show_phone"> {{error_phone}}</span>
 				</div>
 				
-				<div class="contact-info">
+				<div class="tooltip">
 					<span class="add-info-label" > Địa chỉ <span class="color-red">*</span> </span>				
-					<input class="add-info-input" ng-model="user.diaChi"/>
+					<input id="user_diaChi" ng-class="class_address" ng-init="class_address = 'add-info-input'" ng-model="user.diaChi"/>
+					<span class="error" ng-show="error_show_address"> {{error_address}}</span>
 				</div>
 				
-				<span style="font-size: 14px;"><i> Lưu ý: Thay đổi thông tin tại đây sẽ cập nhật lại thông tin cá nhân của bạn </i> </span>
+				<span style="font-size: 14px;"><i> * Lưu ý: Bạn bắt buộc phải có đủ thông tin liên hệ để có thể đăng tin </i> </span>
 			</div>
 			
 			<div class="check-item-div4">

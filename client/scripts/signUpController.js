@@ -97,8 +97,8 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             method: 'POST',
             url: '/api/register',
             data: {
-                'userID' : $scope.username,
-                'password' : $scope.password
+                'userID': $scope.username,
+                'password': $scope.password
             }
         }).then(function successCallback(response) {
             if (response.status === 201) {

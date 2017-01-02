@@ -592,7 +592,7 @@ apiRoutes.get('/new_realty_items', function(req, res) {
 });
 
 //-- Lấy tất cả items Bất động sản
-apiRoutes.get('/new_realty_items', function(req, res) {
+apiRoutes.get('/all_realty_items', function(req, res) {
     Item.find({
         chuyenMuc: 'Bất động sản'
     }).sort({
@@ -626,7 +626,7 @@ apiRoutes.get('/new_other_items', function(req, res) {
 });
 
 //-- Lấy tất cả items Các loại khác
-apiRoutes.get('/new_other_items', function(req, res) {
+apiRoutes.get('/all_other_items', function(req, res) {
     Item.find({
         chuyenMuc: 'Các loại khác'
     }).sort({
@@ -695,8 +695,9 @@ apiRoutes.get('/item_auctioning', function(req, res) {
     });
 });
 
-apiRoutes.get('/item_following', function(req, res) {
-    var _userID = req.query.userID;
+//Lấy toàn bộ item đang theo dõi của 1 user
+apiRoutes.get('/item_following/:ID', function(req, res) {
+    var _userID = req.params.ID;
     Userfollow.find({
         userID: _userID
     }).select().exec(function(err, userfollows) {
@@ -712,20 +713,16 @@ apiRoutes.get('/item_following', function(req, res) {
     });
 });
 
-
-
-
 //##############################################-Userauction API-######################################
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
     // create a sample userauction
+	var buyerName = req.body.buyerName;
     var userauction = new Userauction({
         userID: req.body.userID,
         itemID: req.body.itemID,
         giaDaTra: req.body.giaDaTra
     });
-
-    console.log(req.body.userID);
 
     Userauction.findOne({
         userID: userauction.userID,
@@ -750,8 +747,11 @@ apiRoutes.post('/userauctions', function(req, res) {
                             return res.status(404).send('Not found');
                             console.log('Failed!!');
                         } else {
-                            item1.nguoiTra = user.userID;
-                            item1.giaHienTai = user.giaDaTra;
+
+                            item1.nguoiTra = user.userID;      
+							item1.tenNguoiTra = buyerName;
+							item1.giaHienTai = user.giaDaTra;
+
 
                             item1.save(function(err, abc) {
                                 if (err) {
@@ -760,6 +760,9 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     });
                                     console.error(err);
                                 } else {
+									res.status(200).send({
+										'message': 'updated'
+									});
                                     console.log('updated item');
                                     res.status(200).send({
                                         'message': 'updated'
@@ -768,7 +771,6 @@ apiRoutes.post('/userauctions', function(req, res) {
                             });
                         }
                     });
-
                 }
             });
         } else {
@@ -810,11 +812,14 @@ apiRoutes.post('/userauctions', function(req, res) {
 });
 
 //GET
-//Lay 1 userauction theo ID
-apiRoutes.get('/userauctions/:ID', function(req, res) {
-    var id = req.params.ID;
+//Lay 1 userauction theo userID va itemID
+apiRoutes.get('/userauctions', function(req, res) {
+    var _userID = req.query.userID;
+	console.log(req.query.userID);
+	var _itemID = req.query.itemID;
     Userauction.find({
-        userID: id
+        userID: _userID,
+		itemID: _itemID 
     }).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
@@ -918,8 +923,8 @@ apiRoutes.post('/userfollows', function(req, res) {
 });
 
 //GET
-//Lay 1 userfollow theo ID
-apiRoutes.get('/userfollows/:ID', function(req, res) {
+//Lay 1 userfollow theo ID &^&*#$*&@$@
+apiRoutes.get('/userXXXXXfollows/:ID', function(req, res) {
     var id = req.params.ID;
     Userfollow.find({
         ID: id
@@ -929,6 +934,38 @@ apiRoutes.get('/userfollows/:ID', function(req, res) {
         else {
             res.status(200).send(userfollows);
             console.log(userfollows);
+        }
+    });
+});
+
+// Lấy toàn bộ item mà user đang theo dõi
+apiRoutes.get('/userfollows/:ID', function(req, res)  {
+	var userID = req.params.ID;
+	var items = [];
+	Userfollow.find({
+        userID: req.params.ID
+    }).select().exec(function(err, followed_items) {
+        if (err)
+             return console.log(followed_items);
+        else {
+            if (followed_items) {						
+				for(var i=0; i< followed_items.length; i++){
+					//Lấy từng item
+					Item.find({
+						ID: followed_items[i].itemID
+						}).select().exec(function(err, item) {
+						if (item){
+							items.push(item[0]);
+							if (items.length === followed_items.length){
+								console.log('Lay danh sach followed items thanh cong!');
+								res.status(200).send(items);			
+							}
+						}
+					});
+				}        
+            } else {
+                res.status(200).json({'follow' : false});
+            }
         }
     });
 });
@@ -974,6 +1011,8 @@ apiRoutes.put('/userfollows', function(req, res) {
         }
     });
 });
+
+
 
 // //EDIT
 // apiRoutes.put('/userfollows/:ID', function(req, res) {

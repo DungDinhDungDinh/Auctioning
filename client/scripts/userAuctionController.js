@@ -50,13 +50,14 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
     };
 
     $scope.goTo_Item_List = function(danh_muc) {
-        Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
     $scope.goTo_Search_Result = function() {
-        Data.danh_muc = $scope.searchString;
-        $location.path('/danh-sach-san-pham');
+        if (!$scope.searchString) {
+            $scope.searchString = 'all';
+        }
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
     $scope.goTo_Item_Info = function(item_ID) {
@@ -85,6 +86,69 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         $location.path('/them-san-pham-step-1');
     };
 
+
+    // -------------- Kết thúc link --------------
+
+    //Chuyển giá tiền thành có '.'
+    changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
+
+    $scope.changeInfo = function(item) {
+        item.giaHienTai = changeNumber(item.giaHienTai);
+        if (item.trangThai === true) {
+            item.status = 'Đang đấu giá';
+        } else {
+            item.status = 'Đã kết thúc';
+        }
+        $http({
+            method: 'GET',
+            url: '/api/userauctions/', //+ Data.viewID + '/' + item.ID,
+            params: {
+                'userID': $scope.viewID,
+                'itemID': item.ID
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                item.giaDaTra = response.data[0].giaDaTra;
+                item.giaDaTra = changeNumber(item.giaDaTra);
+            }
+        }, function errorCallback(response) {
+            console.log('failed to update user information');
+            console.log(response);
+        });
+        var date = new Date(item.ngayHetHan);
+        $scope.time_day = date.getDate();
+        $scope.time_month = date.getMonth() + 1;
+        $scope.time_year = date.getFullYear();
+        $scope.time_hour = date.getHours();
+        $scope.time_minute = date.getMinutes();
+
+        if ($scope.time_day < 10) {
+            $scope.time_day = '0' + $scope.time_day;
+        }
+
+        if ($scope.time_month < 10) {
+            $scope.time_month = '0' + $scope.time_month;
+        }
+
+        if ($scope.time_hour < 10) {
+            $scope.time_hour = '0' + $scope.time_hour;
+        }
+
+        if ($scope.time_minute < 10) {
+            $scope.time_minute = '0' + $scope.time_minute;
+        }
+
+        item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+        item.time = $scope.time_hour + ':' + $scope.time_minute;
+    };
+
+
     var getUserInformation = function() {
         $http({
             method: 'GET',
@@ -94,8 +158,8 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 var info = response.data[0];
+
                 $scope.picture = info.avatar;
                 $scope.staticName = info.ten;
                 $scope.staticEmail = info.email;
@@ -129,24 +193,19 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
-                $scope.itemIDs = response.data;
+                $scope.item_list_ID = response.data;
+                $scope.auctioning_items = [];
 
-                for (i = 0; i < $scope.itemIDs.length; i++) {
+                //Lấy danh sách item
+                for (i = 0; i < $scope.item_list_ID.length; i++) {
                     $http({
                         method: 'GET',
-                        url: '/api/item_auctioning',
-                        params: {
-                            'userID': $scope.viewID
-                        }
+                        url: '/api/items/' + $scope.item_list_ID[i].itemID,
                     }).then(function successCallback(response) {
-                        if (response.status === 200) {
-                            var item = response.data[0];
-                            $scope.user_items.push(item);
-                        }
-                    }, function errorCallback(response) {
-                        console.log(response);
+                        $scope.auctioning_items.push(response.data[0]);
+                        console.log($scope.auctioning_items);
                     });
-                }
+                };
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -162,7 +221,7 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
 
-     Data.socket.on('auction_notification', function(data) {
+    Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {

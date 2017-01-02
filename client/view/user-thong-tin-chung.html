@@ -96,35 +96,26 @@
             
             <span class="user-title"> THÔNG TIN CHUNG </span>
             
-            <div class="user-info-line">
-                <span class="user-info-label"> ID</span>
-                <span class="user-info-label"> {{viewID}}</span>
+			<div class="user-info-line">
+                <span class="user-info-label"> Tên hiển thị</span>			
+				<span class="user-info-label"> {{name}}</span>
             </div>
+			
             <div class="user-info-line">
                 <span class="user-info-label"> Email</span>
 				
 				<span class="user-info-text" ng-show="notMyInfo"> {{email}}</span>
                 <input class="user-info-input" type="email" ng-model="email" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"></input>
-            </div>
-            
+            </div>                    
+                  
             <div class="user-info-line">
-                <span class="user-info-label"> Tên hiển thị</span>
-				
-				<span class="user-info-text" ng-show="notMyInfo"> {{name}}</span>
-                <input class="user-info-input" ng-model="name" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"></input>
-            </div>
-            
-            
-            <div class="user-info-line">
-                <span class="user-info-label"> Ngày sinh</span>
-				
+                <span class="user-info-label"> Ngày sinh</span>				
 				<span class="user-info-text" ng-show="notMyInfo"> {{birthday}}</span>
                 <input class="user-info-input" ng-model="birthday" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
             <div class="user-info-line">
-                <span class="user-info-label"> Giới tính</span>
-				
+                <span class="user-info-label"> Giới tính</span>				
                 <span class="user-info-text" ng-show="notMyInfo"> {{gender}}</span>
 				<select class="user-info-input-2" ng-model="gender" ng-hide="notMyInfo" placeholder="">
 					<option value="" disabled selected style="display: none;">* Chưa cập nhật *	</option>
@@ -135,21 +126,19 @@
             </div>
             
              <div class="user-info-line">
-                <span class="user-info-label"> Số điện thoại</span>
-				
+                <span class="user-info-label"> Số điện thoại</span>				
 				<span class="user-info-text" ng-show="notMyInfo"> {{phone}}</span>
                 <input class="user-info-input" ng-model="phone" ng-keypress="filterValue($event)" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
             <div class="user-info-line">
-                <span class="user-info-label"> Địa chỉ</span>
-				
+                <span class="user-info-label"> Địa chỉ</span>				
 				<span class="user-info-text" ng-show="notMyInfo"> {{address}}</span>
                 <input class="user-info-input" ng-model="address" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
             <div class="user-info-line line-save">
-                <button class="btn-cancel-info" ng-hide="notMyInfo"> HỦY </button>
+                <button class="btn-cancel-info" ng-hide="notMyInfo" ng-click="cancel()"> HỦY </button>
                 <button class="btn-save-info" ng-click="saveNewInfo()" ng-hide="notMyInfo"><i class="fa fa-save" style="color: white;"> </i>  LƯU THAY ĐỔI </button>
             </div>
         </div>

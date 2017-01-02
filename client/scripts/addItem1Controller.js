@@ -85,13 +85,14 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
     };
 
     $scope.goTo_Item_List = function(danh_muc) {
-        Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
     $scope.goTo_Search_Result = function() {
-        Data.danh_muc = $scope.searchString;
-        $location.path('/danh-sach-san-pham');
+        if (!$scope.searchString) {
+            $scope.searchString = 'all';
+        }
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
     $scope.goTo_Item_Info = function(item_ID) {
@@ -206,7 +207,6 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
             });
     }
 
-
     $scope.checkToNextStep = function() {
         $scope.class_name = "add-info-input";
         $scope.class_content = "add-info-textarea";
@@ -313,7 +313,6 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
         }
 
         var item = {};
-
         item.item_name = $scope.item_name;
         item.item_content = $scope.item_content;
         item.item_type = $scope.item_type;
@@ -363,7 +362,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
                         showLeadingZero: true
                     });
                     $('#timepicker').timepicker('setTime', 'null');
-                     $('#timepicker').timepicker(
+                    $('#timepicker').timepicker(
                         'option', {
                             minTime: {
                                 hour: 0,
@@ -383,7 +382,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
 
-     Data.socket.on('auction_notification', function(data) {
+    Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {

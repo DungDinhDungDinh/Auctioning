@@ -42,7 +42,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/them-san-pham-step-3.html',
         controller: 'addItem3Controller'
     }).
-    when('/danh-sach-san-pham', {
+    when('/danh-sach-san-pham/:chuyenMuc', {
         templateUrl: './view/danh-sach-san-pham.html',
         controller: 'itemListController'
     }).
@@ -50,7 +50,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/user-thong-tin-chung.html',
         controller: 'userCommonInfoController'
     }).
-
+    when('/ket-qua-tim-kiem/:viewID', {
+        templateUrl: './view/ket-qua-tim-kiem.html',
+        controller: 'searchResultController'
+    }).
     otherwise({
         redirectTo: '/trang-chu'
     });
@@ -59,8 +62,4 @@ myapp.config(['$routeProvider', function($routeProvider) {
 myapp.service('Data', function() {
     this.token = '';
     this.username = '';
-    this.userID = '';
-    this.socket = io.connect('http://localhost:8081');
-    this.auction_noti = 0;
-    this.follow_noti = 0;
 });

@@ -49,14 +49,16 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
         $location.path('/');
     };
 
+
     $scope.goTo_Item_List = function(danh_muc) {
-        Data.danh_muc = danh_muc;
-        $location.path('/danh-sach-san-pham');
+        $location.path('/danh-sach-san-pham/' + danh_muc);
     };
 
     $scope.goTo_Search_Result = function() {
-        Data.danh_muc = $scope.searchString;
-        $location.path('/danh-sach-san-pham');
+        if (!$scope.searchString) {
+            $scope.searchString = 'all';
+        }
+        $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
     };
 
     $scope.goTo_Item_Info = function(item_ID) {
@@ -87,8 +89,53 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
 
     // -------------- Kết thúc link --------------
 
+    //Chuyển giá tiền thành có '.'
+    changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
 
+    $scope.changeInfo = function(item) {
+        item.giaHienTai = changeNumber(item.giaHienTai);
+        if (item.trangThai === true) {
+            item.status = 'Đang đấu giá';
+        } else {
+            item.status = 'Đã kết thúc';
+        }
+
+        var date = new Date(item.ngayHetHan);
+        $scope.time_day = date.getDate();
+        $scope.time_month = date.getMonth() + 1;
+        $scope.time_year = date.getFullYear();
+        $scope.time_hour = date.getHours();
+        $scope.time_minute = date.getMinutes();
+
+        if ($scope.time_day < 10) {
+            $scope.time_day = '0' + $scope.time_day;
+        }
+
+        if ($scope.time_month < 10) {
+            $scope.time_month = '0' + $scope.time_month;
+        }
+
+        if ($scope.time_hour < 10) {
+            $scope.time_hour = '0' + $scope.time_hour;
+        }
+
+        if ($scope.time_minute < 10) {
+            $scope.time_minute = '0' + $scope.time_minute;
+        }
+
+        item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+        item.time = $scope.time_hour + ':' + $scope.time_minute;
+    }
+
+    //Lấy danh sách sản phẩm đang theo dõi
     var getUserFollowItems = function() {
+        //Lấy thông tin user
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -100,7 +147,6 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
                 console.log(response.data);
                 var info = response.data[0];
                 $scope.picture = info.avatar;
-
                 $scope.staticName = info.ten;
                 $scope.staticEmail = info.email;
                 $scope.staticBirthday = info.ngaySinh;
@@ -119,22 +165,31 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
         }, function errorCallback(response) {
             console.log('failed to get user info');
             console.log(response);
-
         });
 
+        //Lấy danh sách followed item
         $http({
             method: 'GET',
-            url: '/api/getItems/' + $scope.viewID
+            url: '/api/item_following/' + $scope.viewID,
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response.data);
-                $scope.user_items = response.data;
+                $scope.item_list_ID = response.data;
+                $scope.followed_items = [];
+
+                for (var i = 0; i < $scope.item_list_ID.length; i++) {
+                    $http({
+                        method: 'GET',
+                        url: '/api/items/' + $scope.item_list_ID[i].itemID,
+                    }).then(function successCallback(response) {
+                        $scope.followed_items.push(response.data[0]);
+                    });
+                };
 
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
             console.log(response);
-
         });
     };
 
@@ -144,7 +199,7 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
 
-     Data.socket.on('auction_notification', function(data) {
+    Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {
@@ -164,5 +219,4 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
             $scope.$apply();
         }
     });
-
 }]);
