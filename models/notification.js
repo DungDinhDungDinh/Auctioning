@@ -14,14 +14,16 @@ var notificationSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	noiDung: {
-		type: String,
+	//trạng thái của item 1 nếu còn hạn đấu giá, 0 nếu hết hạn đấu giá
+	status: {
+		type: Boolean,
 		required: true
 	},
 	seen :  {
 		type: Boolean,
 		required: true
 	},
+	//định danh noti để xóa
 	ID: {
 		type: String,
 		required: true
