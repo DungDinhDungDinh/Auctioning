@@ -187,5 +187,30 @@ myapp.controller('addItem2Controller',  ['$scope', '$http', 'Data', '$location',
         });
     }
 
+    //Notification
+    $scope.auction_noti = Data.auction_noti;
+    $scope.follow_noti = Data.follow_noti;
+
+     Data.socket.on('auction_notification', function(data) {
+        console.log('auction_notification');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.auction_noti += 1;
+            $scope.auction_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
+
+    Data.socket.on('follow_notification', function(data) {
+        console.log('follow_notificaiton');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.follow_noti += 1;
+            $scope.follow_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
 	// -------------- Kết thúc link --------------
 }]);

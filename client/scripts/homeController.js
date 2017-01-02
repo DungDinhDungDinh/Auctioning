@@ -1,5 +1,7 @@
 myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location, $rootScope) {
 
+    
+
 	$(window).scrollTop(0, 0);
 	if (Data.token !== '') {
 		$scope.show1 = false;
@@ -101,8 +103,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_items = response.data;
             }
         }, function errorCallback(response) {
@@ -116,8 +118,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_electronic_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_electronic_items = response.data;
             }
         }, function errorCallback(response) {
@@ -131,8 +133,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_entertainment_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_entertainment_items = response.data;
             }
         }, function errorCallback(response) {
@@ -146,8 +148,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_vehicle_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_vehicle_items = response.data;
             }
         }, function errorCallback(response) {
@@ -161,8 +163,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_momandbaby_titems'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+               // console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_momandbaby_titems = response.data;
             }
         }, function errorCallback(response) {
@@ -176,8 +178,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_fashion_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_fashion_items = response.data;
             }
         }, function errorCallback(response) {
@@ -191,8 +193,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_food_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_food_items = response.data;
             }
         }, function errorCallback(response) {
@@ -206,8 +208,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_home_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_home_items = response.data;
             }
         }, function errorCallback(response) {
@@ -221,8 +223,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_healthy_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_healthy_items = response.data;
             }
         }, function errorCallback(response) {
@@ -236,8 +238,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_realty_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_realty_items = response.data;
             }
         }, function errorCallback(response) {
@@ -251,8 +253,8 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
             url: '/api/new_other_items'
         }).then(function successCallback(response) {
             if (response.status === 200) {	
-                console.log(response.data);
-				console.log('load du lieu thanh cong');
+                //console.log(response.data);
+				//console.log('load du lieu thanh cong');
                 $scope.new_other_items = response.data;
             }
         }, function errorCallback(response) {
@@ -261,6 +263,33 @@ myapp.controller('homeController',  ['$scope', '$http', 'Data', '$location', '$r
         });	
 		
 	}
-	
 	loadDuLieu();
+
+
+
+    //Notification
+    $scope.auction_noti = Data.auction_noti;
+    $scope.follow_noti = Data.follow_noti;
+
+     Data.socket.on('auction_notification', function(data) {
+        console.log('auction_notification');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.auction_noti += 1;
+            $scope.auction_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
+
+    Data.socket.on('follow_notification', function(data) {
+        console.log('follow_notificaiton');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.follow_noti += 1;
+            $scope.follow_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
 }]);

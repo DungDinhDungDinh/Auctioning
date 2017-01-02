@@ -225,8 +225,12 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     };
 
     $scope.bidItem = function() {
-        var newPrice = $scope.yourPrice.replace(/ /g, '');
-        if (newPrice > $scope.item_price) {
+        var newPriceString = $scope.yourPrice.replace(/ /g, '');
+        var itemPriceString = $scope.item_price.replace(/\./g, '');
+        var newPrice = parseInt(newPriceString);
+        var itemPrice = parseInt(itemPriceString);
+        console.log(newPrice + ' vs ' + itemPrice);
+        if (newPrice > itemPrice) {
             $http({
                 method: 'POST',
                 url: '/api/userauctions',
@@ -238,7 +242,11 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             }).then(function successCallback(response) {
                 if (response.status === 200) {
                     console.log(response.data);
+                    Data.socket.emit('new_auction', {
+                        itemID: $scope.itemID
+                    });
                     $route.reload();
+
                 }
             }, function errorCallback(response) {
                 console.log(response);
@@ -250,25 +258,48 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     }
 
     var checkFollowItem = function() {
-    	  $http({
-                method: 'GET',
-                url: '/api/userfollows',
-                params: {
-                    'userID': Data.userID,
-                    'itemID': $scope.itemID
-                }
-            }).then(function successCallback(response) {
-            	console.log(response.data);
-                if (response.status === 200) {
-                 	$scope.show2 = response.data.follow;
-                }
-            }, function errorCallback(response) {
-                console.log(response);
+        $http({
+            method: 'GET',
+            url: '/api/userfollows',
+            params: {
+                'userID': Data.userID,
+                'itemID': $scope.itemID
+            }
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            if (response.status === 200) {
+                $scope.show2 = response.data.follow;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
 
-            });
+        });
     };
     checkFollowItem();
 
+    //Notification
+    $scope.auction_noti = Data.auction_noti;
+    $scope.follow_noti = Data.follow_noti;
 
+     Data.socket.on('auction_notification', function(data) {
+        console.log('auction_notification');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.auction_noti += 1;
+            $scope.auction_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
+
+    Data.socket.on('follow_notification', function(data) {
+        console.log('follow_notificaiton');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.follow_noti += 1;
+            $scope.follow_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
 
 }]);

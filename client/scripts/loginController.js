@@ -31,6 +31,9 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
                     Data.token = response.data.token;
                     Data.username = response.data.name;
 					Data.userID = response.data.userID;
+                    localStorage.setItem("token", Data.token);
+                    localStorage.setItem("userID", Data.userID);
+                    localStorage.setItem("username", Data.username);
                     $location.path('/trang-chu');
                     console.log(response.data);
                 }
@@ -71,7 +74,12 @@ myapp.controller('loginController',  ['$scope', '$http', 'Data', '$location', '$
             }).then(function successCallback(response) {
                 if (response.status === 200) {
                     Data.token = response.data.token;
-                    Data.username = response.data.username;
+                    Data.userID = response.data.userID;
+                    Data.username = response.data.name;
+                    localStorage.setItem("token", Data.token);
+                    localStorage.setItem("userID", Data.userID);
+                    localStorage.setItem("username", Data.username);
+                    console.log(response.data);
                     $location.path('/trang-chu');
                 }
             }, function errorCallback(response) {

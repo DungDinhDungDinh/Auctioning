@@ -58,25 +58,25 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/danh-sach-san-pham');
     };
 
-	$scope.goTo_Item_Info = function (item_ID) {
-		Data.item_ID = item_ID;
+    $scope.goTo_Item_Info = function(item_ID) {
+        Data.item_ID = item_ID;
         $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
-	$scope.goTo_User_Info = function () {
-		Data.ViewUserID = Data.userID;
+    $scope.goTo_User_Info = function() {
+        Data.ViewUserID = Data.userID;
         $location.path('/user-thong-tin-chung/' + $scope.viewID);
     };
 
-	$scope.goTo_User_Sell = function () {
+    $scope.goTo_User_Sell = function() {
         $location.path('/user-dang-ban/' + $scope.viewID);
     };
 
-	$scope.goTo_User_Buy = function () {
+    $scope.goTo_User_Buy = function() {
         $location.path('/user-dang-dau/' + $scope.viewID);
     };
 
-	$scope.goTo_User_Follow = function () {
+    $scope.goTo_User_Follow = function() {
         $location.path('/user-theo-doi/' + $scope.viewID);
     };
 
@@ -84,14 +84,13 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/them-san-pham-step-1');
     };
 
-	//Number only
-	$scope.filterValue = function($event)
-	{
-		var charCode = ($event.which) ? $event.which : $event.keyCode;
-		if (charCode > 31 && (charCode < 48 || charCode > 57))
-       		$event.preventDefault()
-	}
-	
+    //Number only
+    $scope.filterValue = function($event) {
+        var charCode = ($event.which) ? $event.which : $event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            $event.preventDefault()
+    }
+
     getUserInformation = function() {
         $http({
             method: 'GET',
@@ -105,6 +104,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
                 var info = response.data[0];
                 $scope.userID = info.ID;
                 $scope.name = info.ten;
+                Data.username = info.ten;
                 $scope.email = info.email;
                 $scope.phone = info.soDienThoai;
                 $scope.birthday = info.ngaySinh;
@@ -116,34 +116,39 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
                 $scope.staticEmail = info.email;
                 $scope.staticBirthday = info.ngaySinh;
                 $scope.staticGender = info.gioiTinh;
-				if($scope.staticEmail){ $scope.showEmail = true;}
-				if($scope.staticBirthday){ $scope.showBirthday= true;}
-				if($scope.staticGender){ $scope.showGender = true;}
-				
-				//Trang thông tin của người khác
-				if(Data.userID !== $scope.viewID) 
-				{ 
-					$scope.notMyInfo = true; 
-					console.log($scope.phone);
-					if (!$scope.name){ 
-						$scope.name = '* Chưa cập nhật *';
-					}
-					if (!$scope.email){ 
-						$scope.email = '* Chưa cập nhật *';
-					}
-					if (!$scope.phone){ 
-						$scope.phone = '* Chưa cập nhật *';
-					}
-					if (!$scope.birthday){ 
-						$scope.birthday = '* Chưa cập nhật *';
-					}
-					if (!$scope.gender){ 
-						$scope.gender = '* Chưa cập nhật *';
-					}
-					if (!$scope.address){ 
-						$scope.address = '* Chưa cập nhật *';
-					}
-				}
+                if ($scope.staticEmail) {
+                    $scope.showEmail = true;
+                }
+                if ($scope.staticBirthday) {
+                    $scope.showBirthday = true;
+                }
+                if ($scope.staticGender) {
+                    $scope.showGender = true;
+                }
+
+                //Trang thông tin của người khác
+                if (Data.userID !== $scope.viewID) {
+                    $scope.notMyInfo = true;
+                    console.log($scope.phone);
+                    if (!$scope.name) {
+                        $scope.name = '* Chưa cập nhật *';
+                    }
+                    if (!$scope.email) {
+                        $scope.email = '* Chưa cập nhật *';
+                    }
+                    if (!$scope.phone) {
+                        $scope.phone = '* Chưa cập nhật *';
+                    }
+                    if (!$scope.birthday) {
+                        $scope.birthday = '* Chưa cập nhật *';
+                    }
+                    if (!$scope.gender) {
+                        $scope.gender = '* Chưa cập nhật *';
+                    }
+                    if (!$scope.address) {
+                        $scope.address = '* Chưa cập nhật *';
+                    }
+                }
             }
         }, function errorCallback(response) {
             console.log('failed to get user info');
@@ -170,28 +175,27 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             });
     };
 
-    $scope.saveNewInfo = function() {		
-		if($scope.gender === '* Chưa cập nhật *')
-		{
-			$scope.gender = null;	
-		}
-    	$http({
+    $scope.saveNewInfo = function() {
+        if ($scope.gender === '* Chưa cập nhật *') {
+            $scope.gender = null;
+        }
+        $http({
             method: 'PUT',
             url: '/api/users/' + $scope.userID,
             data: {
                 'token': Data.token,
                 'email': $scope.email,
-    			'ten': $scope.name,
-    			'avatar': $scope.picture,
-    			'soDienThoai': $scope.phone,
-    			'ngaySinh': $scope.birthday,
-    			'gioiTinh': $scope.gender,
-    			'diaChi': $scope.address
+                'ten': $scope.name,
+                'avatar': $scope.picture,
+                'soDienThoai': $scope.phone,
+                'ngaySinh': $scope.birthday,
+                'gioiTinh': $scope.gender,
+                'diaChi': $scope.address
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-				alert('Lưu thay đổi thành công');
-				$route.reload();
+                alert('Lưu thay đổi thành công');
+                $route.reload();
             }
         }, function errorCallback(response) {
             console.log('failed to update user information');
@@ -199,5 +203,30 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
 
         });
     };
+
+    //Notification
+    $scope.auction_noti = Data.auction_noti;
+    $scope.follow_noti = Data.follow_noti;
+
+     Data.socket.on('auction_notification', function(data) {
+        console.log('auction_notification');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.auction_noti += 1;
+            $scope.auction_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
+
+    Data.socket.on('follow_notification', function(data) {
+        console.log('follow_notificaiton');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.follow_noti += 1;
+            $scope.follow_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
 
 }]);

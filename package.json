@@ -24,6 +24,7 @@
     "jsonwebtoken": "*",
     "mongoose": "*",
     "request": "*",
-    "cron" : "*"
+    "cron" : "*",
+    "socket.io" : "*"
   }
 }

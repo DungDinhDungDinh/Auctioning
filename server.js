@@ -209,7 +209,7 @@ apiRoutes.get('/items', function(req, res) {
             return console.log(items);
         else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -296,7 +296,7 @@ apiRoutes.get('/new_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -314,7 +314,7 @@ apiRoutes.get('/new_electronic_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -331,7 +331,7 @@ apiRoutes.get('/all_electronic_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -348,7 +348,7 @@ apiRoutes.get('/new_entertainment_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -365,7 +365,7 @@ apiRoutes.get('/all_entertainment_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -382,7 +382,7 @@ apiRoutes.get('/new_vehicle_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -399,7 +399,7 @@ apiRoutes.get('/all_vehicle_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -416,7 +416,7 @@ apiRoutes.get('/new_momandbaby_titems', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -433,7 +433,7 @@ apiRoutes.get('/all_momandbaby_titems', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -450,7 +450,7 @@ apiRoutes.get('/new_fashion_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -467,7 +467,7 @@ apiRoutes.get('/all_fashion_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -484,7 +484,7 @@ apiRoutes.get('/new_food_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -501,7 +501,7 @@ apiRoutes.get('/all_food_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -518,7 +518,7 @@ apiRoutes.get('/new_home_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -535,7 +535,7 @@ apiRoutes.get('/all_home_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -552,7 +552,7 @@ apiRoutes.get('/new_healthy_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -569,7 +569,7 @@ apiRoutes.get('/all_healthy_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -586,7 +586,7 @@ apiRoutes.get('/new_realty_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -603,7 +603,7 @@ apiRoutes.get('/new_realty_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -620,7 +620,7 @@ apiRoutes.get('/new_other_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -637,7 +637,7 @@ apiRoutes.get('/new_other_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -654,7 +654,7 @@ apiRoutes.get('/get_items', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            // console.log(items);
         }
     });
 });
@@ -672,7 +672,7 @@ apiRoutes.get('/search', function(req, res) {
             console.log('Failed!!');
         } else {
             res.status(200).send(items);
-            console.log(items);
+            //console.log(items);
         }
     });
 });
@@ -687,7 +687,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for(var i=0; i<userauctions.length; i++){
+            for (var i = 0; i < userauctions.length; i++) {
                 tmp_array.push(userauctions[i].itemID);
             }
             res.status(200).send(tmp_array);
@@ -704,7 +704,7 @@ apiRoutes.get('/item_following', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for(var i=0; i<userfollows.length; i++){
+            for (var i = 0; i < userfollows.length; i++) {
                 tmp_array.push(userfollows[i].itemID);
             }
             res.status(200).send(tmp_array);
@@ -752,9 +752,6 @@ apiRoutes.post('/userauctions', function(req, res) {
                         } else {
                             item1.nguoiTra = user.userID;
                             item1.giaHienTai = user.giaDaTra;
-                            console.log(item1.nguoiTra);
-                            console.log(item1.giaHienTai);
-                            console.log(item1);
 
                             item1.save(function(err, abc) {
                                 if (err) {
@@ -764,13 +761,14 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     console.error(err);
                                 } else {
                                     console.log('updated item');
+                                    res.status(200).send({
+                                        'message': 'updated'
+                                    });
                                 }
                             });
                         }
                     });
-                    res.status(200).send({
-                        'message': 'updated'
-                    });
+
                 }
             });
         } else {
@@ -816,7 +814,7 @@ apiRoutes.post('/userauctions', function(req, res) {
 apiRoutes.get('/userauctions/:ID', function(req, res) {
     var id = req.params.ID;
     Userauction.find({
-        ID: id
+        userID: id
     }).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
@@ -842,7 +840,7 @@ apiRoutes.get('/userauctions', function(req, res) {
 //DELETE
 apiRoutes.delete('/userauctions/:ID', function(req, res) {
     Userauction.remove({
-        ID: req.params.ID
+        userID: req.params.ID
     }, function(err) {
         if (!err) {
             console.log('remove userauction successfull');
@@ -947,10 +945,14 @@ apiRoutes.get('/userfollows', function(req, res) {
             return console.log(userfollow);
         else {
             if (userfollow) {
-                res.status(200).json({'follow' : true});
+                res.status(200).json({
+                    'follow': true
+                });
                 console.log(userfollow);
             } else {
-                res.status(200).json({'follow' : false});
+                res.status(200).json({
+                    'follow': false
+                });
             }
         }
     });
@@ -1157,7 +1159,7 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
                     }
                 });
             } else {
-                res.status(401).send("Oh uh, something went wrong, cannot authenticate");
+                res.status(400).send("Oh uh, something went wrong, cannot authenticate");
             }
         });
 });
@@ -1200,7 +1202,7 @@ apiRoutes.post('/register', function(req, res) {
                 }
             });
         } else if (account) {
-            res.status(401).send("* Tên đăng nhập đã tồn tại");
+            res.status(400).send("* Tên đăng nhập đã tồn tại");
         }
 
     });
@@ -1213,24 +1215,24 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     console.log(req.body.username);
     console.log(req.body);
-    // find the user
-    User.findOne({
-        username: req.body.username
-    }, function(err, user) {
+    // find the account
+    Account.findOne({
+        ID: req.body.username
+    }, function(err, account) {
 
         if (err) throw err;
 
-        console.log(user);
-        if (!user) {
-            res.json({
+        console.log(account);
+        if (!account) {
+            res.status(400).json({
                 success: false,
-                message: 'Authentication failed. User not found.'
+                message: 'Authentication failed. Account not found.'
             });
-        } else if (user) {
+        } else {
 
             // check if password matches
-            if (user.password != req.body.password) {
-                res.json({
+            if (account.password != req.body.password) {
+                res.status(400).json({
                     success: false,
                     message: 'Authentication failed. Wrong password.'
                 });
@@ -1238,13 +1240,13 @@ apiRoutes.post('/authenticate', function(req, res) {
 
                 // if user is found and password is right
                 // create a token
-                var token = jwt.sign(user, app.get('superSecret'), {
+                var token = jwt.sign(account, app.get('superSecret'), {
                     expiresIn: 60 * 60 * 24 // expires in 24 hours
                 });
 
                 // return the information including token as JSON
                 res.json({
-                    username: user.username,
+                    userID: account.ID,
                     token: token
                 });
             }
@@ -1310,5 +1312,54 @@ app.use('/api', apiRoutes);
 
 
 //Test 
-app.listen(port);
+var server = app.listen(port);
 console.log('server is running at port::' + port);
+
+var io = require('socket.io').listen(server);
+
+io.on('connection', function(socket) {
+    console.log('connection');
+    socket.on('new_auction', function(data) {
+        console.log('on new_auction event');
+        console.log(data.itemID);
+
+        //SEND Auction noti
+        Userauction.find({
+            itemID: data.itemID
+        }).select().exec(function(err, userauctions) {
+            if (err)
+                return console.log(userauctions);
+            else {
+                var auction_users = [];
+                for (var i = 0; i < userauctions.length; i++) {
+                    auction_users.push(userauctions[i].userID);
+                }
+                console.log(auction_users);
+                socket.broadcast.emit('auction_notification', {
+                    users: auction_users
+                });
+            }
+        });
+
+
+        //SEND Follow noti
+        Userfollow.find({
+            itemID: data.itemID
+        }).select().exec(function(err, userfollows) {
+            if (err)
+                return console.log(userfollows);
+            else {
+                var follow_users = [];
+                for (var i = 0; i < userfollows.length; i++) {
+                    follow_users.push(userfollows[i].userID);
+                }
+                console.log(follow_users);
+                socket.broadcast.emit('follow_notification', {
+                    users: follow_users
+                });
+            }
+        });
+
+
+    });
+});

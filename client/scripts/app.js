@@ -14,35 +14,35 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/dang-nhap.html',
         controller: 'loginController'
     }).
-	when('/san-pham-dau-gia/:itemID', {
+    when('/san-pham-dau-gia/:itemID', {
         templateUrl: './view/san-pham-dau-gia.html',
         controller: 'itemController'
     }).
-	when('/user-dang-ban/:viewID', {
+    when('/user-dang-ban/:viewID', {
         templateUrl: './view/user-dang-ban.html',
         controller: 'userSellController'
     }).
-	when('/user-dang-dau/:viewID', {
+    when('/user-dang-dau/:viewID', {
         templateUrl: './view/user-dang-dau.html',
         controller: 'userAuctionController'
     }).
-	when('/user-theo-doi/:viewID', {
+    when('/user-theo-doi/:viewID', {
         templateUrl: './view/user-theo-doi.html',
         controller: 'userFollowController'
     }).
-	when('/them-san-pham-step-1', {
+    when('/them-san-pham-step-1', {
         templateUrl: './view/them-san-pham-step-1.html',
         controller: 'addItem1Controller'
     }).
-	when('/them-san-pham-step-2', {
+    when('/them-san-pham-step-2', {
         templateUrl: './view/them-san-pham-step-2.html',
         controller: 'addItem2Controller'
     }).
-	when('/them-san-pham-step-3', {
+    when('/them-san-pham-step-3', {
         templateUrl: './view/them-san-pham-step-3.html',
         controller: 'addItem3Controller'
     }).
-	when('/danh-sach-san-pham', {
+    when('/danh-sach-san-pham', {
         templateUrl: './view/danh-sach-san-pham.html',
         controller: 'itemListController'
     }).
@@ -59,4 +59,8 @@ myapp.config(['$routeProvider', function($routeProvider) {
 myapp.service('Data', function() {
     this.token = '';
     this.username = '';
+    this.userID = '';
+    this.socket = io.connect('http://localhost:8081');
+    this.auction_noti = 0;
+    this.follow_noti = 0;
 });
