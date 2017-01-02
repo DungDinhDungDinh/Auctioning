@@ -62,4 +62,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
 myapp.service('Data', function() {
     this.token = '';
     this.username = '';
+    this.socket = io('http://localhost:8081');
+    this.auction_noti = 0;
+    this.follow_noti = 0;
 });
