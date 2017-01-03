@@ -250,7 +250,7 @@ apiRoutes.put('/items/:ID', function(req, res) {
 
         if (err) throw err;
 
-        if (!u) {
+        if (u) {
             u.ten = ten;
             u.hinhAnh = hinhAnh;
             u.chuyenMuc = chuyenMuc;
@@ -721,7 +721,7 @@ apiRoutes.post('/userauctions', function(req, res) {
         userID: userauction.userID,
         itemID: userauction.itemID
     }, function(err, user) {
-        console.log(userauction);
+        //console.log(userauction);
         if (err) throw err;
         if (user) {
             user.giaDaTra = userauction.giaDaTra;
@@ -756,9 +756,6 @@ apiRoutes.post('/userauctions', function(req, res) {
 										'message': 'updated'
 									});
                                     console.log('updated item');
-                                    res.status(200).send({
-                                        'message': 'updated'
-                                    });
                                 }
                             });
                         }
@@ -782,6 +779,7 @@ apiRoutes.post('/userauctions', function(req, res) {
                             console.log('Failed!!');
                         } else {
                             items.nguoiTra = userauction.userID;
+                            items.tenNguoiTra = buyerName;
                             items.giaHienTai = userauction.giaDaTra;
 
                             items.save(function(err) {
@@ -861,7 +859,7 @@ apiRoutes.put('/userauctions/:ID', function(req, res) {
 
         if (err) throw err;
 
-        if (!u) {
+        if (u) {
             u.userID = userID;
             u.itemID = itemID;
             u.giaHienTai = giaHienTai;
@@ -977,7 +975,6 @@ apiRoutes.get('/userfollows', function(req, res) {
                 res.status(200).json({
                     'follow': true
                 });
-                console.log(userfollow);
             } else {
                 res.status(200).json({
                     'follow': false
@@ -1208,7 +1205,6 @@ apiRoutes.post('/register', function(req, res) {
             console.log(err);
         }
 
-        console.log(account);
         if (!account) {
             var account = new Account({
                 ID: userID,
@@ -1219,17 +1215,18 @@ apiRoutes.post('/register', function(req, res) {
                     console.log('error create new account' + err);
                 } else {
                     var user = new User({
-                        ID: userID
+                        ID: userID,
+                        email: ''
                     });
                     user.save(function(err) {
                         if (err) {
                             console.log(err);
                         } else {
                             console.log('created new user');
+                            res.status(201).send("Đăng ký thành công!");
                         }
                     });
                     console.log('Created new account');
-                    res.status(201).send("Đăng ký thành công!");
                 }
             });
         } else if (account) {
@@ -1245,15 +1242,13 @@ apiRoutes.post('/authenticate', function(req, res) {
     console.log('------Vo ham-----')
 
     console.log(req.body.username);
-    console.log(req.body);
     // find the account
     Account.findOne({
         ID: req.body.username
     }, function(err, account) {
 
-        if (err) throw err;
+        if (err) {console.log(err)};
 
-        console.log(account);
         if (!account) {
             res.status(400).json({
                 success: false,
@@ -1321,16 +1316,16 @@ apiRoutes.use(function(req, res, next) {
     }
 });
 
-var myFunction = function() {
+// var myFunction = function() {
 
-}
+// }
 
-var cron = require('cron');
-var cronJob = cron.job('*/5 * * * * *', function() {
-    // perform operation e.g. GET request http.get() etc.
-    myFunction();
-});
-cronJob.start();
+// var cron = require('cron');
+// var cronJob = cron.job('*/5 * * * * *', function() {
+//     // perform operation e.g. GET request http.get() etc.
+//     myFunction();
+// });
+// cronJob.start();
 
 var port = process.env.PORT || 8081;
 
@@ -1354,42 +1349,42 @@ io.on('connection', function(socket) {
         console.log('on new_auction event');
         console.log(data.itemID);
 
-        // //SEND Auction noti
-        // Userauction.find({
-            // itemID: data.itemID
-        // }).select().exec(function(err, userauctions) {
-            // if (err)
-                // return console.log(userauctions);
-            // else {
-                // var auction_users = [];
-                // for (var i = 0; i < userauctions.length; i++) {
-                    // auction_users.push(userauctions[i].userID);
-                // }
-                // console.log(auction_users);
-                // socket.broadcast.emit('auction_notification', {
-                    // users: auction_users
-                // });
-            // }
-        // });
+        //SEND Auction noti
+        Userauction.find({
+            itemID: data.itemID
+        }).select().exec(function(err, userauctions) {
+            if (err)
+                return console.log(userauctions);
+            else {
+                var auction_users = [];
+                for (var i = 0; i < userauctions.length; i++) {
+                    auction_users.push(userauctions[i].userID);
+                }
+                console.log(auction_users);
+                socket.broadcast.emit('auction_notification', {
+                    users: auction_users
+                });
+            }
+        });
 
 
-        // //SEND Follow noti
-        // Userfollow.find({
-            // itemID: data.itemID
-        // }).select().exec(function(err, userfollows) {
-            // if (err)
-                // return console.log(userfollows);
-            // else {
-                // var follow_users = [];
-                // for (var i = 0; i < userfollows.length; i++) {
-                    // follow_users.push(userfollows[i].userID);
-                // }
-                // console.log(follow_users);
-                // socket.broadcast.emit('follow_notification', {
-                    // users: follow_users
-                // });
-            // }
-        // });
+        //SEND Follow noti
+        Userfollow.find({
+            itemID: data.itemID
+        }).select().exec(function(err, userfollows) {
+            if (err)
+                return console.log(userfollows);
+            else {
+                var follow_users = [];
+                for (var i = 0; i < userfollows.length; i++) {
+                    follow_users.push(userfollows[i].userID);
+                }
+                console.log(follow_users);
+                socket.broadcast.emit('follow_notification', {
+                    users: follow_users
+                });
+            }
+        });
 
 
     });
