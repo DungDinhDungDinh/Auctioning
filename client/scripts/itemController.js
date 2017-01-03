@@ -210,8 +210,31 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 }
 
                 if (!item.nguoiTra) {
-                    $scope.noBuyer = true;
+                    $scope.noBuyer = true;					
                 }
+						
+				//Kết thúc mà ko có người trả giá
+				console.log(item.trangThai);
+				if ((!item.nguoiTra) && (item.trangThai === false)){
+					$scope.priceStart = true;
+				}
+				
+				//Kết thúc mà có người trả giá
+				if ((item.nguoiTra) && (item.trangThai === false)){
+					$scope.priceEnd = true;
+					$scope.winnerShow = true;
+				}
+				
+				//Chưa kết thúc và chưa có người trả giá
+				if ((!item.nguoiTra) && (item.trangThai === true)){
+					$scope.priceStart = true;
+				}
+				
+				//Chưa kết thúc và có người trả giá
+				if ((item.nguoiTra) && (item.trangThai === true)){
+					console.log(item.nguoiTra);
+					$scope.priceNow = true;
+				}
 
                 $(function() {
                     var austDay = new Date();
@@ -229,7 +252,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     };
 	
     var getUserInformation = function(id, isOwner) {
-		console.log(id);
         $http({
             method: 'GET',
             url: '/api/users/' + id
@@ -239,7 +261,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 if (isOwner) {
                     $scope.owner = info;
                 } else {
-					console.log(response.data);
                     $scope.buyer = info;
                 }
             }
@@ -362,8 +383,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     // //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
-	console.log($scope.auction_noti);
-	console.log($scope.auction_noti);
+
     Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;

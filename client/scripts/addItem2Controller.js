@@ -3,6 +3,7 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
     $scope.item = Data.item;
 	$scope.divNotiFollow = false;
 	$scope.divNotiAuction = false;
+	
     if (!$scope.item.item_image) {
         $scope.item.item_image = 'image/image-default.png';
     }

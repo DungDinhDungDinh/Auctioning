@@ -33,51 +33,52 @@
 				
 				<div id="notiBoxFollow" ng-class="notiFollowClass" ng-init="notiFollowClass = 'box-noti'" ng-click="showNotiFollow()">
 					<i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{follow_noti}}</span>
+                    <span class="badge" ng-show='haveFollowNoti'>{{follow_noti}}</span>
 					<div id="notiFollow" class="div-show-follow-container" ng-show="divNotiFollow">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"ng-click='deleteAllFollowNoti($index)'> Xóa tất cả </span>
 						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO THEO DÕI </strong> </span>
 						<div class="div-show-noti" ng-show="divNotiFollow"> 
-							<div class="noti-div-container">
-							
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+						
+							<div ng-repeat="follow in follow_info">
+								<div class="noti-div-container">
+									<div class="noti-div" ng-click="goTo_Item_Info(follow.itemID)">
+										<div class="noti-img-div">
+											<img class="noti-img" src="image/image-default.png">
+										</div>	
+										<div class="noti-delete-div" ng-click='deleteFollowNoti'>
+											<img class="noti-img" src="image/icon-delete.png">
+										</div>	
+										<span style="display:block"> <strong> {{follow.name}} </strong>  </span>
+										<span style="display:block"> {{follow.massage}}   </span>							
+									</div>
 								</div>
-								
-							</div>				
-							
+							</div>										
 						</div>
 					</div>
 				</div>
 				
 				<div id="notiBoxAuction" ng-class="notiAuctionClass" ng-init="notiAuctionClass = 'box-noti'" ng-click="showNotiAuction()">
 					<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{auction_noti}}</span>
+                    <span class="badge" ng-show='haveAuctionNoti'>{{auction_noti}}</span>
 					<div id="notiAuction" class="div-show-auction-container" ng-show="divNotiAuction">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;" ng-click='deleteAllAuctionNoti($index)'> Xóa tất cả </span>
 						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO ĐẤU GIÁ </strong> </span>
 						<div  class="div-show-noti" ng-show="divNotiAuction"> 
-							<div class="noti-div-container">
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+						
+							<div ng-repeat="auction in auction_info">
+								<div class="noti-div-container">
+									<div class="noti-div" ng-click="goTo_Item_Info(auction.itemID)">
+										<div class="noti-img-div">
+											<img class="noti-img" src="image/image-default.png">
+										</div>	
+										<div class="noti-delete-div" ng-click='deleteAuctionNoti($index)'>
+											<img class="noti-img" src="image/icon-delete.png">
+										</div>	
+										<span style="display:block"> <strong> {{auction.name}} </strong>  </span>
+										<span style="display:block"> {{auction.massage}}   </span>								
+									</div>
 								</div>
-							</div>				
+							</div>		
 							
 						</div>
 					</div>
@@ -192,8 +193,8 @@
     
     <div class="main-container">
         <div class="container">
-            <div class="title"><a> ĐỒ ĐIỆN TỬ </a></div>       
-			<div class="item-list"ng-repeat="item in new_electronic_items">
+            <div class="title" ng-click="goTo_Item_List('do-dien-tu')"><a> ĐỒ ĐIỆN TỬ </a></div>       
+			<div class="item-list" ng-repeat="item in new_electronic_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -206,8 +207,8 @@
         </div>
         
         <div class="container">
-            <div class="title"><a> GIẢI TRÍ, THỂ THAO, SỞ THÍCH </a></div>       
-			<div class="item-list"ng-repeat="item in new_entertainment_items">
+            <div class="title" ng-click="goTo_Item_List('giai-tri-the-thao-so-thich')"><a> GIẢI TRÍ, THỂ THAO, SỞ THÍCH </a></div>       
+			<div class="item-list" ng-repeat="item in new_entertainment_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -220,8 +221,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> XE CỘ, MÁY MÓC </a></div>       
-			<div class="item-list"ng-repeat="item in new_vehicle_items">
+            <div class="title" ng-click="goTo_Item_List('xe-co-may-moc')"><a> XE CỘ, MÁY MÓC </a></div>       
+			<div class="item-list" ng-repeat="item in new_vehicle_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -234,8 +235,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> MẸ VÀ BÉ </a></div>       
-			<div class="item-list"ng-repeat="item in new_momandbaby_titems">
+            <div class="title" ng-click="goTo_Item_List('me-va-be')"><a> MẸ VÀ BÉ </a></div>       
+			<div class="item-list" ng-repeat="item in new_momandbaby_titems">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -248,8 +249,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> THỜI TRANG & PHỤ KIỆN </a></div>       
-			<div class="item-list"ng-repeat="item in new_fashion_items">
+            <div class="title" ng-click="goTo_Item_List('thoi-trang-va-phu-kien')"><a> THỜI TRANG & PHỤ KIỆN </a></div>       
+			<div class="item-list" ng-repeat="item in new_fashion_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -262,8 +263,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> ĐỒ ĂN, THÚC UỐNG </a></div>       
-			<div class="item-list"ng-repeat="item in new_food_items">
+            <div class="title" ng-click="goTo_Item_List('do-an-thuc-uong')"><a> ĐỒ ĂN, THÚC UỐNG </a></div>       
+			<div class="item-list" ng-repeat="item in new_food_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -276,8 +277,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> ĐỒ GIA DỤNG </a></div>       
-			<div class="item-list"ng-repeat="item in new_home_items">
+            <div class="title" ng-click="goTo_Item_List('do-gia-dung')"><a> ĐỒ GIA DỤNG </a></div>       
+			<div class="item-list" ng-repeat="item in new_home_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -290,8 +291,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> SỨC KHỎE & SẮC ĐẸP </a></div>       
-			<div class="item-list"ng-repeat="item in new_healthy_items">
+            <div class="title" ng-click="goTo_Item_List('suc-khoe-va-sac-dep')"><a> SỨC KHỎE & SẮC ĐẸP </a></div>       
+			<div class="item-list" ng-repeat="item in new_healthy_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -304,8 +305,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> BẤT ĐỘNG SẢN </a></div>       
-			<div class="item-list"ng-repeat="item in new_realty_items">
+            <div class="title" ng-click="goTo_Item_List('bat-dong-san')"><a> BẤT ĐỘNG SẢN </a></div>       
+			<div class="item-list" ng-repeat="item in new_realty_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">
@@ -318,8 +319,8 @@
         </div>
 		
 		<div class="container">
-            <div class="title"><a> CÁC LOẠI KHÁC </a></div>       
-			<div class="item-list"ng-repeat="item in new_other_items">
+            <div class="title" ng-click="goTo_Item_List('cac-loai-khac')"><a> CÁC LOẠI KHÁC </a></div>       
+			<div class="item-list" ng-repeat="item in new_other_items">
 				<div class="item-list-inner" ng-click="goTo_Item_Info(item.ID)">
 					<div class="item-img-div" id="divUpImg">
 						<img class="chosen-img" ng-src="{{item.hinhAnh}}">

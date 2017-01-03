@@ -169,8 +169,10 @@
         		<span> {{item_name}}</span>
 			</div>
             
-            <div class="body-price" ng-init="changeNumber()">
-            	<span style="display:block; color: #666; font-size: 15px;"> Giá hiện tại:</span> 
+            <div class="body-price" ng-init="changeNumber()">        	
+				<span style="display:block; color: #666; font-size: 15px;" ng-show='priceStart'> Giá khởi điểm:</span> 
+				<span style="display:block; color: #666; font-size: 15px;" ng-show='priceNow'> Giá hiện tại:</span> 
+				<span style="display:block; color: #666; font-size: 15px;" ng-show='priceEnd'> Giá thắng cuộc:</span> 
         		<span> {{item_price}} <u> đ </u></span>     
 			</div>
             
@@ -201,12 +203,14 @@
 				<br>
                 <pre>{{item_content}}</pre>               
             </div>
-            	
-            <div class="div-info-3" ng-hide="ownItem">
-            	<span class="info-title-2" ng-hide="show2" ng-click="Theo_doi()"> <i class="fa fa-eye" style=" width:20px;"> </i>Theo dõi</span>
-                <span class="info-title-3" ng-show="show2" ng-click="Bo_theo_doi()">Đang theo dõi</span>
-                <span class="info-title-4" style="margin-right: 20px;"> <i class="fa fa-warning" style=" width:20px;"> </i>Báo sai phạm</span>
-            </div>
+            
+			<div ng-hide="expiredShow">
+				<div class="div-info-3" ng-hide="ownItem">
+					<span class="info-title-2" ng-hide="show2" ng-click="Theo_doi()"> <i class="fa fa-eye" style=" width:20px;"> </i>Theo dõi</span>
+					<span class="info-title-3" ng-show="show2" ng-click="Bo_theo_doi()">Đang theo dõi</span>
+					<!--<span class="info-title-4" style="margin-right: 20px;"> <i class="fa fa-warning" style=" width:20px;"> </i>Báo sai phạm</span>-->
+				</div>
+			</div>
 		</div>
         
         <div class="body-item-div3">
@@ -258,7 +262,7 @@
 				<span class="salesman-email" ng-click="goTo_User_Info(owner.ID)"> <strong>{{owner.ten}} </strong> </span>
 			</div>
 			
-			<div class="info-salesman" ng-show="expiredShow">
+			<div class="info-salesman" ng-show="winnerShow">
 				<div class="body-info-name-3">
 					<span> NGƯỜI THẮNG CUỘC</span>			
 				</div>

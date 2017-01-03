@@ -1,8 +1,8 @@
-myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
+myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$filter', function($scope, $http, Data, $location, $rootScope, $filter) {
 	
 	$scope.divNotiFollow = false;
 	$scope.divNotiAuction = false;
-	
+
     $(window).scrollTop(0, 0);
 	
     if (Data.token !== '') {
@@ -313,26 +313,110 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
     //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
-
+	$scope.auction_info = [];
+	
     Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {
-            Data.auction_noti += 1;
-            $scope.auction_noti = Data.follow_noti;
+			getNotiAuction();
             $scope.$apply();
         }
     });
-
 
     Data.socket.on('follow_notification', function(data) {
         console.log('follow_notificaiton');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {
-            Data.follow_noti += 1;
-            $scope.follow_noti = Data.follow_noti;
-            $scope.$apply();
+            getNotiFollow();	
+			$scope.$apply();
         }
     });
-
+	
+	var getNotiAuction = function (){
+		$http({
+            method: 'GET',
+            url: '/api/notifications' ,
+			params: {
+				'userID' : Data.userID,
+				'kind' : 0
+			}
+        }).then(function successCallback(response) {
+            if (response.status === 200) {			
+				$scope.auction_info = response.data; 
+				$scope.auction_noti = $filter('filter')($scope.auction_info, {seen: false}).length;
+				if($scope.auction_noti !== 0){
+					$scope.haveAuctionNoti = true;
+				}
+				console.log($scope.auction_info);
+				angular.forEach($scope.auction_info, function(data){
+					if(data.status === true){
+						data.massage = 'Đã có trả giá cao hơn cho sản phẩm này';
+					} else{
+						data.massage = 'Thời hạn đấu giá sản phẩm đã kết thúc';
+					}
+				});
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+	};
+	
+	var getNotiFollow= function (){
+		$http({
+            method: 'GET',
+            url: '/api/notifications' ,
+			params: {
+				'userID' : Data.userID,
+				'kind' : 1
+			}
+        }).then(function successCallback(response) {
+            if (response.status === 200) {			
+				$scope.follow_info = response.data; 
+				$scope.follow_noti = $filter('filter')($scope.follow_info, {seen: false}).length;
+				if($scope.follow_noti !== 0){
+					$scope.haveFollowNoti = true;
+				}
+				angular.forEach($scope.follow_info, function(data){
+					if(data.status === true){
+						data.massage = 'Đã có trả giá cao hơn cho sản phẩm này';
+					} else{
+						data.massage = 'Thời hạn đấu giá sản phẩm đã kết thúc';
+					}
+				});
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+	};
+	
+	$scope.deleteAuctionNoti = function(index) {
+		$scope.auction_info.splice(index, 1);
+		//gọi api xóa auction noti của user ở đây
+		//...
+		
+	}
+	
+	$scope.deleteFollowNoti = function(index) {
+		$scope.follow_info.splice(index, 1);
+		//gọi api xóa follow noti của user ở đây
+		//...
+	}
+	
+	$scope.deleteAllAuctionNoti = function(index) {
+		$scope.auction_info = [];
+		//gọi api xóa toàn bộ auction noti của user ở đây
+		//...
+	}
+	
+	$scope.deleteAllFollowNoti = function(index) {
+		$scope.follow_info = [];
+		//gọi api xóa toàn bộ follow noti của user ở đây
+		//...
+	}
+	
+	getNotiAuction();
+	getNotiFollow();
+	
+	
 }]);
