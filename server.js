@@ -1242,7 +1242,8 @@ apiRoutes.post('/register', function(req, res) {
                 } else {
                     var user = new User({
                         ID: userID,
-                        ten: username
+                        ten: username,
+                        email: ''
                     });
                     user.save(function(err) {
                         if (err) {
