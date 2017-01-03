@@ -32,15 +32,57 @@
 					</div>
 				</div>
 				
-                <div class="icon-wrapper">
-                    <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">9</span>
-                </div>
-                
-                <div class="icon-wrapper">
-                    <i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">9</span>
-                </div>
+                <div id="notiBoxFollow" ng-class="notiFollowClass" ng-init="notiFollowClass = 'box-noti'" ng-click="showNotiFollow()">
+					<i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+                    <span class="badge">{{follow_noti}}</span>
+					<div id="notiFollow" class="div-show-follow-container" ng-show="divNotiFollow">
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO THEO DÕI </strong> </span>
+						<div class="div-show-noti" ng-show="divNotiFollow"> 
+							<div class="noti-div-container">
+							
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+								
+							</div>				
+							
+						</div>
+					</div>
+				</div>
+				
+				<div id="notiBoxAuction" ng-class="notiAuctionClass" ng-init="notiAuctionClass = 'box-noti'" ng-click="showNotiAuction()">
+					<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+                    <span class="badge">{{auction_noti}}</span>
+					<div id="notiAuction" class="div-show-auction-container" ng-show="divNotiAuction">
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO ĐẤU GIÁ </strong> </span>
+						<div  class="div-show-noti" ng-show="divNotiAuction"> 
+							<div class="noti-div-container">
+								<div class="noti-div">
+									<div class="noti-img-div">
+										<img class="noti-img" src="image/image-default.png">
+									</div>	
+									<div class="noti-delete-div">
+										<img class="noti-img" src="image/icon-delete.png">
+									</div>	
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>
+									<span style="display:block"> qwyqeq  </span>
+									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+								</div>
+							</div>				
+							
+						</div>
+					</div>
+				</div>
             </div>
         </div>
         

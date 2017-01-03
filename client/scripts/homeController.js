@@ -1,6 +1,8 @@
 myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
 	
-	$scope.divNoti = false;
+	$scope.divNotiFollow = false;
+	$scope.divNotiAuction = false;
+	
     $(window).scrollTop(0, 0);
 	
     if (Data.token !== '') {
@@ -258,26 +260,53 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
         });
     }
     loadDuLieu();
-	
-	
-	//Hiện notification
-	$scope.showNotification = function() {
-		if($scope.divNoti === false){
-			$scope.divNoti = true;	
-		}
-		else{
-			$scope.divNoti = false;	
-		}
-	}
-	
+		
+	//Hiện notification Follow	
 	$(document).mouseup(function (e){
-		var container = $("#notifications");
-		var box = $("#notiBox");
-		if(!box.is(e.target) && (box.has(e.target).length === 0)){
-			if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNoti === true)) {
-				$scope.divNoti = false;
-				$scope.$apply();
+		var container = $("#notiFollow");
+		var box = $("#notiBoxFollow");
+		//Là box được chọn
+		if(box.is(e.target) || (box.has(e.target).length !== 0)){
+			//Nếu chưa show container
+			if($scope.divNotiFollow === false){
+				$scope.divNotiFollow = true;	
+				$scope.notiFollowClass = 'box-noti-clicked';
+			} else{
+				// Đã show container
+				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiFollow === true)) {
+					$scope.divNotiFollow = false;
+					$scope.notiFollowClass = 'box-noti';		
+				}
 			}
+		} else { //không phải box
+			$scope.notiFollowClass = 'box-noti';
+			$scope.divNotiFollow = false;			
+			$scope.$apply();
+		}
+	});
+	
+	
+	//Hiện notification Auction
+	$(document).mouseup(function (e){
+		var container = $("#notiAuction");
+		var box = $("#notiBoxAuction");
+		//Là box được chọn
+		if(box.is(e.target) || (box.has(e.target).length !== 0)){
+			//Nếu chưa show container
+			if($scope.divNotiAuction === false){
+				$scope.divNotiAuction = true;	
+				$scope.notiAuctionClass = 'box-noti-clicked';
+			} else{
+				// Đã show container
+				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiAuction === true)) {
+					$scope.divNotiAuction = false;
+					$scope.notiAuctionClass = 'box-noti';		
+				}
+			}
+		} else { //không phải box
+			$scope.notiAuctionClass = 'box-noti';
+			$scope.divNotiAuction = false;			
+			$scope.$apply();
 		}
 	});
 

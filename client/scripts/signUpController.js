@@ -7,6 +7,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
         $location.path('/trang-chu');
     };
 
+	$scope.userID = '';
     $scope.username = '';
     $scope.password = '';
     $scope.retypePassword = '';
@@ -21,7 +22,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
     }
 
     $scope.signUp = function() {
-        if ($scope.username === '') {
+        if ($scope.userID === '') {
             $scope.errorText = " * Chưa nhập tên đăng nhập";
             $scope.errorStyle = {
                 "color": "red",
@@ -32,7 +33,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             return;
         }
 
-        if ($scope.username.length < 6) {
+        if ($scope.userID.length < 6) {
             $scope.errorText = " * Tên đăng nhập phải dài tối thiểu 6 ký tự";
             $scope.errorStyle = {
                 "color": "red",
@@ -40,6 +41,28 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
                 "display": "block"
             };
             angular.element('#inputID').focus();
+            return;
+        }
+		
+		if ($scope.username === '') {
+            $scope.errorText = " * Chưa nhập tên hiển thị";
+            $scope.errorStyle = {
+                "color": "red",
+                "font-size": "12px",
+                "display": "block"
+            };
+            angular.element('#inputName').focus();
+            return;
+        }
+		
+		if ($scope.username.length < 6) {
+            $scope.errorText = " * Tên hiển thị phải dài tối thiểu 6 ký tự";
+            $scope.errorStyle = {
+                "color": "red",
+                "font-size": "12px",
+                "display": "block"
+            };
+            angular.element('#inputName').focus();
             return;
         }
 
@@ -88,16 +111,17 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             return;
         }
 
-        signUp($scope.username, $scope.password);
+        signUp($scope.userID, $scope.username, $scope.password);
 
     };
 
-    signUp = function(username, password) {
+    signUp = function(userID, username, password) {
         $http({
             method: 'POST',
             url: '/api/register',
             data: {
-                'userID': $scope.username,
+                'userID': $scope.userID,
+				'username': $scope.username,
                 'password': $scope.password
             }
         }).then(function successCallback(response) {

@@ -1,10 +1,8 @@
 myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
-    $scope.number = [1, 2, 4, 6];
-    $scope.show1 = false;
-    $scope.price = "1000000";
-    $scope.highest_price = "100000000";
+	
     $scope.item = Data.item;
-
+	$scope.divNotiFollow = false;
+	$scope.divNotiAuction = false;
     if (!$scope.item.item_image) {
         $scope.item.item_image = 'image/image-default.png';
     }
@@ -213,6 +211,55 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
 
         });
     }
+	
+	//Hiện notification Follow	
+	$(document).mouseup(function (e){
+		var container = $("#notiFollow");
+		var box = $("#notiBoxFollow");
+		//Là box được chọn
+		if(box.is(e.target) || (box.has(e.target).length !== 0)){
+			//Nếu chưa show container
+			if($scope.divNotiFollow === false){
+				$scope.divNotiFollow = true;	
+				$scope.notiFollowClass = 'box-noti-clicked';
+			} else{
+				// Đã show container
+				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiFollow === true)) {
+					$scope.divNotiFollow = false;
+					$scope.notiFollowClass = 'box-noti';		
+				}
+			}
+		} else { //không phải box
+			$scope.notiFollowClass = 'box-noti';
+			$scope.divNotiFollow = false;			
+			$scope.$apply();
+		}
+	});
+	
+	
+	//Hiện notification Auction
+	$(document).mouseup(function (e){
+		var container = $("#notiAuction");
+		var box = $("#notiBoxAuction");
+		//Là box được chọn
+		if(box.is(e.target) || (box.has(e.target).length !== 0)){
+			//Nếu chưa show container
+			if($scope.divNotiAuction === false){
+				$scope.divNotiAuction = true;	
+				$scope.notiAuctionClass = 'box-noti-clicked';
+			} else{
+				// Đã show container
+				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiAuction === true)) {
+					$scope.divNotiAuction = false;
+					$scope.notiAuctionClass = 'box-noti';		
+				}
+			}
+		} else { //không phải box
+			$scope.notiAuctionClass = 'box-noti';
+			$scope.divNotiAuction = false;			
+			$scope.$apply();
+		}
+	});
 
     //Notification
     $scope.auction_noti = Data.auction_noti;

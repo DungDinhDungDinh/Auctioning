@@ -1200,7 +1200,9 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
 apiRoutes.post('/register', function(req, res) {
 
     var userID = req.body.userID;
+	var username = req.body.username;
     var password = req.body.password;
+	
     // find the user
     Account.findOne({
         ID: userID
@@ -1221,7 +1223,7 @@ apiRoutes.post('/register', function(req, res) {
                 } else {
                     var user = new User({
                         ID: userID,
-                        email: ''
+						ten: username
                     });
                     user.save(function(err) {
                         if (err) {
