@@ -1,4 +1,4 @@
-var myapp = angular.module('Auctioning', ['ngRoute']);
+var myapp = angular.module('Auctioning', ['ngRoute', 'ngAnimate']);
 
 myapp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
