@@ -1051,14 +1051,31 @@ apiRoutes.put('/userfollows', function(req, res) {
 //Lay tat ca notification
 apiRoutes.get('/notifications', function(req, res) {
     var userID = req.query.userID;
-    Userfollow.find({
+    Notification.find({
         userID: userID
+    }).sort({
+        thoiGian: 1
     }).select().exec(function(err, notifications) {
         if (err)
             return console.log(notifications);
         else {
             res.status(200).send(notifications);
-            console.log(notifications);
+        }
+    });
+});
+
+//Lay tat ca notification
+apiRoutes.delete('/notifications/:ID', function(req, res) {
+    var ID = req.params.ID;
+    Notification.remove({
+        _id: ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove user successfull');
+            res.status(200).send('Successfully');
+        } else {
+            console.log(error);
+            res.status(500).send('Error');
         }
     });
 });
@@ -1066,42 +1083,42 @@ apiRoutes.get('/notifications', function(req, res) {
 
 
 //EDIT
-apiRoutes.put('/notifications/:ID', function(req, res) {
+// apiRoutes.put('/notifications/:ID', function(req, res) {
 
-    // var userID = req.body.userID;
-    // var itemID = req.body.itemID;
-    // var giaHienTai = req.body.giaHienTai;
-    // var trangThai = req.body.trangThai;
+// var userID = req.body.userID;
+// var itemID = req.body.itemID;
+// var giaHienTai = req.body.giaHienTai;
+// var trangThai = req.body.trangThai;
 
-    // Userfollow.findOne({
-    //            ID : req.params.ID
-    //         }, function(err, u) {
+// Userfollow.findOne({
+//            ID : req.params.ID
+//         }, function(err, u) {
 
-    //             if (err) throw err;
+//             if (err) throw err;
 
-    //             if (!u) {
-    //                 u.userID= userID;
-    //                 u.itemID = itemID;
-    //                 u.giaHienTai = giaHienTai;
-    //                 u.trangThai = trangThai;
+//             if (!u) {
+//                 u.userID= userID;
+//                 u.itemID = itemID;
+//                 u.giaHienTai = giaHienTai;
+//                 u.trangThai = trangThai;
 
-    //                 u.save(function(err, u) {
-    //                 if (err) {
-    //                     res.status(400).send({
-    //                         'error': 'Bad request (The data is invalid)'
-    //                     });
-    //                     return console.error(err);
-    //                 } else {
-    //                     Userfollow.find(function(err, userfollows) {
-    //                         res.status(200).send({
-    //                             'messege': 'Updated'
-    //                         });
-    //                     });
-    //                 }
-    //             });
-    //             }
-    //         });
-});
+//                 u.save(function(err, u) {
+//                 if (err) {
+//                     res.status(400).send({
+//                         'error': 'Bad request (The data is invalid)'
+//                     });
+//                     return console.error(err);
+//                 } else {
+//                     Userfollow.find(function(err, userfollows) {
+//                         res.status(200).send({
+//                             'messege': 'Updated'
+//                         });
+//                     });
+//                 }
+//             });
+//             }
+//         });
+// });
 
 //#########################################-Authentication API-#################################
 
@@ -1200,9 +1217,9 @@ apiRoutes.post('/authenticate/facebook', function(req, res) {
 apiRoutes.post('/register', function(req, res) {
 
     var userID = req.body.userID;
-	var username = req.body.username;
+    var username = req.body.username;
     var password = req.body.password;
-	
+
     // find the user
     Account.findOne({
         ID: userID
@@ -1223,7 +1240,7 @@ apiRoutes.post('/register', function(req, res) {
                 } else {
                     var user = new User({
                         ID: userID,
-						ten: username
+                        ten: username
                     });
                     user.save(function(err) {
                         if (err) {
@@ -1412,7 +1429,6 @@ io.on('connection', function(socket) {
 });
 
 var checkExpiredItems = function() {
-    console.log('check expire');
     Item.find({}).select().exec(function(err, items) {
         for (var i = 0; i < items.length; i++) {
 
