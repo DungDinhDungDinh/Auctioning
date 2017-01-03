@@ -1,8 +1,8 @@
 myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
-
-
-
+	
+	$scope.divNoti = false;
     $(window).scrollTop(0, 0);
+	
     if (Data.token !== '') {
         $scope.show1 = false;
         $scope.username = Data.username;
@@ -258,8 +258,28 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
         });
     }
     loadDuLieu();
-
-
+	
+	
+	//Hiện notification
+	$scope.showNotification = function() {
+		if($scope.divNoti === false){
+			$scope.divNoti = true;	
+		}
+		else{
+			$scope.divNoti = false;	
+		}
+	}
+	
+	$(document).mouseup(function (e){
+		var container = $("#notifications");
+		var box = $("#notiBox");
+		if(!box.is(e.target) && (box.has(e.target).length === 0)){
+			if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNoti === true)) {
+				$scope.divNoti = false;
+				$scope.$apply();
+			}
+		}
+	});
 
     //Notification
     $scope.auction_noti = Data.auction_noti;

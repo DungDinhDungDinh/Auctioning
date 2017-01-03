@@ -50,7 +50,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/user-thong-tin-chung.html',
         controller: 'userCommonInfoController'
     }).
-    when('/ket-qua-tim-kiem/:viewID', {
+    when('/ket-qua-tim-kiem/:searchString', {
         templateUrl: './view/ket-qua-tim-kiem.html',
         controller: 'searchResultController'
     }).
@@ -62,7 +62,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
 myapp.service('Data', function() {
     this.token = '';
     this.username = '';
-    this.socket = io('http://localhost:8081');
+	this.socket = io('http://localhost:8081');
     this.auction_noti = 0;
     this.follow_noti = 0;
 });

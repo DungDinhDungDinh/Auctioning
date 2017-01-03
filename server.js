@@ -65,7 +65,7 @@ apiRoutes.get('/users/:ID', function(req, res) {
         ID: id
     }).select().exec(function(err, users) {
         if (err)
-            return console.log(users);
+            res.status(400).send(err);
         else {
             res.status(200).send(users);
             //console.log(users);
@@ -679,7 +679,6 @@ apiRoutes.get('/search', function(req, res) {
 
 apiRoutes.get('/item_auctioning', function(req, res) {
     var _userID = req.query.userID;
-    var tmp_array = [];
     Userauction.find({
         userID: _userID
     }).select().exec(function(err, userauctions) {
@@ -687,10 +686,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for (var i = 0; i < userauctions.length; i++) {
-                tmp_array.push(userauctions[i].itemID);
-            }
-            res.status(200).send(tmp_array);
+            res.status(200).send(userauctions);
         }
     });
 });
@@ -705,10 +701,7 @@ apiRoutes.get('/item_following/:ID', function(req, res) {
             return res.status(404).send('Not found');
             console.log('Failed!!');
         } else {
-            for (var i = 0; i < userfollows.length; i++) {
-                tmp_array.push(userfollows[i].itemID);
-            }
-            res.status(200).send(tmp_array);
+            res.status(200).send(userfollows);
         }
     });
 });
@@ -751,7 +744,6 @@ apiRoutes.post('/userauctions', function(req, res) {
                             item1.nguoiTra = user.userID;      
 							item1.tenNguoiTra = buyerName;
 							item1.giaHienTai = user.giaDaTra;
-
 
                             item1.save(function(err, abc) {
                                 if (err) {
@@ -1362,42 +1354,42 @@ io.on('connection', function(socket) {
         console.log('on new_auction event');
         console.log(data.itemID);
 
-        //SEND Auction noti
-        Userauction.find({
-            itemID: data.itemID
-        }).select().exec(function(err, userauctions) {
-            if (err)
-                return console.log(userauctions);
-            else {
-                var auction_users = [];
-                for (var i = 0; i < userauctions.length; i++) {
-                    auction_users.push(userauctions[i].userID);
-                }
-                console.log(auction_users);
-                socket.broadcast.emit('auction_notification', {
-                    users: auction_users
-                });
-            }
-        });
+        // //SEND Auction noti
+        // Userauction.find({
+            // itemID: data.itemID
+        // }).select().exec(function(err, userauctions) {
+            // if (err)
+                // return console.log(userauctions);
+            // else {
+                // var auction_users = [];
+                // for (var i = 0; i < userauctions.length; i++) {
+                    // auction_users.push(userauctions[i].userID);
+                // }
+                // console.log(auction_users);
+                // socket.broadcast.emit('auction_notification', {
+                    // users: auction_users
+                // });
+            // }
+        // });
 
 
-        //SEND Follow noti
-        Userfollow.find({
-            itemID: data.itemID
-        }).select().exec(function(err, userfollows) {
-            if (err)
-                return console.log(userfollows);
-            else {
-                var follow_users = [];
-                for (var i = 0; i < userfollows.length; i++) {
-                    follow_users.push(userfollows[i].userID);
-                }
-                console.log(follow_users);
-                socket.broadcast.emit('follow_notification', {
-                    users: follow_users
-                });
-            }
-        });
+        // //SEND Follow noti
+        // Userfollow.find({
+            // itemID: data.itemID
+        // }).select().exec(function(err, userfollows) {
+            // if (err)
+                // return console.log(userfollows);
+            // else {
+                // var follow_users = [];
+                // for (var i = 0; i < userfollows.length; i++) {
+                    // follow_users.push(userfollows[i].userID);
+                // }
+                // console.log(follow_users);
+                // socket.broadcast.emit('follow_notification', {
+                    // users: follow_users
+                // });
+            // }
+        // });
 
 
     });
