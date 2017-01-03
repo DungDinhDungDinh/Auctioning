@@ -1,6 +1,5 @@
 myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 
-    $scope.highest_price = "100000000";
     $scope.itemID = $routeParams.itemID;
 
     $(window).scrollTop(0, 0);
@@ -124,7 +123,6 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             }
         }, function errorCallback(response) {
             //console.log(response);
-
         });
     }
 
@@ -196,8 +194,8 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     $scope.time_minute = '0' + $scope.time_minute;
                 }
 
-                $scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year + ' ' + $scope.time_hour + ':' + $scope.time_minute;
-
+                $scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year + ' ' + $scope.time_hour + ':' +$scope.time_minute;
+				
                 getUserInformation(item.nguoiBan, 1);
                 getUserInformation(item.nguoiTra, 0);
 
@@ -209,7 +207,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     $scope.expiredShow = true;
                 }
 
-                if (!item.tenNguoiTra) {
+                if (!item.nguoiTra) {
                     $scope.noBuyer = true;
                 }
 
@@ -222,17 +220,14 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     });
                     $('#year').text(austDay.getFullYear());
                 });
-
             }
         }, function errorCallback(response) {
             console.log(response);
-
         });
     };
-
-
-
+	
     var getUserInformation = function(id, isOwner) {
+		console.log(id);
         $http({
             method: 'GET',
             url: '/api/users/' + id
@@ -242,6 +237,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 if (isOwner) {
                     $scope.owner = info;
                 } else {
+					console.log(response.data);
                     $scope.buyer = info;
                 }
             }
@@ -296,10 +292,10 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 'userID': Data.userID,
                 'itemID': $scope.itemID
             }
-        }).then(function successCallback(response) {
-            console.log(response.data);
+        }).then(function successCallback(response) {           
             if (response.status === 200) {
                 $scope.show2 = response.data.follow;
+				console.log(response.data);
             }
         }, function errorCallback(response) {
             console.log(response);
@@ -310,29 +306,30 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     getItemInformation();
     checkFollowItem();
 
-    //Notification
+    // //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
+	console.log($scope.auction_noti);
+	console.log($scope.auction_noti);
+    // Data.socket.on('auction_notification', function(data) {
+        // console.log('auction_notification');
+        // var users = data.users;
+        // if (users.indexOf(Data.userID) !== -1) {
+            // Data.auction_noti += 1;
+            // $scope.auction_noti = Data.follow_noti;
+            // $scope.$apply();
+        // }
+    // });
 
-    Data.socket.on('auction_notification', function(data) {
-        console.log('auction_notification');
-        var users = data.users;
-        if (users.indexOf(Data.userID) !== -1) {
-            Data.auction_noti += 1;
-            $scope.auction_noti = Data.follow_noti;
-            $scope.$apply();
-        }
-    });
 
-
-    Data.socket.on('follow_notification', function(data) {
-        console.log('follow_notificaiton');
-        var users = data.users;
-        if (users.indexOf(Data.userID) !== -1) {
-            Data.follow_noti += 1;
-            $scope.follow_noti = Data.follow_noti;
-            $scope.$apply();
-        }
-    });
+    // Data.socket.on('follow_notification', function(data) {
+        // console.log('follow_notificaiton');
+        // var users = data.users;
+        // if (users.indexOf(Data.userID) !== -1) {
+            // Data.follow_noti += 1;
+            // $scope.follow_noti = Data.follow_noti;
+            // $scope.$apply();
+        // }
+    // });
 
 }]);

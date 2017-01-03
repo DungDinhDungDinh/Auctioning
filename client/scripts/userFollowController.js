@@ -135,6 +135,9 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
 
     //Lấy danh sách sản phẩm đang theo dõi
     var getUserFollowItems = function() {
+		if (Data.userID !== $scope.viewID) {
+            $scope.notMyInfo = true;
+		}
         //Lấy thông tin user
         $http({
             method: 'GET',
@@ -173,10 +176,8 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
             url: '/api/item_following/' + $scope.viewID,
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 $scope.item_list_ID = response.data;
                 $scope.followed_items = [];
-
                 for (var i = 0; i < $scope.item_list_ID.length; i++) {
                     $http({
                         method: 'GET',

@@ -207,8 +207,10 @@ myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/' + $scope.apiString,
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 console.log('load danh sach chuyen muc thanh cong');
+				if(response.data.length === 0){
+					$scope.notFound = true;
+				}
                 $scope.all_type_items = response.data;
             }
         }, function errorCallback(response) {
@@ -242,5 +244,5 @@ myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', 
             $scope.$apply();
         }
     });
-    // -------------- Kết thúc link --------------
+    
 }]);

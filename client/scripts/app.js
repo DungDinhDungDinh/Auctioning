@@ -50,7 +50,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/user-thong-tin-chung.html',
         controller: 'userCommonInfoController'
     }).
-    when('/ket-qua-tim-kiem/:viewID', {
+    when('/ket-qua-tim-kiem/:searchString', {
         templateUrl: './view/ket-qua-tim-kiem.html',
         controller: 'searchResultController'
     }).

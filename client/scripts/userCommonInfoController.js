@@ -1,14 +1,11 @@
 myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 
-    $scope.price = "1000000";
-    $scope.highest_price = "100000000";
     $scope.viewID = $routeParams.viewID;
 
     $(window).scrollTop(0, 0);
     if (Data.token !== '') {
         $scope.show1 = false;
         $scope.username = Data.username;
-
         //Lưu vào Storage
         localStorage.setItem("token", Data.token);
         localStorage.setItem("userID", Data.userID);
@@ -64,9 +61,12 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         $location.path('/san-pham-dau-gia/' + Data.item_ID);
     };
 
-    $scope.goTo_User_Info = function() {
-        Data.ViewUserID = Data.userID;
-        $location.path('/user-thong-tin-chung/' + $scope.viewID);
+    $scope.goTo_User_Info = function(viewID) {
+        if (!viewID) {
+            $location.path('/user-thong-tin-chung/' + Data.userID);
+        } else {
+            $location.path('/user-thong-tin-chung/' + viewID);
+        }
     };
 
     $scope.goTo_User_Sell = function() {
@@ -105,7 +105,6 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
                 var info = response.data[0];
                 $scope.userID = info.ID;
                 $scope.name = info.ten;
-                Data.username = info.ten;
                 $scope.email = info.email;
                 $scope.phone = info.soDienThoai;
                 $scope.birthday = info.ngaySinh;
@@ -154,7 +153,6 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         }, function errorCallback(response) {
             console.log('failed to get user info');
             console.log(response);
-
         });
     };
 

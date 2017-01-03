@@ -96,7 +96,6 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 $scope.user_items = response.data;
 
             }
@@ -109,6 +108,9 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
     getUserSellingItems();
 
     var getUserInformation = function() {
+		if (Data.userID !== $scope.viewID) {
+            $scope.notMyInfo = true;
+		}
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -117,7 +119,6 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 var info = response.data[0];
 
                 $scope.picture = info.avatar;

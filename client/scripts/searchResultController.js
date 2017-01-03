@@ -1,9 +1,10 @@
-myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
+myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 
-    $scope.number = [1, 2, 4, 6];
-    $scope.price = "1000000";
-    $scope.highest_price = "100000000";
-
+	$scope.searchStr = $routeParams.searchString;
+	if($scope.searchStr === 'all'){
+		$scope.searchStr = 'Tất cả';
+	}
+	
     $(window).scrollTop(0, 0);
     if (Data.token !== '') {
         $scope.show1 = false;
@@ -57,6 +58,7 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
             $scope.searchString = 'all';
         }
         $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
+		$route.reload();
     };
 
     $scope.goTo_Item_Info = function(item_ID) {
@@ -87,5 +89,99 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
 
     // -------------- Kết thúc link --------------
 
+	//Chuyển giá tiền thành có '.'
+    changeNumber = function(price) {
+        var x = price;
+        var parts = x.toString().split(" ");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        price = parts.join(" ");
+        return price
+    }
 
+    $scope.changeInfo = function(item) {
+        item.giaHienTai = changeNumber(item.giaHienTai);
+        if (item.trangThai === true) {
+            item.status = 'Đang đấu giá';
+        } else {
+            item.status = 'Đã kết thúc';
+        }
+
+        var date = new Date(item.ngayHetHan);
+        $scope.time_day = date.getDate();
+        $scope.time_month = date.getMonth() + 1;
+        $scope.time_year = date.getFullYear();
+        $scope.time_hour = date.getHours();
+        $scope.time_minute = date.getMinutes();
+
+        if ($scope.time_day < 10) {
+            $scope.time_day = '0' + $scope.time_day;
+        }
+
+        if ($scope.time_month < 10) {
+            $scope.time_month = '0' + $scope.time_month;
+        }
+
+        if ($scope.time_hour < 10) {
+            $scope.time_hour = '0' + $scope.time_hour;
+        }
+
+        if ($scope.time_minute < 10) {
+            $scope.time_minute = '0' + $scope.time_minute;
+        }
+
+        item.date = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year;
+        item.time = $scope.time_hour + ':' + $scope.time_minute;
+    }
+
+    // Lấy danh sách các kết quả tìm được
+    var loadDuLieu = function() {
+		$scope.searchStrAPi = $scope.searchStr
+		if($scope.searchStrAPi  === 'Tất cả'){
+			$scope.searchStrAPi = '';
+		}
+        $http({
+            method: 'GET',
+            url: '/api/search',
+			params: {
+                'search': $scope.searchStrAPi
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log('Lay danh sach tim kiem thanh cong');        
+				if(response.data.length === 0){
+					$scope.notFound = true;
+				}
+				$scope.all_type_items = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    loadDuLieu();
+
+    //Notification
+    $scope.auction_noti = Data.auction_noti;
+    $scope.follow_noti = Data.follow_noti;
+
+    Data.socket.on('auction_notification', function(data) {
+        console.log('auction_notification');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.auction_noti += 1;
+            $scope.auction_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
+
+
+    Data.socket.on('follow_notification', function(data) {
+        console.log('follow_notificaiton');
+        var users = data.users;
+        if (users.indexOf(Data.userID) !== -1) {
+            Data.follow_noti += 1;
+            $scope.follow_noti = Data.follow_noti;
+            $scope.$apply();
+        }
+    });
 }]);

@@ -150,6 +150,9 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
 
 
     var getUserInformation = function() {
+		if (Data.userID !== $scope.viewID) {
+            $scope.notMyInfo = true;
+		}
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -192,10 +195,8 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log(response.data);
                 $scope.item_list_ID = response.data;
                 $scope.auctioning_items = [];
-
                 //Lấy danh sách item
                 for (i = 0; i < $scope.item_list_ID.length; i++) {
                     $http({
@@ -203,7 +204,6 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
                         url: '/api/items/' + $scope.item_list_ID[i].itemID,
                     }).then(function successCallback(response) {
                         $scope.auctioning_items.push(response.data[0]);
-                        console.log($scope.auctioning_items);
                     });
                 };
             }
