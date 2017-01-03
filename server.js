@@ -1051,8 +1051,10 @@ apiRoutes.put('/userfollows', function(req, res) {
 //Lay tat ca notification
 apiRoutes.get('/notifications', function(req, res) {
     var userID = req.query.userID;
+    var kind = req.query.kind;
     Notification.find({
-        userID: userID
+        userID: userID,
+        kind: kind
     }).sort({
         thoiGian: 1
     }).select().exec(function(err, notifications) {
@@ -1357,13 +1359,14 @@ var server = app.listen(port);
 console.log('server is running at port::' + port);
 
 
-var createNotiWithData = function(data, userID, status) {
+var createNotiWithData = function(data, userID, status, kind) {
     var notification = new Notification({
         userID: userID,
         itemID: data.itemID,
         name: data.itemName,
         thoiGian: new Date(),
         status: status,
+        kind: kind,
         seen: 0
     });
     notification.save(function(err) {
@@ -1395,7 +1398,7 @@ io.on('connection', function(socket) {
                 var auction_users = [];
                 for (var i = 0; i < userauctions.length; i++) {
                     auction_users.push(userauctions[i].userID);
-                    createNotiWithData(data, userauctions[i].userID, 1);
+                    createNotiWithData(data, userauctions[i].userID, 1, 0);
                 }
                 console.log(auction_users);
                 socket.broadcast.emit('auction_notification', {
@@ -1415,7 +1418,7 @@ io.on('connection', function(socket) {
                 var follow_users = [];
                 for (var i = 0; i < userfollows.length; i++) {
                     follow_users.push(userfollows[i].userID);
-                    createNotiWithData(data, userfollows[i].userID, 1);
+                    createNotiWithData(data, userfollows[i].userID, 1, 1);
                 }
                 console.log(follow_users);
                 socket.broadcast.emit('follow_notification', {
@@ -1457,7 +1460,7 @@ var checkExpiredItems = function() {
                         for (var i = 0; i < userauctions.length; i++) {
                             auction_users.push(userauctions[i].userID);
 
-                            createNotiWithData(data, userauctions[i].userID, 0);
+                            createNotiWithData(data, userauctions[i].userID, 0, 0);
                         }
                         console.log(auction_users);
                         io.sockets.emit('auction_notification', {
@@ -1477,7 +1480,7 @@ var checkExpiredItems = function() {
                         var follow_users = [];
                         for (var i = 0; i < userfollows.length; i++) {
                             follow_users.push(userfollows[i].userID);
-                            createNotiWithData(data, userfollows[i].userID, 0);
+                            createNotiWithData(data, userfollows[i].userID, 0, 1);
                         }
                         console.log(follow_users);
                         io.sockets.emit('follow_notification', {

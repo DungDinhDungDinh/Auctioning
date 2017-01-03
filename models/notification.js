@@ -27,6 +27,10 @@ var notificationSchema = mongoose.Schema({
 	seen :  {
 		type: Boolean,
 		required: true
+	},
+	kind : {
+		type: Boolean,
+		required: true
 	}
 	//định danh noti để xóa
 	// ID: {
