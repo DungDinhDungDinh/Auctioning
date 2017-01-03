@@ -698,6 +698,7 @@ apiRoutes.get('/item_auctioning', function(req, res) {
 //Lấy toàn bộ item đang theo dõi của 1 user
 apiRoutes.get('/item_following/:ID', function(req, res) {
     var _userID = req.params.ID;
+    var tmp_array=[];
     Userfollow.find({
         userID: _userID
     }).select().exec(function(err, userfollows) {
