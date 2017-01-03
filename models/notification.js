@@ -16,7 +16,7 @@ var notificationSchema = mongoose.Schema({
 		required: true
 	},
 	thoiGian: {
-		type: String,
+		type: Date,
 		required: true
 	},
 	//trạng thái của item 1 nếu còn hạn đấu giá, 0 nếu hết hạn đấu giá
@@ -27,12 +27,12 @@ var notificationSchema = mongoose.Schema({
 	seen :  {
 		type: Boolean,
 		required: true
-	},
-	//định danh noti để xóa
-	ID: {
-		type: String,
-		required: true
 	}
+	//định danh noti để xóa
+	// ID: {
+	// 	type: String,
+	// 	required: true
+	// }
 });
 
 

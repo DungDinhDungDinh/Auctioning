@@ -710,7 +710,7 @@ apiRoutes.get('/item_following/:ID', function(req, res) {
 //ADD
 apiRoutes.post('/userauctions', function(req, res) {
     // create a sample userauction
-	var buyerName = req.body.buyerName;
+    var buyerName = req.body.buyerName;
     var userauction = new Userauction({
         userID: req.body.userID,
         itemID: req.body.itemID,
@@ -741,9 +741,9 @@ apiRoutes.post('/userauctions', function(req, res) {
                             console.log('Failed!!');
                         } else {
 
-                            item1.nguoiTra = user.userID;      
-							item1.tenNguoiTra = buyerName;
-							item1.giaHienTai = user.giaDaTra;
+                            item1.nguoiTra = user.userID;
+                            item1.tenNguoiTra = buyerName;
+                            item1.giaHienTai = user.giaDaTra;
 
                             item1.save(function(err, abc) {
                                 if (err) {
@@ -752,9 +752,9 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     });
                                     console.error(err);
                                 } else {
-									res.status(200).send({
-										'message': 'updated'
-									});
+                                    res.status(200).send({
+                                        'message': 'updated'
+                                    });
                                     console.log('updated item');
                                 }
                             });
@@ -789,6 +789,9 @@ apiRoutes.post('/userauctions', function(req, res) {
                                     });
                                     return console.error(err);
                                 } else {
+                                    res.status(200).send({
+                                        'message': 'updated'
+                                    });
                                     console.log('updated item');
                                 }
                             });
@@ -805,11 +808,11 @@ apiRoutes.post('/userauctions', function(req, res) {
 //Lay 1 userauction theo userID va itemID
 apiRoutes.get('/userauctions', function(req, res) {
     var _userID = req.query.userID;
-	console.log(req.query.userID);
-	var _itemID = req.query.itemID;
+    console.log(req.query.userID);
+    var _itemID = req.query.itemID;
     Userauction.find({
         userID: _userID,
-		itemID: _itemID 
+        itemID: _itemID
     }).select().exec(function(err, userauctions) {
         if (err)
             return console.log(userauctions);
@@ -929,32 +932,34 @@ apiRoutes.get('/userXXXXXfollows/:ID', function(req, res) {
 });
 
 // Lấy toàn bộ item mà user đang theo dõi
-apiRoutes.get('/userfollows/:ID', function(req, res)  {
-	var userID = req.params.ID;
-	var items = [];
-	Userfollow.find({
+apiRoutes.get('/userfollows/:ID', function(req, res) {
+    var userID = req.params.ID;
+    var items = [];
+    Userfollow.find({
         userID: req.params.ID
     }).select().exec(function(err, followed_items) {
         if (err)
-             return console.log(followed_items);
+            return console.log(followed_items);
         else {
-            if (followed_items) {						
-				for(var i=0; i< followed_items.length; i++){
-					//Lấy từng item
-					Item.find({
-						ID: followed_items[i].itemID
-						}).select().exec(function(err, item) {
-						if (item){
-							items.push(item[0]);
-							if (items.length === followed_items.length){
-								console.log('Lay danh sach followed items thanh cong!');
-								res.status(200).send(items);			
-							}
-						}
-					});
-				}        
+            if (followed_items) {
+                for (var i = 0; i < followed_items.length; i++) {
+                    //Lấy từng item
+                    Item.find({
+                        ID: followed_items[i].itemID
+                    }).select().exec(function(err, item) {
+                        if (item) {
+                            items.push(item[0]);
+                            if (items.length === followed_items.length) {
+                                console.log('Lay danh sach followed items thanh cong!');
+                                res.status(200).send(items);
+                            }
+                        }
+                    });
+                }
             } else {
-                res.status(200).json({'follow' : false});
+                res.status(200).json({
+                    'follow': false
+                });
             }
         }
     });
@@ -1247,7 +1252,9 @@ apiRoutes.post('/authenticate', function(req, res) {
         ID: req.body.username
     }, function(err, account) {
 
-        if (err) {console.log(err)};
+        if (err) {
+            console.log(err)
+        };
 
         if (!account) {
             res.status(400).json({
@@ -1316,16 +1323,6 @@ apiRoutes.use(function(req, res, next) {
     }
 });
 
-// var myFunction = function() {
-
-// }
-
-// var cron = require('cron');
-// var cronJob = cron.job('*/5 * * * * *', function() {
-//     // perform operation e.g. GET request http.get() etc.
-//     myFunction();
-// });
-// cronJob.start();
 
 var port = process.env.PORT || 8081;
 
@@ -1336,10 +1333,29 @@ apiRoutes.get('/', function(req, res) {
 app.use('/api', apiRoutes);
 
 
-
 //Test 
 var server = app.listen(port);
 console.log('server is running at port::' + port);
+
+
+var createNotiWithData = function(data, userID, status) {
+    var notification = new Notification({
+        userID: userID,
+        itemID: data.itemID,
+        name: data.itemName,
+        thoiGian: new Date(),
+        status: status,
+        seen: 0
+    });
+    notification.save(function(err) {
+        if (err) {
+            console.log('error create new notification' + err);
+        } else {
+            console.log('Created new auction notification');
+        }
+    });
+};
+
 
 var io = require('socket.io').listen(server);
 
@@ -1348,6 +1364,7 @@ io.on('connection', function(socket) {
     socket.on('new_auction', function(data) {
         console.log('on new_auction event');
         console.log(data.itemID);
+
 
         //SEND Auction noti
         Userauction.find({
@@ -1359,6 +1376,7 @@ io.on('connection', function(socket) {
                 var auction_users = [];
                 for (var i = 0; i < userauctions.length; i++) {
                     auction_users.push(userauctions[i].userID);
+                    createNotiWithData(data, userauctions[i].userID, 1);
                 }
                 console.log(auction_users);
                 socket.broadcast.emit('auction_notification', {
@@ -1378,6 +1396,7 @@ io.on('connection', function(socket) {
                 var follow_users = [];
                 for (var i = 0; i < userfollows.length; i++) {
                     follow_users.push(userfollows[i].userID);
+                    createNotiWithData(data, userfollows[i].userID, 1);
                 }
                 console.log(follow_users);
                 socket.broadcast.emit('follow_notification', {
@@ -1389,3 +1408,73 @@ io.on('connection', function(socket) {
 
     });
 });
+
+var checkExpiredItems = function() {
+    console.log('check expire');
+    Item.find({}).select().exec(function(err, items) {
+        for (var i = 0; i < items.length; i++) {
+
+            if (items[i].ngayHetHan <= new Date() && items[i].trangThai) {
+                console.log('update status');
+                items[i].trangThai = 0;
+                items[i].save(function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log('one item expired');
+                });
+
+                var data = {
+                    itemID: items[i].ID,
+                    itemName: items[i].ten
+                };
+
+                Userauction.find({
+                    itemID: items[i].ID
+                }).select().exec(function(err, userauctions) {
+                    if (err)
+                        return console.log(userauctions);
+                    else {
+                        var auction_users = [];
+                        for (var i = 0; i < userauctions.length; i++) {
+                            auction_users.push(userauctions[i].userID);
+
+                            createNotiWithData(data, userauctions[i].userID, 0);
+                        }
+                        console.log(auction_users);
+                        io.sockets.emit('auction_notification', {
+                            users: auction_users
+                        });
+                    }
+                });
+
+
+                //SEND Follow noti
+                Userfollow.find({
+                    itemID: items[i].ID
+                }).select().exec(function(err, userfollows) {
+                    if (err)
+                        return console.log(userfollows);
+                    else {
+                        var follow_users = [];
+                        for (var i = 0; i < userfollows.length; i++) {
+                            follow_users.push(userfollows[i].userID);
+                            createNotiWithData(data, userfollows[i].userID, 0);
+                        }
+                        console.log(follow_users);
+                        io.sockets.emit('follow_notification', {
+                            users: follow_users
+                        });
+                    }
+                });
+
+            }
+        }
+    });
+}
+
+var cron = require('cron');
+var cronJob = cron.job('*/5 * * * * *', function() {
+    checkExpiredItems();
+});
+cronJob.start();

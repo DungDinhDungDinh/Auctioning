@@ -268,7 +268,9 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 if (response.status === 200) {
                     console.log(response.data);
                     Data.socket.emit('new_auction', {
-                        itemID: $scope.itemID
+                        itemID: $scope.itemID,
+                        userID: Data.userID,
+                        itemName: $scope.item_name
                     });
                     console.log(response.data);
                     alert('Ra giá thành công!');
