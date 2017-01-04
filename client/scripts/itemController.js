@@ -112,9 +112,9 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
     $scope.Bo_theo_doi = function() {
         $http({
-            method: 'PUT',
+            method: 'DELETE',
             url: '/api/userfollows',
-            data: {
+            params: {
                 'userID': Data.userID,
                 'itemID': $scope.itemID
             }

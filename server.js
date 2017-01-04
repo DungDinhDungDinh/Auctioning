@@ -990,11 +990,10 @@ apiRoutes.get('/userfollows', function(req, res) {
 });
 
 //DELETE
-apiRoutes.put('/userfollows', function(req, res) {
-    console.log(req.body);
+apiRoutes.delete('/userfollows', function(req, res) {
     Userfollow.remove({
-        userID: req.body.userID,
-        itemID: req.body.itemID,
+        userID: req.query.userID,
+        itemID: req.query.itemID,
     }, function(err) {
         if (!err) {
             console.log('remove userfollow successfull');
@@ -1006,45 +1005,6 @@ apiRoutes.put('/userfollows', function(req, res) {
     });
 });
 
-
-
-// //EDIT
-// apiRoutes.put('/userfollows/:ID', function(req, res) {
-
-//     var userID = req.body.userID;
-//     var itemID = req.body.itemID;
-//     var giaHienTai = req.body.giaHienTai;
-//     var trangThai = req.body.trangThai;
-
-//     Userfollow.findOne({
-//         ID: req.params.ID
-//     }, function(err, u) {
-
-//         if (err) throw err;
-
-//         if (!u) {
-//             u.userID = userID;
-//             u.itemID = itemID;
-//             u.giaHienTai = giaHienTai;
-//             u.trangThai = trangThai;
-
-//             u.save(function(err, u) {
-//                 if (err) {
-//                     res.status(400).send({
-//                         'error': 'Bad request (The data is invalid)'
-//                     });
-//                     return console.error(err);
-//                 } else {
-//                     Userfollow.find(function(err, userfollows) {
-//                         res.status(200).send({
-//                             'messege': 'Updated'
-//                         });
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// });
 
 //##############################################-Notification API-######################################
 
@@ -1067,13 +1027,45 @@ apiRoutes.get('/notifications', function(req, res) {
 });
 
 //Lay tat ca notification
+apiRoutes.post('/notifications_seen', function(req, res) {
+    var userID = req.body.userID;
+    var kind = req.body.kind;
+    console.log('here');
+    Notification.find({
+        userID: userID,
+        kind: kind
+    }).sort({
+        thoiGian: 1
+    }).select().exec(function(err, notifications) {
+        if (err) {
+            res.status(400).send({
+                'error': 'Bad request (The data is invalid)'
+            });
+            return console.log(notifications);
+        } else {
+            for (var i = 0; i < notifications.lenght; i++) {
+                notifications[i].seen = 0;
+                notifications[i].save(function(err, notification) {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+            res.status(200).send({
+                'messege': 'Updated'
+            });
+        }
+    });
+});
+
+
 apiRoutes.delete('/notifications/:ID', function(req, res) {
     var ID = req.params.ID;
     Notification.remove({
         _id: ID
     }, function(err) {
         if (!err) {
-            console.log('remove user successfull');
+            console.log('remove notification successfull');
             res.status(200).send('Successfully');
         } else {
             console.log(error);
@@ -1082,45 +1074,23 @@ apiRoutes.delete('/notifications/:ID', function(req, res) {
     });
 });
 
+apiRoutes.delete('/notifications', function(req, res) {
+    var userID = req.query.userID;
+    var kind = req.query.kind;
+    Notification.remove({
+        userID: userID,
+        kind: kind
+    }, function(err) {
+        if (!err) {
+            console.log('remove all notification successfull');
+            res.status(200).send('Successfully');
+        } else {
+            console.log(error);
+            res.status(500).send('Error');
+        }
+    });
+});
 
-
-//EDIT
-// apiRoutes.put('/notifications/:ID', function(req, res) {
-
-// var userID = req.body.userID;
-// var itemID = req.body.itemID;
-// var giaHienTai = req.body.giaHienTai;
-// var trangThai = req.body.trangThai;
-
-// Userfollow.findOne({
-//            ID : req.params.ID
-//         }, function(err, u) {
-
-//             if (err) throw err;
-
-//             if (!u) {
-//                 u.userID= userID;
-//                 u.itemID = itemID;
-//                 u.giaHienTai = giaHienTai;
-//                 u.trangThai = trangThai;
-
-//                 u.save(function(err, u) {
-//                 if (err) {
-//                     res.status(400).send({
-//                         'error': 'Bad request (The data is invalid)'
-//                     });
-//                     return console.error(err);
-//                 } else {
-//                     Userfollow.find(function(err, userfollows) {
-//                         res.status(200).send({
-//                             'messege': 'Updated'
-//                         });
-//                     });
-//                 }
-//             });
-//             }
-//         });
-// });
 
 //#########################################-Authentication API-#################################
 

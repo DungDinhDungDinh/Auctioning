@@ -344,6 +344,7 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
         }).then(function successCallback(response) {
             if (response.status === 200) {			
 				$scope.auction_info = response.data; 
+                console.log($scope.auction_info);
 				$scope.auction_noti = $filter('filter')($scope.auction_info, {seen: false}).length;
 				if($scope.auction_noti !== 0){
 					$scope.haveAuctionNoti = true;
@@ -391,32 +392,98 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
 	};
 	
 	$scope.deleteAuctionNoti = function(index) {
+        var noti = $scope.auction_info[index];
 		$scope.auction_info.splice(index, 1);
 		//gọi api xóa auction noti của user ở đây
 		//...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications/' + noti._id,
+        }).then(function successCallback(response) {
+            if (response.status === 200) {          
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
 		
 	}
 	
 	$scope.deleteFollowNoti = function(index) {
+        var noti = $scope.auction_info[index];
 		$scope.follow_info.splice(index, 1);
 		//gọi api xóa follow noti của user ở đây
 		//...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications/' + noti._id,
+        }).then(function successCallback(response) {
+            if (response.status === 200) {          
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
 	}
 	
 	$scope.deleteAllAuctionNoti = function(index) {
 		$scope.auction_info = [];
 		//gọi api xóa toàn bộ auction noti của user ở đây
 		//...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications' ,
+            params: {
+                'userID' : Data.userID,
+                'kind' : 0
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {          
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
 	}
 	
 	$scope.deleteAllFollowNoti = function(index) {
 		$scope.follow_info = [];
 		//gọi api xóa toàn bộ follow noti của user ở đây
 		//...
+         $http({
+            method: 'DELETE',
+            url: '/api/notifications' ,
+            params: {
+                'userID' : Data.userID,
+                'kind' : 1
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {          
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
 	}
 	
 	getNotiAuction();
 	getNotiFollow();
-	
-	
+
+    var setSeenAllNoti = function () {
+        $http({
+            method: 'POST',
+            url: '/api/notifications_seen' ,
+            data: {
+                'userID' : Data.userID,
+                'kind' : 1
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {          
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
 }]);
