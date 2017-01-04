@@ -1030,7 +1030,6 @@ apiRoutes.get('/notifications', function(req, res) {
 apiRoutes.post('/notifications_seen', function(req, res) {
     var userID = req.body.userID;
     var kind = req.body.kind;
-    console.log('here');
     Notification.find({
         userID: userID,
         kind: kind
@@ -1041,13 +1040,15 @@ apiRoutes.post('/notifications_seen', function(req, res) {
             res.status(400).send({
                 'error': 'Bad request (The data is invalid)'
             });
-            return console.log(notifications);
         } else {
-            for (var i = 0; i < notifications.lenght; i++) {
-                notifications[i].seen = 0;
-                notifications[i].save(function(err, notification) {
+            for (var i = 0; i < notifications.length; i++) {
+                var noti = notifications[i];
+                noti.seen = 1;
+                noti.save(function(err) {
                     if (err) {
                         console.error(err);
+                    } else {
+                        //console.log('set seen 1');
                     }
                 });
             }

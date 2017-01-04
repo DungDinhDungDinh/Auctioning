@@ -216,53 +216,60 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
     getUserInformation();
     getUserAuctionItems();
 	
-	//Hiện notification Follow	
-	$(document).mouseup(function (e){
-		var container = $("#notiFollow");
-		var box = $("#notiBoxFollow");
-		//Là box được chọn
-		if(box.is(e.target) || (box.has(e.target).length !== 0)){
-			//Nếu chưa show container
-			if($scope.divNotiFollow === false){
-				$scope.divNotiFollow = true;	
-				$scope.notiFollowClass = 'box-noti-clicked';
-			} else{
-				// Đã show container
-				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiFollow === true)) {
-					$scope.divNotiFollow = false;
-					$scope.notiFollowClass = 'box-noti';		
-				}
-			}
-		} else { //không phải box
-			$scope.notiFollowClass = 'box-noti';
-			$scope.divNotiFollow = false;			
-			$scope.$apply();
-		}
-	});
-	
-	//Hiện notification Auction
-	$(document).mouseup(function (e){
-		var container = $("#notiAuction");
-		var box = $("#notiBoxAuction");
-		//Là box được chọn
-		if(box.is(e.target) || (box.has(e.target).length !== 0)){
-			//Nếu chưa show container
-			if($scope.divNotiAuction === false){
-				$scope.divNotiAuction = true;	
-				$scope.notiAuctionClass = 'box-noti-clicked';
-			} else{
-				// Đã show container
-				if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiAuction === true)) {
-					$scope.divNotiAuction = false;
-					$scope.notiAuctionClass = 'box-noti';		
-				}
-			}
-		} else { //không phải box
-			$scope.notiAuctionClass = 'box-noti';
-			$scope.divNotiAuction = false;			
-			$scope.$apply();
-		}
-	});
+	    //Hiện notification Follow 
+    $(document).mouseup(function(e) {
+        var container = $("#notiFollow");
+        var box = $("#notiBoxFollow");
+        //Là box được chọn
+        if (box.is(e.target) || (box.has(e.target).length !== 0)) {
+            //Nếu chưa show container
+            if ($scope.divNotiFollow === false) {
+                $scope.divNotiFollow = true;
+                setSeenAllNoti(1);
+                $scope.follow_noti = 0;
+                $scope.notiFollowClass = 'box-noti-clicked';
+                $scope.$apply();
+            } else {
+                // Đã show container
+                if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiFollow === true)) {
+                    $scope.divNotiFollow = false;
+                    $scope.notiFollowClass = 'box-noti';
+                }
+            }
+        } else { //không phải box
+            $scope.notiFollowClass = 'box-noti';
+            $scope.divNotiFollow = false;
+            $scope.$apply();
+        }
+    });
+
+
+    //Hiện notification Auction
+    $(document).mouseup(function(e) {
+        var container = $("#notiAuction");
+        var box = $("#notiBoxAuction");
+        //Là box được chọn
+        if (box.is(e.target) || (box.has(e.target).length !== 0)) {
+            //Nếu chưa show container
+            if ($scope.divNotiAuction === false) {
+                $scope.divNotiAuction = true;
+                setSeenAllNoti(0);
+                $scope.auction_noti = 0;
+                $scope.notiAuctionClass = 'box-noti-clicked';
+                $scope.$apply();
+            } else {
+                // Đã show container
+                if (!container.is(e.target) && (container.has(e.target).length === 0) && ($scope.divNotiAuction === true)) {
+                    $scope.divNotiAuction = false;
+                    $scope.notiAuctionClass = 'box-noti';
+                }
+            }
+        } else { //không phải box
+            $scope.notiAuctionClass = 'box-noti';
+            $scope.divNotiAuction = false;
+            $scope.$apply();
+        }
+    });
 
     //Notification
     $scope.auction_noti = Data.auction_noti;
@@ -288,4 +295,161 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
             $scope.$apply();
         }
     });
+
+    var getNotiAuction = function() {
+        $http({
+            method: 'GET',
+            url: '/api/notifications',
+            params: {
+                'userID': Data.userID,
+                'kind': 0
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                $scope.auction_info = response.data;
+                console.log($scope.auction_info);
+                $scope.auction_noti = $filter('filter')($scope.auction_info, {
+                    seen: false
+                }).length;
+                if ($scope.auction_noti !== 0) {
+                    $scope.haveAuctionNoti = true;
+                }
+                console.log($scope.auction_info);
+                angular.forEach($scope.auction_info, function(data) {
+                    if (data.status === true) {
+                        data.massage = 'Đã có trả giá cao hơn cho sản phẩm này';
+                    } else {
+                        data.massage = 'Thời hạn đấu giá sản phẩm đã kết thúc';
+                    }
+                });
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    var getNotiFollow = function() {
+        $http({
+            method: 'GET',
+            url: '/api/notifications',
+            params: {
+                'userID': Data.userID,
+                'kind': 1
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                $scope.follow_info = response.data;
+                $scope.follow_noti = $filter('filter')($scope.follow_info, {
+                    seen: false
+                }).length;
+                if ($scope.follow_noti !== 0) {
+                    $scope.haveFollowNoti = true;
+                }
+                angular.forEach($scope.follow_info, function(data) {
+                    if (data.status === true) {
+                        data.massage = 'Đã có trả giá cao hơn cho sản phẩm này';
+                    } else {
+                        data.massage = 'Thời hạn đấu giá sản phẩm đã kết thúc';
+                    }
+                });
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.deleteAuctionNoti = function(index) {
+        var noti = $scope.auction_info[index];
+        $scope.auction_info.splice(index, 1);
+        //gọi api xóa auction noti của user ở đây
+        //...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications/' + noti._id,
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+
+    }
+
+    $scope.deleteFollowNoti = function(index) {
+        var noti = $scope.auction_info[index];
+        $scope.follow_info.splice(index, 1);
+        //gọi api xóa follow noti của user ở đây
+        //...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications/' + noti._id,
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    $scope.deleteAllAuctionNoti = function(index) {
+        $scope.auction_info = [];
+        //gọi api xóa toàn bộ auction noti của user ở đây
+        //...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications',
+            params: {
+                'userID': Data.userID,
+                'kind': 0
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    $scope.deleteAllFollowNoti = function(index) {
+        $scope.follow_info = [];
+        //gọi api xóa toàn bộ follow noti của user ở đây
+        //...
+        $http({
+            method: 'DELETE',
+            url: '/api/notifications',
+            params: {
+                'userID': Data.userID,
+                'kind': 1
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    getNotiAuction();
+    getNotiFollow();
+
+    var setSeenAllNoti = function(kind) {
+        $http({
+            method: 'POST',
+            url: '/api/notifications_seen',
+            data: {
+                'userID': Data.userID,
+                'kind': kind
+            }
+        }).then(function successCallback(response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
 }]);
