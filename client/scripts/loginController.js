@@ -101,4 +101,9 @@ myapp.controller('loginController', ['$scope', '$http', 'Data', '$location', '$r
 
         });
     }
+
+    
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
+    };
 }]);

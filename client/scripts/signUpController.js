@@ -142,4 +142,8 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
         });
 
     }
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
+    };
 }]);
