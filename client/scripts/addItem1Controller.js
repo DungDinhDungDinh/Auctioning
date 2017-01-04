@@ -53,7 +53,6 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
         localStorage.setItem("userID", Data.userID);
         localStorage.setItem("username", Data.username);
     } else {
-
         //Kiểm tra đã có userID trong Storage chưa
         if (localStorage.getItem("userID") !== null) {
             $scope.show1 = false;
@@ -62,6 +61,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
             Data.username = localStorage.getItem("username");
             $scope.username = Data.username;
         } else
+			$location.path('/dang-nhap');
             $scope.show1 = true;
     }
 

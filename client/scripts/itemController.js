@@ -270,6 +270,10 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     };
 
     $scope.bidItem = function() {
+		if (!Data.userID) {
+            $location.path('/dang-nhap');
+			return;
+        }	
         if (!$scope.yourPrice) {
             alert('Hãy nhập giá của bạn');
             return;
