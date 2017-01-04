@@ -469,13 +469,13 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
 	getNotiAuction();
 	getNotiFollow();
 
-    var setSeenAllNoti = function () {
+    var setSeenAllNoti = function (kind) {
         $http({
             method: 'POST',
             url: '/api/notifications_seen' ,
             data: {
                 'userID' : Data.userID,
-                'kind' : 1
+                'kind' : kind
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {          
