@@ -24,41 +24,26 @@ var Notification = require('./models/notification');
 
 var apiRoutes = express.Router();
 
-//##############################################-User API-######################################
-//##############################################-User API-######################################
-//##############################################-User API-######################################
 
 
-//ADD
-apiRoutes.post('/users', function(req, res) {
 
-    // create a sample user
-    var user = new User({
-        ID: req.body.ID,
-        email: req.body.email,
-        ten: req.body.ten,
-        avatar: req.body.avatar,
-        soDienThoai: req.body.soDienThoai,
-        ngaySinh: req.body.ngaySinh,
-        gioiTinh: req.body.gioiTinh,
-        diaChi: req.body.diaChi
-    });
 
-    // save the user
-    user.save(function(err) {
-        if (err) {
-            res.status(400).json({
-                'error': 'bad request'
-            });
-        }
 
-        console.log('User saved successfully');
-        res.status(201).send({
-            'message': 'user created'
-        });
-    });
-});
 
+
+//##############################################-Non-authenticate API-######################################
+//##############################################-Non-authenticate API-######################################
+//##############################################-Non-authenticate API-######################################
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------User------------------------------------------------
 //GET
 //Lay 1 user theo ID
 apiRoutes.get('/users/:ID', function(req, res) {
@@ -87,110 +72,8 @@ apiRoutes.get('/users', function(req, res) {
     });
 });
 
-//DELETE
-apiRoutes.delete('/users/:ID', function(req, res) {
-    User.remove({
-        ID: req.params.ID
-    }, function(err) {
-        if (!err) {
-            console.log('remove user successfull');
-        } else {
-            console.log(error);
-        }
-    });
-});
+//------------------------------------------------------Item------------------------------------------------
 
-//EDIT
-apiRoutes.put('/users/:ID', function(req, res) {
-
-    var email = req.body.email;
-    var ten = req.body.ten;
-    var avatar = req.body.avatar;
-    var soDienThoai = req.body.soDienThoai;
-    var ngaySinh = req.body.ngaySinh;
-    var gioiTinh = req.body.gioiTinh;
-    var diaChi = req.body.diaChi;
-
-
-    User.findOne({
-        ID: req.params.ID
-    }, function(err, user) {
-
-        if (err) throw err;
-
-        if (user) {
-            user.email = email;
-            user.ten = ten;
-            user.avatar = avatar;
-            user.soDienThoai = soDienThoai;
-            user.ngaySinh = ngaySinh;
-            user.gioiTinh = gioiTinh;
-            user.diaChi = diaChi;
-
-            user.save(function(err, user1) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    User.find(function(err, users) {
-                        res.status(200).send({
-                            'messege': 'Updated'
-                        });
-                    });
-                }
-            });
-        } else {
-            res.status(404).send({
-                'messege': 'Not found'
-            });
-        }
-    });
-});
-
-//##############################################-Item API-######################################
-//##############################################-Item API-######################################
-//##############################################-Item API-######################################
-//ADD
-apiRoutes.post('/items', function(req, res) {
-
-    // create a sample item
-    var item = new Item({
-        ID: req.body.ID,
-        moTa: req.body.moTa,
-        ten: req.body.ten,
-        hinhAnh: req.body.hinhAnh,
-        chuyenMuc: req.body.chuyenMuc,
-        giaHienTai: req.body.giaHienTai,
-        ngayHetHan: req.body.ngayHetHan,
-        trangThai: req.body.trangThai,
-        tinhTrang: req.body.tinhTrang,
-        noiBan: req.body.noiBan,
-        vanChuyen: req.body.vanChuyen,
-        nguoiBan: req.body.nguoiBan,
-        nguoiTra: req.body.nguoiTra,
-        giaKhoiDiem: req.body.giaKhoiDiem
-    });
-
-
-    // save the item
-    item.save(function(err) {
-        if (err) {
-            console.log(err);
-            res.status(400).json({
-                'error': 'bad request'
-            });
-        } else {
-            console.log('Item saved successfully');
-            res.status(201).send({
-                'message': 'item created'
-            });
-        }
-
-
-    });
-});
 //GET
 //Lay 1 item theo ID
 apiRoutes.get('/items/:ID', function(req, res) {
@@ -217,77 +100,6 @@ apiRoutes.get('/items', function(req, res) {
         }
     });
 });
-
-//DELETE
-apiRoutes.delete('/items/:ID', function(req, res) {
-    Item.remove({
-        ID: req.params.ID
-    }, function(err) {
-        if (!err) {
-            console.log('remove item successfull');
-        } else {
-            console.log(error);
-        }
-    });
-});
-
-//EDIT
-apiRoutes.put('/items/:ID', function(req, res) {
-
-    var ten = req.body.ten;
-    var hinhAnh = req.body.hinhAnh;
-    var chuyenMuc = req.body.chuyenMuc;
-    var giaHienTai = req.body.giaHienTai;
-    var ngayHetHan = req.body.ngayHetHan;
-    var trangThai = req.body.trangThai;
-    var tinhTrang = req.body.tinhTrang;
-    var noiBan = req.body.noiBan;
-    var vanChuyen = req.body.vanChuyen;
-    var moTa = req.body.moTa;
-    var nguoiBan = req.body.nguoiBan;
-    var nguoiTra = req.body.nguoiTra;
-    var giaKhoiDiem = req.body.giaKhoiDiem;
-
-    Item.findOne({
-        ID: req.params.ID
-    }, function(err, u) {
-
-        if (err) throw err;
-
-        if (u) {
-            u.ten = ten;
-            u.hinhAnh = hinhAnh;
-            u.chuyenMuc = chuyenMuc;
-            u.giaHienTai = giaHienTai;
-            u.ngayHetHan = ngayHetHan;
-            u.trangThai = trangThai;
-            u.tinhTrang = tinhTrang;
-            u.noiBan = noiBan;
-            u.vanChuyen = vanChuyen;
-            u.moTa = moTa;
-            u.nguoiBan = nguoiBan;
-            u.nguoiTra = nguoiTra;
-            u.giaKhoiDiem = giaKhoiDiem;
-
-            u.save(function(err, u) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Item.find(function(err, items) {
-                        res.status(200).send({
-                            'messege': 'Updated'
-                        });
-                    });
-                }
-            });
-        }
-    });
-});
-
-
 
 //-------------------------ITEM API------------------
 //API lấy 4 sản phẩm đấu giá mới nhất
@@ -710,105 +522,7 @@ apiRoutes.get('/item_following/:ID', function(req, res) {
     });
 });
 
-//##############################################-Userauction API-######################################
-//##############################################-Userauction API-######################################
-//##############################################-Userauction API-######################################
-//ADD
-apiRoutes.post('/userauctions', function(req, res) {
-    // create a sample userauction
-    var buyerName = req.body.buyerName;
-    var userauction = new Userauction({
-        userID: req.body.userID,
-        itemID: req.body.itemID,
-        giaDaTra: req.body.giaDaTra
-    });
-
-    Userauction.findOne({
-        userID: userauction.userID,
-        itemID: userauction.itemID
-    }, function(err, user) {
-        //console.log(userauction);
-        if (err) throw err;
-        if (user) {
-            user.giaDaTra = userauction.giaDaTra;
-
-            user.save(function(err, user1) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Item.findOne({
-                        ID: user.itemID
-                    }).select().exec(function(err, item1) {
-                        if (err) {
-                            return res.status(404).send('Not found');
-                            console.log('Failed!!');
-                        } else {
-
-                            item1.nguoiTra = user.userID;
-                            item1.tenNguoiTra = buyerName;
-                            item1.giaHienTai = user.giaDaTra;
-
-                            item1.save(function(err, abc) {
-                                if (err) {
-                                    res.status(400).send({
-                                        'error': 'Bad request (The data is invalid)'
-                                    });
-                                    console.error(err);
-                                } else {
-                                    res.status(200).send({
-                                        'message': 'updated'
-                                    });
-                                    console.log('updated item');
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        } else {
-            userauction.save(function(err, user1) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    // //--
-                    Item.findOne({
-                        ID: userauction.itemID
-                    }).select().exec(function(err, items) {
-                        if (err) {
-                            return res.status(404).send('Not found');
-                            console.log('Failed!!');
-                        } else {
-                            items.nguoiTra = userauction.userID;
-                            items.tenNguoiTra = buyerName;
-                            items.giaHienTai = userauction.giaDaTra;
-
-                            items.save(function(err) {
-                                if (err) {
-                                    res.status(400).send({
-                                        'error': 'Bad request (The data is invalid)'
-                                    });
-                                    return console.error(err);
-                                } else {
-                                    res.status(200).send({
-                                        'message': 'updated'
-                                    });
-                                    console.log('updated item');
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    })
-
-});
+//------------------------------------------------------User Auction------------------------------------------------
 
 //GET
 //Lay 1 userauction theo userID va itemID
@@ -841,87 +555,8 @@ apiRoutes.get('/userauctions', function(req, res) {
     });
 });
 
-//DELETE
-apiRoutes.delete('/userauctions/:ID', function(req, res) {
-    Userauction.remove({
-        userID: req.params.ID
-    }, function(err) {
-        if (!err) {
-            console.log('remove userauction successfull');
-        } else {
-            console.log(error);
-        }
-    });
-});
 
-//EDIT
-apiRoutes.put('/userauctions/:ID', function(req, res) {
-
-    var userID = req.body.userID;
-    var itemID = req.body.itemID;
-    var giaHienTai = req.body.giaHienTai;
-    var giaDaTra = req.body.giaDaTra;
-
-    Userauction.findOne({
-        ID: req.params.ID
-    }, function(err, u) {
-
-        if (err) throw err;
-
-        if (u) {
-            u.userID = userID;
-            u.itemID = itemID;
-            u.giaHienTai = giaHienTai;
-            u.giaDaTra = giaDaTra;
-
-            u.save(function(err, u) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Userauction.find(function(err, items) {
-                        res.status(200).send({
-                            'messege': 'Updated'
-                        });
-                    });
-                }
-            });
-        }
-    });
-});
-
-//##############################################-Userfollow API-######################################
-//##############################################-Userfollow API-######################################
-//##############################################-Userfollow API-######################################
-//ADD
-apiRoutes.post('/userfollows', function(req, res) {
-
-    // create a sample userfollow
-    var userfollow = new Userfollow({
-        userID: req.body.userID,
-        itemID: req.body.itemID
-    });
-    console.log(req.body);
-
-
-    // save the userfollow
-    userfollow.save(function(err) {
-        if (err) {
-            console.log(err);
-            res.status(400).json({
-                'error': 'bad request'
-            });
-            return;
-        }
-
-        console.log('Userfollow saved successfully');
-        res.status(201).send({
-            'message': 'userfollow created'
-        });
-    });
-});
+//------------------------------------------------------User follow------------------------------------------------
 
 //GET
 //Lay 1 userfollow theo ID &^&*#$*&@$@
@@ -997,115 +632,22 @@ apiRoutes.get('/userfollows', function(req, res) {
     });
 });
 
-//DELETE
-apiRoutes.delete('/userfollows', function(req, res) {
-    Userfollow.remove({
-        userID: req.query.userID,
-        itemID: req.query.itemID,
-    }, function(err) {
-        if (!err) {
-            console.log('remove userfollow successfull');
-            res.status(200).send('Successfully');
-        } else {
-            console.log(error);
-            res.status(400).send('Error');
-        }
-    });
-});
 
 
-//##############################################-Notification API-######################################
-//##############################################-Notification API-######################################
-//##############################################-Notification API-######################################
-
-//Lay tat ca notification
-apiRoutes.get('/notifications', function(req, res) {
-    var userID = req.query.userID;
-    var kind = req.query.kind;
-    Notification.find({
-        userID: userID,
-        kind: kind
-    }).sort({
-        thoiGian: 1
-    }).select().exec(function(err, notifications) {
-        if (err)
-            return console.log(notifications);
-        else {
-            res.status(200).send(notifications);
-        }
-    });
-});
-
-//Lay tat ca notification
-apiRoutes.post('/notifications_seen', function(req, res) {
-    var userID = req.body.userID;
-    var kind = req.body.kind;
-    Notification.find({
-        userID: userID,
-        kind: kind
-    }).sort({
-        thoiGian: 1
-    }).select().exec(function(err, notifications) {
-        if (err) {
-            res.status(400).send({
-                'error': 'Bad request (The data is invalid)'
-            });
-        } else {
-            for (var i = 0; i < notifications.length; i++) {
-                var noti = notifications[i];
-                noti.seen = 1;
-                noti.save(function(err) {
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        //console.log('set seen 1');
-                    }
-                });
-            }
-            res.status(200).send({
-                'messege': 'Updated'
-            });
-        }
-    });
-});
 
 
-apiRoutes.delete('/notifications/:ID', function(req, res) {
-    var ID = req.params.ID;
-    Notification.remove({
-        _id: ID
-    }, function(err) {
-        if (!err) {
-            console.log('remove notification successfull');
-            res.status(200).send('Successfully');
-        } else {
-            console.log(error);
-            res.status(500).send('Error');
-        }
-    });
-});
 
-apiRoutes.delete('/notifications', function(req, res) {
-    var userID = req.query.userID;
-    var kind = req.query.kind;
-    Notification.remove({
-        userID: userID,
-        kind: kind
-    }, function(err) {
-        if (!err) {
-            console.log('remove all notification successfull');
-            res.status(200).send('Successfully');
-        } else {
-            console.log(error);
-            res.status(500).send('Error');
-        }
-    });
-});
 
 
 //#########################################-Authentication API-#################################
 //#########################################-Authentication API-#################################
 //#########################################-Authentication API-#################################
+
+
+
+
+
+
 
 
 
@@ -1329,6 +871,572 @@ apiRoutes.use(function(req, res, next) {
 });
 
 
+
+
+
+
+
+
+//##############################################-User API-######################################
+//##############################################-User API-######################################
+//##############################################-User API-######################################
+
+
+
+
+
+
+
+
+
+//ADD
+apiRoutes.post('/users', function(req, res) {
+
+    // create a sample user
+    var user = new User({
+        ID: req.body.ID,
+        email: req.body.email,
+        ten: req.body.ten,
+        avatar: req.body.avatar,
+        soDienThoai: req.body.soDienThoai,
+        ngaySinh: req.body.ngaySinh,
+        gioiTinh: req.body.gioiTinh,
+        diaChi: req.body.diaChi
+    });
+
+    // save the user
+    user.save(function(err) {
+        if (err) {
+            res.status(400).json({
+                'error': 'bad request'
+            });
+        }
+
+        console.log('User saved successfully');
+        res.status(201).send({
+            'message': 'user created'
+        });
+    });
+});
+
+//DELETE
+apiRoutes.delete('/users/:ID', function(req, res) {
+    User.remove({
+        ID: req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove user successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/users/:ID', function(req, res) {
+
+    var email = req.body.email;
+    var ten = req.body.ten;
+    var avatar = req.body.avatar;
+    var soDienThoai = req.body.soDienThoai;
+    var ngaySinh = req.body.ngaySinh;
+    var gioiTinh = req.body.gioiTinh;
+    var diaChi = req.body.diaChi;
+
+
+    User.findOne({
+        ID: req.params.ID
+    }, function(err, user) {
+
+        if (err) throw err;
+
+        if (user) {
+            user.email = email;
+            user.ten = ten;
+            user.avatar = avatar;
+            user.soDienThoai = soDienThoai;
+            user.ngaySinh = ngaySinh;
+            user.gioiTinh = gioiTinh;
+            user.diaChi = diaChi;
+
+            user.save(function(err, user1) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    User.find(function(err, users) {
+                        res.status(200).send({
+                            'messege': 'Updated'
+                        });
+                    });
+                }
+            });
+        } else {
+            res.status(404).send({
+                'messege': 'Not found'
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+//##############################################-Item API-######################################
+//##############################################-Item API-######################################
+//##############################################-Item API-######################################
+
+
+
+
+
+//ADD
+apiRoutes.post('/items', function(req, res) {
+
+    // create a sample item
+    var item = new Item({
+        ID: req.body.ID,
+        moTa: req.body.moTa,
+        ten: req.body.ten,
+        hinhAnh: req.body.hinhAnh,
+        chuyenMuc: req.body.chuyenMuc,
+        giaHienTai: req.body.giaHienTai,
+        ngayHetHan: req.body.ngayHetHan,
+        trangThai: req.body.trangThai,
+        tinhTrang: req.body.tinhTrang,
+        noiBan: req.body.noiBan,
+        vanChuyen: req.body.vanChuyen,
+        nguoiBan: req.body.nguoiBan,
+        nguoiTra: req.body.nguoiTra,
+        giaKhoiDiem: req.body.giaKhoiDiem
+    });
+
+
+    // save the item
+    item.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                'error': 'bad request'
+            });
+        } else {
+            console.log('Item saved successfully');
+            res.status(201).send({
+                'message': 'item created'
+            });
+        }
+
+
+    });
+});
+
+//DELETE
+apiRoutes.delete('/items/:ID', function(req, res) {
+    Item.remove({
+        ID: req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove item successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/items/:ID', function(req, res) {
+
+    var ten = req.body.ten;
+    var hinhAnh = req.body.hinhAnh;
+    var chuyenMuc = req.body.chuyenMuc;
+    var giaHienTai = req.body.giaHienTai;
+    var ngayHetHan = req.body.ngayHetHan;
+    var trangThai = req.body.trangThai;
+    var tinhTrang = req.body.tinhTrang;
+    var noiBan = req.body.noiBan;
+    var vanChuyen = req.body.vanChuyen;
+    var moTa = req.body.moTa;
+    var nguoiBan = req.body.nguoiBan;
+    var nguoiTra = req.body.nguoiTra;
+    var giaKhoiDiem = req.body.giaKhoiDiem;
+
+    Item.findOne({
+        ID: req.params.ID
+    }, function(err, u) {
+
+        if (err) throw err;
+
+        if (u) {
+            u.ten = ten;
+            u.hinhAnh = hinhAnh;
+            u.chuyenMuc = chuyenMuc;
+            u.giaHienTai = giaHienTai;
+            u.ngayHetHan = ngayHetHan;
+            u.trangThai = trangThai;
+            u.tinhTrang = tinhTrang;
+            u.noiBan = noiBan;
+            u.vanChuyen = vanChuyen;
+            u.moTa = moTa;
+            u.nguoiBan = nguoiBan;
+            u.nguoiTra = nguoiTra;
+            u.giaKhoiDiem = giaKhoiDiem;
+
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Item.find(function(err, items) {
+                        res.status(200).send({
+                            'messege': 'Updated'
+                        });
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+//##############################################-Userauction API-######################################
+//##############################################-Userauction API-######################################
+//##############################################-Userauction API-######################################
+
+
+
+
+
+
+
+
+
+//ADD
+apiRoutes.post('/userauctions', function(req, res) {
+    // create a sample userauction
+    var buyerName = req.body.buyerName;
+    var userauction = new Userauction({
+        userID: req.body.userID,
+        itemID: req.body.itemID,
+        giaDaTra: req.body.giaDaTra
+    });
+
+    Userauction.findOne({
+        userID: userauction.userID,
+        itemID: userauction.itemID
+    }, function(err, user) {
+        //console.log(userauction);
+        if (err) throw err;
+        if (user) {
+            user.giaDaTra = userauction.giaDaTra;
+
+            user.save(function(err, user1) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Item.findOne({
+                        ID: user.itemID
+                    }).select().exec(function(err, item1) {
+                        if (err) {
+                            return res.status(404).send('Not found');
+                            console.log('Failed!!');
+                        } else {
+
+                            item1.nguoiTra = user.userID;
+                            item1.tenNguoiTra = buyerName;
+                            item1.giaHienTai = user.giaDaTra;
+
+                            item1.save(function(err, abc) {
+                                if (err) {
+                                    res.status(400).send({
+                                        'error': 'Bad request (The data is invalid)'
+                                    });
+                                    console.error(err);
+                                } else {
+                                    res.status(200).send({
+                                        'message': 'updated'
+                                    });
+                                    console.log('updated item');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        } else {
+            userauction.save(function(err, user1) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    // //--
+                    Item.findOne({
+                        ID: userauction.itemID
+                    }).select().exec(function(err, items) {
+                        if (err) {
+                            return res.status(404).send('Not found');
+                            console.log('Failed!!');
+                        } else {
+                            items.nguoiTra = userauction.userID;
+                            items.tenNguoiTra = buyerName;
+                            items.giaHienTai = userauction.giaDaTra;
+
+                            items.save(function(err) {
+                                if (err) {
+                                    res.status(400).send({
+                                        'error': 'Bad request (The data is invalid)'
+                                    });
+                                    return console.error(err);
+                                } else {
+                                    res.status(200).send({
+                                        'message': 'updated'
+                                    });
+                                    console.log('updated item');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    })
+
+});
+
+
+//DELETE
+apiRoutes.delete('/userauctions/:ID', function(req, res) {
+    Userauction.remove({
+        userID: req.params.ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove userauction successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+//EDIT
+apiRoutes.put('/userauctions/:ID', function(req, res) {
+
+    var userID = req.body.userID;
+    var itemID = req.body.itemID;
+    var giaHienTai = req.body.giaHienTai;
+    var giaDaTra = req.body.giaDaTra;
+
+    Userauction.findOne({
+        ID: req.params.ID
+    }, function(err, u) {
+
+        if (err) throw err;
+
+        if (u) {
+            u.userID = userID;
+            u.itemID = itemID;
+            u.giaHienTai = giaHienTai;
+            u.giaDaTra = giaDaTra;
+
+            u.save(function(err, u) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Userauction.find(function(err, items) {
+                        res.status(200).send({
+                            'messege': 'Updated'
+                        });
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+//##############################################-Userfollow API-######################################
+//##############################################-Userfollow API-######################################
+//##############################################-Userfollow API-######################################
+
+
+
+
+
+
+
+//ADD
+apiRoutes.post('/userfollows', function(req, res) {
+
+    // create a sample userfollow
+    var userfollow = new Userfollow({
+        userID: req.body.userID,
+        itemID: req.body.itemID
+    });
+    console.log(req.body);
+
+
+    // save the userfollow
+    userfollow.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                'error': 'bad request'
+            });
+            return;
+        }
+
+        console.log('Userfollow saved successfully');
+        res.status(201).send({
+            'message': 'userfollow created'
+        });
+    });
+});
+
+
+
+//DELETE
+apiRoutes.delete('/userfollows', function(req, res) {
+    Userfollow.remove({
+        userID: req.query.userID,
+        itemID: req.query.itemID,
+    }, function(err) {
+        if (!err) {
+            console.log('remove userfollow successfull');
+            res.status(200).send('Successfully');
+        } else {
+            console.log(error);
+            res.status(400).send('Error');
+        }
+    });
+});
+
+
+
+
+
+
+
+//##############################################-Notification API-######################################
+//##############################################-Notification API-######################################
+//##############################################-Notification API-######################################
+
+
+
+
+
+
+
+//Lay tat ca notification
+apiRoutes.get('/notifications', function(req, res) {
+    var userID = req.query.userID;
+    var kind = req.query.kind;
+    Notification.find({
+        userID: userID,
+        kind: kind
+    }).sort({
+        thoiGian: 1
+    }).select().exec(function(err, notifications) {
+        if (err)
+            return console.log(notifications);
+        else {
+            res.status(200).send(notifications);
+        }
+    });
+});
+
+//Lay tat ca notification
+apiRoutes.post('/notifications_seen', function(req, res) {
+    var userID = req.body.userID;
+    var kind = req.body.kind;
+    Notification.find({
+        userID: userID,
+        kind: kind
+    }).sort({
+        thoiGian: 1
+    }).select().exec(function(err, notifications) {
+        if (err) {
+            res.status(400).send({
+                'error': 'Bad request (The data is invalid)'
+            });
+        } else {
+            for (var i = 0; i < notifications.length; i++) {
+                var noti = notifications[i];
+                noti.seen = 1;
+                noti.save(function(err) {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        //console.log('set seen 1');
+                    }
+                });
+            }
+            res.status(200).send({
+                'messege': 'Updated'
+            });
+        }
+    });
+});
+
+
+apiRoutes.delete('/notifications/:ID', function(req, res) {
+    var ID = req.params.ID;
+    Notification.remove({
+        _id: ID
+    }, function(err) {
+        if (!err) {
+            console.log('remove notification successfull');
+            res.status(200).send('Successfully');
+        } else {
+            console.log(error);
+            res.status(500).send('Error');
+        }
+    });
+});
+
+apiRoutes.delete('/notifications', function(req, res) {
+    var userID = req.query.userID;
+    var kind = req.query.kind;
+    Notification.remove({
+        userID: userID,
+        kind: kind
+    }, function(err) {
+        if (!err) {
+            console.log('remove all notification successfull');
+            res.status(200).send('Successfully');
+        } else {
+            console.log(error);
+            res.status(500).send('Error');
+        }
+    });
+});
+
+
+
+
+
 var port = process.env.PORT || 8081;
 
 apiRoutes.get('/', function(req, res) {
@@ -1343,9 +1451,21 @@ var server = app.listen(port);
 console.log('server is running at port::' + port);
 
 
+
+
+
+
+
 //#########################################-Socket -#################################
 //#########################################-Socket -#################################
 //#########################################-Socket -#################################
+
+
+
+
+
+
+
 
 var createNotiWithData = function(data, userID, status, kind) {
     var notification = new Notification({
