@@ -1,139 +1,139 @@
 <div style="background: white;">
-    <div class="top-header" id="fixedHeader">
+	<div class="top-header" id="fixedHeader">
 		<div class="fix-header-div1" ng-click="goTo_Home()"></div>
-        <div class="fix-header-div2">
-            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?" ng/>
-            <button class="btn-tim-kiem" ng-click="goTo_Search_Result()"><i class="fa fa-search" style="color: white;"> </i> </button>
-            <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
-        </div>
+		<div class="fix-header-div2">
+			<input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?" ng/>
+			<button class="btn-tim-kiem" ng-click="goTo_Search_Result()"><i class="fa fa-search" style="color: white;"> </i> </button>
+			<button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+		</div>
 	</div>
-
-    <div class="header" id="defaultHeader">
-        <div class="header-div1">
-            <div class="link-dk-dn" ng-show="show1" >
-                <a class="text-link-dk-dn" ng-click="goTo_Login()">Đăng nhập</a>
-                <a class="text-link-dk-dn" ng-click="goTo_SignUp()">Đăng ký</a>
-            </div>
-            
-            <div ng-hide="show1">
+	<div class="header" id="defaultHeader">
+		<div class="header-div1">
+			<div class="link-dk-dn" ng-show="show1" >
+				<a class="text-link-dk-dn" ng-click="goTo_Login()">Đăng nhập</a>
+				<a class="text-link-dk-dn" ng-click="goTo_SignUp()">Đăng ký</a>
+			</div>
+			
+			<div ng-hide="show1">
 				<div class="dropdown">
 					<div class="box-username">
 						<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
 						<a class="text-username"> {{username }}</a>
 					</div>
 					<div class="dropdown-user">
-						<div class="dropdown-account"> 
+						<div class="dropdown-account">
 							<span class="dropdown-myInfo" ng-click="goTo_User_Info()"> Trang cá nhân </span>
 						</div>
-						<div class="dropdown-account"> 
+						<div class="dropdown-account">
 							<span class="dropdown-logOut" ng-click="goTo_Logout()"> Đăng xuất </i> </span>
 						</div>
 					</div>
 				</div>
 				
-                <div id="notiBoxFollow" ng-class="notiFollowClass" ng-init="notiFollowClass = 'box-noti'" ng-click="showNotiFollow()">
+				<div id="notiBoxFollow" ng-class="notiFollowClass" ng-init="notiFollowClass = 'box-noti'" ng-click="showNotiFollow()">
 					<i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{follow_noti}}</span>
+					<span class="badge" ng-show='haveFollowNoti'>{{follow_noti}}</span>
 					<div id="notiFollow" class="div-show-follow-container" ng-show="divNotiFollow">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"ng-click='deleteAllFollowNoti($index)'> Xóa tất cả </span>
 						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO THEO DÕI </strong> </span>
-						<div class="div-show-noti" ng-show="divNotiFollow"> 
-							<div class="noti-div-container">
+						<div class="div-show-noti" ng-show="divNotiFollow">
 							
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+							<div ng-repeat="follow in follow_info">
+								<div class="noti-div-container">
+									<div class="noti-div" ng-click="goTo_Item_Info(follow.itemID)">
+										<div class="noti-img-div">
+											<img class="noti-img" src="image/image-default.png">
+										</div>
+										<div class="noti-delete-div" ng-click='deleteFollowNoti'>
+											<img class="noti-img" src="image/icon-delete.png">
+										</div>
+										<span style="display:block"> <strong> {{follow.name}} </strong>  </span>
+										<span style="display:block"> {{follow.massage}}   </span>
+									</div>
 								</div>
-								
-							</div>				
-							
+							</div>
 						</div>
 					</div>
 				</div>
 				
 				<div id="notiBoxAuction" ng-class="notiAuctionClass" ng-init="notiAuctionClass = 'box-noti'" ng-click="showNotiAuction()">
 					<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{auction_noti}}</span>
+					<span class="badge" ng-show='haveAuctionNoti'>{{auction_noti}}</span>
 					<div id="notiAuction" class="div-show-auction-container" ng-show="divNotiAuction">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
+						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;" ng-click='deleteAllAuctionNoti($index)'> Xóa tất cả </span>
 						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO ĐẤU GIÁ </strong> </span>
-						<div  class="div-show-noti" ng-show="divNotiAuction"> 
-							<div class="noti-div-container">
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
+						<div  class="div-show-noti" ng-show="divNotiAuction">
+							
+							<div ng-repeat="auction in auction_info">
+								<div class="noti-div-container">
+									<div class="noti-div" ng-click="goTo_Item_Info(auction.itemID)">
+										<div class="noti-img-div">
+											<img class="noti-img" src="image/image-default.png">
+										</div>
+										<div class="noti-delete-div" ng-click='deleteAuctionNoti($index)'>
+											<img class="noti-img" src="image/icon-delete.png">
+										</div>
+										<span style="display:block"> <strong> {{auction.name}} </strong>  </span>
+										<span style="display:block"> {{auction.massage}}   </span>
+									</div>
 								</div>
-							</div>				
+							</div>
 							
 						</div>
 					</div>
 				</div>
-            </div>
-        </div>
-        
-        <div class="header-div2" ng-click="goTo_Home()">
-        </div>
-        
-        <div class="header-div3">
-            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
-            <button class="btn-tim-kiem" ng-click="goTo_Search_Result()" ><i class="fa fa-search" style="color: white;"> </i> </button>
-            <button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
-        </div>
-    </div>
-    
-        
-    <div class="body-item">
+			</div>
+		</div>
+		
+		<div class="header-div2" ng-click="goTo_Home()">
+		</div>
+		
+		<div class="header-div3">
+			<input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
+			<button class="btn-tim-kiem" ng-click="goTo_Search_Result()" ><i class="fa fa-search" style="color: white;"> </i> </button>
+			<button class="btn-dang-tin color-white" ng-click="goTo_Add_Item()"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+		</div>
+	</div>
+	
+	
+	<div class="body-item">
 		<div class="user-info-div1">
-            <div class="user-img-and-name">
+			<div class="user-img-and-name">
 				<div class="avatar-div" ng-hide="notMyInfo">
 					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{picture}}" ng-click="pickImage()">
 				</div>
 				<div class="avatar-div" ng-show="notMyInfo">
 					<img class="user-avatar-static" title="Ảnh đại diện" ng-src="{{picture}}">
 				</div>
-                <span class="user-name"> {{staticName}}</span>
-            </div>
+				<span class="user-name"> {{staticName}}</span>
+			</div>
 			
-            <div class="user-info-1" ng-show="showEmail">
-                <span class="user-info-text"> <b> Email </b></span>
+			<div class="user-info-1" ng-show="showEmail">
+				<span class="user-info-text"> <b> Email </b></span>
 				</br>
-                <span class="user-info-text"> {{staticEmail}}</span>
-            </div>
-            
-            <div class="user-info-1" ng-show="showBirthday">
-                <span class="user-info-text"> <b> Ngày sinh </b></span>
+				<span class="user-info-text"> {{staticEmail}}</span>
+			</div>
+			
+			<div class="user-info-1" ng-show="showBirthday">
+				<span class="user-info-text"> <b> Ngày sinh </b></span>
 				</br>
-                <span class="user-info-text">{{staticBirthday}}</span>
-            </div>
-            
-            
-            <div class="user-info-1" ng-show="showGender">
-                <span class="user-info-text"> <b> Giới tính </b></span>
+				<span class="user-info-text">{{staticBirthday}}</span>
+			</div>
+			
+			
+			<div class="user-info-1" ng-show="showGender">
+				<span class="user-info-text"> <b> Giới tính </b></span>
 				</br>
-                <span class="user-info-text"> {{staticGender}}</span>
-            </div>
-        </div>
-        
-        <div class="user-info-div2" style="">
+				<span class="user-info-text"> {{staticGender}}</span>
+			</div>
+		</div>
+		
+		<div class="user-info-div2" style="">
 			<div class="user-main-tab">
 				<div class="user-tab" ng-click="goTo_User_Info()">
 					<span> THÔNG TIN CHUNG </span>
 				</div>
-				<div class="user-selected-tab" 
+				<div class="user-selected-tab"
 					<span> ĐĂNG BÁN </span>
 				</div>
 				<div class="user-tab" ng-click="goTo_User_Buy()">
@@ -152,177 +152,173 @@
 				
 				<div class="user-sell-title2">
 					<span class="user-sell-title-text"> GIÁ HIỆN TẠI <span>
+					</div>
+					
+					<div class="user-sell-title2">
+						<span class="user-sell-title-text"> THỜI HẠN <span>
+						</div>
+						
+						<div class="user-sell-title2">
+							<span class="user-sell-title-text"> TÌNH TRẠNG <span>
+							</div>
+						</div>
+						
+						<div ng-repeat="item in user_items" ng-init="changeInfo(item)">
+							<div class="user-sell-container" >
+								<div class="user-sell-div-1" ng-click="goTo_Item_Info(item.ID)">
+									<img class="user-item-img" ng-src="{{item.hinhAnh}}" alt=" No image " />
+								</div>
+								
+								<div class="user-sell-div-2">
+									<span class="span-item-name" ng-click="goTo_Item_Info(item.ID)"> {{item.ten}} </span>
+									<span class="span-item-location"> {{item.noiBan}}</span>
+									<span class="span-item-type" ng-click="goTo_Item_List(item.chuyenMuc)"> {{item.chuyenMuc}}  </span>
+									<span class="span-item-seller" ng-click="goTo_User_Info(viewID)"> {{viewID}}  </span>
+								</div>
+								
+								<div class="user-sell-div-3">
+									<span class="span-item-price"> {{item.giaHienTai}} <u> đ </u> </span>
+								</div>
+								
+								<div class="user-sell-div-4">
+									<span class="span-item-date1"> {{item.date}} </span>
+									<span class="span-item-date2"> {{item.time}} </span>
+								</div>
+								
+								<div class="user-sell-div-5">
+									<span class="span-item-stt"> {{item.status}} <span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="footer">
+						<div class="footer-begin">
+						</div>
+						
+						<div class="footer-container">
+							<div class="footer-chuyen-muc">
+								<div class="footer-title">
+									<span> CHUYÊN MỤC </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('do-dien-tu')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Đồ điện tử </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('giai-tri-the-thao-so-thich')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Giải trí, Thể thao, Sở thích</span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('xe-co-may-moc')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Xe cộ, máy móc </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('me-va-be')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Mẹ và Bé </span>
+								</div>
+								
+								<div class="footer-item" style="border-bottom: none;" ng-click="goTo_Item_List('thoi-trang-va-phu-kien')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Thời trang & Phụ kiện </span>
+								</div>
+							</div>
+							
+							<div class="footer-chuyen-muc">
+								<div class="footer-title">
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('do-an-thuc-uong')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Đồ ăn, thức uống </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('do-gia-dung')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Đồ gia dụng </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('suc-khoe-va-sac-dep')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Sức khỏe & Sắc đẹp </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Item_List('bat-dong-san')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Bất động sản </span>
+								</div>
+								
+								<div class="footer-item" style="border-bottom: none;" ng-click="goTo_Item_List('cac-loai-khac')">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Các loại khác </span>
+								</div>
+							</div>
+							
+							<div class="footer-chuyen-muc">
+								<div class="footer-title">
+									<span> INFORMATION </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_Login()">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Đăng nhập </span>
+								</div>
+								
+								<div class="footer-item" ng-click="goTo_SignUp()">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Đăng ký </span>
+								</div>
+								<div class="footer-item" style="border-bottom: none;" ng-click="inDevelopmentAlert()">
+									<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
+									<span> Liên hệ </span>
+								</div>
+							</div>
+							
+							<div class="footer-ket-noi">
+								<div class="footer-title">
+									<span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
+									<input class="input-email" placeholder="Enter your email address"/>
+									<button class="btn-subscribe" ng-click="inDevelopmentAlert()"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
+									
+									<span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
+									<div>
+										<a class="icon-fb" ng-click="inDevelopmentAlert()"></a>
+										<a class="icon-google" ng-click="inDevelopmentAlert()"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div style="width: 100%; clear:both; padding-top: 30px;">
+							<img class="footer-logo" src="image/logo-2.png">
+						</div>
+						
+						<div class="footer-end">
+							<span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
+						</div>
+					</div>
+					
 				</div>
-				
-				<div class="user-sell-title2">
-					<span class="user-sell-title-text"> THỜI HẠN <span>   
-				</div>	
-				
-				<div class="user-sell-title2">
-					<span class="user-sell-title-text"> TÌNH TRẠNG <span>   
-				</div>				
-			</div>
-			
-			<div ng-repeat="item in user_items" ng-init="changeInfo(item)">
-				<div class="user-sell-container" >
-					<div class="user-sell-div-1" ng-click="goTo_Item_Info(item.ID)">
-						<img class="user-item-img" ng-src="{{item.hinhAnh}}" alt=" No image " />
-					</div>
+				<script>
+					$(function () {
+						var austDay = new Date();
+						austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
+						$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+						$('#year').text(austDay.getFullYear());
+					});
 					
-					<div class="user-sell-div-2">
-						<span class="span-item-name" ng-click="goTo_Item_Info(item.ID)"> {{item.ten}} </span>
-						<span class="span-item-location"> {{item.noiBan}}</span>
-						<span class="span-item-type" ng-click="goTo_Item_List(item.chuyenMuc)"> {{item.chuyenMuc}}  </span>
-						<span class="span-item-seller" ng-click="goTo_User_Info(viewID)"> {{viewID}}  </span>
-					</div>
-					
-					<div class="user-sell-div-3">
-						<span class="span-item-price"> {{item.giaHienTai}} <u> đ </u> </span>   
-					</div>		
-					
-					<div class="user-sell-div-4">
-						<span class="span-item-date1"> {{item.date}} </span>   
-						<span class="span-item-date2"> {{item.time}} </span>  
-					</div>
-					
-					<div class="user-sell-div-5">
-						<span class="span-item-stt"> {{item.status}} <span>   
-					</div>
-				</div>
-			</div>
-		</div>     
-	</div> 		
-
-	
-    <div class="footer">
-    	<div class="footer-begin">
-    	</div>
-    
-    	<div class="footer-container">
-            <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
-            		<span> CHUYÊN MỤC </span>
-                </div>
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ điện tử </span>
-           		</div>  
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Giải trí, Thể thao, Sở thích</span>
-           		</div>  
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Xe cộ, máy móc </span>
-           		</div>  
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Mẹ & Bé </span>
-           		</div>  
-                
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Thời trang & Phụ kiện </span>
-           		</div>  
-            </div>
-            
-            <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
-                </div>
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ ăn, thức uống </span>
-           		</div>   
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đồ gia dụng </span>
-           		</div>  
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Sức khỏe & Sắc đẹp </span>
-           		</div>  
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Bất động sản </span>
-           		</div>  
-                
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Các loại khác </span>
-           		</div>  
-            </div>
-            
-            <div class="footer-chuyen-muc">
-            	<div class="footer-title">  
-            		<span> INFOMATION </span>
-                </div>
-                
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đăng nhập </span>
-           		</div>  
-           
-                <div class="footer-item"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Đăng kí </span>
-           		</div>  
-
-                <div class="footer-item" style="border-bottom: none;"> 
-            		<i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                	<span> Liên hệ </span>
-           		</div>  
-            </div>
-            
-            <div class="footer-ket-noi">
-            	<div class="footer-title">
-            		<span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
-                    <input class="input-email" placeholder="Enter your email address"/>
-            		<button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
-                    
- 					<span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
-                    <div>
-                    <a class="icon-fb"></a>
-                    <a class="icon-google"></a>
-                	</div>    
-				</div>
-			</div>
-        </div>
-            
-    	<div style="width: 100%; clear:both; padding-top: 30px;">
-        	<img class="footer-logo" src="image/logo-2.png">
-    	</div>
-    	
-        <div class="footer-end">
-        	<span> Đấu giá - trang web đồ án của Nguyễn Đình Chung - Đặng Thành Danh - Đinh Thị Thùy Dung :) </span>
-    	</div>
-    </div>
-    
-</div>
-
-<script>
-	$(function () {
-		var austDay = new Date();
-		austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
-		$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
-		$('#year').text(austDay.getFullYear());
-	});
-	
-	window.onscroll = function() {myFunction()};
-	function myFunction() {
-		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-			document.getElementById("fixedHeader").style.display = "block";
-		} else {
-			document.getElementById("fixedHeader").style.display = "none";
-		}
-	}
-</script>
-
-</html>
+					window.onscroll = function() {myFunction()};
+					function myFunction() {
+						if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+							document.getElementById("fixedHeader").style.display = "block";
+						} else {
+							document.getElementById("fixedHeader").style.display = "none";
+						}
+					}
+				</script>
+			</html>

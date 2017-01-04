@@ -31,56 +31,57 @@
                 </div>
                 
                 <div id="notiBoxFollow" ng-class="notiFollowClass" ng-init="notiFollowClass = 'box-noti'" ng-click="showNotiFollow()">
-					<i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{follow_noti}}</span>
-					<div id="notiFollow" class="div-show-follow-container" ng-show="divNotiFollow">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
-						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO THEO DÕI </strong> </span>
-						<div class="div-show-noti" ng-show="divNotiFollow"> 
-							<div class="noti-div-container">
-							
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
-								</div>
-								
-							</div>				
-							
-						</div>
-					</div>
-				</div>
-				
-				<div id="notiBoxAuction" ng-class="notiAuctionClass" ng-init="notiAuctionClass = 'box-noti'" ng-click="showNotiAuction()">
-					<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
-                    <span class="badge">{{auction_noti}}</span>
-					<div id="notiAuction" class="div-show-auction-container" ng-show="divNotiAuction">
-						<span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"> Xóa tất cả </span>
-						<span class="text-noti" style="display:block"> <strong> THÔNG BÁO ĐẤU GIÁ </strong> </span>
-						<div  class="div-show-noti" ng-show="divNotiAuction"> 
-							<div class="noti-div-container">
-								<div class="noti-div">
-									<div class="noti-img-div">
-										<img class="noti-img" src="image/image-default.png">
-									</div>	
-									<div class="noti-delete-div">
-										<img class="noti-img" src="image/icon-delete.png">
-									</div>	
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>
-									<span style="display:block"> qwyqeq  </span>
-									<span style="display:block">  qwyetqwyeqeqqeq  </span>									
-								</div>
-							</div>				
-							
-						</div>
-					</div>
-				</div>
+                    <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+                    <span class="badge" ng-show='haveFollowNoti'>{{follow_noti}}</span>
+                    <div id="notiFollow" class="div-show-follow-container" ng-show="divNotiFollow">
+                        <span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;"ng-click='deleteAllFollowNoti($index)'> Xóa tất cả </span>
+                        <span class="text-noti" style="display:block"> <strong> THÔNG BÁO THEO DÕI </strong> </span>
+                        <div class="div-show-noti" ng-show="divNotiFollow">
+                            
+                            <div ng-repeat="follow in follow_info">
+                                <div class="noti-div-container">
+                                    <div class="noti-div" ng-click="goTo_Item_Info(follow.itemID)">
+                                        <div class="noti-img-div">
+                                            <img class="noti-img" src="image/image-default.png">
+                                        </div>
+                                        <div class="noti-delete-div" ng-click='deleteFollowNoti'>
+                                            <img class="noti-img" src="image/icon-delete.png">
+                                        </div>
+                                        <span style="display:block"> <strong> {{follow.name}} </strong>  </span>
+                                        <span style="display:block"> {{follow.massage}}   </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="notiBoxAuction" ng-class="notiAuctionClass" ng-init="notiAuctionClass = 'box-noti'" ng-click="showNotiAuction()">
+                    <i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+                    <span class="badge" ng-show='haveAuctionNoti'>{{auction_noti}}</span>
+                    <div id="notiAuction" class="div-show-auction-container" ng-show="divNotiAuction">
+                        <span class="text-noti text-noti-delete" style="float:right; margin-right: 10px;" ng-click='deleteAllAuctionNoti($index)'> Xóa tất cả </span>
+                        <span class="text-noti" style="display:block"> <strong> THÔNG BÁO ĐẤU GIÁ </strong> </span>
+                        <div  class="div-show-noti" ng-show="divNotiAuction">
+                            
+                            <div ng-repeat="auction in auction_info">
+                                <div class="noti-div-container">
+                                    <div class="noti-div" ng-click="goTo_Item_Info(auction.itemID)">
+                                        <div class="noti-img-div">
+                                            <img class="noti-img" src="image/image-default.png">
+                                        </div>
+                                        <div class="noti-delete-div" ng-click='deleteAuctionNoti($index)'>
+                                            <img class="noti-img" src="image/icon-delete.png">
+                                        </div>
+                                        <span style="display:block"> <strong> {{auction.name}} </strong>  </span>
+                                        <span style="display:block"> {{auction.massage}}   </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -98,31 +99,31 @@
         
         <div class="user-info-div1">
             <div class="user-img-and-name">
-				<div class="avatar-div" ng-hide="notMyInfo">
-					<img class="user-avatar" title="Ảnh đại diện" ng-src="{{picture}}" ng-click="pickImage()">
-				</div>
-				<div class="avatar-div" ng-show="notMyInfo">
-					<img class="user-avatar-static" title="Ảnh đại diện" ng-src="{{picture}}">
-				</div>
+                <div class="avatar-div" ng-hide="notMyInfo">
+                    <img class="user-avatar" title="Ảnh đại diện" ng-src="{{picture}}" ng-click="pickImage()">
+                </div>
+                <div class="avatar-div" ng-show="notMyInfo">
+                    <img class="user-avatar-static" title="Ảnh đại diện" ng-src="{{picture}}">
+                </div>
                 <span class="user-name"> {{staticName}}</span>
             </div>
-			
+            
             <div class="user-info-1" ng-show="showEmail">
                 <span class="user-info-text"> <b> Email </b></span>
-				</br>
+                </br>
                 <span class="user-info-text"> {{staticEmail}}</span>
             </div>
             
             <div class="user-info-1" ng-show="showBirthday">
                 <span class="user-info-text"> <b> Ngày sinh </b></span>
-				</br>
+                </br>
                 <span class="user-info-text">{{staticBirthday}}</span>
             </div>
             
             
             <div class="user-info-1" ng-show="showGender">
                 <span class="user-info-text"> <b> Giới tính </b></span>
-				</br>
+                </br>
                 <span class="user-info-text"> {{staticGender}}</span>
             </div>
         </div>
@@ -145,44 +146,44 @@
             
             <span class="user-title"> THÔNG TIN CHUNG </span>
             
-			<div class="user-info-line">
-                <span class="user-info-label"> Tên hiển thị</span>			
-				<span class="user-info-label"> {{name}}</span>
+            <div class="user-info-line">
+                <span class="user-info-label"> Tên hiển thị</span>
+                <span class="user-info-label"> {{name}}</span>
             </div>
-			
+            
             <div class="user-info-line">
                 <span class="user-info-label"> Email</span>
-				
-				<span class="user-info-text" ng-show="notMyInfo"> {{email}}</span>
+                
+                <span class="user-info-text" ng-show="notMyInfo"> {{email}}</span>
                 <input class="user-info-input" type="email" ng-model="email" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"></input>
-            </div>                    
-                  
+            </div>
+            
             <div class="user-info-line">
-                <span class="user-info-label"> Ngày sinh</span>				
-				<span class="user-info-text" ng-show="notMyInfo"> {{birthday}}</span>
+                <span class="user-info-label"> Ngày sinh</span>
+                <span class="user-info-text" ng-show="notMyInfo"> {{birthday}}</span>
                 <input class="user-info-input" ng-model="birthday" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
             <div class="user-info-line">
-                <span class="user-info-label"> Giới tính</span>				
+                <span class="user-info-label"> Giới tính</span>
                 <span class="user-info-text" ng-show="notMyInfo"> {{gender}}</span>
-				<select class="user-info-input-2" ng-model="gender" ng-hide="notMyInfo" placeholder="">
-					<option value="" disabled selected style="display: none;">* Chưa cập nhật *	</option>
-					<option value="Nam">Nam</option>
-					<option value="Nữ">Nữ</option>	
-				</select>
-				
+                <select class="user-info-input-2" ng-model="gender" ng-hide="notMyInfo" placeholder="">
+                    <option value="" disabled selected style="display: none;">* Chưa cập nhật * </option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                </select>
+                
             </div>
             
-             <div class="user-info-line">
-                <span class="user-info-label"> Số điện thoại</span>				
-				<span class="user-info-text" ng-show="notMyInfo"> {{phone}}</span>
+            <div class="user-info-line">
+                <span class="user-info-label"> Số điện thoại</span>
+                <span class="user-info-text" ng-show="notMyInfo"> {{phone}}</span>
                 <input class="user-info-input" ng-model="phone" ng-keypress="filterValue($event)" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
             <div class="user-info-line">
-                <span class="user-info-label"> Địa chỉ</span>				
-				<span class="user-info-text" ng-show="notMyInfo"> {{address}}</span>
+                <span class="user-info-label"> Địa chỉ</span>
+                <span class="user-info-text" ng-show="notMyInfo"> {{address}}</span>
                 <input class="user-info-input" ng-model="address" ng-hide="notMyInfo" placeholder="* Chưa cập nhật *"> </input>
             </div>
             
@@ -203,27 +204,27 @@
                     <span> CHUYÊN MỤC </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('do-dien-tu')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Đồ điện tử </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('giai-tri-the-thao-so-thich')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Giải trí, Thể thao, Sở thích</span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('xe-co-may-moc')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Xe cộ, máy móc </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('me-va-be')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                    <span> Mẹ & Bé </span>
+                    <span> Mẹ và Bé </span>
                 </div>
                 
-                <div class="footer-item" style="border-bottom: none;">
+                <div class="footer-item" style="border-bottom: none;" ng-click="goTo_Item_List('thoi-trang-va-phu-kien')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Thời trang & Phụ kiện </span>
                 </div>
@@ -233,27 +234,27 @@
                 <div class="footer-title">
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('do-an-thuc-uong')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Đồ ăn, thức uống </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('do-gia-dung')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Đồ gia dụng </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('suc-khoe-va-sac-dep')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Sức khỏe & Sắc đẹp </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Item_List('bat-dong-san')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Bất động sản </span>
                 </div>
                 
-                <div class="footer-item" style="border-bottom: none;">
+                <div class="footer-item" style="border-bottom: none;" ng-click="goTo_Item_List('cac-loai-khac')">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Các loại khác </span>
                 </div>
@@ -261,19 +262,19 @@
             
             <div class="footer-chuyen-muc">
                 <div class="footer-title">
-                    <span> INFOMATION </span>
+                    <span> INFORMATION </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_Login()">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Đăng nhập </span>
                 </div>
                 
-                <div class="footer-item">
+                <div class="footer-item" ng-click="goTo_SignUp()">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
-                    <span> Đăng kí </span>
+                    <span> Đăng ký </span>
                 </div>
-                <div class="footer-item" style="border-bottom: none;">
+                <div class="footer-item" style="border-bottom: none;" ng-click="inDevelopmentAlert()">
                     <i class="fa fa-angle-right" style="font-size:15px; width: 10px;" > </i>
                     <span> Liên hệ </span>
                 </div>
@@ -283,12 +284,12 @@
                 <div class="footer-title">
                     <span style="display:block;"> ĐĂNG KÍ NHẬN TIN ĐẤU GIÁ HỜI </span>
                     <input class="input-email" placeholder="Enter your email address"/>
-                    <button class="btn-subscribe"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
+                    <button class="btn-subscribe" ng-click="inDevelopmentAlert()"><i class="fa fa-envelope" style="color: white;"> </i> SUBSCRIBE </button>
                     
                     <span style="display:block; clear:both"> KẾT NỐI VỚI CHÚNG TÔI </span>
                     <div>
-                        <a class="icon-fb"></a>
-                        <a class="icon-google"></a>
+                        <a class="icon-fb" ng-click="inDevelopmentAlert()"></a>
+                        <a class="icon-google" ng-click="inDevelopmentAlert()"></a>
                     </div>
                 </div>
             </div>
@@ -305,27 +306,26 @@
     
 </div>
 <script>
-	window.onload = function() {
-		// short timeout
-		setTimeout(function() {
-			$(document.body).scrollTop(0);
-		}, 1);
-	};
+    window.onload = function() {
+        // short timeout
+        setTimeout(function() {
+            $(document.body).scrollTop(0);
+        }, 1);
+    };
+$(function () {
+var austDay = new Date();
+austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
+$('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
+$('#year').text(austDay.getFullYear());
+});
 
-    $(function () {
-        var austDay = new Date();
-        austDay = new Date(austDay.getFullYear() + 1  , 1 - 1, 1, 23, 0);
-        $('#defaultCountdown').countdown({until: austDay, format: 'dHMS'});
-        $('#year').text(austDay.getFullYear());
-    });
-    
-    window.onscroll = function() {myFunction()};
-    function myFunction() {
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            document.getElementById("fixedHeader").style.display = "block";
-        } else {
-            document.getElementById("fixedHeader").style.display = "none";
-        }
-    }
+window.onscroll = function() {myFunction()};
+function myFunction() {
+if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+document.getElementById("fixedHeader").style.display = "block";
+} else {
+document.getElementById("fixedHeader").style.display = "none";
+}
+}
 </script>
 </html>

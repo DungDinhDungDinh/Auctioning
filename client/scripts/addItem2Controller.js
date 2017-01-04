@@ -1,9 +1,9 @@
-myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
-	
+myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', '$filter', function($scope, $http, Data, $location, $rootScope, $filter) {
+
     $scope.item = Data.item;
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
-	
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
+
     if (!$scope.item.item_image) {
         $scope.item.item_image = 'image/image-default.png';
     }
@@ -212,7 +212,7 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
 
         });
     }
-	
+
     //Hiện notification Follow  
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
@@ -448,6 +448,10 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 
     // -------------- Kết thúc link --------------

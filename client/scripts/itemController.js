@@ -1,7 +1,7 @@
-myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
+myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $route, $filter) {
 
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
     $scope.itemID = $routeParams.itemID;
 
     $(window).scrollTop(0, 0);
@@ -90,7 +90,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
     // -------------- Kết thúc link --------------
 
-	
+
     $scope.Theo_doi = function() {
         $http({
             method: 'POST',
@@ -196,8 +196,8 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     $scope.time_minute = '0' + $scope.time_minute;
                 }
 
-                $scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year + ' ' + $scope.time_hour + ':' +$scope.time_minute;
-				
+                $scope.item_dateExpire = $scope.time_day + '/' + $scope.time_month + '/' + $scope.time_year + ' ' + $scope.time_hour + ':' + $scope.time_minute;
+
                 getUserInformation(item.nguoiBan, 1);
                 getUserInformation(item.nguoiTra, 0);
 
@@ -210,31 +210,31 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 }
 
                 if (!item.nguoiTra) {
-                    $scope.noBuyer = true;					
+                    $scope.noBuyer = true;
                 }
-						
-				//Kết thúc mà ko có người trả giá
-				console.log(item.trangThai);
-				if ((!item.nguoiTra) && (item.trangThai === false)){
-					$scope.priceStart = true;
-				}
-				
-				//Kết thúc mà có người trả giá
-				if ((item.nguoiTra) && (item.trangThai === false)){
-					$scope.priceEnd = true;
-					$scope.winnerShow = true;
-				}
-				
-				//Chưa kết thúc và chưa có người trả giá
-				if ((!item.nguoiTra) && (item.trangThai === true)){
-					$scope.priceStart = true;
-				}
-				
-				//Chưa kết thúc và có người trả giá
-				if ((item.nguoiTra) && (item.trangThai === true)){
-					console.log(item.nguoiTra);
-					$scope.priceNow = true;
-				}
+
+                //Kết thúc mà ko có người trả giá
+                console.log(item.trangThai);
+                if ((!item.nguoiTra) && (item.trangThai === false)) {
+                    $scope.priceStart = true;
+                }
+
+                //Kết thúc mà có người trả giá
+                if ((item.nguoiTra) && (item.trangThai === false)) {
+                    $scope.priceEnd = true;
+                    $scope.winnerShow = true;
+                }
+
+                //Chưa kết thúc và chưa có người trả giá
+                if ((!item.nguoiTra) && (item.trangThai === true)) {
+                    $scope.priceStart = true;
+                }
+
+                //Chưa kết thúc và có người trả giá
+                if ((item.nguoiTra) && (item.trangThai === true)) {
+                    console.log(item.nguoiTra);
+                    $scope.priceNow = true;
+                }
 
                 $(function() {
                     var austDay = new Date();
@@ -250,7 +250,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             console.log(response);
         });
     };
-	
+
     var getUserInformation = function(id, isOwner) {
         $http({
             method: 'GET',
@@ -317,10 +317,10 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                 'userID': Data.userID,
                 'itemID': $scope.itemID
             }
-        }).then(function successCallback(response) {           
+        }).then(function successCallback(response) {
             if (response.status === 200) {
                 $scope.show2 = response.data.follow;
-				console.log(response.data);
+                console.log(response.data);
             }
         }, function errorCallback(response) {
             console.log(response);
@@ -330,7 +330,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
 
     getItemInformation();
     checkFollowItem();
-	
+
     //Hiện notification Follow  
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
@@ -566,6 +566,10 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 
 }]);

@@ -1,12 +1,12 @@
-myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
+myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
 
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
-	$scope.searchStr = $routeParams.searchString;
-	if($scope.searchStr === 'all'){
-		$scope.searchStr = 'Tất cả';
-	}
-	
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
+    $scope.searchStr = $routeParams.searchString;
+    if ($scope.searchStr === 'all') {
+        $scope.searchStr = 'Tất cả';
+    }
+
     $(window).scrollTop(0, 0);
     if (Data.token !== '') {
         $scope.show1 = false;
@@ -60,7 +60,7 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
             $scope.searchString = 'all';
         }
         $location.path('/ket-qua-tim-kiem/' + $scope.searchString);
-		$route.reload();
+        $route.reload();
     };
 
     $scope.goTo_Item_Info = function(item_ID) {
@@ -91,7 +91,7 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
 
     // -------------- Kết thúc link --------------
 
-	//Chuyển giá tiền thành có '.'
+    //Chuyển giá tiền thành có '.'
     changeNumber = function(price) {
         var x = price;
         var parts = x.toString().split(" ");
@@ -137,23 +137,23 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
 
     // Lấy danh sách các kết quả tìm được
     var loadDuLieu = function() {
-		$scope.searchStrAPi = $scope.searchStr
-		if($scope.searchStrAPi  === 'Tất cả'){
-			$scope.searchStrAPi = '';
-		}
+        $scope.searchStrAPi = $scope.searchStr
+        if ($scope.searchStrAPi === 'Tất cả') {
+            $scope.searchStrAPi = '';
+        }
         $http({
             method: 'GET',
             url: '/api/search',
-			params: {
+            params: {
                 'search': $scope.searchStrAPi
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
-                console.log('Lay danh sach tim kiem thanh cong');        
-				if(response.data.length === 0){
-					$scope.notFound = true;
-				}
-				$scope.all_type_items = response.data;
+                console.log('Lay danh sach tim kiem thanh cong');
+                if (response.data.length === 0) {
+                    $scope.notFound = true;
+                }
+                $scope.all_type_items = response.data;
             }
         }, function errorCallback(response) {
             console.log(response);
@@ -216,7 +216,7 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
             $scope.$apply();
         }
     });
-	
+
     //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
@@ -397,5 +397,9 @@ myapp.controller('searchResultController', ['$scope', '$http', 'Data', '$locatio
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 }]);

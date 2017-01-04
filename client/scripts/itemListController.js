@@ -1,7 +1,7 @@
-myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
+myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $route, $filter) {
 
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
     $scope.chuyenMuc = $routeParams.chuyenMuc;
     if ($scope.chuyenMuc === 'do-dien-tu') {
         $scope.chuyenMuc = "Đồ điện tử";
@@ -210,9 +210,9 @@ myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', 
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log('load danh sach chuyen muc thanh cong');
-				if(response.data.length === 0){
-					$scope.notFound = true;
-				}
+                if (response.data.length === 0) {
+                    $scope.notFound = true;
+                }
                 $scope.all_type_items = response.data;
             }
         }, function errorCallback(response) {
@@ -221,7 +221,7 @@ myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', 
     }
 
     loadDuLieu();
-	
+
     //Hiện notification Follow  
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
@@ -458,5 +458,9 @@ myapp.controller('itemListController', ['$scope', '$http', 'Data', '$location', 
             console.log(response);
         });
     };
-    
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
+    };
+
 }]);

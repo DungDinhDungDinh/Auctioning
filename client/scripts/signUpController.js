@@ -7,7 +7,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
         $location.path('/trang-chu');
     };
 
-	$scope.userID = '';
+    $scope.userID = '';
     $scope.username = '';
     $scope.password = '';
     $scope.retypePassword = '';
@@ -43,8 +43,8 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             angular.element('#inputID').focus();
             return;
         }
-		
-		if ($scope.username === '') {
+
+        if ($scope.username === '') {
             $scope.errorText = " * Chưa nhập tên hiển thị";
             $scope.errorStyle = {
                 "color": "red",
@@ -54,8 +54,8 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             angular.element('#inputName').focus();
             return;
         }
-		
-		if ($scope.username.length < 6) {
+
+        if ($scope.username.length < 6) {
             $scope.errorText = " * Tên hiển thị phải dài tối thiểu 6 ký tự";
             $scope.errorStyle = {
                 "color": "red",
@@ -121,7 +121,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
             url: '/api/register',
             data: {
                 'userID': $scope.userID,
-				'username': $scope.username,
+                'username': $scope.username,
                 'password': $scope.password
             }
         }).then(function successCallback(response) {

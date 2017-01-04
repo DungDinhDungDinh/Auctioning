@@ -496,4 +496,8 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
         });
     };
 
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
+    };
+
 }]);

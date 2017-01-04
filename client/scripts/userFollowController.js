@@ -1,7 +1,7 @@
-myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function($scope, $http, Data, $location, $rootScope, $routeParams) {
+myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $filter) {
 
     $scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+    $scope.divNotiAuction = false;
     $scope.viewID = $routeParams.viewID;
 
     $(window).scrollTop(0, 0);
@@ -134,9 +134,9 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
 
     //Lấy danh sách sản phẩm đang theo dõi
     var getUserFollowItems = function() {
-		if (Data.userID !== $scope.viewID) {
+        if (Data.userID !== $scope.viewID) {
             $scope.notMyInfo = true;
-		}
+        }
         //Lấy thông tin user
         $http({
             method: 'GET',
@@ -194,8 +194,8 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
     };
 
     getUserFollowItems();
-	
-	//Hiện notification Follow	
+
+    //Hiện notification Follow	
     //Hiện notification Follow  
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
@@ -431,5 +431,8 @@ myapp.controller('userFollowController', ['$scope', '$http', 'Data', '$location'
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 }]);

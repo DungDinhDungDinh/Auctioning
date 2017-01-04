@@ -1,7 +1,7 @@
-myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', function($scope, $http, Data, $location, $rootScope, $routeParams) {
+myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $filter) {
 
     $scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+    $scope.divNotiAuction = false;
     $scope.viewID = $routeParams.viewID;
 
     $(window).scrollTop(0, 0);
@@ -149,9 +149,9 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
 
 
     var getUserInformation = function() {
-		if (Data.userID !== $scope.viewID) {
+        if (Data.userID !== $scope.viewID) {
             $scope.notMyInfo = true;
-		}
+        }
         $http({
             method: 'GET',
             url: '/api/users/' + $scope.viewID,
@@ -215,8 +215,8 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
 
     getUserInformation();
     getUserAuctionItems();
-	
-	    //Hiện notification Follow 
+
+    //Hiện notification Follow 
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
         var box = $("#notiBoxFollow");
@@ -451,5 +451,9 @@ myapp.controller('userAuctionController', ['$scope', '$http', 'Data', '$location
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 }]);

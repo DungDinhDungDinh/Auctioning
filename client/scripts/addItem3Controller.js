@@ -1,8 +1,8 @@
-myapp.controller('addItem3Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
+myapp.controller('addItem3Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', '$filter', function($scope, $http, Data, $location, $rootScope, $filter) {
 
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
-	
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
+
     $(window).scrollTop(0, 0);
     if (Data.token !== '') {
         $scope.show1 = false;
@@ -138,7 +138,7 @@ myapp.controller('addItem3Controller', ['$scope', '$http', 'Data', '$location', 
             $scope.$apply();
         }
     });
-	
+
     //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
@@ -319,6 +319,10 @@ myapp.controller('addItem3Controller', ['$scope', '$http', 'Data', '$location', 
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 
     // -------------- Kết thúc link --------------

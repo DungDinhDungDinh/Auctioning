@@ -1,55 +1,53 @@
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '661148127390858',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+window.fbAsyncInit = function() {
+FB.init({
+appId      : '661148127390858',
+xfbml      : true,
+version    : 'v2.6'
+});
+};
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 </script>
-
 <div>
-    <div class="dk-form1">
-        <div class="dk-form2" style="font-family:Roboto,Helvetica,Arial,sans-serif;">
-            <div class = dk-form3>
-                <h2 style="font-size: 26px;"> ĐĂNG NHẬP </h2>
-                
-                <div style="font-size: 13px;" class="hr-sect color-black-2">Dùng mạng xã hội</div>
-                
-                <div>
-                    <a class="icon-fb" ng-click="loginWithFacebook()"></a>
-                    <a class="icon-google"></a>
-                </div>
-                
-                <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div>
-                
-				<span ng-model="error" ng-style="errorStyle" style="text-align: left; float:left; font-size: 12px; display:none;" > {{errorText}} </span>
-                <input class="input-dn" id="inputName" placeholder="Tên đăng nhập" ng-model="username"/>
-                <input class="input-dn" id="inputPassword" placeholder="Mật khẩu" type="password" ng-model="password"/>
-                
-                <a class="text-dk" href="/forgot-password" style="float:right; margin-top: 15px;">Quên mật khẩu?</a>
-                
-                <button type="button" ng-click="login()" class="btn-dn" style="margin-top: 15px;"> <i class="fa fa-unlock-alt" style="padding-right:6px;"> </i><strong>ĐĂNG NHẬP</strong></button>
-                
-                <div style="padding-top: 15px; margin-bottom: 15px;">
-                    <a class="text-dk" ng-click="goToSignUp()"><strong>Bạn chưa có tài khoản?</strong> Đăng kí ngay</a>
-                </div>
-                
-                <hr/>
-                
-                <div style="padding-top: 5px;">
-                    <a class="text-dk" ng-click="goToHome()"><strong>Về trang chủ</strong></a>
-                </div>
-                
-            </div>
+  <div class="dk-form1">
+    <div class="dk-form2" style="font-family:Roboto,Helvetica,Arial,sans-serif;">
+      <div class = dk-form3>
+        <h2 style="font-size: 26px;"> ĐĂNG NHẬP </h2>
+        
+        <div style="font-size: 13px;" class="hr-sect color-black-2">Dùng mạng xã hội</div>
+        
+        <div>
+          <a class="icon-fb" ng-click="loginWithFacebook()"></a>
+          <a class="icon-google"></a>
         </div>
+        
+        <div style="font-size: 13px;" class="hr-sect color-black-2">hoặc</div>
+        
+        <span ng-model="error" ng-style="errorStyle" style="text-align: left; float:left; font-size: 12px; display:none;" > {{errorText}} </span>
+        <input class="input-dn" id="inputName" placeholder="Tên đăng nhập" ng-model="username"/>
+        <input class="input-dn" id="inputPassword" placeholder="Mật khẩu" type="password" ng-model="password"/>
+        
+        <a class="text-dk" href="/forgot-password" style="float:right; margin-top: 15px;">Quên mật khẩu?</a>
+        
+        <button type="button" ng-click="login()" class="btn-dn" style="margin-top: 15px;"> <i class="fa fa-unlock-alt" style="padding-right:6px;"> </i><strong>ĐĂNG NHẬP</strong></button>
+        
+        <div style="padding-top: 15px; margin-bottom: 15px;">
+          <a class="text-dk" ng-click="goToSignUp()"><strong>Bạn chưa có tài khoản?</strong> Đăng kí ngay</a>
+        </div>
+        
+        <hr/>
+        
+        <div style="padding-top: 5px;">
+          <a class="text-dk" ng-click="goToHome()"><strong>Về trang chủ</strong></a>
+        </div>
+        
+      </div>
     </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
-myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', function($scope, $http, Data, $location, $rootScope) {
-	
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', '$rootScope', '$filter', function($scope, $http, Data, $location, $rootScope, $filter) {
+
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
 
     $scope.types = ["-- Chọn chuyên mục --",
         "Đồ điện tử",
@@ -380,7 +380,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
 
     }
     timeCondition();
-	
+
     //Hiện notification Follow  
     $(document).mouseup(function(e) {
         var container = $("#notiFollow");
@@ -615,6 +615,10 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 
 }]);

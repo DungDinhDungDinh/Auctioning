@@ -1,7 +1,7 @@
-myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', function($scope, $http, Data, $location, $rootScope, $routeParams, $route) {
-	
-	$scope.divNotiFollow = false;
-	$scope.divNotiAuction = false;
+myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$location', '$rootScope', '$routeParams', '$route', '$filter', function($scope, $http, Data, $location, $rootScope, $routeParams, $route, $filter) {
+
+    $scope.divNotiFollow = false;
+    $scope.divNotiAuction = false;
     $scope.viewID = $routeParams.viewID;
 
     $(window).scrollTop(0, 0);
@@ -264,7 +264,7 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
             $scope.$apply();
         }
     });
-	
+
     //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
@@ -445,6 +445,10 @@ myapp.controller('userCommonInfoController', ['$scope', '$http', 'Data', '$locat
         }, function errorCallback(response) {
             console.log(response);
         });
+    };
+
+    $scope.inDevelopmentAlert = function() {
+        alert('Chức năng hiện tại đang được phát triển ...');
     };
 
 }]);
