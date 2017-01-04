@@ -231,19 +231,18 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/notifications',
             params: {
                 'userID': Data.userID,
-                'kind': 0
+                'kind': 0,
+                'token' : Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 $scope.auction_info = response.data;
-                console.log($scope.auction_info);
                 $scope.auction_noti = $filter('filter')($scope.auction_info, {
                     seen: false
                 }).length;
                 if ($scope.auction_noti !== 0) {
                     $scope.haveAuctionNoti = true;
                 }
-                console.log($scope.auction_info);
                 angular.forEach($scope.auction_info, function(data) {
                     if (data.status === true) {
                         data.massage = 'Đã có trả giá cao hơn cho sản phẩm này';
@@ -263,7 +262,8 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/notifications',
             params: {
                 'userID': Data.userID,
-                'kind': 1
+                'kind': 1,
+                'token' : Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -295,6 +295,9 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
         $http({
             method: 'DELETE',
             url: '/api/notifications/' + noti._id,
+            params: {
+                'token' : Data.token
+            }
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response);
@@ -313,6 +316,9 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
         $http({
             method: 'DELETE',
             url: '/api/notifications/' + noti._id,
+            params: {
+                'token' : Data.token
+            }
         }).then(function successCallback(response) {
             if (response.status === 200) {
                 console.log(response);
@@ -331,7 +337,8 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/notifications',
             params: {
                 'userID': Data.userID,
-                'kind': 0
+                'kind': 0,
+                'token' : Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -351,7 +358,8 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/notifications',
             params: {
                 'userID': Data.userID,
-                'kind': 1
+                'kind': 1,
+                'token' : Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -371,7 +379,8 @@ myapp.controller('userSellController', ['$scope', '$http', 'Data', '$location', 
             url: '/api/notifications_seen',
             data: {
                 'userID': Data.userID,
-                'kind': kind
+                'kind': kind,
+                'token' : Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {

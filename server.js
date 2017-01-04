@@ -538,7 +538,7 @@ apiRoutes.get('/userauctions', function(req, res) {
             return console.log(userauctions);
         else {
             res.status(200).send(userauctions);
-            console.log(userauctions);
+            //console.log(userauctions);
         }
     });
 });
@@ -550,7 +550,7 @@ apiRoutes.get('/userauctions', function(req, res) {
             return console.log(userauctions);
         else {
             res.status(200).send(userauctions);
-            console.log(userauctions);
+            //console.log(userauctions);
         }
     });
 });
