@@ -131,6 +131,7 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
             $scope.error_show_phone = true;
             $scope.class_phone = "add-info-input-error";
             angular.element('#user_soDienThoai').focus();
+            return;
         }
 
         if (!$scope.user.diaChi) {
@@ -138,6 +139,7 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
             $scope.error_show_address = true;
             $scope.class_address = "add-info-input-error";
             angular.element('#user_diaChi').focus();
+            return;
         }
 
         $http({

@@ -79,7 +79,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
 
 
         if ($scope.password.length < 6) {
-            $scope.errorText = " * Password phải dài tối thiểu 6 ký tự";
+            $scope.errorText = " * Mật khẩu phải dài tối thiểu 6 ký tự";
             $scope.errorStyle = {
                 "color": "red",
                 "font-size": "12px",
@@ -101,7 +101,7 @@ myapp.controller('signUpController', ['$scope', '$http', 'Data', '$location', '$
         }
 
         if ($scope.password !== $scope.retypePassword) {
-            $scope.errorText = " * Xác nhận Password chưa chính xác";
+            $scope.errorText = " * Xác nhận mật khẩu chưa chính xác";
             $scope.errorStyle = {
                 "color": "red",
                 "font-size": "12px",
