@@ -1,36 +1,45 @@
 
 <div style="background: white;">
-    <div class="header">
+    <div class="top-header" id="fixedHeader">
+		<div class="fix-header-div1"></div>
+        <div class="fix-header-div2">
+            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
+        </div>
+	</div>
+
+    <div class="header" id="defaultHeader">
         <div class="header-div1">
-            <div class="link-dk-dn" ng-hide="show1" >
+            <div class="link-dk-dn" ng-show="show1" >
                 <a class="text-link-dk-dn" >Đăng nhập</a>
                 <a class="text-link-dk-dn">Đăng ký</a>
             </div>
             
-            <div ng-show="show1">
+            <div ng-hide="show1">
                 <div class="box-username">
-                	<i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
-                    <a class="text-username"> Nguyễn Đình Chung...</a>
+                    <i class="fa fa-user-circle icon-user" style="font-size:18px;"></i>
+                    <a class="text-username"> {{username }}</a>
                 </div>
                 
                 <div class="icon-wrapper">
-                   <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
-                   <span class="badge">9</span>
+                    <i class="fa fa-heart icon-notification" style="font-size:18px;"></i>
+                    <span class="badge">9</span>
                 </div>
                 
                 <div class="icon-wrapper">
-                	<i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
-                	<span class="badge">9</span>
+                    <i class="fa fa-bell icon-notification" style="font-size:18px;"></i>
+                    <span class="badge">9</span>
                 </div>
             </div>
         </div>
         
-        <div class="header-div2">      
+        <div class="header-div2">
         </div>
         
-        <div class="header-div3"> 
-            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
-            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+        <div class="header-div3">
+            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem" ><i class="fa fa-search" style="color: white;"> </i> </button>
             <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
     </div>
@@ -58,13 +67,13 @@
         </div>
      
 		<div class="add-item-info">
-		
 			<span class="add-item-title"> NỘI DUNG TIN </span>
 
 			<div class="tooltip">
 				<span class="add-info-label"> Tên sản phẩm <span class="color-red">*</span> </span>
+				<input class="add-info-input" ng-model="input_name" ng-style="myStyle" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
+				<span class="error"> Không được để trống </span>
 				
-				<input class="add-info-input" ng-focus="showTipName()" ng-blur="hideTipName()"placeholder="Nhập tên sản phẩm tại đây"/>
 				<span class="tooltiptext" ng-show="tipName">
 					<p>- Điền tên mặt hàng bạn muốn đấu giá</p>
 					<p>- Nội dung không được chứa giá tiền, thông tin liên lạc</p>
@@ -315,5 +324,14 @@
 		changeYear: true
 		});
 	});
+	
+	window.onscroll = function() {myFunction()};
+	function myFunction() {
+		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+			document.getElementById("fixedHeader").style.display = "block";
+		} else {
+			document.getElementById("fixedHeader").style.display = "none";
+		}
+	}
 </script>
 

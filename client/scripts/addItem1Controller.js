@@ -43,6 +43,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.showTipName = function() 
 	{	
 		$scope.tipName = true;
+		$scope.myStyle={border:'1px solid blue'};
 	}
 	
 	$scope.hideTipName = function() 
@@ -53,6 +54,7 @@ myapp.controller('addItem1Controller',  ['$scope', '$http', 'Data', '$location',
 	$scope.showTipContent = function() 
 	{	
 		$scope.tipContent = true;
+		$scope.myStyle={border:'1px solid red'};
 	}
 	
 	$scope.hideTipContent = function() 

@@ -1,9 +1,8 @@
 <div style="background: white;">
-
 	<div class="top-header" id="fixedHeader">
 		<div class="fix-header-div1"></div>
         <div class="fix-header-div2">
-            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
+            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
             <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
             <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
@@ -38,8 +37,8 @@
         </div>
         
         <div class="header-div3">
-            <input class="input-tim-kiem" placeholder="What are you looking for?"/>
-            <button class="btn-tim-kiem"><i class="fa fa-search" style="color: white;"> </i> </button>
+            <input class="input-tim-kiem" ng-model="searchString" placeholder="What are you looking for?"/>
+            <button class="btn-tim-kiem" ><i class="fa fa-search" style="color: white;"> </i> </button>
             <button class="btn-dang-tin color-white"><i class="fa fa-pencil-square-o" style="padding-right:4px; color: white;"> </i> ĐĂNG TIN </button>
         </div>
     </div>
@@ -400,12 +399,9 @@
 
 	function myFunction() {
 		if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-			document.getElementById("defaultHeader").style.display = "none";
 			document.getElementById("fixedHeader").style.display = "block";
 		} else {
-			document.getElementById("defaultHeader").style.display = "block";
 			document.getElementById("fixedHeader").style.display = "none";
 		}
 	}
-		
 </script>

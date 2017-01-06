@@ -2074,3 +2074,24 @@ h1, .h1, h2, .h2, h3, .h3 {
 	margin-left: 15%;
 }
 
+.tooltip .error {
+    position: absolute;
+    top: -18px;
+    right: 5px;
+    background: #df280a;
+    color: #fff;
+    font-weight: 400;
+    padding: 2px 8px;
+    font-size: 12px;
+    border-radius: 3px 0 0 0;
+}
+
+
+
+
+
+
+
+
+
+
