@@ -22,8 +22,9 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             Data.userID = localStorage.getItem("userID");
             Data.username = localStorage.getItem("username");
             $scope.username = Data.username;
-        } else
+        } else {
             $scope.show1 = true;
+        }
     }
 
     // -------------- Link --------------
@@ -98,7 +99,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             data: {
                 'userID': Data.userID,
                 'itemID': $scope.itemID,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             //console.log(response.data);
@@ -118,7 +119,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             params: {
                 'userID': Data.userID,
                 'itemID': $scope.itemID,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             //console.log(response.data);
@@ -272,10 +273,10 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
     };
 
     $scope.bidItem = function() {
-		if (!Data.userID) {
+        if (!Data.userID) {
             $location.path('/dang-nhap');
-			return;
-        }	
+            return;
+        }
         if (!$scope.yourPrice) {
             alert('Hãy nhập giá của bạn');
             return;
@@ -292,7 +293,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
                     'itemID': $scope.itemID,
                     'buyerName': Data.username,
                     'giaDaTra': newPrice,
-                    'token' : Data.token
+                    'token': Data.token
                 }
             }).then(function successCallback(response) {
                 if (response.status === 200) {
@@ -393,27 +394,25 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
         }
     });
 
-    // //Notification
+    //Notification
     $scope.auction_noti = Data.auction_noti;
     $scope.follow_noti = Data.follow_noti;
+    $scope.auction_info = [];
 
     Data.socket.on('auction_notification', function(data) {
         console.log('auction_notification');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {
-            Data.auction_noti += 1;
-            $scope.auction_noti = Data.follow_noti;
+            getNotiAuction();
             $scope.$apply();
         }
     });
-
 
     Data.socket.on('follow_notification', function(data) {
         console.log('follow_notificaiton');
         var users = data.users;
         if (users.indexOf(Data.userID) !== -1) {
-            Data.follow_noti += 1;
-            $scope.follow_noti = Data.follow_noti;
+            getNotiFollow();
             $scope.$apply();
         }
     });
@@ -425,7 +424,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             params: {
                 'userID': Data.userID,
                 'kind': 0,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -456,7 +455,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             params: {
                 'userID': Data.userID,
                 'kind': 1,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -489,7 +488,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             method: 'DELETE',
             url: '/api/notifications/' + noti._id,
             params: {
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -510,7 +509,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             method: 'DELETE',
             url: '/api/notifications/' + noti._id,
             params: {
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -531,7 +530,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             params: {
                 'userID': Data.userID,
                 'kind': 0,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -552,7 +551,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             params: {
                 'userID': Data.userID,
                 'kind': 1,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {
@@ -573,7 +572,7 @@ myapp.controller('itemController', ['$scope', '$http', 'Data', '$location', '$ro
             data: {
                 'userID': Data.userID,
                 'kind': kind,
-                'token' : Data.token
+                'token': Data.token
             }
         }).then(function successCallback(response) {
             if (response.status === 200) {

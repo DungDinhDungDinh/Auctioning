@@ -22,8 +22,9 @@ myapp.controller('homeController', ['$scope', '$http', 'Data', '$location', '$ro
             Data.userID = localStorage.getItem("userID");
             Data.username = localStorage.getItem("username");
             $scope.username = Data.username;
-        } else
+        } else {
             $scope.show1 = true;
+        }
     }
 
     $scope.goTo_SignUp = function() {

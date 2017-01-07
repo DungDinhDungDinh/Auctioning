@@ -818,16 +818,32 @@ apiRoutes.post('/authenticate', function(req, res) {
                 });
             } else {
 
-                // if user is found and password is right
-                // create a token
-                var token = jwt.sign(account, app.get('superSecret'), {
-                    expiresIn: 60 * 60 * 24 // expires in 24 hours
-                });
+                User.findOne({
+                    ID: account.ID
+                }, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (user) {
+                            // if user is found and password is right
+                            // create a token
+                            var token = jwt.sign(account, app.get('superSecret'), {
+                                expiresIn: 60 * 60 * 24 // expires in 24 hours
+                            });
 
-                // return the information including token as JSON
-                res.json({
-                    userID: account.ID,
-                    token: token
+                            // return the information including token as JSON
+                            res.json({
+                                userID: account.ID,
+                                token: token,
+                                name: user.ten
+                            });
+                        } else {
+                            res.status(400).json({
+                                success: false,
+                                message: 'Authentication failed.User not found.'
+                            });
+                        }
+                    }
                 });
             }
 
