@@ -87,6 +87,11 @@ myapp.controller('addItem2Controller', ['$scope', '$http', 'Data', '$location', 
     };
 
     $scope.goTo_Add_Item = function() {
+        Data.item = null;
+        $location.path('/them-san-pham-step-1');
+    };
+
+    $scope.go_back = function() {
         $location.path('/them-san-pham-step-1');
     };
 

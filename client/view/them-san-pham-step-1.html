@@ -146,7 +146,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Chuyên mục <span class="color-red">*</span> </span>
-				<select id="item_type" ng-class="class_type" ng-init="class_type = 'add-info-select';item_type = types[0]" ng-model="item_type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
+				<select id="item_type" ng-class="class_type" ng-init="class_type = 'add-info-select'" ng-model="item_type" ng-options="type for type in types" ng-focus="showTipType()" ng-blur="hideTipType()">
 				</select>
 				
 				<span class="error" ng-show="error_show_type"> {{error_type}}</span>
@@ -158,7 +158,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Trạng thái sản phẩm <span class="color-red">*</span> </span>
-				<select id="item_situation" ng-class="class_situation" ng-init="class_situation = 'add-info-select';item_situation = situations[0]" ng-model="item_situation"ng-options="stt for stt in situations">
+				<select id="item_situation" ng-class="class_situation" ng-init="class_situation = 'add-info-select'" ng-model="item_situation"ng-options="stt for stt in situations">
 				</select>
 				
 				<span class="error" ng-show="error_show_situation"> {{error_situation}}</span>
@@ -200,7 +200,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Khu vực bán hàng <span class="color-red">*</span> </span>
-				<select id="item_location" ng-class="class_location" ng-init="class_location = 'add-info-select';item_location = locations[0]" ng-model="item_location"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select id="item_location" ng-class="class_location" ng-init="class_location = 'add-info-select'" ng-model="item_location"ng-options="location for location in locations" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
 				<span class="error" ng-show="error_show_location"> {{error_location}}</span>
@@ -211,7 +211,7 @@
 			
 			<div class="tooltip">
 				<span class="add-info-label" style="line-height: 28px;"> Vận chuyển <span class="color-red">*</span> </span>
-				<select id="item_trans" ng-class="class_trans" ng-init="class_trans = 'add-info-select';item_trans = trans[0]" ng-model="item_trans" ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
+				<select id="item_trans" ng-class="class_trans" ng-init="class_trans = 'add-info-select'" ng-model="item_trans" ng-options="tran for tran in trans" ng-focus="showTipLocation()" ng-blur="hideTipLocation()">
 				</select>
 				
 				<span class="error" ng-show="error_show_trans"> {{error_trans}}</span>

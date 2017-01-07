@@ -1311,7 +1311,7 @@ apiRoutes.post('/userfollows', function(req, res) {
         userID: req.body.userID,
         itemID: req.body.itemID
     });
-    console.log(req.body);
+    // sconsole.log(req.body);
 
 
     // save the userfollow

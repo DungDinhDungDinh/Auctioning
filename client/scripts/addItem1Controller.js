@@ -3,6 +3,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
     $scope.divNotiFollow = false;
     $scope.divNotiAuction = false;
 
+
     $scope.types = ["-- Chọn chuyên mục --",
         "Đồ điện tử",
         "Giải trí, thể thao, sở thích",
@@ -42,6 +43,25 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
         "Miễn phí trong khu vực",
         "Thỏa thuận sau"
     ];
+
+    if (Data.item) {
+        console.log(Data.item);
+        $scope.item_name = Data.item.item_name;
+        $scope.item_content = Data.item.item_content;
+        $scope.item_type = Data.item.item_type;
+        $scope.item_situation = Data.item.item_situation;
+        $scope.item_image = Data.item.item_image;
+        $scope.item_price = Data.item.item_price;
+        $scope.item_date = Data.item.item_date;
+        $scope.item_time = Data.item.item_time;
+        $scope.item_location = Data.item.item_location;
+        $scope.item_trans = Data.item.item_trans;
+    } else {
+        $scope.item_type = $scope.types[0];
+        $scope.item_situation = $scope.situations[0];
+        $scope.item_location = $scope.locations[0];
+        $scope.item_trans = $scope.trans[0];
+    }
 
     $(window).scrollTop(0, 0);
     if (Data.token !== '') {
@@ -460,7 +480,7 @@ myapp.controller('addItem1Controller', ['$scope', '$http', 'Data', '$location', 
             $scope.$apply();
         }
     });
-    
+
     var getNotiAuction = function() {
         $http({
             method: 'GET',
