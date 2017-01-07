@@ -480,7 +480,7 @@ apiRoutes.get('/search', function(req, res) {
     var tmp = req.query.search;
     Item.find({
         'ten': {
-            '$regex': tmp
+            '$regex': tmp, $options: '-i' 
         }
     }).select().exec(function(err, items) {
         if (err) {
